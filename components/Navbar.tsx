@@ -25,9 +25,8 @@ const navItems: NavItem[] = [
   {
     label: "เครื่องมือ",
     children: [
-      { href: "/#tools", label: "ภาพรวมเครื่องมือ", desc: "5 tools ที่เราติดตั้ง" },
-      { href: "/#use-cases", label: "ตัวอย่างใช้งาน", desc: "8 automation workflows" },
-      { href: "/home-ai", label: "Home AI Assistant", desc: "ผู้ช่วย AI ที่บ้าน" },
+      { href: "/integrations", label: "55+ Integrations", desc: "เชื่อมต่อทุกแอป" },
+      { href: "/home-ai", label: "Home AI Assistant", desc: "ผู้ช่วย AI ส่วนตัว" },
     ],
   },
   { href: "/#pricing", label: "ราคา" },

@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
+import RestaurantSection from "@/components/RestaurantSection";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "AI สำหรับร้านอาหาร & F&B",
   description:
-    "ระบบ AI Automation สำหรับร้านอาหารและธุรกิจ F&B รับออเดอร์อัตโนมัติ จัดการสต๊อกวัตถุดิบ วิเคราะห์เมนูขายดี ตอบรีวิว และเพิ่มยอดขายด้วย AI",
+    "ระบบ AI Automation สำหรับร้านอาหารและธุรกิจ F&B รับออเดอร์อัตโนมัติ จัดการสต๊อกวัตถุดิบ คำนวณ food cost ตอบรีวิว สรุปยอดขาย เริ่มต้น ฿14,900/เดือน",
 };
 
 export default function RestaurantSolutionPage() {
@@ -14,14 +15,7 @@ export default function RestaurantSolutionPage() {
     <main className="bg-[#fbfbfd] min-h-screen">
       <Navbar />
       <div className="pt-20" />
-      <section className="py-24">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-[#1d1d1f] mb-4">
-            AI สำหรับร้านอาหาร & F&B
-          </h1>
-          <p className="text-lg text-[#6e6e73]">Coming soon</p>
-        </div>
-      </section>
+      <RestaurantSection />
       <Contact />
       <Footer />
     </main>

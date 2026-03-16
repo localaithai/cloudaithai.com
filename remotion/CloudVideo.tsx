@@ -1,8 +1,5 @@
-import { AbsoluteFill, useCurrentFrame, interpolate, Easing } from "remotion";
+import { AbsoluteFill, useCurrentFrame, interpolate, Easing, Img } from "remotion";
 
-const TOTAL = 180;
-
-// Colors
 const BG = "#fbfbfd";
 const BLUE = "#2997ff";
 const PURPLE = "#5856d6";
@@ -11,314 +8,253 @@ const GREEN = "#34c759";
 const GRAY = "#86868b";
 const DARK = "#1d1d1f";
 
-// Node positions (cloud AI architecture)
+/* ─── Icon component with simpleicons ─── */
+function Icon({ slug, fallback, size = 28, color }: { slug: string; fallback: string; size?: number; color?: string }) {
+  const url = color
+    ? `https://cdn.simpleicons.org/${slug}/${color.replace("#", "")}`
+    : `https://cdn.simpleicons.org/${slug}`;
+  return (
+    <Img src={url} width={size} height={size} style={{ objectFit: "contain" }}
+      onError={() => {}} // Remotion handles errors
+    />
+  );
+}
+
+/* ─── Centered node layout — symmetric around 960,540 ─── */
+const CX = 960;
+const CY = 540;
+
 const nodes = [
-  { id: "user", label: "ลูกค้า", emoji: "👤", x: 160, y: 540, color: BLUE },
-  { id: "line", label: "LINE", emoji: "💬", x: 480, y: 540, color: "#00C300" },
-  { id: "n8n", label: "n8n", emoji: "⚡", x: 800, y: 400, color: "#EA4B71" },
-  { id: "ai", label: "AI Model", emoji: "🧠", x: 1120, y: 300, color: PURPLE },
-  { id: "rag", label: "RAG", emoji: "🔍", x: 1120, y: 540, color: VIOLET },
-  { id: "db", label: "Database", emoji: "💾", x: 1400, y: 540, color: GREEN },
-  { id: "response", label: "คำตอบ", emoji: "✨", x: 1600, y: 400, color: BLUE },
-  { id: "back", label: "ส่งกลับ", emoji: "🚀", x: 480, y: 300, color: "#ff9500" },
+  { id: "user", label: "ลูกค้า", slug: "line", fallback: "👤", x: CX, y: CY - 300, color: "#00C300", iconColor: "00C300" },
+  { id: "n8n", label: "n8n", slug: "n8n", fallback: "⚡", x: CX - 350, y: CY - 100, color: "#EA4B71", iconColor: "EA4B71" },
+  { id: "ai", label: "AI Model", slug: "openai", fallback: "🧠", x: CX + 350, y: CY - 100, color: PURPLE, iconColor: "5856d6" },
+  { id: "rag", label: "RAG", slug: "pinecone", fallback: "🔍", x: CX - 350, y: CY + 150, color: VIOLET, iconColor: "af52de" },
+  { id: "db", label: "Database", slug: "supabase", fallback: "💾", x: CX + 350, y: CY + 150, color: GREEN, iconColor: "34c759" },
+  { id: "response", label: "คำตอบ", slug: "googlechat", fallback: "✨", x: CX, y: CY + 300, color: BLUE, iconColor: "2997ff" },
 ];
 
 const connections = [
   { from: 0, to: 1, phase: 0 },
-  { from: 1, to: 2, phase: 1 },
-  { from: 2, to: 3, phase: 2 },
-  { from: 2, to: 4, phase: 2 },
-  { from: 4, to: 5, phase: 3 },
-  { from: 3, to: 6, phase: 4 },
-  { from: 6, to: 7, phase: 5 },
-  { from: 7, to: 0, phase: 6 },
+  { from: 0, to: 2, phase: 0 },
+  { from: 1, to: 3, phase: 1 },
+  { from: 2, to: 4, phase: 1 },
+  { from: 3, to: 5, phase: 2 },
+  { from: 4, to: 5, phase: 2 },
 ];
 
 const phases = [
-  { range: [0, 25], title: "ลูกค้าส่งข้อความ", sub: "ผ่าน LINE, WhatsApp, หรือเว็บ" },
-  { range: [25, 50], title: "n8n รับ Webhook", sub: "Workflow automation จัดการ routing" },
-  { range: [50, 85], title: "AI วิเคราะห์ + ค้นหา", sub: "Frontier Model + RAG pipeline" },
-  { range: [85, 120], title: "ค้น Knowledge Base", sub: "Vector DB ค้นเอกสารที่เกี่ยวข้อง" },
-  { range: [120, 145], title: "สร้างคำตอบอัจฉริยะ", sub: "Generate response ภาษาไทย" },
-  { range: [145, 170], title: "ส่งกลับทันที", sub: "< 3 วินาที ตอบกลับลูกค้า" },
-  { range: [170, 180], title: "วนรอบ", sub: "ทำงาน 24/7 อัตโนมัติ" },
+  { range: [0, 30], title: "ลูกค้าส่งข้อความ", sub: "ผ่าน LINE / WhatsApp / เว็บ" },
+  { range: [30, 70], title: "n8n + AI วิเคราะห์", sub: "Workflow Automation + Frontier Model" },
+  { range: [70, 120], title: "ค้นหา Knowledge Base", sub: "RAG Pipeline + Vector Database" },
+  { range: [120, 155], title: "สร้างคำตอบอัจฉริยะ", sub: "Generate response ภาษาไทย" },
+  { range: [155, 180], title: "ส่งกลับทันที", sub: "< 3 วินาที ตอบกลับลูกค้า" },
 ];
-
-function drawConnection(
-  ctx: CanvasRenderingContext2D,
-  from: typeof nodes[0],
-  to: typeof nodes[0],
-  progress: number,
-  color: string
-) {
-  // Draw line
-  ctx.beginPath();
-  ctx.moveTo(from.x, from.y);
-  ctx.lineTo(
-    from.x + (to.x - from.x) * Math.min(progress, 1),
-    from.y + (to.y - from.y) * Math.min(progress, 1)
-  );
-  ctx.strokeStyle = color + "40";
-  ctx.lineWidth = 2;
-  ctx.stroke();
-
-  // Draw traveling dot
-  if (progress > 0 && progress < 1.5) {
-    const dotProgress = Math.min(progress, 1);
-    const dx = from.x + (to.x - from.x) * dotProgress;
-    const dy = from.y + (to.y - from.y) * dotProgress;
-    ctx.beginPath();
-    ctx.arc(dx, dy, 5, 0, Math.PI * 2);
-    ctx.fillStyle = color;
-    ctx.fill();
-
-    // Glow
-    const grad = ctx.createRadialGradient(dx, dy, 0, dx, dy, 20);
-    grad.addColorStop(0, color + "40");
-    grad.addColorStop(1, color + "00");
-    ctx.beginPath();
-    ctx.arc(dx, dy, 20, 0, Math.PI * 2);
-    ctx.fillStyle = grad;
-    ctx.fill();
-  }
-}
 
 export default function CloudVideo() {
   const frame = useCurrentFrame();
-  const progress = frame / TOTAL;
-
-  // Current phase
-  const currentPhase = phases.findIndex(
-    (p) => frame >= p.range[0] && frame < p.range[1]
-  );
+  const progress = frame / 180;
+  const currentPhase = phases.findIndex((p) => frame >= p.range[0] && frame < p.range[1]);
   const phase = phases[Math.max(0, currentPhase)];
 
   return (
     <AbsoluteFill style={{ background: BG }}>
-      {/* Grid background */}
-      <svg width="1920" height="1080" style={{ position: "absolute", opacity: 0.3 }}>
-        {Array.from({ length: 40 }).map((_, i) => (
-          <line key={`v${i}`} x1={i * 50} y1={0} x2={i * 50} y2={1080} stroke="#e5e5ea" strokeWidth={0.5} />
+      {/* ─── Subtle grid ─── */}
+      <svg width="1920" height="1080" style={{ position: "absolute", opacity: 0.15 }}>
+        {Array.from({ length: 39 }).map((_, i) => (
+          <line key={`v${i}`} x1={i * 50} y1={0} x2={i * 50} y2={1080} stroke="#d2d2d7" strokeWidth={0.5} />
         ))}
         {Array.from({ length: 22 }).map((_, i) => (
-          <line key={`h${i}`} x1={0} y1={i * 50} x2={1920} y2={i * 50} stroke="#e5e5ea" strokeWidth={0.5} />
+          <line key={`h${i}`} x1={0} y1={i * 50} x2={1920} y2={i * 50} stroke="#d2d2d7" strokeWidth={0.5} />
         ))}
       </svg>
 
-      {/* Connections */}
+      {/* ─── Center pulse ring ─── */}
+      {[120, 200, 300].map((r, i) => {
+        const ringOp = interpolate(frame, [5 + i * 5, 25 + i * 5], [0, 0.12], { extrapolateRight: "clamp" });
+        const pulse = 1 + Math.sin(frame * 0.02 + i) * 0.03;
+        return (
+          <div key={i} style={{
+            position: "absolute",
+            left: CX - r * pulse,
+            top: CY - r * pulse,
+            width: r * 2 * pulse,
+            height: r * 2 * pulse,
+            borderRadius: "50%",
+            border: `1.5px solid ${BLUE}`,
+            opacity: ringOp,
+          }} />
+        );
+      })}
+
+      {/* ─── Connection lines ─── */}
       <svg width="1920" height="1080" style={{ position: "absolute" }}>
         {connections.map((conn, i) => {
-          const phaseStart = conn.phase * 25;
-          const connProgress = interpolate(frame, [phaseStart, phaseStart + 20], [0, 1.3], {
-            extrapolateLeft: "clamp",
-            extrapolateRight: "clamp",
-          });
+          const phaseStart = conn.phase * 35 + 10;
+          const p = interpolate(frame, [phaseStart, phaseStart + 25], [0, 1.3], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
           const from = nodes[conn.from];
           const to = nodes[conn.to];
-
+          const ex = from.x + (to.x - from.x) * Math.min(p, 1);
+          const ey = from.y + (to.y - from.y) * Math.min(p, 1);
           return (
             <g key={i}>
-              {/* Static line (faded) */}
-              <line x1={from.x} y1={from.y} x2={to.x} y2={to.y} stroke="#e5e5ea" strokeWidth={1} strokeDasharray="6 4" />
-              {/* Animated line */}
-              {connProgress > 0 && (
-                <line
-                  x1={from.x}
-                  y1={from.y}
-                  x2={from.x + (to.x - from.x) * Math.min(connProgress, 1)}
-                  y2={from.y + (to.y - from.y) * Math.min(connProgress, 1)}
-                  stroke={from.color}
-                  strokeWidth={2.5}
-                  strokeLinecap="round"
-                  opacity={0.6}
+              {/* Background dashed line */}
+              <line x1={from.x} y1={from.y} x2={to.x} y2={to.y} stroke="#d2d2d7" strokeWidth={1.5} strokeDasharray="8 6" />
+              {/* Animated solid line */}
+              {p > 0 && (
+                <line x1={from.x} y1={from.y} x2={ex} y2={ey}
+                  stroke={from.color} strokeWidth={3} strokeLinecap="round" opacity={0.7}
                 />
               )}
-              {/* Traveling dot */}
-              {connProgress > 0 && connProgress < 1.3 && (
-                <circle
-                  cx={from.x + (to.x - from.x) * Math.min(connProgress, 1)}
-                  cy={from.y + (to.y - from.y) * Math.min(connProgress, 1)}
-                  r={6}
-                  fill={from.color}
-                />
+              {/* Traveling circle */}
+              {p > 0 && p < 1.3 && (
+                <>
+                  <circle cx={ex} cy={ey} r={8} fill={from.color} opacity={0.8} />
+                  <circle cx={ex} cy={ey} r={16} fill={from.color} opacity={0.15} />
+                </>
               )}
             </g>
           );
         })}
       </svg>
 
-      {/* Nodes */}
+      {/* ─── Nodes with real icons ─── */}
       {nodes.map((node, i) => {
-        const nodeAppear = interpolate(frame, [i * 8, i * 8 + 15], [0, 1], {
-          extrapolateLeft: "clamp",
-          extrapolateRight: "clamp",
-          easing: Easing.out(Easing.back(1.5)),
+        const appear = interpolate(frame, [i * 5 + 2, i * 5 + 18], [0, 1], {
+          extrapolateLeft: "clamp", extrapolateRight: "clamp",
+          easing: Easing.out(Easing.back(1.4)),
         });
         const isActive = connections.some(
-          (c) =>
-            (c.from === i || c.to === i) &&
-            frame >= c.phase * 25 &&
-            frame < c.phase * 25 + 30
+          (c) => (c.from === i || c.to === i) && frame >= c.phase * 35 + 10 && frame < c.phase * 35 + 45
         );
+        const bob = Math.sin(frame * 0.015 + i * 2) * 4;
 
         return (
-          <div
-            key={node.id}
-            style={{
-              position: "absolute",
-              left: node.x - 50,
-              top: node.y - 50,
-              width: 100,
-              height: 100,
+          <div key={node.id} style={{
+            position: "absolute",
+            left: node.x - 45,
+            top: node.y - 45 + bob,
+            width: 90,
+            height: 90,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            transform: `scale(${appear})`,
+            opacity: appear,
+          }}>
+            {/* Active pulse ring */}
+            {isActive && (
+              <div style={{
+                position: "absolute",
+                inset: -8,
+                borderRadius: 24,
+                border: `2px solid ${node.color}40`,
+                animation: "none",
+                opacity: 0.5 + Math.sin(frame * 0.1) * 0.3,
+              }} />
+            )}
+            {/* Icon container */}
+            <div style={{
+              width: 68,
+              height: 68,
+              borderRadius: 20,
+              background: isActive ? `${node.color}12` : "#fff",
+              border: `2px solid ${isActive ? node.color + "50" : "#e5e5ea"}`,
               display: "flex",
-              flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              transform: `scale(${nodeAppear})`,
-              opacity: nodeAppear,
-            }}
-          >
-            {/* Pulse ring when active */}
-            {isActive && (
-              <div
-                style={{
-                  position: "absolute",
-                  width: 90,
-                  height: 90,
-                  borderRadius: "50%",
-                  border: `2px solid ${node.color}40`,
-                  animation: "pulse 1s ease-out infinite",
-                }}
-              />
-            )}
-            <div
-              style={{
-                width: 64,
-                height: 64,
-                borderRadius: 18,
-                background: isActive ? node.color + "15" : "#fff",
-                border: `1.5px solid ${isActive ? node.color + "40" : "#e5e5ea"}`,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: 28,
-                boxShadow: isActive
-                  ? `0 8px 24px ${node.color}20`
-                  : "0 2px 8px rgba(0,0,0,0.04)",
-                transition: "all 0.3s",
-              }}
-            >
-              {node.emoji}
+              boxShadow: isActive
+                ? `0 8px 30px ${node.color}25`
+                : "0 2px 8px rgba(0,0,0,0.04)",
+            }}>
+              <Icon slug={node.slug} fallback={node.fallback} size={30} color={node.iconColor} />
             </div>
-            <span
-              style={{
-                marginTop: 6,
-                fontSize: 13,
-                fontWeight: 500,
-                color: isActive ? node.color : GRAY,
-                fontFamily: "SF Pro Display, -apple-system, sans-serif",
-              }}
-            >
-              {node.label}
-            </span>
+            {/* Label */}
+            <span style={{
+              marginTop: 6,
+              fontSize: 14,
+              fontWeight: 600,
+              color: isActive ? node.color : GRAY,
+              fontFamily: "Bai Jamjuree, -apple-system, sans-serif",
+            }}>{node.label}</span>
           </div>
         );
       })}
 
-      {/* Phase title (bottom) */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: 80,
-          left: 0,
-          right: 0,
-          textAlign: "center",
-        }}
-      >
-        <div
-          style={{
-            fontSize: 14,
-            fontWeight: 600,
-            color: BLUE,
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-            marginBottom: 8,
-            fontFamily: "SF Pro Display, -apple-system, sans-serif",
-          }}
-        >
+      {/* ─── Center dot ─── */}
+      <div style={{
+        position: "absolute",
+        left: CX - 6,
+        top: CY - 6,
+        width: 12,
+        height: 12,
+        borderRadius: "50%",
+        background: BLUE,
+        boxShadow: `0 0 20px ${BLUE}40`,
+        opacity: interpolate(frame, [0, 15], [0, 0.8], { extrapolateRight: "clamp" }),
+      }} />
+
+      {/* ─── Phase title ─── */}
+      <div style={{
+        position: "absolute",
+        bottom: 60,
+        left: 0,
+        right: 0,
+        textAlign: "center",
+      }}>
+        <div style={{
+          fontSize: 15,
+          fontWeight: 600,
+          color: BLUE,
+          letterSpacing: "0.1em",
+          textTransform: "uppercase",
+          marginBottom: 8,
+          fontFamily: "Bai Jamjuree, -apple-system, sans-serif",
+        }}>
           {currentPhase >= 0 ? `STEP ${currentPhase + 1}` : "CLOUD AI WORKFLOW"}
         </div>
-        <div
-          style={{
-            fontSize: 36,
-            fontWeight: 600,
-            color: DARK,
-            letterSpacing: "-0.03em",
-            fontFamily: "SF Pro Display, -apple-system, sans-serif",
-          }}
-        >
+        <div style={{
+          fontSize: 40,
+          fontWeight: 600,
+          color: DARK,
+          letterSpacing: "-0.02em",
+          fontFamily: "Bai Jamjuree, -apple-system, sans-serif",
+        }}>
           {phase?.title || "AI Automation Pipeline"}
         </div>
-        <div
-          style={{
-            fontSize: 19,
-            color: GRAY,
-            marginTop: 4,
-            fontFamily: "SF Pro Display, -apple-system, sans-serif",
-          }}
-        >
-          {phase?.sub || "ระบบอัตโนมัติสำหรับธุรกิจไทย"}
+        <div style={{
+          fontSize: 20,
+          color: GRAY,
+          marginTop: 4,
+          fontFamily: "Bai Jamjuree, -apple-system, sans-serif",
+        }}>
+          {phase?.sub || ""}
         </div>
       </div>
 
-      {/* Progress bar */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: 3,
-          background: "#e5e5ea",
-        }}
-      >
-        <div
-          style={{
-            width: `${progress * 100}%`,
-            height: "100%",
-            background: `linear-gradient(90deg, ${BLUE}, ${PURPLE}, ${GREEN})`,
-          }}
-        />
+      {/* ─── Progress bar ─── */}
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 4, background: "#e5e5ea" }}>
+        <div style={{
+          width: `${progress * 100}%`,
+          height: "100%",
+          background: `linear-gradient(90deg, ${BLUE}, ${PURPLE}, ${GREEN})`,
+          borderRadius: 2,
+        }} />
       </div>
 
-      {/* Branding */}
-      <div
-        style={{
-          position: "absolute",
-          top: 30,
-          left: 40,
-          display: "flex",
-          alignItems: "center",
-          gap: 8,
-        }}
-      >
-        <div
-          style={{
-            width: 28,
-            height: 28,
-            borderRadius: 8,
-            background: `linear-gradient(135deg, ${BLUE}, ${PURPLE})`,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "#fff",
-            fontSize: 12,
-            fontWeight: 800,
-          }}
-        >
-          C
-        </div>
-        <span style={{ fontSize: 15, fontWeight: 600, color: DARK, fontFamily: "SF Pro Display, -apple-system, sans-serif" }}>
+      {/* ─── Branding ─── */}
+      <div style={{
+        position: "absolute", top: 28, left: 36,
+        display: "flex", alignItems: "center", gap: 8,
+        opacity: 0.5,
+      }}>
+        <div style={{
+          width: 26, height: 26, borderRadius: 8,
+          background: `linear-gradient(135deg, ${BLUE}, ${PURPLE})`,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          color: "#fff", fontSize: 11, fontWeight: 800,
+        }}>C</div>
+        <span style={{ fontSize: 14, fontWeight: 600, color: DARK, fontFamily: "Bai Jamjuree, -apple-system, sans-serif" }}>
           CloudAI Thailand
         </span>
       </div>

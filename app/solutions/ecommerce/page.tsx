@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
+import EcommerceSection from "@/components/EcommerceSection";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "AI สำหรับร้านค้าออนไลน์",
-  description:
-    "ระบบ AI Automation สำหรับร้านค้าออนไลน์ ตอบแชทลูกค้าอัตโนมัติ จัดการออเดอร์ วิเคราะห์ยอดขาย แนะนำสินค้า และเพิ่มประสิทธิภาพ E-commerce ด้วย AI",
+  title: "AI สำหรับร้านค้าออนไลน์ — ตอบแชท จัดการ Order สร้าง Content อัตโนมัติ",
+  description: "ระบบ AI Automation สำหรับ E-commerce ตอบแชทลูกค้า 24/7 จัดการออเดอร์ สร้าง product description วิเคราะห์ยอดขาย เริ่มต้น ฿19,900",
 };
 
 export default function EcommerceSolutionPage() {
@@ -14,14 +14,7 @@ export default function EcommerceSolutionPage() {
     <main className="bg-[#fbfbfd] min-h-screen">
       <Navbar />
       <div className="pt-20" />
-      <section className="py-24">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-[#1d1d1f] mb-4">
-            AI สำหรับร้านค้าออนไลน์
-          </h1>
-          <p className="text-lg text-[#6e6e73]">Coming soon</p>
-        </div>
-      </section>
+      <EcommerceSection />
       <Contact />
       <Footer />
     </main>

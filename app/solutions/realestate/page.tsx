@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
+import RealEstateSection from "@/components/RealEstateSection";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -14,14 +15,7 @@ export default function RealestateSolutionPage() {
     <main className="bg-[#fbfbfd] min-h-screen">
       <Navbar />
       <div className="pt-20" />
-      <section className="py-24">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-[#1d1d1f] mb-4">
-            AI สำหรับอสังหาริมทรัพย์
-          </h1>
-          <p className="text-lg text-[#6e6e73]">Coming soon</p>
-        </div>
-      </section>
+      <RealEstateSection />
       <Contact />
       <Footer />
     </main>
