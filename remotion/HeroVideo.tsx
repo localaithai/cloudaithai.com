@@ -103,7 +103,7 @@ function CenterIcon({ frame }: { frame: number }) {
     <div style={{
       position: "absolute",
       left: 960 - 40,
-      top: 540 - 40,
+      top: 600 - 40,
       width: 80,
       height: 80,
       opacity: appear,
@@ -155,7 +155,7 @@ function ConnectionLine({
   });
 
   const cx = 960;
-  const cy = 540;
+  const cy = 600;
   const dx = cx + (x - cx) * progress;
   const dy = cy + (y - cy) * progress;
 
@@ -178,37 +178,85 @@ function ConnectionLine({
   );
 }
 
+/* ─── Big cinematic text ─── */
+function HeroText({ frame }: { frame: number }) {
+  const titleOp = interpolate(frame, [5, 30], [0, 1], { extrapolateRight: "clamp" });
+  const titleY = interpolate(frame, [5, 30], [40, 0], { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) });
+  const subOp = interpolate(frame, [20, 45], [0, 1], { extrapolateRight: "clamp" });
+  const subY = interpolate(frame, [20, 45], [30, 0], { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) });
+
+  return (
+    <div style={{ position: "absolute", top: 140, left: 0, right: 0, textAlign: "center", zIndex: 10 }}>
+      <div style={{
+        fontSize: 18,
+        color: BLUE,
+        fontWeight: 500,
+        fontFamily: "Bai Jamjuree, -apple-system, sans-serif",
+        marginBottom: 16,
+        opacity: interpolate(frame, [0, 15], [0, 1], { extrapolateRight: "clamp" }),
+      }}>
+        AI Automation สำหรับธุรกิจไทย
+      </div>
+      <div style={{
+        fontSize: 82,
+        fontWeight: 600,
+        color: "#1d1d1f",
+        letterSpacing: "-0.03em",
+        lineHeight: 1.1,
+        fontFamily: "Bai Jamjuree, -apple-system, sans-serif",
+        opacity: titleOp,
+        transform: `translateY(${titleY}px)`,
+      }}>
+        ให้ AI ทำงานแทน
+      </div>
+      <div style={{
+        fontSize: 52,
+        fontWeight: 500,
+        background: "linear-gradient(90deg, #2997ff, #5856d6)",
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+        letterSpacing: "-0.02em",
+        lineHeight: 1.15,
+        fontFamily: "Bai Jamjuree, -apple-system, sans-serif",
+        opacity: subOp,
+        transform: `translateY(${subY}px)`,
+        marginTop: 4,
+      }}>
+        คุณทำสิ่งที่สำคัญ
+      </div>
+    </div>
+  );
+}
+
 /* ─── Main composition ─── */
 export default function HeroVideo() {
   const frame = useCurrentFrame();
 
   const models = [
-    { name: "GPT-5", color: "#10a37f", x: 480, y: 280, start: 30 },
-    { name: "Claude 4.6", color: "#c96442", x: 1440, y: 300, start: 40 },
-    { name: "Gemini 3.1", color: "#4285f4", x: 380, y: 700, start: 50 },
-    { name: "DeepSeek V3", color: "#5b6abf", x: 1500, y: 720, start: 60 },
-    { name: "Grok 3", color: "#1d9bf0", x: 350, y: 490, start: 70 },
-    { name: "o3", color: "#10a37f", x: 1520, y: 510, start: 80 },
+    { name: "GPT-5", color: "#10a37f", x: 480, y: 380, start: 50 },
+    { name: "Claude 4.6", color: "#c96442", x: 1440, y: 400, start: 60 },
+    { name: "Gemini 3.1", color: "#4285f4", x: 380, y: 750, start: 70 },
+    { name: "DeepSeek V3", color: "#5b6abf", x: 1500, y: 770, start: 80 },
+    { name: "Grok 3", color: "#1d9bf0", x: 350, y: 570, start: 90 },
+    { name: "o3", color: "#10a37f", x: 1520, y: 590, start: 100 },
   ];
 
   return (
     <AbsoluteFill style={{ background: "#fbfbfd" }}>
-      {/* Slowly morphing gradient blobs */}
       <GradientBlob frame={frame} />
+      <DrawLine frame={frame} startFrame={35} y={460} color={BLUE} />
+      <DrawLine frame={frame} startFrame={45} y={780} color={PURPLE} />
 
-      {/* Subtle horizontal accent lines */}
-      <DrawLine frame={frame} startFrame={15} y={380} color={BLUE} />
-      <DrawLine frame={frame} startFrame={25} y={700} color={PURPLE} />
+      {/* Big text */}
+      <HeroText frame={frame} />
 
-      {/* Connection lines (appear before cards) */}
-      {models.map((m) => (
-        <ConnectionLine key={m.name} frame={frame} startFrame={m.start - 5} x={m.x} y={m.y} color={m.color} />
-      ))}
-
-      {/* Center cloud icon */}
+      {/* Center icon — pushed lower */}
       <CenterIcon frame={frame} />
 
-      {/* Model cards — staggered entrance */}
+      {/* Connections + model cards — appear after text */}
+      {models.map((m) => (
+        <ConnectionLine key={`c-${m.name}`} frame={frame} startFrame={m.start - 5} x={m.x} y={m.y} color={m.color} />
+      ))}
       {models.map((m) => (
         <ModelCard key={m.name} frame={frame} startFrame={m.start} name={m.name} color={m.color} x={m.x} y={m.y} />
       ))}

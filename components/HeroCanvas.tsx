@@ -9,25 +9,43 @@ export default function HeroCanvas() {
   const imagesRef = useRef<HTMLImageElement[]>([]);
   const loadedRef = useRef<boolean[]>(new Array(TOTAL_FRAMES).fill(false));
   const [loaded, setLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const frameRef = useRef(0);
 
+  // Detect mobile
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 640);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  const frameDir = isMobile ? "/hero-frames-mobile" : "/hero-frames";
+  const WIDTH = isMobile ? 780 : 1920;
+  const HEIGHT = isMobile ? 1400 : 1080;
+
+  // Preload
   useEffect(() => {
     let count = 0;
     const images: HTMLImageElement[] = [];
+    loadedRef.current = new Array(TOTAL_FRAMES).fill(false);
+    setLoaded(false);
+
     for (let i = 0; i < TOTAL_FRAMES; i++) {
       const img = new Image();
-      img.src = `/hero-frames/element-${String(i).padStart(3, "0")}.jpeg`;
+      img.src = `${frameDir}/element-${String(i).padStart(3, "0")}.jpeg`;
       img.onload = () => {
         count++;
         loadedRef.current[i] = true;
-        if (count >= TOTAL_FRAMES * 0.2 && !loaded) setLoaded(true);
+        if (count >= TOTAL_FRAMES * 0.15) setLoaded(true);
       };
       img.onerror = () => { count++; };
       images.push(img);
     }
     imagesRef.current = images;
-  }, []);
+  }, [frameDir]);
 
+  // Animation loop
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -57,12 +75,11 @@ export default function HeroCanvas() {
     <div className="w-full h-full relative">
       <canvas
         ref={canvasRef}
-        width={1920}
-        height={1080}
+        width={WIDTH}
+        height={HEIGHT}
         className="w-full h-full object-contain"
         style={{ opacity: loaded ? 1 : 0, transition: "opacity 0.8s ease" }}
       />
-      {/* Loading placeholder */}
       {!loaded && (
         <div className="absolute inset-0 bg-[#f5f5f7] flex items-center justify-center rounded-3xl">
           <div className="w-6 h-6 border-2 border-[#2997ff] border-t-transparent rounded-full animate-spin" />

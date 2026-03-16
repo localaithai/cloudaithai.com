@@ -25,7 +25,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35, duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="text-[44px] sm:text-[60px] md:text-[72px] font-semibold leading-[1.08] tracking-[-0.025em] text-[#1d1d1f] mb-3 max-w-[800px] mx-auto"
+          className="text-[52px] sm:text-[68px] md:text-[80px] lg:text-[96px] font-semibold leading-[1.08] tracking-[-0.03em] text-[#1d1d1f] mb-3 max-w-[900px] mx-auto"
         >
           ให้ AI ทำงานแทน<br />
           <span className="gradient-text">คุณทำสิ่งที่สำคัญ</span>
