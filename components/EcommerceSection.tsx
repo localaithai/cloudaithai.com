@@ -1066,17 +1066,17 @@ export default function EcommerceSection() {
             className="apple-card p-0 overflow-hidden ring-2 ring-[#2997ff]/20 shadow-xl shadow-[#2997ff]/[0.06]"
           >
             {/* Plan header */}
-            <div className="bg-gradient-to-r from-[#2997ff] to-[#5856d6] px-6 sm:px-8 py-6 text-center text-white">
-              <span className="text-[11px] font-bold uppercase tracking-widest opacity-80">
+            <div className="bg-gradient-to-br from-[#1a6de3] to-[#4a3fc4] px-6 sm:px-8 py-8 text-center text-white" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.15)" }}>
+              <span className="text-[12px] font-bold uppercase tracking-widest text-white/90">
                 แนะนำ
               </span>
-              <h3 className="text-[24px] font-bold mt-1">Professional</h3>
-              <div className="flex items-baseline justify-center gap-1 mt-2">
-                <span className="text-[48px] font-bold leading-none">
+              <h3 className="text-[28px] font-bold mt-2">Professional</h3>
+              <div className="flex items-baseline justify-center gap-1 mt-3">
+                <span className="text-[56px] font-bold leading-none">
                   ฿39,900
                 </span>
               </div>
-              <p className="text-[13px] opacity-80 mt-1">
+              <p className="text-[15px] text-white/90 mt-2 font-medium">
                 Setup fee (ครั้งเดียว) + ฿2,000-5,000/เดือน (API ตามใช้จริง)
               </p>
             </div>
