@@ -1,626 +1,196 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Building2, MessageSquare, FileText, CalendarClock, TrendingUp,
-  Users, ArrowRight, Clock, CheckCircle2, XCircle, ChevronDown,
-  Send, Bot, User, AlertTriangle, MapPin, DollarSign, Home,
-  Search, Star, Check, BarChart3, Phone, Zap
-} from "lucide-react";
+import { Building2, MessageSquare, FileText, CalendarClock, TrendingUp, Users, ChevronDown, Check, ArrowRight, Clock, BarChart3, MapPin, DollarSign, Star, Phone, Eye } from "lucide-react";
 
-/* ─── Pain Points ─── */
-const painPoints = [
-  {
-    icon: <MessageSquare size={20} />,
-    title: "ตอบลูกค้าไม่ทัน 24/7",
-    desc: "ลูกค้าสอบถามทรัพย์มาทุกเวลา ตี 2 ก็ถาม ตอบไม่ทัน ลูกค้าไปหานายหน้าคนอื่น",
-    color: "#ff3b30",
-  },
-  {
-    icon: <Home size={20} />,
-    title: "Listing เยอะจัดการไม่ไหว",
-    desc: "มีทรัพย์ 200+ รายการ อัพเดทราคา สถานะ รูปภาพ ไม่ครบ ข้อมูลไม่ตรง",
-    color: "#ff9500",
-  },
-  {
-    icon: <CalendarClock size={20} />,
-    title: "นัดดูไม่ตรงเวลา",
-    desc: "นัดชมทรัพย์ซ้อนกัน ลูกค้าเลื่อนบ่อย ลืม follow-up ทำให้เสียโอกาสปิดการขาย",
-    color: "#5856d6",
-  },
-  {
-    icon: <TrendingUp size={20} />,
-    title: "ไม่รู้ราคาตลาด",
-    desc: "ตั้งราคาจากความรู้สึก ไม่มี data เปรียบเทียบ ทำให้ขายช้าหรือขายถูกเกินไป",
-    color: "#2997ff",
-  },
-];
-
-/* ─── 5 Automation Workflows ─── */
-const workflows = [
-  {
-    icon: <MessageSquare size={22} />,
-    title: "LINE Property Inquiry Bot",
-    subtitle: "ลูกค้าถาม → AI ตอบพร้อมรายละเอียดทรัพย์ทันที 24/7",
-    color: "#30d158",
-    steps: [
-      "ลูกค้าส่งข้อความสอบถามทรัพย์ผ่าน LINE OA เช่น \"หาคอนโดสุขุมวิท งบ 3 ล้าน\"",
-      "n8n รับ webhook → ส่งให้ Flowise วิเคราะห์ความต้องการ (ทำเล, งบ, ขนาด, ประเภท)",
-      "AI ค้นทรัพย์ที่ตรง criteria จาก listing database (RAG)",
-      "ส่งรายละเอียดทรัพย์ให้ลูกค้า — รูป, ราคา, พื้นที่, ใกล้ BTS/MRT",
-      "ถ้าลูกค้าสนใจ → สร้าง link นัดชมอัตโนมัติ",
-      "ถ้าคำถามซับซ้อน (สินเชื่อ, กฎหมาย) → ส่งต่อนายหน้าพร้อม context ครบ",
-    ],
-    tools: ["n8n", "Flowise", "LINE Messaging API", "Google Sheets"],
-    models: ["Gemini 3 Flash (ถูก เร็ว)", "GPT-5 (คำถามซับซ้อน)"],
-    cost: "฿500-1,500/เดือน",
-    result: "ตอบลูกค้าภายใน 5 วินาที 24/7 ลดงานตอบแชท 80%",
-  },
-  {
-    icon: <FileText size={22} />,
-    title: "Listing Description Generator",
-    subtitle: "ใส่ข้อมูลทรัพย์ → AI เขียน listing โปรมืออาชีพ",
-    color: "#af52de",
-    steps: [
-      "Upload รูปทรัพย์ + ข้อมูลพื้นฐาน (ประเภท, ราคา, พื้นที่, ที่ตั้ง, จุดเด่น)",
-      "AI วิเคราะห์รูป — มุมห้อง, วิว, สภาพ, สไตล์ตกแต่ง",
-      "สร้าง listing description 3 แบบ: สั้น (LINE), กลาง (DDproperty), ยาว (เว็บ)",
-      "ใส่ SEO keywords ที่เกี่ยวข้อง (\"คอนโดใกล้ BTS\", \"บ้านเดี่ยว ราคาถูก\")",
-      "สร้าง highlight จุดขาย + เปรียบเทียบราคากับทรัพย์ใกล้เคียง",
-      "ส่งให้ review หรือ auto-post ลงทุก platform ได้เลย",
-    ],
-    tools: ["n8n", "Dify", "GPT-5 Vision"],
-    models: ["Claude Sonnet (creative copy)", "GPT-5 Vision (วิเคราะห์รูป)"],
-    cost: "฿800-2,000/เดือน",
-    result: "เขียน listing 30 รายการ/ชั่วโมง แทนที่จะ 3 รายการ เร็วขึ้น 10x",
-  },
-  {
-    icon: <CalendarClock size={22} />,
-    title: "Appointment Scheduler",
-    subtitle: "ลูกค้าสนใจ → AI จัดนัดชมทรัพย์ให้อัตโนมัติ",
-    color: "#2997ff",
-    steps: [
-      "ลูกค้าแจ้งว่าสนใจดูทรัพย์ผ่าน LINE / เว็บ",
-      "AI เช็คตารางนายหน้าจาก Google Calendar",
-      "เสนอ 3 slot เวลาที่ว่าง ให้ลูกค้าเลือก",
-      "พอลูกค้าเลือก → สร้าง calendar event + แจ้งนายหน้า",
-      "ส่ง reminder ก่อนนัด 24 ชม. และ 1 ชม. ผ่าน LINE",
-      "หลังดูทรัพย์ → AI ส่ง follow-up ถามความสนใจ + เสนอทรัพย์คล้ายกัน",
-    ],
-    tools: ["n8n", "Google Calendar", "LINE API"],
-    models: ["Gemini Flash (scheduling)", "GPT-5 (follow-up)"],
-    cost: "฿400-1,000/เดือน",
-    result: "นัดชมทรัพย์อัตโนมัติ ลด no-show 60% เพิ่ม conversion 35%",
-  },
-  {
-    icon: <BarChart3 size={22} />,
-    title: "Market Price Analysis",
-    subtitle: "AI วิเคราะห์ราคาตลาด → ตั้งราคาแม่นยำ",
-    color: "#ff9500",
-    steps: [
-      "ดึงข้อมูลราคาทรัพย์ใกล้เคียงจาก DDproperty, Hipflat, และฐานข้อมูลภายใน",
-      "AI วิเคราะห์: ราคา/ตร.ม., trend ย้อนหลัง 6-12 เดือน, อัตราขาย",
-      "เปรียบเทียบกับทรัพย์ที่ขายได้จริงในรอบ 3 เดือน",
-      "แนะนำช่วงราคาที่เหมาะสม (ราคาต่ำสุด / แนะนำ / สูงสุด)",
-      "สร้าง CMA report (Comparative Market Analysis) อัตโนมัติ",
-      "ส่งรายงานให้เจ้าของทรัพย์ / นายหน้า ผ่าน LINE หรือ Email",
-    ],
-    tools: ["n8n", "Python scraper", "Google Sheets"],
-    models: ["GPT-5 (data analysis)", "Gemini Flash (daily monitoring)"],
-    cost: "฿1,500-3,000/เดือน",
-    result: "ตั้งราคาแม่นยำ ขายเร็วขึ้น 40% ได้ราคาดีขึ้น 8-15%",
-  },
-  {
-    icon: <Users size={22} />,
-    title: "Lead Scoring & Follow-up",
-    subtitle: "AI จัดลำดับลูกค้า → follow-up อัตโนมัติ ไม่มีหลุด",
-    color: "#ff2d55",
-    steps: [
-      "ลูกค้าใหม่เข้ามาจากทุกช่องทาง (LINE, เว็บ, โทร, walk-in)",
-      "AI วิเคราะห์พฤติกรรม: ดูทรัพย์กี่รายการ, ถามราคา, มีงบเท่าไร",
-      "ให้คะแนน lead: Hot (พร้อมซื้อ), Warm (สนใจ), Cold (แค่ดูๆ)",
-      "Hot lead → แจ้งนายหน้าทันทีผ่าน LINE + โทรภายใน 5 นาที",
-      "Warm lead → AI ส่ง content ทรัพย์ที่ตรงใจ ทุก 3 วัน",
-      "Cold lead → ส่ง newsletter ราคาตลาด + ทรัพย์ใหม่ รายสัปดาห์",
-    ],
-    tools: ["n8n", "Flowise", "Google Sheets", "LINE API"],
-    models: ["Gemini Flash (scoring)", "Claude Sonnet (personalized msg)"],
-    cost: "฿1,000-2,500/เดือน",
-    result: "ไม่มี lead หลุด ปิดการขายเพิ่ม 45% เพราะ follow-up ตรงเวลา",
-  },
-];
-
-/* ─── Before/After ─── */
-const comparisons = [
-  {
-    aspect: "ตอบลูกค้า",
-    before: "ตอบได้แค่เวลาทำงาน 9-18 น.",
-    after: "AI ตอบ 24/7 พร้อมรายละเอียดทรัพย์",
-    saving: "ลด 80%",
-  },
-  {
-    aspect: "เขียน Listing",
-    before: "3 รายการ/ชม. เขียนเองทุกอัน",
-    after: "30+ รายการ/ชม. AI เขียน คนแค่ review",
-    saving: "เร็วขึ้น 10x",
-  },
-  {
-    aspect: "นัดชมทรัพย์",
-    before: "โทรนัดเอง ซ้อนบ่อย ลืม follow-up",
-    after: "AI จัดตาราง + reminder อัตโนมัติ",
-    saving: "-60% no-show",
-  },
-  {
-    aspect: "วิเคราะห์ราคา",
-    before: "ตั้งราคาจากประสบการณ์ ไม่มี data",
-    after: "AI วิเคราะห์ตลาด + สร้าง CMA report",
-    saving: "+15% ราคา",
-  },
-  {
-    aspect: "จัดการ Lead",
-    before: "จดมือ ลืม follow-up บ่อย lead หลุด",
-    after: "AI score + follow-up อัตโนมัติ ไม่มีหลุด",
-    saving: "+45% ปิดขาย",
-  },
-];
-
-/* ─── Chat Demo ─── */
-const chatMessages = [
-  { role: "customer" as const, text: "สนใจคอนโดแถวสุขุมวิทค่ะ งบ 3-4 ล้าน ใกล้ BTS" },
-  {
-    role: "ai" as const,
-    text: "หาให้แล้วค่ะ! มี 3 ทรัพย์ที่ตรง criteria:\n\n1. The Base Sukhumvit 77\n   1 bed 30 ตร.ม. ชั้น 15\n   ราคา ฿3.2M ใกล้ BTS อ่อนนุช 200m\n\n2. Ideo Mobi Sukhumvit 66\n   1 bed 35 ตร.ม. ชั้น 22 วิวเมือง\n   ราคา ฿3.8M ใกล้ BTS อุดมสุข 100m\n\n3. Aspire Sukhumvit 48\n   1 bed 28 ตร.ม. ชั้น 10 ตกแต่งครบ\n   ราคา ฿2.9M ใกล้ BTS พระโขนง 350m\n\nสนใจดูห้องไหนคะ?",
-  },
-  { role: "customer" as const, text: "สนใจ Ideo Mobi ค่ะ นัดดูได้ไหม เสาร์หน้า" },
-  {
-    role: "ai" as const,
-    text: "ว่างค่ะ! นัดได้เลย\n\nวันเสาร์ที่ 22 มี.ค. เลือกเวลาได้เลยค่ะ:\n- 10:00-11:00\n- 13:00-14:00\n- 15:00-16:00\n\nสะดวกช่วงไหนคะ?\n\nจุดนัดพบ: Lobby ชั้น G Ideo Mobi Sukhumvit 66\nนายหน้า: คุณแพร (โทร 08x-xxx-xxxx)",
-  },
-];
-
-/* ─── Pricing ─── */
-const pricing = [
-  {
-    name: "Solo Agent",
-    price: "฿14,900",
-    monthly: "฿1,500-3,000",
-    features: [
-      "LINE Inquiry Bot (500 msg/เดือน)",
-      "Listing Description Generator",
-      "Appointment Scheduler พื้นฐาน",
-      "Support 30 วัน",
-    ],
-    color: "#2997ff",
-  },
-  {
-    name: "Agency",
-    price: "฿39,900",
-    monthly: "฿3,500-8,000",
-    features: [
-      "LINE Inquiry Bot ไม่จำกัด",
-      "Listing Generator ไม่จำกัด",
-      "Appointment Scheduler + Reminder",
-      "Market Price Analysis",
-      "Lead Scoring & Follow-up",
-      "Training ทีม 2 ชม.",
-      "Support 60 วัน",
-    ],
-    color: "#5856d6",
-    badge: "แนะนำ",
-  },
-  {
-    name: "Developer",
-    price: "฿79,900",
-    monthly: "฿8,000-20,000",
-    features: [
-      "ทุกอย่างใน Agency",
-      "Multi-project dashboard",
-      "Custom CMA report template",
-      "API integration กับระบบ CRM ที่มี",
-      "Multi-user + permissions",
-      "On-site training 1 วัน",
-      "Priority support 90 วัน",
-    ],
-    color: "#af52de",
-  },
-];
-
-/* ─── Tools ─── */
-const toolsUsed = [
-  { name: "n8n", desc: "Workflow automation — เชื่อมทุก API เข้าด้วยกัน", color: "#ff6d5a" },
-  { name: "Flowise", desc: "AI Chatbot builder — สร้าง RAG chatbot สำหรับ listing", color: "#2997ff" },
-  { name: "LINE Messaging API", desc: "ส่ง/รับข้อความ LINE OA + rich message", color: "#30d158" },
-  { name: "Google Calendar", desc: "จัดการนัดชมทรัพย์ + sync ตารางนายหน้า", color: "#4285F4" },
-  { name: "Google Sheets", desc: "Listing database, lead tracking, price data", color: "#34c759" },
-  { name: "Dify", desc: "AI workflow builder สำหรับ listing description", color: "#af52de" },
-];
+/* ─── REAL ESTATE PAGE — Every section has industry-specific UI mockups ─── */
 
 export default function RealEstateSection() {
   const [expandedWorkflow, setExpandedWorkflow] = useState<number | null>(null);
 
   return (
-    <div className="bg-[#fbfbfd] min-h-screen">
+    <div>
       {/* ═══ HERO ═══ */}
-      <section className="pt-32 pb-20 px-6">
+      <section className="py-12 px-6">
         <div className="max-w-5xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="inline-flex items-center gap-2 bg-[#f5f5f7] rounded-full px-5 py-2 mb-6 text-[13px] text-[#2997ff] font-medium">
-              <Building2 size={16} /> Real Estate AI Solutions
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+            <div className="inline-flex items-center gap-2 bg-[#f5f5f7] rounded-full px-4 py-1.5 mb-6">
+              <Building2 size={14} className="text-[#2997ff]" />
+              <span className="text-[12px] font-medium text-[#2997ff]">Real Estate AI Solution</span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold text-[#1d1d1f] tracking-tight mb-6">
+            <h1 className="text-[36px] sm:text-[48px] md:text-[56px] font-semibold tracking-tight text-[#1d1d1f] mb-3">
               AI สำหรับ<span className="gradient-text">อสังหาริมทรัพย์</span>
             </h1>
-            <p className="text-lg md:text-xl text-[#86868b] max-w-2xl mx-auto mb-10 leading-relaxed">
-              ตอบลูกค้า 24/7, เขียน listing มืออาชีพ, นัดชมทรัพย์อัตโนมัติ, วิเคราะห์ราคาตลาด,
-              จัดการ lead ไม่มีหลุด — เริ่มต้นแค่ ฿14,900
+            <p className="text-[17px] text-[#86868b] max-w-[520px] mx-auto mb-8">
+              ตอบลูกค้า 24/7 เขียน listing อัตโนมัติ นัดชมทรัพย์ วิเคราะห์ราคาตลาด จัดการ lead — ปิดดีลเร็วขึ้น 45%
             </p>
           </motion.div>
+        </div>
+      </section>
 
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"
-          >
-            {[
-              { value: "80%", label: "ลดงานตอบแชท", color: "#30d158" },
-              { value: "5 วิ", label: "ตอบลูกค้า 24/7", color: "#2997ff" },
-              { value: "10x", label: "เขียน listing เร็วขึ้น", color: "#af52de" },
-              { value: "45%", label: "ปิดขายเพิ่มขึ้น", color: "#ff2d55" },
-            ].map((stat) => (
-              <div key={stat.label} className="apple-card p-4 text-center">
-                <p className="text-2xl md:text-3xl font-bold" style={{ color: stat.color }}>
-                  {stat.value}
-                </p>
-                <p className="text-[12px] text-[#86868b] mt-1">{stat.label}</p>
+      {/* ═══ PAIN POINTS — with real UI mockups ═══ */}
+      <section className="py-16 px-6 bg-[#f5f5f7]">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-[28px] sm:text-[32px] font-semibold text-[#1d1d1f] text-center mb-12">ปัญหาที่นายหน้าอสังหาฯ เจอทุกวัน</h2>
+          <div className="grid sm:grid-cols-2 gap-5">
+            {/* LINE inbox overflow mockup */}
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="apple-card p-0 overflow-hidden">
+              <div className="px-5 py-3 bg-[#ff3b30]/5 border-b border-[#ff3b30]/10 flex items-center justify-between">
+                <span className="text-[13px] font-medium text-[#ff3b30]">💬 LINE OA — สอบถามทรัพย์</span>
+                <span className="text-[11px] font-bold bg-[#ff3b30] text-white px-2 py-0.5 rounded-full">50+ ยังไม่อ่าน</span>
               </div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ═══ PAIN POINTS ═══ */}
-      <section className="py-20 px-6">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <p className="text-[13px] font-semibold text-[#ff3b30] uppercase tracking-widest mb-3">
-              Pain Points
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1d1d1f] tracking-tight mb-3">
-              ปัญหาที่นายหน้าอสังหาฯ เจอทุกวัน
-            </h2>
-            <p className="text-base text-[#86868b] max-w-xl mx-auto">
-              ถ้าคุณเจอปัญหาเหล่านี้ AI ช่วยแก้ได้ทั้งหมด
-            </p>
-          </motion.div>
-
-          <div className="grid sm:grid-cols-2 gap-4">
-            {painPoints.map((p, i) => (
-              <motion.div
-                key={p.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="apple-card p-5"
-              >
-                <div className="relative z-10 flex items-start gap-3">
-                  <div
-                    className="w-10 h-10 rounded-full bg-[#f5f5f7] flex items-center justify-center shrink-0"
-                    style={{ color: p.color }}
-                  >
-                    {p.icon}
-                  </div>
-                  <div>
-                    <h3 className="text-[15px] font-semibold text-[#1d1d1f] mb-1">{p.title}</h3>
-                    <p className="text-[12px] text-[#86868b] leading-relaxed">{p.desc}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ 5 AUTOMATION WORKFLOWS ═══ */}
-      <section className="py-20 px-6">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <p className="text-[13px] font-semibold text-[#2997ff] uppercase tracking-widest mb-3">
-              Automation Workflows
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1d1d1f] tracking-tight mb-3">
-              5 ระบบ AI สำหรับอสังหาริมทรัพย์
-            </h2>
-            <p className="text-base text-[#86868b] max-w-xl mx-auto">
-              แต่ละระบบทำงานอัตโนมัติ — เลือกใช้ทีละตัว หรือใช้ทั้งหมดก็ได้
-            </p>
-          </motion.div>
-
-          <div className="space-y-4">
-            {workflows.map((wf, i) => (
-              <motion.div
-                key={wf.title}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-30px" }}
-                transition={{ delay: i * 0.05 }}
-              >
-                <div
-                  className={`apple-card relative overflow-hidden ${expandedWorkflow === i ? "!bg-white/70" : ""}`}
-                >
-                  <button
-                    onClick={() => setExpandedWorkflow(expandedWorkflow === i ? null : i)}
-                    className="w-full text-left p-6"
-                  >
-                    <div className="flex items-start gap-4">
-                      <div
-                        className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
-                        style={{ background: wf.color + "15", color: wf.color }}
-                      >
-                        {wf.icon}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-[15px] font-semibold text-[#1d1d1f] mb-0.5">
-                          {wf.title}
-                        </h3>
-                        <p className="text-[13px] text-[#86868b]">{wf.subtitle}</p>
-                      </div>
-                      <div className="flex items-center gap-3 shrink-0">
-                        <span className="hidden sm:block text-[11px] text-[#86868b]">{wf.cost}</span>
-                        <motion.div animate={{ rotate: expandedWorkflow === i ? 180 : 0 }}>
-                          <ChevronDown size={16} className="text-[#d2d2d7]" />
-                        </motion.div>
-                      </div>
-                    </div>
-                  </button>
-
-                  <AnimatePresence>
-                    {expandedWorkflow === i && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="overflow-hidden"
-                      >
-                        <div className="px-6 pb-6 space-y-5">
-                          <div className="h-[1px] bg-gradient-to-r from-transparent via-black/[0.06] to-transparent" />
-
-                          {/* Steps */}
-                          <div>
-                            <p className="text-[11px] font-medium text-[#86868b] uppercase tracking-wider mb-3">
-                              ขั้นตอนการทำงาน
-                            </p>
-                            <div className="space-y-2">
-                              {wf.steps.map((step, si) => (
-                                <div key={si} className="flex items-start gap-3">
-                                  <span
-                                    className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-[10px] font-bold text-white mt-0.5"
-                                    style={{ background: wf.color }}
-                                  >
-                                    {si + 1}
-                                  </span>
-                                  <span className="text-[13px] text-[#1d1d1f]/80">{step}</span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-
-                          {/* Tools + Models + Cost */}
-                          <div className="grid sm:grid-cols-3 gap-4">
-                            <div className="bg-[#fafafa] rounded-xl p-4">
-                              <p className="text-[10px] font-medium text-[#86868b] uppercase tracking-wider mb-2">
-                                เครื่องมือ
-                              </p>
-                              <div className="flex flex-wrap gap-1.5">
-                                {wf.tools.map((t) => (
-                                  <span
-                                    key={t}
-                                    className="text-[11px] px-2.5 py-1 rounded-full bg-white border border-black/[0.06] text-[#1d1d1f]"
-                                  >
-                                    {t}
-                                  </span>
-                                ))}
-                              </div>
-                            </div>
-                            <div className="bg-[#fafafa] rounded-xl p-4">
-                              <p className="text-[10px] font-medium text-[#86868b] uppercase tracking-wider mb-2">
-                                AI Model
-                              </p>
-                              <div className="space-y-1">
-                                {wf.models.map((m) => (
-                                  <p key={m} className="text-[11px] text-[#1d1d1f]">
-                                    {m}
-                                  </p>
-                                ))}
-                              </div>
-                            </div>
-                            <div className="bg-[#fafafa] rounded-xl p-4">
-                              <p className="text-[10px] font-medium text-[#86868b] uppercase tracking-wider mb-2">
-                                ผลลัพธ์
-                              </p>
-                              <p className="text-[13px] font-medium" style={{ color: wf.color }}>
-                                {wf.result}
-                              </p>
-                              <p className="text-[11px] text-[#86868b] mt-1">ค่า API ~{wf.cost}/เดือน</p>
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ BEFORE / AFTER ═══ */}
-      <section className="py-20 px-6">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <p className="text-[13px] font-semibold text-[#34c759] uppercase tracking-widest mb-3">
-              Before / After
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1d1d1f] tracking-tight mb-3">
-              เดิม vs ใช้ AI
-            </h2>
-          </motion.div>
-
-          <div className="apple-card overflow-hidden">
-            <div className="relative z-10">
-              {/* Header */}
-              <div className="grid grid-cols-12 gap-4 p-5 border-b border-black/[0.04] nav-glass">
-                <div className="col-span-3 text-[12px] font-semibold text-[#86868b]">งาน</div>
-                <div className="col-span-4 text-[12px] font-semibold text-[#ff3b30] flex items-center gap-1">
-                  <XCircle size={13} /> เดิม (ทำมือ)
-                </div>
-                <div className="col-span-4 text-[12px] font-semibold text-[#34c759] flex items-center gap-1">
-                  <CheckCircle2 size={13} /> ใช้ AI
-                </div>
-                <div className="col-span-1 text-[12px] font-semibold text-[#2997ff] text-center">ผล</div>
-              </div>
-
-              {comparisons.map((c, i) => (
-                <motion.div
-                  key={c.aspect}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.06 }}
-                  className="grid grid-cols-12 gap-4 p-5 border-b border-black/[0.03] hover:bg-white/30 transition-colors"
-                >
-                  <div className="col-span-3 text-[13px] font-medium text-[#1d1d1f]">{c.aspect}</div>
-                  <div className="col-span-4 text-[12px] text-[#86868b]">{c.before}</div>
-                  <div className="col-span-4 text-[12px] text-[#1d1d1f]">{c.after}</div>
-                  <div className="col-span-1 text-center">
-                    <span className="text-[11px] font-semibold text-[#34c759] bg-[#f5f5f7] rounded-full px-2 py-0.5">
-                      {c.saving}
-                    </span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ CHAT DEMO ═══ */}
-      <section className="py-20 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-10 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <p className="text-[13px] font-semibold text-[#30d158] uppercase tracking-widest mb-3">
-                Live Demo
-              </p>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1d1d1f] tracking-tight mb-4">
-                ลูกค้าถาม → AI หาทรัพย์ + นัดชมให้
-              </h2>
-              <p className="text-base text-[#86868b] leading-relaxed mb-6">
-                ดู AI chatbot จริงที่ตอบลูกค้า — ค้นทรัพย์ตาม criteria, แสดงรายละเอียด,
-                นัดชมทรัพย์ พร้อมส่ง reminder ให้อัตโนมัติ ไม่ต้องรอนายหน้า
-              </p>
-              <div className="space-y-3">
-                {[
-                  "ค้นทรัพย์ตามงบ ทำเล ขนาด ประเภท",
-                  "แสดงรายละเอียด + รูปทรัพย์ทันที",
-                  "นัดชมทรัพย์ + ส่ง reminder อัตโนมัติ",
-                  "Follow-up หลังดูทรัพย์ + แนะนำทรัพย์คล้ายกัน",
-                ].map((item) => (
-                  <div key={item} className="flex items-center gap-2 text-[13px] text-[#1d1d1f]">
-                    <CheckCircle2 size={16} className="text-[#30d158] shrink-0" />
-                    {item}
+              <div className="p-4 space-y-2">
+                {["มีคอนโดแถวพระราม9ไหมครับ งบ 3 ล้าน", "ห้องที่โพสต์ยังว่างไหมคะ?", "ราคาต่อรองได้ไหม", "อยากนัดดูห้อง เสาร์หน้าว่างไหม", "มีบ้านเดี่ยว ลาดพร้าว ไหม"].map((msg, i) => (
+                  <div key={i} className="flex items-center gap-3 p-2 rounded-lg bg-[#fafafa]">
+                    <div className="w-7 h-7 rounded-full bg-[#e5e5ea] shrink-0" />
+                    <p className="text-[12px] text-[#1d1d1f] truncate flex-1">{msg}</p>
+                    <span className="text-[9px] text-[#86868b] shrink-0">{i + 1}h</span>
                   </div>
                 ))}
+                <p className="text-[12px] text-[#ff3b30] text-center font-medium pt-1">ตอบไม่ทัน ลูกค้าไปหานายหน้าคนอื่น</p>
               </div>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <div className="apple-card relative p-0 overflow-hidden">
-                {/* Header */}
-                <div className="nav-glass px-5 py-3 flex items-center gap-3">
-                  <div className="flex gap-1.5">
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
+            {/* Listing spreadsheet mockup */}
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="apple-card p-0 overflow-hidden">
+              <div className="px-5 py-3 bg-[#ff9500]/5 border-b border-[#ff9500]/10 flex items-center justify-between">
+                <span className="text-[13px] font-medium text-[#ff9500]">📋 Listing Spreadsheet</span>
+                <span className="text-[11px] text-[#ff3b30] font-medium">68 รายการ outdated</span>
+              </div>
+              <div className="p-4">
+                <div className="text-[10px] grid grid-cols-12 gap-1 pb-2 border-b border-black/[0.04] mb-2 text-[#86868b] font-medium">
+                  <span className="col-span-4">ทรัพย์</span>
+                  <span className="col-span-2">ราคา</span>
+                  <span className="col-span-3">สถานะ</span>
+                  <span className="col-span-3">Description</span>
+                </div>
+                {[
+                  { name: "Life Asoke #2205", price: "3.2M", status: "ว่าง", desc: "ยังไม่เขียน", ok: false },
+                  { name: "Ideo Mobi #1803", price: "???", status: "ไม่แน่ใจ", desc: "เก่า 6 เดือน", ok: false },
+                  { name: "The Base #910", price: "2.9M", status: "ว่าง", desc: "OK", ok: true },
+                  { name: "Rhythm #1522", price: "4.1M", status: "จอง?", desc: "ยังไม่เขียน", ok: false },
+                  { name: "Aspire #704", price: "2.5M", status: "ว่าง", desc: "เก่า 3 เดือน", ok: false },
+                ].map((r) => (
+                  <div key={r.name} className="text-[10px] grid grid-cols-12 gap-1 py-1.5 border-b border-black/[0.02]">
+                    <span className="col-span-4 text-[#1d1d1f] font-medium truncate">{r.name}</span>
+                    <span className="col-span-2 text-[#1d1d1f]">{r.price}</span>
+                    <span className={`col-span-3 ${r.status.includes("?") || r.status === "ไม่แน่ใจ" ? "text-[#ff9500]" : "text-[#34c759]"}`}>{r.status}</span>
+                    <span className={`col-span-3 ${r.ok ? "text-[#34c759]" : "text-[#ff3b30]"}`}>{r.desc}</span>
                   </div>
-                  <span className="text-[12px] text-[#86868b] font-medium ml-2">
-                    LINE OA — อสังหาริมทรัพย์
-                  </span>
-                  <span className="ml-auto relative w-2 h-2 rounded-full bg-[#34c759]">
-                    <span className="absolute inset-0 rounded-full bg-[#34c759] animate-ping opacity-50" />
-                  </span>
-                </div>
+                ))}
+                <p className="text-[11px] text-[#ff9500] text-center font-medium pt-2">200 รายการ จัดการไม่ไหว ข้อมูลไม่ update</p>
+              </div>
+            </motion.div>
 
-                {/* Messages */}
-                <div className="p-5 space-y-3 max-h-[520px] overflow-y-auto">
-                  {chatMessages.map((msg, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, y: 8 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.2 }}
-                      className={`flex ${msg.role === "customer" ? "justify-end" : "justify-start"}`}
-                    >
-                      {msg.role === "ai" && (
-                        <div className="w-7 h-7 rounded-full bg-[#30d158]/10 flex items-center justify-center mr-2 shrink-0 mt-1">
-                          <Bot size={14} className="text-[#30d158]" />
-                        </div>
-                      )}
-                      <div
-                        className={`text-[13px] px-4 py-2.5 max-w-[80%] whitespace-pre-line leading-relaxed ${
-                          msg.role === "customer"
-                            ? "bg-[#2997ff] text-white rounded-2xl rounded-br-md"
-                            : "apple-card relative !rounded-2xl !rounded-bl-md p-4 text-[#1d1d1f]"
-                        }`}
-                      >
-                        {msg.text}
+            {/* Missed appointments mockup */}
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="apple-card p-0 overflow-hidden">
+              <div className="px-5 py-3 bg-[#5856d6]/5 border-b border-[#5856d6]/10 flex items-center justify-between">
+                <span className="text-[13px] font-medium text-[#5856d6]">📅 นัดชมทรัพย์วันนี้</span>
+                <span className="text-[11px] text-[#ff3b30] font-medium">3 no-show</span>
+              </div>
+              <div className="p-4 space-y-2">
+                {[
+                  { time: "10:00", client: "คุณสมชาย", unit: "Life Asoke", status: "ไม่มา", ok: false },
+                  { time: "13:00", client: "คุณแพร", unit: "Ideo Mobi", status: "เลื่อน (ไม่บอก)", ok: false },
+                  { time: "15:00", client: "คุณวิภา", unit: "The Base", status: "ไม่รับโทร", ok: false },
+                  { time: "16:30", client: "คุณธนา", unit: "Rhythm", status: "มาแล้ว", ok: true },
+                ].map((a) => (
+                  <div key={a.time} className="flex items-center justify-between p-2 rounded-lg bg-[#fafafa]">
+                    <div className="flex items-center gap-3">
+                      <span className="text-[12px] font-mono text-[#1d1d1f]">{a.time}</span>
+                      <div>
+                        <p className="text-[11px] font-medium text-[#1d1d1f]">{a.client}</p>
+                        <p className="text-[9px] text-[#86868b]">{a.unit}</p>
                       </div>
-                      {msg.role === "customer" && (
-                        <div className="w-7 h-7 rounded-full bg-[#2997ff]/10 flex items-center justify-center ml-2 shrink-0 mt-1">
-                          <User size={14} className="text-[#2997ff]" />
-                        </div>
-                      )}
-                    </motion.div>
-                  ))}
-                </div>
+                    </div>
+                    <span className={`text-[10px] ${a.ok ? "text-[#34c759]" : "text-[#ff3b30]"}`}>{a.ok ? "✅" : "❌"} {a.status}</span>
+                  </div>
+                ))}
+                <p className="text-[12px] text-[#5856d6] text-center font-medium pt-1">เสียเวลาเดินทาง ลูกค้าไม่มาไม่บอก</p>
+              </div>
+            </motion.div>
 
-                {/* Input */}
-                <div className="p-4 border-t border-black/[0.04]">
-                  <div className="bg-white rounded-[14px] border border-[#d2d2d7]/40 flex items-center gap-2 px-4 py-3">
-                    <span className="text-[13px] text-[#c7c7cc] flex-1">พิมพ์ข้อความ...</span>
-                    <Send size={16} className="text-[#2997ff]" />
+            {/* Competitor pricing mockup */}
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="apple-card p-0 overflow-hidden">
+              <div className="px-5 py-3 bg-[#2997ff]/5 border-b border-[#2997ff]/10 flex items-center justify-between">
+                <span className="text-[13px] font-medium text-[#2997ff]">📊 ราคาคู่แข่ง — สุขุมวิท 1BR</span>
+                <span className="text-[11px] text-[#86868b]">ต้องเช็คเอง</span>
+              </div>
+              <div className="p-4">
+                <div className="text-[10px] grid grid-cols-12 gap-1 pb-2 border-b border-black/[0.04] mb-2 text-[#86868b] font-medium">
+                  <span className="col-span-5">โครงการ</span>
+                  <span className="col-span-3">ราคา/ตร.ม.</span>
+                  <span className="col-span-4">คู่แข่ง listing</span>
+                </div>
+                {[
+                  { name: "Life Asoke Rama 9", psm: "฿95K", comp: "ถูกกว่าเรา 5%" },
+                  { name: "Ideo Mobi Sukhumvit", psm: "฿110K", comp: "เท่ากัน" },
+                  { name: "The Base Phetchaburi", psm: "฿85K", comp: "แพงกว่าเรา 8%" },
+                  { name: "Rhythm Asoke", psm: "฿125K", comp: "ถูกกว่าเรา 12%" },
+                ].map((c) => (
+                  <div key={c.name} className="text-[10px] grid grid-cols-12 gap-1 py-1.5 border-b border-black/[0.02]">
+                    <span className="col-span-5 text-[#1d1d1f] font-medium truncate">{c.name}</span>
+                    <span className="col-span-3 text-[#1d1d1f]">{c.psm}</span>
+                    <span className={`col-span-4 ${c.comp.includes("ถูกกว่า") ? "text-[#ff3b30]" : "text-[#34c759]"}`}>{c.comp}</span>
+                  </div>
+                ))}
+                <p className="text-[11px] text-[#2997ff] text-center font-medium pt-2">ไม่มี data ตั้งราคาจากความรู้สึก ขายช้า</p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ BEFORE/AFTER — side-by-side chat mockups ═══ */}
+      <section className="py-20 px-6">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-[28px] sm:text-[32px] font-semibold text-[#1d1d1f] text-center mb-3">ก่อน vs หลัง ใช้ AI</h2>
+          <p className="text-[17px] text-[#86868b] text-center mb-12">เปลี่ยนจากตอบช้า เป็นปิดดีลทันที</p>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* BEFORE */}
+            <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+              <p className="text-[13px] font-semibold text-[#ff3b30] uppercase tracking-wider mb-3 text-center">ก่อนใช้ AI</p>
+              <div className="apple-card p-0 overflow-hidden border-2 border-[#ff3b30]/10">
+                <div className="px-4 py-2.5 bg-[#ff3b30]/5 text-[12px] text-[#ff3b30] font-medium text-center">ตอบ: 2 ชม. | ลูกค้าหนี: 40%</div>
+                <div className="p-4 space-y-3">
+                  <div className="flex justify-end"><div className="bg-[#e5e5ea] text-[#1d1d1f] text-[12px] px-3 py-2 rounded-2xl rounded-br-sm max-w-[75%]">มีคอนโดแถวพระราม9ไหมครับ งบ 3 ล้าน</div></div>
+                  <div className="text-center py-6"><Clock size={24} className="text-[#d2d2d7] mx-auto mb-2" /><p className="text-[11px] text-[#d2d2d7]">รอ 2 ชั่วโมง...</p></div>
+                  <div className="flex justify-start"><div className="bg-[#f5f5f7] text-[#1d1d1f] text-[12px] px-3 py-2 rounded-2xl rounded-bl-sm max-w-[75%]">สวัสดีครับ ต้องเช็คให้ก่อนนะครับ รอแป๊บ...</div></div>
+                  <div className="flex justify-end"><div className="bg-[#e5e5ea] text-[#1d1d1f] text-[12px] px-3 py-2 rounded-2xl rounded-br-sm max-w-[75%]">ช้ามาก ไปถามนายหน้าคนอื่นแล้วครับ</div></div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* AFTER */}
+            <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+              <p className="text-[13px] font-semibold text-[#34c759] uppercase tracking-wider mb-3 text-center">หลังใช้ AI</p>
+              <div className="apple-card p-0 overflow-hidden border-2 border-[#34c759]/10">
+                <div className="px-4 py-2.5 bg-[#34c759]/5 text-[12px] text-[#34c759] font-medium text-center">ตอบ: 3 วินาที | นัดดูทันที: +45%</div>
+                <div className="p-4 space-y-3">
+                  <div className="flex justify-end"><div className="bg-[#2997ff] text-white text-[12px] px-3 py-2 rounded-2xl rounded-br-sm max-w-[75%]">มีคอนโดแถวพระราม9ไหมครับ งบ 3 ล้าน</div></div>
+                  <div className="flex justify-start">
+                    <div className="bg-[#f5f5f7] text-[#1d1d1f] text-[12px] px-3 py-2.5 rounded-2xl rounded-bl-sm max-w-[85%]">
+                      <p className="font-medium mb-1.5">มีค่ะ! พบ 3 ห้องตรงเงื่อนไข</p>
+                      <div className="space-y-1.5 text-[11px]">
+                        <div className="p-1.5 rounded bg-white/60">
+                          <p className="font-medium">1. Life Asoke Rama 9</p>
+                          <p className="text-[#86868b]">1BR 30 ตร.ม. ชั้น 22 วิวเมือง ฿3.2M</p>
+                        </div>
+                        <div className="p-1.5 rounded bg-white/60">
+                          <p className="font-medium">2. Aspire Rama 9</p>
+                          <p className="text-[#86868b]">1BR 28 ตร.ม. ชั้น 15 ตกแต่งครบ ฿2.9M</p>
+                        </div>
+                        <div className="p-1.5 rounded bg-white/60">
+                          <p className="font-medium">3. The Base Garden Rama 9</p>
+                          <p className="text-[#86868b]">Studio 26 ตร.ม. ชั้น 10 ใกล้ MRT ฿2.65M</p>
+                        </div>
+                      </div>
+                      <p className="text-[#2997ff] mt-1.5">สนใจนัดดูห้องไหนคะ? จัดให้ได้เลย</p>
+                    </div>
+                  </div>
+                  <div className="text-[10px] text-[#86868b] px-2 flex items-center gap-1.5">
+                    <span className="px-1.5 py-0.5 rounded bg-[#34c759]/10 text-[#34c759] font-medium">AI</span> 2.8 วินาที
                   </div>
                 </div>
               </div>
@@ -629,266 +199,267 @@ export default function RealEstateSection() {
         </div>
       </section>
 
-      {/* ═══ INTERACTIVE DEMO — Real Estate UI ═══ */}
-      <section className="py-20 px-6">
+      {/* ═══ WORKFLOWS — with inline mini-demos ═══ */}
+      <section className="py-20 px-6 bg-[#f5f5f7]">
         <div className="max-w-5xl mx-auto">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <h2 className="text-[28px] sm:text-[36px] font-semibold text-[#1d1d1f] tracking-tight mb-3">ดูตัวอย่างจริง</h2>
-            <p className="text-[17px] text-[#86868b]">ระบบ AI ช่วยขายอสังหาฯ — จากสอบถามถึงปิดดีล</p>
-          </motion.div>
+          <h2 className="text-[28px] sm:text-[32px] font-semibold text-[#1d1d1f] text-center mb-3">5 ระบบอัตโนมัติ</h2>
+          <p className="text-[17px] text-[#86868b] text-center mb-12">ทุกอย่างทำงาน 24/7 ไม่ต้องจ้างคนเพิ่ม</p>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* LINE Inquiry Bot */}
-            <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="apple-card p-0 overflow-hidden">
-              <div className="flex items-center gap-3 px-5 py-3 bg-[#00C300] text-white">
-                <span className="text-lg">💬</span>
-                <span className="text-[13px] font-semibold">LINE — สอบถามโครงการ</span>
-              </div>
-              <div className="p-5 space-y-3 bg-[#7494a5]/5 min-h-[300px]">
-                <div className="flex justify-end">
-                  <div className="bg-[#06C755] text-white text-[13px] px-4 py-2.5 rounded-2xl rounded-br-sm max-w-[75%]">
-                    คอนโดย่านพระราม 9 งบ 3-5 ล้าน มีห้องไหนบ้างครับ
-                  </div>
-                </div>
-                <div className="flex justify-start">
-                  <div className="bg-white text-[#1d1d1f] text-[13px] px-4 py-3 rounded-2xl rounded-bl-sm max-w-[80%] shadow-sm">
-                    <p className="font-medium mb-2">พบ 3 ห้องที่ตรงเงื่อนไข 🏢</p>
-                    <div className="space-y-2 text-[12px]">
-                      <div className="p-2 rounded-lg bg-[#f5f5f7]">
-                        <p className="font-medium">Life Asoke Rama 9</p>
-                        <p className="text-[#86868b]">1BR 30 ตร.ม. • ฿3.29M • ชั้น 22 วิวสวย</p>
-                      </div>
-                      <div className="p-2 rounded-lg bg-[#f5f5f7]">
-                        <p className="font-medium">Ideo Mobi Rama 9</p>
-                        <p className="text-[#86868b]">1BR 35 ตร.ม. • ฿4.15M • ใกล้ MRT</p>
-                      </div>
-                      <div className="p-2 rounded-lg bg-[#f5f5f7]">
-                        <p className="font-medium">Rhythm Asoke</p>
-                        <p className="text-[#86868b]">Studio 28 ตร.ม. • ฿3.65M • พร้อมเฟอร์</p>
+          <div className="space-y-4">
+            {[
+              { icon: <MessageSquare size={20} />, title: "Property Inquiry Bot", color: "#30d158", desc: "LINE → ลูกค้าถามคอนโด → AI ค้นทรัพย์ตรง criteria ตอบทันที", saved: "ลด 90%", cost: "~฿500/เดือน",
+                demo: (
+                  <div className="mt-3 apple-card p-0 overflow-hidden">
+                    <div className="px-3 py-2 bg-[#00C300] text-white text-[11px] font-medium">LINE OA — สอบถามทรัพย์</div>
+                    <div className="p-3 space-y-2 bg-[#7494a5]/5">
+                      <div className="flex justify-end"><div className="bg-[#06C755] text-white text-[11px] px-3 py-1.5 rounded-full">หาคอนโดสุขุมวิท งบ 3-4 ล้าน ใกล้ BTS</div></div>
+                      <div className="flex justify-start">
+                        <div className="bg-white text-[11px] px-3 py-2 rounded-xl shadow-sm max-w-[85%]">
+                          <p className="font-medium mb-1">พบ 3 ห้องที่ตรง criteria</p>
+                          <div className="space-y-1">
+                            <div className="p-1.5 rounded bg-[#f5f5f7] text-[10px]"><p className="font-medium">The Base Sukhumvit 77</p><p className="text-[#86868b]">1BR 30 ตร.ม. ชั้น 15 ฿3.2M ใกล้ BTS อ่อนนุช</p></div>
+                            <div className="p-1.5 rounded bg-[#f5f5f7] text-[10px]"><p className="font-medium">Ideo Mobi Sukhumvit 66</p><p className="text-[#86868b]">1BR 35 ตร.ม. ชั้น 22 วิวเมือง ฿3.8M</p></div>
+                            <div className="p-1.5 rounded bg-[#f5f5f7] text-[10px]"><p className="font-medium">Aspire Sukhumvit 48</p><p className="text-[#86868b]">1BR 28 ตร.ม. ชั้น 10 ตกแต่งครบ ฿2.9M</p></div>
+                          </div>
+                          <p className="text-[#2997ff] text-[10px] mt-1">สนใจดูห้องไหนคะ?</p>
+                        </div>
                       </div>
                     </div>
-                    <p className="text-[#2997ff] text-[12px] mt-2">ต้องการนัดดูห้องไหนคะ? 📅</p>
                   </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Agent Dashboard */}
-            <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="apple-card p-0 overflow-hidden">
-              <div className="flex items-center justify-between px-5 py-3 bg-[#f5f5f7] border-b border-black/[0.04]">
-                <span className="text-[13px] font-semibold text-[#1d1d1f]">🏠 Agent Dashboard</span>
-                <span className="text-[11px] text-[#34c759] font-medium">● Live</span>
-              </div>
-              <div className="p-5 space-y-3">
-                {/* Lead pipeline */}
-                <div>
-                  <p className="text-[11px] text-[#86868b] uppercase tracking-wider font-medium mb-2">Lead Pipeline</p>
-                  <div className="flex gap-2">
-                    {[
-                      { label: "สอบถาม", count: 12, color: "#2997ff" },
-                      { label: "นัดดู", count: 5, color: "#ff9500" },
-                      { label: "เจรจา", count: 3, color: "#5856d6" },
-                      { label: "ปิดดีล", count: 1, color: "#34c759" },
-                    ].map((stage) => (
-                      <div key={stage.label} className="flex-1 text-center p-2 rounded-lg" style={{ background: stage.color + "08" }}>
-                        <p className="text-[16px] font-semibold" style={{ color: stage.color }}>{stage.count}</p>
-                        <p className="text-[9px] text-[#86868b]">{stage.label}</p>
+                ) },
+              { icon: <FileText size={20} />, title: "Listing Description Generator", color: "#af52de", desc: "ใส่ข้อมูลทรัพย์ → AI เขียน listing มืออาชีพ 3 แบบ", saved: "30นาที→30วินาที", cost: "~฿800/เดือน",
+                demo: (
+                  <div className="mt-3 apple-card p-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#af52de]/10 text-[#af52de] font-medium">AI Generated</span>
+                      <span className="text-[10px] text-[#86868b]">Ideo Mobi Sukhumvit 66</span>
+                    </div>
+                    <p className="text-[12px] font-medium text-[#1d1d1f] mb-1">คอนโดหรู ทำเลทอง ติด BTS อุดมสุข</p>
+                    <p className="text-[11px] text-[#86868b] leading-relaxed">ห้อง 1 Bedroom 35 ตร.ม. ชั้น 22 วิวเมืองแบบ Panoramic ตกแต่งครบพร้อมอยู่ Built-in ทั้งห้อง ครัวปิดแยกส่วน ใกล้ BTS อุดมสุข เดินเพียง 100 เมตร</p>
+                    <div className="flex flex-wrap gap-1 mt-2">{["คอนโดสุขุมวิท","ใกล้BTS","วิวเมือง","ตกแต่งครบ","1BR"].map(t => <span key={t} className="text-[8px] px-1.5 py-0.5 rounded bg-[#af52de]/8 text-[#af52de]">{t}</span>)}</div>
+                  </div>
+                ) },
+              { icon: <CalendarClock size={20} />, title: "Appointment Scheduler", color: "#2997ff", desc: "ลูกค้าสนใจ → AI นัดชมทรัพย์ + reminder อัตโนมัติ", saved: "-60% no-show", cost: "~฿400/เดือน",
+                demo: (
+                  <div className="mt-3 apple-card p-4">
+                    <div className="flex items-center gap-2 mb-3">
+                      <CalendarClock size={14} className="text-[#2997ff]" />
+                      <span className="text-[11px] font-medium text-[#1d1d1f]">ยืนยันการนัดชมทรัพย์</span>
+                      <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-[#34c759]/10 text-[#34c759] font-medium ml-auto">ยืนยันแล้ว</span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 text-[11px]">
+                      <div className="p-2 rounded-lg bg-[#f5f5f7]"><p className="text-[9px] text-[#86868b]">วันที่</p><p className="font-medium text-[#1d1d1f]">เสาร์ 22 มี.ค. 2026</p></div>
+                      <div className="p-2 rounded-lg bg-[#f5f5f7]"><p className="text-[9px] text-[#86868b]">เวลา</p><p className="font-medium text-[#1d1d1f]">13:00 - 14:00</p></div>
+                      <div className="p-2 rounded-lg bg-[#f5f5f7]"><p className="text-[9px] text-[#86868b]">ทรัพย์</p><p className="font-medium text-[#1d1d1f]">Ideo Mobi #1803</p></div>
+                      <div className="p-2 rounded-lg bg-[#f5f5f7]"><p className="text-[9px] text-[#86868b]">นายหน้า</p><p className="font-medium text-[#1d1d1f]">คุณแพร 08x-xxx-xxxx</p></div>
+                    </div>
+                    <div className="flex items-center gap-1.5 mt-2 text-[9px] text-[#86868b]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#34c759]" /> Reminder ส่งก่อน 24 ชม. และ 1 ชม.
+                    </div>
+                  </div>
+                ) },
+              { icon: <BarChart3 size={20} />, title: "Market Price Analysis", color: "#ff9500", desc: "AI วิเคราะห์ราคาตลาด → แนะนำช่วงราคาที่เหมาะ", saved: "+15% ราคาดีขึ้น", cost: "~฿1,500/เดือน",
+                demo: (
+                  <div className="mt-3 apple-card p-4">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-[11px] font-medium text-[#1d1d1f]">CMA Report — สุขุมวิท 1BR</span>
+                    </div>
+                    <div className="text-[10px]">
+                      <div className="grid grid-cols-12 gap-1 pb-1.5 border-b border-black/[0.04] text-[#86868b] font-medium mb-1.5">
+                        <span className="col-span-4">โครงการ</span>
+                        <span className="col-span-2">ตร.ม.</span>
+                        <span className="col-span-3">ราคา/ตร.ม.</span>
+                        <span className="col-span-3">ขายได้</span>
                       </div>
-                    ))}
+                      {[
+                        { name: "Ideo Mobi 66", sqm: "35", psm: "฿109K", sold: "45 วัน" },
+                        { name: "The Base 77", sqm: "30", psm: "฿95K", sold: "32 วัน" },
+                        { name: "Life Asoke", sqm: "32", psm: "฿112K", sold: "28 วัน" },
+                        { name: "Rhythm Asoke", sqm: "28", psm: "฿125K", sold: "55 วัน" },
+                      ].map((r) => (
+                        <div key={r.name} className="grid grid-cols-12 gap-1 py-1 border-b border-black/[0.02]">
+                          <span className="col-span-4 text-[#1d1d1f] font-medium truncate">{r.name}</span>
+                          <span className="col-span-2 text-[#86868b]">{r.sqm}</span>
+                          <span className="col-span-3 text-[#1d1d1f]">{r.psm}</span>
+                          <span className="col-span-3 text-[#86868b]">{r.sold}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mt-2 p-2 rounded-lg bg-[#ff9500]/5 text-[10px]">
+                      <p className="font-medium text-[#ff9500]">AI แนะนำ: ตั้งราคา ฿105-115K/ตร.ม.</p>
+                      <p className="text-[#86868b]">ขายได้ภายใน 30-40 วัน (เฉลี่ยตลาด)</p>
+                    </div>
                   </div>
-                </div>
-                {/* Today's schedule */}
-                <div>
-                  <p className="text-[11px] text-[#86868b] uppercase tracking-wider font-medium mb-2">นัดดูวันนี้</p>
+                ) },
+              { icon: <Users size={20} />, title: "Lead Scoring & Follow-up", color: "#ff2d55", desc: "AI จัดลำดับลูกค้า Hot/Warm/Cold → follow-up อัตโนมัติ", saved: "+45% ปิดขาย", cost: "~฿1,000/เดือน",
+                demo: (
+                  <div className="mt-3 apple-card p-4">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-[11px] font-medium text-[#1d1d1f]">Lead Card — คุณสมชาย</span>
+                      <span className="text-[9px] px-2 py-0.5 rounded-full bg-[#ff2d55] text-white font-bold ml-auto">HOT 92/100</span>
+                    </div>
+                    <div className="space-y-1.5 text-[11px]">
+                      <div className="flex justify-between p-2 rounded-lg bg-[#f5f5f7]">
+                        <span className="text-[#86868b]">สนใจ</span>
+                        <span className="text-[#1d1d1f] font-medium">คอนโด 1BR สุขุมวิท</span>
+                      </div>
+                      <div className="flex justify-between p-2 rounded-lg bg-[#f5f5f7]">
+                        <span className="text-[#86868b]">งบ</span>
+                        <span className="text-[#1d1d1f] font-medium">3-4 ล้านบาท</span>
+                      </div>
+                      <div className="flex justify-between p-2 rounded-lg bg-[#f5f5f7]">
+                        <span className="text-[#86868b]">พฤติกรรม</span>
+                        <span className="text-[#1d1d1f] font-medium">ดู 8 ห้อง, ถามราคา 3 ครั้ง</span>
+                      </div>
+                      <div className="flex justify-between p-2 rounded-lg bg-[#f5f5f7]">
+                        <span className="text-[#86868b]">ช่องทาง</span>
+                        <span className="text-[#1d1d1f] font-medium">LINE + เว็บไซต์</span>
+                      </div>
+                    </div>
+                    <div className="mt-2 p-2 rounded-lg bg-[#ff2d55]/5 text-[10px]">
+                      <p className="font-medium text-[#ff2d55]">แนะนำ: โทรหาภายใน 5 นาที</p>
+                      <p className="text-[#86868b]">เสนอ Ideo Mobi ชั้น 22 วิวเมือง (ตรง criteria ที่สุด)</p>
+                    </div>
+                  </div>
+                ) },
+            ].map((wf, i) => (
+              <motion.div key={wf.title} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }} className="apple-card overflow-hidden">
+                <button onClick={() => setExpandedWorkflow(expandedWorkflow === i ? null : i)} className="w-full text-left p-5">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: wf.color + "10", color: wf.color }}>{wf.icon}</div>
+                    <div className="flex-1"><h3 className="text-[15px] font-semibold text-[#1d1d1f] mb-0.5">{wf.title}</h3><p className="text-[13px] text-[#86868b]">{wf.desc}</p></div>
+                    <div className="flex items-center gap-3 shrink-0">
+                      <div className="hidden sm:block text-right"><p className="text-[11px] font-medium" style={{ color: wf.color }}>{wf.saved}</p><p className="text-[10px] text-[#86868b]">{wf.cost}</p></div>
+                      <motion.div animate={{ rotate: expandedWorkflow === i ? 180 : 0 }}><ChevronDown size={16} className="text-[#d2d2d7]" /></motion.div>
+                    </div>
+                  </div>
+                </button>
+                <AnimatePresence>
+                  {expandedWorkflow === i && wf.demo && (
+                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden"><div className="px-5 pb-5">{wf.demo}</div></motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ DASHBOARD MOCKUP ═══ */}
+      <section className="py-20 px-6">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-[28px] sm:text-[32px] font-semibold text-[#1d1d1f] text-center mb-3">Dashboard ที่คุณได้</h2>
+          <p className="text-[17px] text-[#86868b] text-center mb-10">ดูทุกอย่างในที่เดียว — จาก lead ถึงปิดดีล</p>
+
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="apple-card p-0 overflow-hidden shadow-xl shadow-black/[0.05]">
+            <div className="flex items-center gap-3 px-5 py-3 bg-[#f5f5f7] border-b border-black/[0.04]">
+              <div className="flex gap-1.5"><div className="w-3 h-3 rounded-full bg-[#ff5f57]" /><div className="w-3 h-3 rounded-full bg-[#febc2e]" /><div className="w-3 h-3 rounded-full bg-[#28c840]" /></div>
+              <span className="text-[12px] text-[#86868b] font-medium ml-2">Real Estate AI Dashboard</span>
+            </div>
+            <div className="p-6">
+              {/* Lead Pipeline Funnel */}
+              <div className="mb-6">
+                <p className="text-[11px] text-[#86868b] uppercase tracking-wider font-medium mb-3">Lead Pipeline</p>
+                <div className="flex items-end gap-2">
                   {[
-                    { time: "10:00", client: "คุณสมชาย", unit: "Life Asoke #2205", status: "confirmed" },
-                    { time: "14:00", client: "คุณพิมพ์", unit: "Ideo Mobi #1803", status: "pending" },
+                    { label: "สอบถาม", count: 12, color: "#2997ff", h: "h-20" },
+                    { label: "นัดดู", count: 5, color: "#ff9500", h: "h-14" },
+                    { label: "เจรจา", count: 3, color: "#5856d6", h: "h-10" },
+                    { label: "ปิดดีล", count: 1, color: "#34c759", h: "h-6" },
+                  ].map((stage, i) => (
+                    <div key={stage.label} className="flex-1 text-center">
+                      <p className="text-[16px] font-semibold mb-1" style={{ color: stage.color }}>{stage.count}</p>
+                      <div className={`${stage.h} rounded-t-lg mx-1`} style={{ background: stage.color + "20" }} />
+                      <p className="text-[9px] text-[#86868b] mt-1">{stage.label}</p>
+                      {i < 3 && <div className="hidden" />}
+                    </div>
+                  ))}
+                </div>
+                <div className="flex items-center justify-center gap-1 mt-2">
+                  {["→","→","→"].map((a, i) => <span key={i} className="text-[#d2d2d7] text-[11px]">{a}</span>)}
+                </div>
+              </div>
+
+              {/* Today's Appointments */}
+              <div className="mb-6">
+                <p className="text-[11px] text-[#86868b] uppercase tracking-wider font-medium mb-3">นัดดูวันนี้</p>
+                <div className="space-y-1.5">
+                  {[
+                    { time: "10:00", client: "คุณสมชาย", unit: "Life Asoke #2205", status: "ยืนยันแล้ว", sc: "#34c759" },
+                    { time: "13:00", client: "คุณพิมพ์", unit: "Ideo Mobi #1803", status: "รอยืนยัน", sc: "#ff9500" },
+                    { time: "15:30", client: "คุณวิภา", unit: "The Base #910", status: "ยืนยันแล้ว", sc: "#34c759" },
                   ].map((apt) => (
-                    <div key={apt.time} className="flex items-center justify-between p-2.5 rounded-lg bg-[#fafafa] mb-1.5">
+                    <div key={apt.time} className="flex items-center justify-between p-2.5 rounded-lg bg-[#fafafa]">
                       <div className="flex items-center gap-3">
-                        <span className="text-[13px] font-mono font-medium text-[#1d1d1f]">{apt.time}</span>
+                        <span className="text-[12px] font-mono text-[#86868b]">{apt.time}</span>
                         <div>
                           <p className="text-[12px] font-medium text-[#1d1d1f]">{apt.client}</p>
                           <p className="text-[10px] text-[#86868b]">{apt.unit}</p>
                         </div>
                       </div>
-                      <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${apt.status === "confirmed" ? "bg-[#34c759]/10 text-[#34c759]" : "bg-[#ff9500]/10 text-[#ff9500]"}`}>
-                        {apt.status === "confirmed" ? "ยืนยันแล้ว" : "รอยืนยัน"}
-                      </span>
+                      <span className="text-[9px] font-medium px-1.5 py-0.5 rounded-full" style={{ background: apt.sc + "12", color: apt.sc }}>{apt.status}</span>
                     </div>
                   ))}
                 </div>
-                {/* AI insight */}
-                <div className="p-3 rounded-xl bg-[#2997ff]/5 border border-[#2997ff]/10">
-                  <p className="text-[12px] text-[#2997ff] font-medium">💡 AI Insight</p>
-                  <p className="text-[11px] text-[#86868b] mt-0.5">คุณสมชาย สนใจห้อง 1BR วิวสวย มี budget 3.5M — แนะนำ upsell ชั้นสูงกว่า (+200K)</p>
-                </div>
               </div>
-            </motion.div>
-          </div>
+
+              {/* AI Insight Card */}
+              <div className="p-4 rounded-xl bg-[#2997ff]/5 border border-[#2997ff]/10">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <span className="text-[12px] text-[#2997ff] font-semibold">AI Insight</span>
+                  <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-[#2997ff]/10 text-[#2997ff] font-medium">upsell</span>
+                </div>
+                <p className="text-[12px] text-[#1d1d1f]">คุณสมชาย สนใจ 1BR วิวเมือง งบ 3.5M — ห้อง #2408 ชั้นสูงกว่า วิวดีกว่า ราคา ฿3.7M (+200K)</p>
+                <p className="text-[10px] text-[#86868b] mt-1">โอกาส upsell 68% — ลูกค้าถามเรื่องวิวบ่อย แนะนำเสนอชั้น 24 เปรียบเทียบ</p>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* ═══ PRICING ═══ */}
-      <section className="py-20 px-6">
+      {/* ═══ PRICING with ROI ═══ */}
+      <section className="py-20 px-6 bg-[#f5f5f7]">
         <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <p className="text-[13px] font-semibold text-[#ff9500] uppercase tracking-widest mb-3">
-              Pricing
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1d1d1f] tracking-tight mb-3">
-              แพ็คเกจสำหรับอสังหาริมทรัพย์
-            </h2>
-            <p className="text-base text-[#86868b] max-w-xl mx-auto">
-              เลือกแพ็คเกจที่เหมาะกับธุรกิจคุณ — ค่า setup ครั้งเดียว + ค่า API ตามใช้งานจริง
-            </p>
-          </motion.div>
+          <h2 className="text-[28px] sm:text-[32px] font-semibold text-[#1d1d1f] text-center mb-3">แพ็คเกจสำหรับอสังหาริมทรัพย์</h2>
+          <p className="text-[17px] text-[#86868b] text-center mb-10">Setup fee ครั้งเดียว + ค่า API ตามใช้จริง</p>
 
           <div className="grid md:grid-cols-3 gap-5">
-            {pricing.map((plan) => (
-              <motion.div
-                key={plan.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="apple-card relative p-6"
-              >
-                {plan.badge && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <span
-                      className="text-[11px] font-semibold px-4 py-1 rounded-full text-white"
-                      style={{ background: plan.color }}
-                    >
-                      {plan.badge}
-                    </span>
-                  </div>
-                )}
-                <div className="relative z-10">
-                  <h3 className="text-base font-semibold text-[#1d1d1f] text-center mb-2">
-                    {plan.name}
-                  </h3>
-                  <p className="text-2xl font-bold text-center mb-1" style={{ color: plan.color }}>
-                    {plan.price}
-                  </p>
-                  <p className="text-[11px] text-[#86868b] text-center mb-1">Setup fee (ครั้งเดียว)</p>
-                  <p className="text-[11px] text-[#86868b] text-center mb-4 pb-4 border-b border-black/5">
-                    + {plan.monthly}/เดือน (ค่า API)
-                  </p>
-                  <div className="space-y-2 mb-5">
-                    {plan.features.map((f) => (
-                      <div key={f} className="flex items-start gap-2">
-                        <Check size={13} className="mt-0.5 shrink-0" style={{ color: plan.color }} />
-                        <span className="text-[12px] text-[#86868b]">{f}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <a
-                    href="/#contact"
-                    className="block text-center text-[13px] font-medium py-2.5 rounded-full transition-all"
-                    style={
-                      plan.badge
-                        ? { background: plan.color, color: "white" }
-                        : { background: "rgba(0,0,0,0.04)" }
-                    }
-                  >
-                    เริ่มต้นใช้งาน
-                  </a>
-                </div>
-              </motion.div>
+            {[
+              { name: "Solo Agent", price: "฿14,900", monthly: "฿1,500-3,000", color: "#2997ff", features: ["LINE Inquiry Bot (500 msg)", "Listing Description Generator", "Appointment Scheduler พื้นฐาน", "Support 30 วัน"], best: "นายหน้าเดี่ยว 1-20 ทรัพย์" },
+              { name: "Agency", price: "฿39,900", monthly: "฿3,500-8,000", color: "#5856d6", badge: "แนะนำ", features: ["ทุกอย่างใน Solo Agent", "LINE Bot ไม่จำกัด", "Market Price Analysis", "Lead Scoring & Follow-up", "Appointment + Reminder", "Training ทีม 2 ชม."], best: "สำนักงาน 3-10 agents" },
+              { name: "Developer", price: "฿79,900", monthly: "฿8,000-20,000", color: "#af52de", features: ["ทุกอย่างใน Agency", "Multi-project dashboard", "Custom CMA report", "API integration กับ CRM", "Multi-user + permissions", "On-site training 1 วัน"], best: "Developer / โครงการใหญ่" },
+            ].map((plan) => (
+              <div key={plan.name} className={`apple-card p-6 ${plan.badge ? "ring-2 ring-[#5856d6]/20" : ""}`}>
+                {plan.badge && <div className="text-center mb-3"><span className="text-[11px] font-semibold px-4 py-1 rounded-full text-white" style={{ background: plan.color }}>{plan.badge}</span></div>}
+                <h3 className="text-[17px] font-semibold text-[#1d1d1f] text-center">{plan.name}</h3>
+                <p className="text-[32px] font-semibold text-center mt-1 mb-0.5" style={{ color: plan.color }}>{plan.price}</p>
+                <p className="text-[11px] text-[#86868b] text-center mb-1">Setup fee (ครั้งเดียว)</p>
+                <p className="text-[11px] text-[#86868b] text-center mb-5 pb-5 border-b border-black/[0.04]">+ {plan.monthly}/เดือน</p>
+                <div className="space-y-2 mb-5">{plan.features.map((f) => <div key={f} className="flex items-start gap-2"><Check size={13} className="mt-0.5 shrink-0" style={{ color: plan.color }} /><span className="text-[12px] text-[#86868b]">{f}</span></div>)}</div>
+                <p className="text-[11px] text-[#86868b] mb-3">เหมาะกับ: {plan.best}</p>
+                <a href="/#contact" className="block text-center text-[13px] font-medium py-2.5 rounded-full" style={plan.badge ? { background: plan.color, color: "#fff" } : { background: "#f5f5f7" }}>เริ่มต้นใช้งาน</a>
+              </div>
             ))}
           </div>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-center text-[12px] text-[#86868b] mt-6"
-          >
-            * ทุกแพ็คเกจรวม training การใช้งาน + support หลัง setup — ค่า API จ่ายตามจริง ไม่มี hidden fee
-          </motion.p>
-        </div>
-      </section>
-
-      {/* ═══ TOOLS USED ═══ */}
-      <section className="py-20 px-6">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <p className="text-[13px] font-semibold text-[#5856d6] uppercase tracking-widest mb-3">
-              Tech Stack
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1d1d1f] tracking-tight mb-3">
-              เครื่องมือที่ใช้
-            </h2>
+          {/* ROI */}
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="apple-card p-6 mt-8">
+            <h3 className="text-[15px] font-semibold text-[#1d1d1f] mb-4">คุ้มค่าแค่ไหน?</h3>
+            <div className="grid sm:grid-cols-3 gap-4 text-center">
+              <div className="p-4 rounded-xl bg-[#ff3b30]/5"><p className="text-[11px] text-[#86868b]">จ้างแอดมินตอบแชท + จัดการ lead</p><p className="text-[20px] font-semibold text-[#ff3b30]">฿25,000/เดือน</p></div>
+              <div className="p-4 rounded-xl bg-[#34c759]/5"><p className="text-[11px] text-[#86868b]">ใช้ AI แทน</p><p className="text-[20px] font-semibold text-[#34c759]">฿3,000/เดือน</p></div>
+              <div className="p-4 rounded-xl bg-[#2997ff]/5"><p className="text-[11px] text-[#86868b]">ประหยัด/ปี</p><p className="text-[20px] font-semibold text-[#2997ff]">฿264,000</p></div>
+            </div>
           </motion.div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {toolsUsed.map((tool, i) => (
-              <motion.div
-                key={tool.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.06 }}
-                className="apple-card p-5"
-              >
-                <div className="relative z-10">
-                  <div className="w-10 h-10 rounded-full bg-[#f5f5f7] flex items-center justify-center mb-3">
-                    <Zap size={18} style={{ color: tool.color }} />
-                  </div>
-                  <h3 className="text-[15px] font-semibold text-[#1d1d1f] mb-1">{tool.name}</h3>
-                  <p className="text-[12px] text-[#86868b] leading-relaxed">{tool.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
         </div>
       </section>
 
       {/* ═══ CTA ═══ */}
-      <section className="py-24 px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <div className="apple-card p-10">
-              <div className="relative z-10">
-                <Building2 size={40} className="text-[#2997ff] mx-auto mb-4" />
-                <h2 className="text-2xl md:text-3xl font-bold text-[#1d1d1f] mb-3">
-                  พร้อมให้ AI ช่วยธุรกิจอสังหาฯ ของคุณ?
-                </h2>
-                <p className="text-base text-[#86868b] mb-8 max-w-lg mx-auto">
-                  ปรึกษาฟรี — เราวิเคราะห์ธุรกิจคุณแล้วแนะนำ solution ที่เหมาะสมที่สุด
-                  ไม่มี commitment เริ่มต้นได้ภายใน 1 สัปดาห์
-                </p>
-                <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                  <a
-                    href="https://lin.ee/cloudai"
-                    className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-[#2997ff] text-white font-medium text-[15px] hover:bg-[#0066d6] transition-all shadow-lg shadow-[#2997ff]/20"
-                  >
-                    <MessageSquare size={18} /> ปรึกษาฟรีผ่าน LINE
-                  </a>
-                  <a
-                    href="#pricing"
-                    className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-[#f5f5f7] text-[#2997ff] font-medium text-[15px] hover:bg-white/60 transition-all"
-                  >
-                    ดูแพ็คเกจ <ArrowRight size={16} />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+      <section className="py-20 px-6">
+        <div className="max-w-lg mx-auto text-center">
+          <h2 className="text-[24px] sm:text-[28px] font-semibold text-[#1d1d1f] mb-3">พร้อมให้ AI ช่วยปิดดีลอสังหาฯ?</h2>
+          <p className="text-[15px] text-[#86868b] mb-6">ปรึกษาฟรี บอกเราว่าธุรกิจคุณมีกี่ทรัพย์ เราออกแบบ workflow ให้</p>
+          <a href="/#contact" className="apple-btn apple-btn-blue">ปรึกษาฟรี</a>
         </div>
       </section>
     </div>

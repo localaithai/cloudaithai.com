@@ -1,1005 +1,460 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  HeartPulse, Clock, Pill, FileText, Users, Calendar,
-  Search, ClipboardList, Shield, BarChart3, ArrowRight,
-  CheckCircle2, XCircle, ChevronDown, MessageSquare,
-  Bot, Stethoscope, Activity, AlertTriangle, Workflow,
-  BrainCircuit, Syringe, Hospital, UserCheck
-} from "lucide-react";
+import { HeartPulse, Clock, Pill, FileText, Calendar, ChevronDown, Check, BarChart3, Shield, AlertTriangle, ClipboardList } from "lucide-react";
 
-/* ─── Pain Points ─── */
-const painPoints = [
-  {
-    icon: <Clock size={20} />,
-    text: "ผู้ป่วยรอนาน",
-    detail: "ผู้ป่วย walk-in รอคิวเฉลี่ย 45-90 นาที เพราะระบบนัดหมายไม่มีประสิทธิภาพ จัดคิวมือ ซ้ำซ้อน ผู้ป่วยไม่พอใจ ย้ายไปคลินิกอื่น",
-    color: "#ff3b30",
-  },
-  {
-    icon: <Pill size={20} />,
-    text: "ค้นข้อมูลยาไม่ทัน",
-    detail: "แพทย์ต้องค้น drug interaction, ขนาดยา, ข้อห้ามใช้ จากหลาย source ใช้เวลา 5-10 นาที/เคส ทำให้ตรวจช้า คิวยาวขึ้น",
-    color: "#ff9500",
-  },
-  {
-    icon: <FileText size={20} />,
-    text: "เอกสารเยอะมาก",
-    detail: "ใบส่งตัว, ใบรับรองแพทย์, สรุปเวชระเบียน, เอกสารเคลมประกัน ทุกอย่างต้องพิมพ์มือ ผิดพลาดบ่อย เสียเวลาแก้ไข",
-    color: "#5856d6",
-  },
-  {
-    icon: <Users size={20} />,
-    text: "ซ้ำซ้อนงาน admin",
-    detail: "พยาบาลเสียเวลา 40% ไปกับงาน admin — บันทึกข้อมูล, นัดหมาย, โทรติดตาม แทนที่จะได้ดูแลผู้ป่วย",
-    color: "#2997ff",
-  },
-];
-
-/* ─── 5 Automation Workflows ─── */
-const workflows = [
-  {
-    icon: <Calendar size={22} />,
-    title: "Patient Appointment Bot",
-    subtitle: "ผู้ป่วยนัดหมายผ่าน LINE → ระบบจัดคิวอัตโนมัติ",
-    color: "#30d158",
-    steps: [
-      "ผู้ป่วยส่งข้อความนัดหมายผ่าน LINE OA ของคลินิก/รพ.",
-      "n8n รับ webhook → Flowise วิเคราะห์ข้อความ (แผนก, อาการ, วัน-เวลาที่ต้องการ)",
-      "AI เช็คตารางแพทย์จาก Google Calendar / HIS ว่าว่างเมื่อไร",
-      "เสนอ slot ที่ว่าง 3 ช่วง ให้ผู้ป่วยเลือก",
-      "ยืนยันนัด → สร้าง appointment ในระบบ + ส่ง reminder ก่อน 24 ชม.",
-      "วันนัด → ส่ง QR code check-in ให้ผู้ป่วย ไม่ต้องรอคิว",
-    ],
-    tools: ["n8n", "Flowise", "LINE Messaging API", "Google Calendar"],
-    models: ["Gemini 2.5 Flash (จัดคิว)", "GPT-4.1 (เข้าใจอาการ)"],
-    cost: "฿500-1,200/เดือน",
-    result: "ลดเวลารอคิว 60% ลด no-show 40% ด้วย reminder อัตโนมัติ",
-  },
-  {
-    icon: <Search size={22} />,
-    title: "Drug Info Lookup (RAG)",
-    subtitle: "แพทย์ถามชื่อยา → AI ค้น interaction + ขนาดยาทันที",
-    color: "#2997ff",
-    steps: [
-      "แพทย์พิมพ์ชื่อยา หรือถามเป็นภาษาธรรมชาติ เช่น 'ยาลดไขมันกินกับ warfarin ได้ไหม'",
-      "Flowise RAG ค้นจากฐานข้อมูลยา (MIMS Thailand, FDA, Lexicomp)",
-      "AI สรุป: drug interaction, contraindication, ขนาดยาตาม GFR/น้ำหนัก",
-      "แสดงผลพร้อม reference + level of evidence",
-      "บันทึก query log เพื่อ audit trail ตาม HA standard",
-      "ถ้า critical interaction → แจ้งเตือนแพทย์ทันที พร้อมแนะนำยาทดแทน",
-    ],
-    tools: ["Flowise", "Qdrant Vector DB", "n8n", "HIS API"],
-    models: ["GPT-4.1 (medical reasoning)", "Gemini Flash (quick lookup)"],
-    cost: "฿800-2,000/เดือน",
-    result: "ค้นข้อมูลยาจาก 5-10 นาที เหลือ 10 วินาที ลด medication error 35%",
-  },
-  {
-    icon: <ClipboardList size={22} />,
-    title: "Patient History Summary",
-    subtitle: "เวชระเบียน 50 หน้า → AI สรุปให้ 1 หน้า",
-    color: "#af52de",
-    steps: [
-      "แพทย์เปิดแฟ้มผู้ป่วย ส่งเวชระเบียนเข้าระบบ (PDF/scan/HIS data)",
-      "AI OCR + extract ข้อมูลสำคัญ: diagnosis, medications, lab results, allergies",
-      "สร้าง clinical summary แบ่งตาม timeline: อดีต → ปัจจุบัน",
-      "Highlight ข้อมูลสำคัญ: allergies (แพ้ยา), chronic diseases, recent labs ที่ผิดปกติ",
-      "สร้าง problem list + active medication list อัตโนมัติ",
-      "แพทย์ review + approve → บันทึกเข้า HIS เป็น structured data",
-    ],
-    tools: ["n8n", "Flowise", "OCR API", "HIS Integration"],
-    models: ["GPT-4.1 (medical summary)", "Claude Sonnet (document analysis)"],
-    cost: "฿1,200-3,000/เดือน",
-    result: "แพทย์อ่านประวัติผู้ป่วยจาก 15 นาที เหลือ 2 นาที ดูแลผู้ป่วยได้มากขึ้น",
-  },
-  {
-    icon: <Shield size={22} />,
-    title: "Insurance Claim Processing",
-    subtitle: "เคลมประกัน → AI กรอกเอกสาร + ส่งอัตโนมัติ",
-    color: "#ff9500",
-    steps: [
-      "พยาบาลบันทึกข้อมูลการรักษาเข้าระบบ HIS ตามปกติ",
-      "n8n trigger → AI ดึงข้อมูลการรักษา + รหัส ICD-10 + ค่าใช้จ่าย",
-      "AI กรอกฟอร์มเคลมประกันอัตโนมัติ ตาม format ของแต่ละบริษัทประกัน",
-      "ตรวจสอบความครบถ้วน: เอกสารครบไหม, รหัสถูกไหม, ค่าใช้จ่ายตรงกันไหม",
-      "ส่ง pre-authorization request ไปบริษัทประกันผ่าน API/email",
-      "Track สถานะเคลม → แจ้ง admin ถ้ามี rejection ต้องแก้ไข",
-    ],
-    tools: ["n8n", "Google Sheets", "Email API", "HIS Integration"],
-    models: ["GPT-4.1 (form filling)", "Gemini Flash (ICD-10 coding)"],
-    cost: "฿1,000-2,500/เดือน",
-    result: "ลดเวลาทำเคลมจาก 30 นาที เหลือ 5 นาที rejection rate ลด 50%",
-  },
-  {
-    icon: <BarChart3 size={22} />,
-    title: "Daily Report Generation",
-    subtitle: "ทุกเช้า → AI สรุปรายงานประจำวันให้ผู้บริหาร",
-    color: "#5856d6",
-    steps: [
-      "n8n ดึงข้อมูลจาก HIS ทุกเช้า 6:00 น. — OPD visits, IPD census, revenue, lab pending",
-      "รวมข้อมูลทุกแผนก: จำนวนผู้ป่วย, bed occupancy, average waiting time",
-      "AI วิเคราะห์ trend: เปรียบเทียบกับสัปดาห์ก่อน + เดือนก่อน",
-      "สร้าง executive summary: highlight ประเด็นสำคัญ + anomaly ที่ต้องดูแล",
-      "สร้าง dashboard visual summary ส่งเข้า LINE group ผู้บริหาร",
-      "ถ้ามี KPI ที่ต่ำกว่า target → แจ้งเตือน + แนะนำ action",
-    ],
-    tools: ["n8n", "Google Sheets", "Looker Studio", "LINE API"],
-    models: ["Gemini Flash (data summary)", "GPT-4.1 (analysis + recommendation)"],
-    cost: "฿800-1,800/เดือน",
-    result: "ผู้บริหารเห็นภาพรวม รพ. ทุกเช้าภายใน 2 นาที ตัดสินใจได้เร็วขึ้น",
-  },
-];
-
-/* ─── Before/After ─── */
-const comparisons = [
-  {
-    aspect: "นัดหมายผู้ป่วย",
-    before: "โทรนัด ถือสาย 10 นาที จดมือ ลืมบ่อย",
-    after: "นัดผ่าน LINE 24/7 ยืนยันทันที มี reminder",
-    saving: "ลด 60%",
-  },
-  {
-    aspect: "ค้นข้อมูลยา",
-    before: "เปิดหนังสือ/เว็บ 3-4 แหล่ง ใช้เวลา 5-10 นาที",
-    after: "AI ค้นจากฐานข้อมูลยา ได้คำตอบใน 10 วินาที",
-    saving: "เร็วขึ้น 30x",
-  },
-  {
-    aspect: "สรุปเวชระเบียน",
-    before: "แพทย์อ่านแฟ้ม 50 หน้า ใช้เวลา 15 นาที/ราย",
-    after: "AI สรุปให้ 1 หน้า พร้อม highlight จุดสำคัญ",
-    saving: "เร็วขึ้น 7x",
-  },
-  {
-    aspect: "เคลมประกัน",
-    before: "พิมพ์ฟอร์มมือ 30 นาที/ราย ผิดบ่อย ถูก reject",
-    after: "AI กรอกฟอร์มอัตโนมัติ ตรวจสอบก่อนส่ง",
-    saving: "ลด 83%",
-  },
-  {
-    aspect: "รายงานประจำวัน",
-    before: "admin รวบรวมข้อมูล 2 ชม. ทุกเช้า",
-    after: "AI สรุป + ส่ง LINE ให้ผู้บริหารทุกเช้า 7 โมง",
-    saving: "อัตโนมัติ",
-  },
-  {
-    aspect: "ติดตามผู้ป่วย",
-    before: "โทรติดตามได้ 20 ราย/วัน พยาบาลไม่ว่าง",
-    after: "AI ส่ง follow-up ผ่าน LINE ทุกราย อัตโนมัติ",
-    saving: "ครบ 100%",
-  },
-];
-
-/* ─── Pricing Packages ─── */
-const pricingPackages = [
-  {
-    name: "Clinic",
-    price: "฿19,900",
-    period: "/เดือน",
-    desc: "สำหรับคลินิกเวชกรรม, ทันตกรรม, ผิวหนัง",
-    color: "#30d158",
-    features: [
-      "Appointment Bot (LINE OA)",
-      "Drug Info Lookup (RAG)",
-      "Patient Follow-up อัตโนมัติ",
-      "รายงานสรุปประจำวัน",
-      "รองรับ 500 ผู้ป่วย/เดือน",
-      "Support ผ่าน LINE ในเวลาทำการ",
-    ],
-    highlight: false,
-  },
-  {
-    name: "Hospital",
-    price: "฿49,900",
-    period: "/เดือน",
-    desc: "สำหรับโรงพยาบาลขนาดเล็ก-กลาง",
-    color: "#2997ff",
-    features: [
-      "ทุกอย่างใน Clinic +",
-      "Patient History Summary (AI)",
-      "Insurance Claim Processing",
-      "เชื่อมต่อ HIS (HOSxP, SSB)",
-      "รองรับ 3,000 ผู้ป่วย/เดือน",
-      "Multi-department dashboard",
-      "Priority support 7 วัน/สัปดาห์",
-    ],
-    highlight: true,
-  },
-  {
-    name: "Enterprise",
-    price: "฿89,900",
-    period: "/เดือน",
-    desc: "สำหรับโรงพยาบาลขนาดใหญ่ เครือข่ายคลินิก",
-    color: "#af52de",
-    features: [
-      "ทุกอย่างใน Hospital +",
-      "Custom AI workflows ไม่จำกัด",
-      "On-premise deployment option",
-      "เชื่อมต่อ PACS, LIS, RIS",
-      "ผู้ป่วยไม่จำกัดจำนวน",
-      "HA / JCI compliance support",
-      "Dedicated account manager",
-      "SLA 99.9% uptime",
-    ],
-    highlight: false,
-  },
-];
-
-/* ─── Tools Used ─── */
-const toolsUsed = [
-  { name: "n8n", desc: "Workflow automation — เชื่อมต่อ HIS, LINE, ระบบต่างๆ เข้าด้วยกัน", color: "#ff6d5a" },
-  { name: "Flowise", desc: "AI Chatbot + RAG — สร้าง medical knowledge base ค้นข้อมูลยา", color: "#2997ff" },
-  { name: "Qdrant", desc: "Vector database — จัดเก็บข้อมูลยา วิธีรักษา อย่างมีประสิทธิภาพ", color: "#30d158" },
-  { name: "LINE Messaging API", desc: "ช่องทางสื่อสารกับผู้ป่วย นัดหมาย ติดตามอาการ", color: "#06c755" },
-  { name: "Google Workspace", desc: "Calendar, Sheets, Docs — จัดการตารางแพทย์ + เอกสาร", color: "#34c759" },
-  { name: "HIS Integration", desc: "เชื่อมต่อ HOSxP, SSB, หรือระบบ HIS ที่ใช้อยู่", color: "#ff9500" },
-];
+/* ─── HEALTHCARE PAGE — Every section has industry-specific UI ─── */
 
 export default function HealthcareSection() {
   const [expandedWorkflow, setExpandedWorkflow] = useState<number | null>(null);
 
   return (
-    <div className="bg-[#fbfbfd] min-h-screen">
+    <div>
       {/* ═══ HERO ═══ */}
-      <section className="pt-32 pb-20 px-6">
+      <section className="py-12 px-6">
         <div className="max-w-5xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="inline-flex items-center gap-2 bg-[#f5f5f7] rounded-full px-5 py-2 mb-6 text-[13px] text-[#30d158] font-medium">
-              <HeartPulse size={16} /> Healthcare AI Solutions
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+            <div className="inline-flex items-center gap-2 bg-[#f5f5f7] rounded-full px-4 py-1.5 mb-6">
+              <HeartPulse size={14} className="text-[#2997ff]" />
+              <span className="text-[12px] font-medium text-[#2997ff]">Healthcare AI Solution</span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold text-[#1d1d1f] tracking-tight mb-6">
+            <h1 className="text-[36px] sm:text-[48px] md:text-[56px] font-semibold tracking-tight text-[#1d1d1f] mb-3">
               AI สำหรับ<span className="gradient-text">คลินิก & โรงพยาบาล</span>
             </h1>
-            <p className="text-lg md:text-xl text-[#86868b] max-w-2xl mx-auto mb-10 leading-relaxed">
-              นัดหมายอัตโนมัติ, ค้นข้อมูลยาทันที, สรุปเวชระเบียน, เคลมประกัน, รายงานประจำวัน
-              — ลดภาระงาน admin ให้ทีมแพทย์มีเวลาดูแลผู้ป่วยมากขึ้น
+            <p className="text-[17px] text-[#86868b] max-w-[520px] mx-auto mb-8">
+              จัดคิวนัดหมายอัตโนมัติ ค้นข้อมูลยาทันที สรุปเวชระเบียน เคลมประกัน — ลดงาน admin 80%
             </p>
-          </motion.div>
-
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"
-          >
-            {[
-              { value: "60%", label: "ลดเวลารอคิว", color: "#30d158" },
-              { value: "10 วิ", label: "ค้นข้อมูลยา", color: "#2997ff" },
-              { value: "7x", label: "สรุปเวชระเบียนเร็วขึ้น", color: "#af52de" },
-              { value: "50%", label: "ลด claim rejection", color: "#ff9500" },
-            ].map((stat) => (
-              <div key={stat.label} className="apple-card p-4 text-center">
-                <p className="text-2xl md:text-3xl font-bold" style={{ color: stat.color }}>{stat.value}</p>
-                <p className="text-[12px] text-[#86868b] mt-1">{stat.label}</p>
-              </div>
-            ))}
           </motion.div>
         </div>
       </section>
 
-      {/* ═══ PAIN POINTS ═══ */}
-      <section className="py-20 px-6">
+      {/* ═══ PAIN POINTS — with real UI mockups ═══ */}
+      <section className="py-16 px-6 bg-[#f5f5f7]">
         <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <p className="text-[13px] font-semibold text-[#ff3b30] uppercase tracking-widest mb-3">Pain Points</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1d1d1f] tracking-tight mb-3">
-              ปัญหาที่คลินิก & โรงพยาบาลเจอทุกวัน
-            </h2>
-            <p className="text-base text-[#86868b] max-w-xl mx-auto">
-              ทุกปัญหามี solution — AI ช่วยแก้ได้จริง ไม่ใช่แค่ concept
-            </p>
-          </motion.div>
-
-          <div className="grid sm:grid-cols-2 gap-4">
-            {painPoints.map((p, i) => (
-              <motion.div
-                key={p.text}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="apple-card p-6"
-              >
-                <div className="relative z-10">
-                  <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-3" style={{ background: p.color + "15", color: p.color }}>
-                    {p.icon}
-                  </div>
-                  <h3 className="text-[15px] font-semibold text-[#1d1d1f] mb-2">{p.text}</h3>
-                  <p className="text-[13px] text-[#86868b] leading-relaxed">{p.detail}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ 5 AUTOMATION WORKFLOWS ═══ */}
-      <section className="py-20 px-6">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <p className="text-[13px] font-semibold text-[#2997ff] uppercase tracking-widest mb-3">Automation Workflows</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1d1d1f] tracking-tight mb-3">
-              5 ระบบ AI สำหรับคลินิก & โรงพยาบาล
-            </h2>
-            <p className="text-base text-[#86868b] max-w-xl mx-auto">
-              ออกแบบมาเพื่อสถานพยาบาลไทยโดยเฉพาะ — เชื่อมต่อ HIS ที่ใช้อยู่ได้ทันที
-            </p>
-          </motion.div>
-
-          <div className="space-y-4">
-            {workflows.map((wf, i) => (
-              <motion.div
-                key={wf.title}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-30px" }}
-                transition={{ delay: i * 0.05 }}
-              >
-                <div className={`apple-card relative overflow-hidden ${expandedWorkflow === i ? "!bg-white/70" : ""}`}>
-                  <button
-                    onClick={() => setExpandedWorkflow(expandedWorkflow === i ? null : i)}
-                    className="w-full text-left p-6"
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0" style={{ background: wf.color + "15", color: wf.color }}>
-                        {wf.icon}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-[15px] font-semibold text-[#1d1d1f] mb-0.5">{wf.title}</h3>
-                        <p className="text-[13px] text-[#86868b]">{wf.subtitle}</p>
-                      </div>
-                      <div className="flex items-center gap-3 shrink-0">
-                        <span className="hidden sm:block text-[11px] text-[#86868b]">{wf.cost}</span>
-                        <motion.div animate={{ rotate: expandedWorkflow === i ? 180 : 0 }}>
-                          <ChevronDown size={16} className="text-[#d2d2d7]" />
-                        </motion.div>
-                      </div>
-                    </div>
-                  </button>
-
-                  <AnimatePresence>
-                    {expandedWorkflow === i && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="overflow-hidden"
-                      >
-                        <div className="px-6 pb-6 space-y-5">
-                          <div className="h-[1px] bg-gradient-to-r from-transparent via-black/[0.06] to-transparent" />
-
-                          {/* Steps */}
-                          <div>
-                            <p className="text-[11px] font-medium text-[#86868b] uppercase tracking-wider mb-3">ขั้นตอนการทำงาน</p>
-                            <div className="space-y-2">
-                              {wf.steps.map((step, si) => (
-                                <div key={si} className="flex items-start gap-3">
-                                  <span className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-[10px] font-bold text-white mt-0.5" style={{ background: wf.color }}>
-                                    {si + 1}
-                                  </span>
-                                  <span className="text-[13px] text-[#1d1d1f]/80">{step}</span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-
-                          {/* Tools + Models + Result */}
-                          <div className="grid sm:grid-cols-3 gap-4">
-                            <div className="bg-[#fafafa] rounded-xl p-4">
-                              <p className="text-[10px] font-medium text-[#86868b] uppercase tracking-wider mb-2">เครื่องมือ</p>
-                              <div className="flex flex-wrap gap-1.5">
-                                {wf.tools.map((t) => (
-                                  <span key={t} className="text-[11px] px-2.5 py-1 rounded-full bg-white border border-black/[0.06] text-[#1d1d1f]">{t}</span>
-                                ))}
-                              </div>
-                            </div>
-                            <div className="bg-[#fafafa] rounded-xl p-4">
-                              <p className="text-[10px] font-medium text-[#86868b] uppercase tracking-wider mb-2">AI Model</p>
-                              <div className="space-y-1">
-                                {wf.models.map((m) => (
-                                  <p key={m} className="text-[11px] text-[#1d1d1f]">{m}</p>
-                                ))}
-                              </div>
-                            </div>
-                            <div className="bg-[#fafafa] rounded-xl p-4">
-                              <p className="text-[10px] font-medium text-[#86868b] uppercase tracking-wider mb-2">ผลลัพธ์</p>
-                              <p className="text-[13px] font-medium" style={{ color: wf.color }}>{wf.result}</p>
-                              <p className="text-[11px] text-[#86868b] mt-1">ค่า API ~{wf.cost}/เดือน</p>
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ BEFORE / AFTER ═══ */}
-      <section className="py-20 px-6">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <p className="text-[13px] font-semibold text-[#34c759] uppercase tracking-widest mb-3">Before / After</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1d1d1f] tracking-tight mb-3">
-              เดิม vs ใช้ AI
-            </h2>
-            <p className="text-base text-[#86868b] max-w-xl mx-auto">
-              เปรียบเทียบการทำงานแบบเดิม กับการใช้ AI Automation ช่วย
-            </p>
-          </motion.div>
-
-          <div className="apple-card overflow-hidden">
-            <div className="relative z-10">
-              {/* Header */}
-              <div className="grid grid-cols-12 gap-4 p-5 border-b border-black/[0.04] nav-glass">
-                <div className="col-span-3 text-[12px] font-semibold text-[#86868b]">งาน</div>
-                <div className="col-span-4 text-[12px] font-semibold text-[#ff3b30] flex items-center gap-1"><XCircle size={13} /> เดิม (ทำมือ)</div>
-                <div className="col-span-4 text-[12px] font-semibold text-[#34c759] flex items-center gap-1"><CheckCircle2 size={13} /> ใช้ AI</div>
-                <div className="col-span-1 text-[12px] font-semibold text-[#2997ff] text-center">ผล</div>
+          <h2 className="text-[28px] sm:text-[32px] font-semibold text-[#1d1d1f] text-center mb-12">ปัญหาที่คลินิก & โรงพยาบาลเจอทุกวัน</h2>
+          <div className="grid sm:grid-cols-2 gap-5">
+            {/* Patient queue mockup */}
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="apple-card p-0 overflow-hidden">
+              <div className="px-5 py-3 bg-[#ff3b30]/5 border-b border-[#ff3b30]/10 flex items-center justify-between">
+                <span className="text-[13px] font-medium text-[#ff3b30]">คิวผู้ป่วยวันนี้</span>
+                <span className="text-[11px] font-bold bg-[#ff3b30] text-white px-2 py-0.5 rounded-full">20 คนรอ</span>
               </div>
-
-              {comparisons.map((c, i) => (
-                <motion.div
-                  key={c.aspect}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.06 }}
-                  className="grid grid-cols-12 gap-4 p-5 border-b border-black/[0.03] hover:bg-white/30 transition-colors"
-                >
-                  <div className="col-span-3 text-[13px] font-medium text-[#1d1d1f]">{c.aspect}</div>
-                  <div className="col-span-4 text-[12px] text-[#86868b]">{c.before}</div>
-                  <div className="col-span-4 text-[12px] text-[#1d1d1f]">{c.after}</div>
-                  <div className="col-span-1 text-center">
-                    <span className="text-[11px] font-semibold text-[#34c759] bg-[#f5f5f7] rounded-full px-2 py-0.5">{c.saving}</span>
+              <div className="p-4 space-y-2">
+                {[
+                  { name: "คุณสมศรี", time: "08:30", wait: "52 นาที" },
+                  { name: "คุณวิชัย", time: "08:45", wait: "45 นาที" },
+                  { name: "คุณนภา", time: "09:00", wait: "38 นาที" },
+                  { name: "คุณพงษ์", time: "09:15", wait: "30 นาที" },
+                  { name: "คุณมาลี", time: "09:30", wait: "25 นาที" },
+                ].map((p, i) => (
+                  <div key={i} className="flex items-center justify-between p-2 rounded-lg bg-[#fafafa]">
+                    <div className="flex items-center gap-3">
+                      <div className="w-7 h-7 rounded-full bg-[#e5e5ea] shrink-0 flex items-center justify-center text-[9px] text-[#86868b]">{i + 1}</div>
+                      <div><p className="text-[12px] text-[#1d1d1f] font-medium">{p.name}</p><p className="text-[9px] text-[#86868b]">นัด {p.time}</p></div>
+                    </div>
+                    <span className="text-[10px] text-[#ff3b30] font-medium">รอ {p.wait}</span>
                   </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ INTERACTIVE MOCKUP: ดูตัวอย่างจริง ═══ */}
-      <section className="py-20 px-6">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <p className="text-[13px] font-semibold text-[#30d158] uppercase tracking-widest mb-3">Live Demo</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1d1d1f] tracking-tight mb-3">
-              ดูตัวอย่างจริง
-            </h2>
-            <p className="text-base text-[#86868b] max-w-xl mx-auto">
-              ระบบ AI นัดหมาย + ค้นข้อมูลยา ที่ใช้งานได้จริงในคลินิก & โรงพยาบาล
-            </p>
-          </motion.div>
-
-          {/* ── LINE Chat Appointment Mockup ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="apple-card overflow-hidden mb-6"
-          >
-            <div className="relative z-10">
-              {/* Phone frame header */}
-              <div className="bg-[#06c755] px-5 py-3 flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-                  <MessageSquare size={14} className="text-white" />
+                ))}
+                <div className="text-center pt-2">
+                  <p className="text-[11px] text-[#ff3b30] font-medium">เฉลี่ยรอ 45 นาที — ผู้ป่วยไม่พอใจ ย้ายคลินิก</p>
                 </div>
-                <div className="flex-1">
-                  <p className="text-[13px] font-semibold text-white">คลินิกใจดี Clinic</p>
-                  <p className="text-[10px] text-white/70">LINE Official Account</p>
-                </div>
-                <div className="flex gap-2">
-                  <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center">
-                    <Search size={12} className="text-white/70" />
+              </div>
+            </motion.div>
+
+            {/* Drug interaction lookup mockup */}
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="apple-card p-0 overflow-hidden">
+              <div className="px-5 py-3 bg-[#ff9500]/5 border-b border-[#ff9500]/10 flex items-center justify-between">
+                <span className="text-[13px] font-medium text-[#ff9500]">ค้นหา Drug Interaction</span>
+                <span className="text-[11px] text-[#ff9500] font-medium">ใช้เวลา 8 นาที</span>
+              </div>
+              <div className="p-4 space-y-3">
+                <div className="p-3 rounded-lg bg-[#fafafa]">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Pill size={14} className="text-[#ff9500]" />
+                    <span className="text-[12px] font-medium text-[#1d1d1f]">Warfarin + Aspirin</span>
                   </div>
-                  <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center">
-                    <Users size={12} className="text-white/70" />
+                  <div className="text-[11px] text-[#86868b] space-y-1">
+                    <p>กำลังค้นหาใน... MIMS Thailand</p>
+                    <p>กำลังค้นหาใน... Drug Interaction Checker</p>
+                    <p>กำลังค้นหาใน... UpToDate</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 text-[11px] text-[#ff9500]">
+                  <Clock size={12} />
+                  <span>เปิดหนังสือ 3 เล่ม + เว็บ 2 เจ้า = 8 นาที/เคส</span>
+                </div>
+                <p className="text-[11px] text-[#ff3b30] text-center font-medium">คิวยาวขึ้นเรื่อย ๆ เพราะตรวจช้า</p>
+              </div>
+            </motion.div>
+
+            {/* Paperwork pile mockup */}
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="apple-card p-5">
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[#5856d6]/8 flex items-center justify-center shrink-0 text-[#5856d6]"><FileText size={20} /></div>
+                <div>
+                  <h3 className="text-[14px] font-semibold text-[#1d1d1f] mb-1">เอกสารกองเป็นภูเขา</h3>
+                  <p className="text-[12px] text-[#86868b]">ใบส่งตัว + ใบรับรองแพทย์ + เวชระเบียน + เคลมประกัน = <span className="text-[#5856d6] font-medium">พิมพ์มือ 3 ชม./วัน</span></p>
+                  <div className="flex gap-1.5 mt-2 flex-wrap">
+                    {["ใบส่งตัว", "ใบรับรองแพทย์", "เคลมประกัน", "สรุป OPD"].map(d => (
+                      <span key={d} className="text-[9px] px-2 py-0.5 rounded bg-[#5856d6]/8 text-[#5856d6] font-medium">{d}</span>
+                    ))}
                   </div>
                 </div>
               </div>
+            </motion.div>
 
-              {/* Chat area */}
-              <div className="bg-[#7494a5]/10 p-5 space-y-4 min-h-[420px]">
-                {/* Date divider */}
-                <div className="text-center">
-                  <span className="text-[10px] text-[#86868b] bg-white/60 rounded-full px-3 py-1">วันจันทร์ 16 มี.ค. 2568</span>
-                </div>
-
-                {/* Patient message 1 */}
-                <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.1 }}
-                  className="flex justify-end"
-                >
-                  <div className="max-w-[70%]">
-                    <div className="bg-[#06c755] rounded-2xl rounded-tr-md px-4 py-2.5">
-                      <p className="text-[13px] text-white">หมอมีคิวว่างวันพุธไหมคะ อยากมาตรวจสุขภาพค่ะ</p>
-                    </div>
-                    <p className="text-[9px] text-[#86868b] text-right mt-1">อ่านแล้ว 10:32</p>
-                  </div>
-                </motion.div>
-
-                {/* AI typing indicator then response */}
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 }}
-                  className="flex justify-start gap-2"
-                >
-                  <div className="w-8 h-8 rounded-full bg-[#06c755] flex items-center justify-center shrink-0">
-                    <Bot size={14} className="text-white" />
-                  </div>
-                  <div className="max-w-[75%]">
-                    <div className="bg-white rounded-2xl rounded-tl-md px-4 py-3 shadow-sm">
-                      <p className="text-[13px] text-[#1d1d1f] mb-3">สวัสดีค่ะ คุณสมศรี! ตรวจสุขภาพประจำปี วันพุธที่ 18 มี.ค. มีคิวว่างดังนี้ค่ะ:</p>
-                      <div className="space-y-2 mb-3">
-                        {[
-                          { time: "09:00 - 09:30", doctor: "นพ.สมชาย", status: "ว่าง", available: true },
-                          { time: "10:30 - 11:00", doctor: "นพ.สมชาย", status: "ว่าง", available: true },
-                          { time: "13:00 - 13:30", doctor: "พญ.วิลาวรรณ", status: "ว่าง", available: true },
-                          { time: "14:00 - 14:30", doctor: "พญ.วิลาวรรณ", status: "เต็ม", available: false },
-                        ].map((slot, si) => (
-                          <div key={si} className={`flex items-center justify-between rounded-xl px-3 py-2 text-[12px] ${slot.available ? "bg-[#f5f5f7]" : "bg-[#f5f5f7]/50 opacity-50"}`}>
-                            <div className="flex items-center gap-2">
-                              <Clock size={12} className={slot.available ? "text-[#30d158]" : "text-[#86868b]"} />
-                              <span className="font-medium text-[#1d1d1f]">{slot.time}</span>
-                            </div>
-                            <span className="text-[#86868b]">{slot.doctor}</span>
-                            <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${slot.available ? "bg-[#30d158]/10 text-[#30d158]" : "bg-[#ff3b30]/10 text-[#ff3b30]"}`}>
-                              {slot.status}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                      <p className="text-[12px] text-[#86868b] mb-2">กรุณาเลือกช่วงเวลาที่สะดวกค่ะ</p>
-                    </div>
-                    <p className="text-[9px] text-[#86868b] mt-1">10:32</p>
-                  </div>
-                </motion.div>
-
-                {/* Patient selects slot */}
-                <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.5 }}
-                  className="flex justify-end"
-                >
-                  <div className="max-w-[70%]">
-                    <div className="bg-[#06c755] rounded-2xl rounded-tr-md px-4 py-2.5">
-                      <p className="text-[13px] text-white">ขอ 09:00 นพ.สมชาย ค่ะ</p>
-                    </div>
-                    <p className="text-[9px] text-[#86868b] text-right mt-1">อ่านแล้ว 10:33</p>
-                  </div>
-                </motion.div>
-
-                {/* AI confirms booking */}
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.7 }}
-                  className="flex justify-start gap-2"
-                >
-                  <div className="w-8 h-8 rounded-full bg-[#06c755] flex items-center justify-center shrink-0">
-                    <Bot size={14} className="text-white" />
-                  </div>
-                  <div className="max-w-[75%]">
-                    <div className="bg-white rounded-2xl rounded-tl-md px-4 py-3 shadow-sm">
-                      <div className="bg-[#30d158]/10 border border-[#30d158]/20 rounded-xl p-3 mb-3">
-                        <div className="flex items-center gap-2 mb-2">
-                          <CheckCircle2 size={14} className="text-[#30d158]" />
-                          <span className="text-[13px] font-semibold text-[#30d158]">ยืนยันการนัดหมายเรียบร้อย!</span>
-                        </div>
-                        <div className="space-y-1.5 text-[12px] text-[#1d1d1f]/80">
-                          <p><span className="text-[#86868b]">วันที่:</span> พุธ 18 มี.ค. 2568</p>
-                          <p><span className="text-[#86868b]">เวลา:</span> 09:00 - 09:30 น.</p>
-                          <p><span className="text-[#86868b]">แพทย์:</span> นพ.สมชาย วิทยากุล</p>
-                          <p><span className="text-[#86868b]">บริการ:</span> ตรวจสุขภาพประจำปี</p>
-                        </div>
-                      </div>
-                      <p className="text-[12px] text-[#86868b]">จะส่ง reminder ก่อนนัด 24 ชม. พร้อม QR check-in ค่ะ</p>
-                    </div>
-                    <p className="text-[9px] text-[#86868b] mt-1">10:33</p>
-                  </div>
-                </motion.div>
-              </div>
-
-              {/* Chat input */}
-              <div className="bg-white border-t border-black/[0.06] px-4 py-3 flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#f5f5f7] flex items-center justify-center">
-                  <Syringe size={14} className="text-[#86868b]" />
-                </div>
-                <div className="flex-1 bg-[#f5f5f7] rounded-full px-4 py-2">
-                  <span className="text-[13px] text-[#c7c7cc]">พิมพ์ข้อความ...</span>
-                </div>
-                <div className="w-8 h-8 rounded-full bg-[#06c755] flex items-center justify-center">
-                  <ArrowRight size={14} className="text-white" />
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* ── Drug Info Card Mockup ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="apple-card overflow-hidden"
-          >
-            <div className="relative z-10">
-              {/* Window chrome */}
-              <div className="flex items-center gap-2 px-5 py-3 border-b border-black/[0.04] bg-[#fafafa]">
-                <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
-                  <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
-                  <div className="w-3 h-3 rounded-full bg-[#28c840]" />
-                </div>
-                <div className="flex-1 text-center">
-                  <span className="text-[11px] text-[#86868b] bg-white rounded-md px-4 py-1 border border-black/[0.06]">
-                    Cloud AI Drug Info — AI Drug Lookup
-                  </span>
-                </div>
-              </div>
-
-              <div className="p-6">
-                {/* Search */}
-                <div className="flex items-center gap-3 bg-white border border-black/[0.08] rounded-2xl px-5 py-3.5 mb-6 shadow-sm">
-                  <Search size={18} className="text-[#2997ff]" />
-                  <span className="text-[14px] text-[#1d1d1f] flex-1">Metformin 500mg</span>
-                  <div className="bg-[#2997ff] text-white text-[12px] font-medium px-4 py-1.5 rounded-full shrink-0">ค้นหา</div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-5">
-                  {/* Left: Drug main info */}
-                  <div className="space-y-4">
-                    {/* Drug header card */}
-                    <div className="bg-gradient-to-br from-[#2997ff]/5 to-[#30d158]/5 rounded-2xl p-5 border border-[#2997ff]/10">
-                      <div className="flex items-start gap-4">
-                        <div className="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center shrink-0">
-                          <Pill size={28} className="text-[#2997ff]" />
-                        </div>
-                        <div>
-                          <h3 className="text-[17px] font-bold text-[#1d1d1f]">Metformin HCl 500mg</h3>
-                          <p className="text-[12px] text-[#86868b]">Biguanide / Antidiabetic</p>
-                          <div className="flex gap-2 mt-2">
-                            <span className="text-[10px] bg-[#2997ff]/10 text-[#2997ff] px-2 py-0.5 rounded-full font-medium">ยาควบคุม</span>
-                            <span className="text-[10px] bg-[#30d158]/10 text-[#30d158] px-2 py-0.5 rounded-full font-medium">ED List</span>
-                            <span className="text-[10px] bg-[#af52de]/10 text-[#af52de] px-2 py-0.5 rounded-full font-medium">NLEM</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Dosage */}
-                    <div className="bg-white rounded-xl p-4 border border-black/[0.06]">
-                      <p className="text-[11px] font-semibold text-[#1d1d1f] uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                        <Activity size={12} className="text-[#2997ff]" /> ขนาดยาและวิธีใช้
-                      </p>
-                      <div className="space-y-2.5">
-                        {[
-                          { label: "ผู้ใหญ่ (เริ่มต้น)", value: "500 mg วันละ 2 ครั้ง หลังอาหาร", note: "เช้า-เย็น" },
-                          { label: "ผู้ใหญ่ (สูงสุด)", value: "2,550 mg/วัน แบ่ง 3 มื้อ", note: "ค่อยๆ เพิ่ม" },
-                          { label: "ผู้สูงอายุ (>65)", value: "500 mg วันละ 1 ครั้ง", note: "ตรวจ Cr ก่อน" },
-                          { label: "GFR < 30", value: "ห้ามใช้", note: "Contraindicated" },
-                        ].map((d, di) => (
-                          <div key={di} className="flex items-center justify-between bg-[#fafafa] rounded-lg px-3 py-2">
-                            <span className="text-[11px] text-[#86868b]">{d.label}</span>
-                            <span className="text-[12px] font-medium text-[#1d1d1f]">{d.value}</span>
-                            <span className={`text-[9px] px-2 py-0.5 rounded-full font-medium ${d.note === "Contraindicated" ? "bg-[#ff3b30]/10 text-[#ff3b30]" : "bg-[#f5f5f7] text-[#86868b]"}`}>{d.note}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Right: Contraindications + Interactions */}
-                  <div className="space-y-4">
-                    {/* Contraindications */}
-                    <div className="bg-white rounded-xl p-4 border border-[#ff3b30]/10">
-                      <p className="text-[11px] font-semibold text-[#ff3b30] uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                        <AlertTriangle size={12} /> ข้อห้ามใช้
-                      </p>
-                      <div className="space-y-2">
-                        {[
-                          "ไตวายรุนแรง (GFR < 30 mL/min)",
-                          "ภาวะ metabolic acidosis รวมถึง diabetic ketoacidosis",
-                          "ภาวะขาดน้ำรุนแรง (dehydration)",
-                          "โรคตับรุนแรง (severe hepatic impairment)",
-                          "แพ้ metformin หรือส่วนประกอบ",
-                        ].map((item, ci) => (
-                          <div key={ci} className="flex items-start gap-2">
-                            <XCircle size={13} className="text-[#ff3b30] shrink-0 mt-0.5" />
-                            <span className="text-[11px] text-[#1d1d1f]/80">{item}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Drug Interactions */}
-                    <div className="bg-white rounded-xl p-4 border border-[#ff9500]/10">
-                      <p className="text-[11px] font-semibold text-[#ff9500] uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                        <AlertTriangle size={12} /> ปฏิกิริยาระหว่างยา
-                      </p>
-                      <div className="space-y-2">
-                        {[
-                          { drug: "Insulin", level: "สูง", desc: "เสริมฤทธิ์ลดน้ำตาล อาจเกิด hypoglycemia" },
-                          { drug: "Alcohol", level: "สูง", desc: "เพิ่มความเสี่ยง lactic acidosis อย่างมาก" },
-                          { drug: "Contrast media", level: "สูง", desc: "หยุดยา 48 ชม. ก่อน-หลังฉีดสารทึบรังสี" },
-                          { drug: "Cimetidine", level: "ปานกลาง", desc: "เพิ่มระดับ metformin ในเลือด 40%" },
-                        ].map((interaction, ii) => (
-                          <div key={ii} className="bg-[#fafafa] rounded-lg px-3 py-2.5">
-                            <div className="flex items-center justify-between mb-1">
-                              <span className="text-[12px] font-medium text-[#1d1d1f]">{interaction.drug}</span>
-                              <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full ${interaction.level === "สูง" ? "bg-[#ff3b30]/10 text-[#ff3b30]" : "bg-[#ff9500]/10 text-[#ff9500]"}`}>
-                                {interaction.level}
-                              </span>
-                            </div>
-                            <p className="text-[10px] text-[#86868b]">{interaction.desc}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* AI note */}
-                    <div className="bg-[#2997ff]/[0.05] rounded-xl p-3 border border-[#2997ff]/10">
-                      <div className="flex items-start gap-2">
-                        <BrainCircuit size={14} className="text-[#2997ff] shrink-0 mt-0.5" />
-                        <div>
-                          <p className="text-[11px] font-semibold text-[#2997ff] mb-1">AI แนะนำ</p>
-                          <p className="text-[10px] text-[#86868b] leading-relaxed">
-                            ผู้ป่วยรายนี้ใช้ Warfarin อยู่ — Metformin ไม่มี significant interaction กับ Warfarin
-                            สามารถใช้ร่วมกันได้ แต่ควรติดตาม blood glucose อย่างใกล้ชิดในช่วง 2 สัปดาห์แรก
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between mt-5 pt-4 border-t border-black/[0.04]">
-                  <span className="text-[10px] text-[#86868b]">แหล่งข้อมูล: MIMS Thailand, Thai FDA, Lexicomp | อัพเดท: มี.ค. 2568</span>
-                  <span className="text-[10px] text-[#2997ff] font-medium cursor-pointer hover:underline">ดู full monograph →</span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ═══ PRICING PACKAGES ═══ */}
-      <section className="py-20 px-6" id="pricing">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <p className="text-[13px] font-semibold text-[#ff9500] uppercase tracking-widest mb-3">Pricing</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1d1d1f] tracking-tight mb-3">
-              แพ็คเกจสำหรับสถานพยาบาล
-            </h2>
-            <p className="text-base text-[#86868b] max-w-xl mx-auto">
-              เลือกแพ็คเกจที่เหมาะกับขนาดสถานพยาบาลของคุณ — ทดลองใช้ฟรี 14 วัน
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {pricingPackages.map((pkg, i) => (
-              <motion.div
-                key={pkg.name}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className={`apple-card p-8 relative ${pkg.highlight ? "ring-2 ring-[#2997ff]" : ""}`}
-              >
-                {pkg.highlight && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#2997ff] text-white text-[11px] font-semibold px-4 py-1 rounded-full">
-                    แนะนำ
-                  </div>
-                )}
-                <div className="relative z-10">
-                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4" style={{ background: pkg.color + "15" }}>
-                    {pkg.name === "Clinic" && <Stethoscope size={22} style={{ color: pkg.color }} />}
-                    {pkg.name === "Hospital" && <Hospital size={22} style={{ color: pkg.color }} />}
-                    {pkg.name === "Enterprise" && <BrainCircuit size={22} style={{ color: pkg.color }} />}
-                  </div>
-                  <h3 className="text-xl font-bold text-[#1d1d1f] mb-1">{pkg.name}</h3>
-                  <p className="text-[12px] text-[#86868b] mb-4">{pkg.desc}</p>
-                  <div className="mb-6">
-                    <span className="text-3xl font-bold" style={{ color: pkg.color }}>{pkg.price}</span>
-                    <span className="text-[13px] text-[#86868b]">{pkg.period}</span>
-                  </div>
-                  <div className="space-y-3 mb-8">
-                    {pkg.features.map((feat) => (
-                      <div key={feat} className="flex items-start gap-2 text-[13px] text-[#1d1d1f]">
-                        <CheckCircle2 size={15} className="shrink-0 mt-0.5" style={{ color: pkg.color }} />
-                        {feat}
+            {/* Missed follow-ups mockup */}
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="apple-card p-5">
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[#ff3b30]/8 flex items-center justify-center shrink-0 text-[#ff3b30]"><AlertTriangle size={20} /></div>
+                <div>
+                  <h3 className="text-[14px] font-semibold text-[#1d1d1f] mb-1">ผู้ป่วยหายไป ไม่มา follow-up</h3>
+                  <p className="text-[12px] text-[#86868b] mb-2">โทรติดตามไม่ทัน ผู้ป่วยลืมนัด <span className="text-[#ff3b30] font-medium">30% ไม่มาตามนัด</span></p>
+                  <div className="space-y-1">
+                    {[
+                      { name: "คุณสุดา — เบาหวาน", date: "เลยนัด 5 วัน" },
+                      { name: "คุณประเสริฐ — ความดัน", date: "เลยนัด 3 วัน" },
+                      { name: "คุณวรรณา — ไทรอยด์", date: "เลยนัด 7 วัน" },
+                    ].map((p, i) => (
+                      <div key={i} className="flex items-center justify-between text-[10px]">
+                        <span className="text-[#1d1d1f]">{p.name}</span>
+                        <span className="text-[#ff3b30] font-medium">{p.date}</span>
                       </div>
                     ))}
                   </div>
-                  <a
-                    href="https://lin.ee/cloudai"
-                    className={`block w-full text-center py-3 rounded-full font-medium text-[14px] transition-all ${
-                      pkg.highlight
-                        ? "bg-[#2997ff] text-white hover:bg-[#0066d6] shadow-lg shadow-[#2997ff]/20"
-                        : "bg-[#f5f5f7] text-[#2997ff] hover:bg-white/60"
-                    }`}
-                  >
-                    เริ่มต้นใช้งาน
-                  </a>
                 </div>
-              </motion.div>
-            ))}
+              </div>
+            </motion.div>
           </div>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-center text-[12px] text-[#86868b] mt-6"
-          >
-            * ค่า setup ครั้งแรก ฿25,000-80,000 (ขึ้นกับความซับซ้อนของระบบ HIS) + ค่า API ตามใช้งานจริง / ราคายังไม่รวม VAT
-          </motion.p>
         </div>
       </section>
 
-      {/* ═══ TOOLS USED ═══ */}
+      {/* ═══ BEFORE/AFTER — side-by-side chat mockups ═══ */}
       <section className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <p className="text-[13px] font-semibold text-[#5856d6] uppercase tracking-widest mb-3">Tech Stack</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1d1d1f] tracking-tight mb-3">
-              เครื่องมือที่ใช้
-            </h2>
-            <p className="text-base text-[#86868b] max-w-xl mx-auto">
-              เลือกใช้เครื่องมือ open-source เป็นหลัก — ไม่ถูก lock-in กับ vendor ใดๆ
-            </p>
-          </motion.div>
+          <h2 className="text-[28px] sm:text-[32px] font-semibold text-[#1d1d1f] text-center mb-3">ก่อน vs หลัง ใช้ AI</h2>
+          <p className="text-[17px] text-[#86868b] text-center mb-12">จากโทรไม่ติด เป็นจองนัดทันที</p>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {toolsUsed.map((tool, i) => (
-              <motion.div
-                key={tool.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.06 }}
-                className="apple-card p-5"
-              >
-                <div className="relative z-10">
-                  <div className="w-10 h-10 rounded-xl bg-[#f5f5f7] flex items-center justify-center mb-3">
-                    <Workflow size={18} style={{ color: tool.color }} />
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* BEFORE */}
+            <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+              <p className="text-[13px] font-semibold text-[#ff3b30] uppercase tracking-wider mb-3 text-center">ก่อนใช้ AI</p>
+              <div className="apple-card p-0 overflow-hidden border-2 border-[#ff3b30]/10">
+                <div className="px-4 py-2.5 bg-[#ff3b30]/5 text-[12px] text-[#ff3b30] font-medium text-center">โทรติดต่อคลินิก — สายไม่ว่าง</div>
+                <div className="p-4 space-y-3">
+                  <div className="flex justify-end">
+                    <div className="bg-[#e5e5ea] text-[#1d1d1f] text-[12px] px-3 py-2 rounded-2xl rounded-br-sm max-w-[75%]">อยากนัดหมอวันเสาร์ค่ะ</div>
                   </div>
-                  <h3 className="text-[15px] font-semibold text-[#1d1d1f] mb-1">{tool.name}</h3>
-                  <p className="text-[12px] text-[#86868b] leading-relaxed">{tool.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ COMPLIANCE NOTE ═══ */}
-      <section className="py-16 px-6">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <div className="apple-card p-8">
-              <div className="relative z-10">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-[#30d158]/10 flex items-center justify-center shrink-0">
-                    <Shield size={24} className="text-[#30d158]" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-[#1d1d1f] mb-2">ความปลอดภัยข้อมูลผู้ป่วย & PDPA</h3>
-                    <p className="text-[13px] text-[#86868b] leading-relaxed mb-4">
-                      เราออกแบบระบบโดยคำนึงถึงความปลอดภัยของข้อมูลผู้ป่วยเป็นอันดับแรก
-                      ข้อมูลทุกอย่างเข้ารหัส (encrypted) ทั้ง at rest และ in transit
-                    </p>
-                    <div className="grid sm:grid-cols-2 gap-3">
-                      {[
-                        "PDPA compliant — ขอ consent ก่อนเก็บข้อมูลทุกครั้ง",
-                        "Data encryption — AES-256 ทั้ง at rest & in transit",
-                        "Access control — Role-based, audit log ทุก action",
-                        "On-premise option — Deploy บน server ของ รพ. ได้",
-                        "HA standard ready — รองรับมาตรฐานคุณภาพ รพ.",
-                        "Data retention policy — ลบข้อมูลตาม policy ที่กำหนด",
-                      ].map((item) => (
-                        <div key={item} className="flex items-start gap-2 text-[12px] text-[#1d1d1f]">
-                          <CheckCircle2 size={14} className="text-[#30d158] shrink-0 mt-0.5" />
-                          {item}
-                        </div>
-                      ))}
+                  <div className="text-center py-4">
+                    <div className="inline-flex items-center gap-2 text-[#d2d2d7]">
+                      <span className="text-[20px]">📞</span>
+                      <div className="flex gap-1">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#d2d2d7] animate-pulse" />
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#d2d2d7] animate-pulse" style={{ animationDelay: "0.2s" }} />
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#d2d2d7] animate-pulse" style={{ animationDelay: "0.4s" }} />
+                      </div>
                     </div>
+                    <p className="text-[11px] text-[#d2d2d7] mt-2">สายไม่ว่าง...</p>
+                    <p className="text-[10px] text-[#d2d2d7]">โทร 3 ครั้งแล้ว ไม่มีคนรับ</p>
+                  </div>
+                  <div className="flex justify-end">
+                    <div className="bg-[#e5e5ea] text-[#1d1d1f] text-[12px] px-3 py-2 rounded-2xl rounded-br-sm max-w-[75%]">ช่างเถอะ ไปคลินิกอื่นดีกว่า</div>
                   </div>
                 </div>
               </div>
+            </motion.div>
+
+            {/* AFTER */}
+            <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+              <p className="text-[13px] font-semibold text-[#34c759] uppercase tracking-wider mb-3 text-center">หลังใช้ AI</p>
+              <div className="apple-card p-0 overflow-hidden border-2 border-[#34c759]/10">
+                <div className="px-4 py-2.5 bg-[#34c759]/5 text-[12px] text-[#34c759] font-medium text-center">LINE Chat — จองนัดทันที 24/7</div>
+                <div className="p-4 space-y-3">
+                  <div className="flex justify-end">
+                    <div className="bg-[#2997ff] text-white text-[12px] px-3 py-2 rounded-2xl rounded-br-sm max-w-[70%]">อยากนัดหมอวันเสาร์ค่ะ</div>
+                  </div>
+                  <div className="flex justify-start">
+                    <div className="bg-[#f5f5f7] text-[#1d1d1f] text-[12px] px-3 py-2.5 rounded-2xl rounded-bl-sm max-w-[85%]">
+                      <p className="font-medium mb-1">คลินิกสุขภาพดี</p>
+                      <p className="text-[#86868b]">วันเสาร์ที่ 21 มี.ค. ว่างค่ะ:</p>
+                      <div className="flex flex-wrap gap-1 mt-1.5 mb-2">
+                        {["09:00", "10:30", "13:00", "14:30", "16:00"].map(t => (
+                          <span key={t} className="text-[10px] px-2 py-1 rounded-full bg-[#34c759]/10 text-[#34c759] font-medium">{t}</span>
+                        ))}
+                      </div>
+                      <p className="text-[#2997ff]">เลือกเวลาได้เลยค่ะ</p>
+                    </div>
+                  </div>
+                  <div className="flex justify-end">
+                    <div className="bg-[#2997ff] text-white text-[12px] px-3 py-2 rounded-2xl rounded-br-sm">10:30 ค่ะ</div>
+                  </div>
+                  <div className="flex justify-start">
+                    <div className="bg-[#f5f5f7] text-[#1d1d1f] text-[12px] px-3 py-2.5 rounded-2xl rounded-bl-sm max-w-[85%]">
+                      <p>จองสำเร็จ! เสาร์ 21 มี.ค. 10:30 น.</p>
+                      <p className="text-[#86868b] mt-1">นพ.สมชาย อายุรกรรม ห้อง 3</p>
+                      <p className="text-[#86868b]">จะแจ้งเตือนล่วงหน้า 1 วันค่ะ</p>
+                    </div>
+                  </div>
+                  <div className="text-[10px] text-[#86868b] px-2 flex items-center gap-1.5">
+                    <span className="px-1.5 py-0.5 rounded bg-[#34c759]/10 text-[#34c759] font-medium">AI</span> 2.1 วินาที
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ WORKFLOWS — with inline mini-demos ═══ */}
+      <section className="py-20 px-6 bg-[#f5f5f7]">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-[28px] sm:text-[32px] font-semibold text-[#1d1d1f] text-center mb-3">5 ระบบอัตโนมัติ</h2>
+          <p className="text-[17px] text-[#86868b] text-center mb-12">ลดงาน admin ให้บุคลากรมีเวลาดูแลผู้ป่วย</p>
+
+          <div className="space-y-4">
+            {[
+              {
+                icon: <Calendar size={20} />, title: "Appointment Bot", color: "#34c759", desc: "ผู้ป่วยนัดหมายผ่าน LINE → AI จัดคิวอัตโนมัติ 24/7", saved: "ลดโทร 90%", cost: "~฿500/เดือน",
+                demo: (
+                  <div className="mt-3 p-3 rounded-xl bg-[#f5f5f7]">
+                    <p className="text-[11px] font-medium text-[#34c759] mb-2">LINE Chat — นัดหมาย</p>
+                    <div className="space-y-2">
+                      <div className="flex justify-end"><div className="bg-[#34c759] text-white text-[10px] px-2.5 py-1.5 rounded-full">นัดหมอวันพุธบ่ายได้ไหมคะ</div></div>
+                      <div className="flex justify-start">
+                        <div className="bg-white text-[10px] px-2.5 py-1.5 rounded-lg shadow-sm">
+                          <p className="text-[#1d1d1f]">พุธที่ 19 มี.ค. ว่างค่ะ:</p>
+                          <div className="flex gap-1 mt-1">
+                            {["13:00", "14:00", "15:30"].map(t => <span key={t} className="px-1.5 py-0.5 rounded bg-[#34c759]/10 text-[#34c759] text-[9px] font-medium">{t}</span>)}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex justify-end"><div className="bg-[#34c759] text-white text-[10px] px-2.5 py-1.5 rounded-full">14:00 ค่ะ</div></div>
+                      <div className="flex justify-start"><div className="bg-white text-[10px] px-2.5 py-1.5 rounded-lg shadow-sm text-[#34c759] font-medium">จองสำเร็จ! พุธ 19 มี.ค. 14:00 น. นพ.สมชาย ห้อง 3</div></div>
+                    </div>
+                  </div>
+                ),
+              },
+              {
+                icon: <Pill size={20} />, title: "Drug Info RAG", color: "#ff9500", desc: "ค้นข้อมูลยา ขนาด ข้อห้าม drug interaction ทันทีจาก database", saved: "8นาที→3วินาที", cost: "~฿400/เดือน",
+                demo: (
+                  <div className="mt-3 p-3 rounded-xl bg-[#f5f5f7]">
+                    <div className="p-3 rounded-lg bg-white shadow-sm">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-[12px] font-semibold text-[#1d1d1f]">Metformin 500mg</span>
+                        <span className="text-[9px] px-2 py-0.5 rounded-full bg-[#34c759]/10 text-[#34c759] font-medium">First-line DM</span>
+                      </div>
+                      <div className="space-y-2 text-[10px]">
+                        <div><span className="text-[#86868b]">Dosage:</span> <span className="text-[#1d1d1f]">500-2000 mg/day แบ่ง 2-3 มื้อ</span></div>
+                        <div><span className="text-[#86868b]">Contraindication:</span> <span className="text-[#ff3b30]">eGFR {"<"} 30, hepatic impairment, heart failure (NYHA IV)</span></div>
+                        <div className="p-2 rounded bg-[#ff9500]/5 border border-[#ff9500]/10">
+                          <p className="text-[#ff9500] font-medium">Drug Interactions:</p>
+                          <p className="text-[#86868b] mt-0.5">Warfarin — เพิ่มฤทธิ์ anticoagulant</p>
+                          <p className="text-[#86868b]">Alcohol — เพิ่มเสี่ยง lactic acidosis</p>
+                        </div>
+                        <div><span className="text-[#86868b]">Side effects:</span> <span className="text-[#1d1d1f]">คลื่นไส้ ท้องเสีย (ช่วงแรก)</span></div>
+                      </div>
+                    </div>
+                  </div>
+                ),
+              },
+              {
+                icon: <ClipboardList size={20} />, title: "Patient History Summary", color: "#5856d6", desc: "AI สรุปประวัติผู้ป่วย ยาที่ใช้ ผลแลป ในการ์ดเดียว", saved: "อ่าน 10 หน้า→1 การ์ด", cost: "~฿300/เดือน",
+                demo: (
+                  <div className="mt-3 p-3 rounded-xl bg-[#f5f5f7]">
+                    <div className="p-3 rounded-lg bg-white shadow-sm">
+                      <div className="flex items-center justify-between mb-2">
+                        <div>
+                          <p className="text-[12px] font-semibold text-[#1d1d1f]">คุณสมศรี วงศ์ดี</p>
+                          <p className="text-[9px] text-[#86868b]">หญิง 58 ปี | HN: 12345</p>
+                        </div>
+                        <span className="text-[9px] px-2 py-0.5 rounded-full bg-[#5856d6]/10 text-[#5856d6] font-medium">AI Summary</span>
+                      </div>
+                      <div className="space-y-1.5 text-[10px]">
+                        <div className="p-1.5 rounded bg-[#fafafa]">
+                          <span className="text-[#86868b]">โรคประจำตัว:</span> <span className="text-[#1d1d1f]">DM type 2, HT, Dyslipidemia</span>
+                        </div>
+                        <div className="p-1.5 rounded bg-[#fafafa]">
+                          <span className="text-[#86868b]">ยาปัจจุบัน:</span> <span className="text-[#1d1d1f]">Metformin 500mg, Amlodipine 5mg, Simvastatin 20mg</span>
+                        </div>
+                        <div className="p-1.5 rounded bg-[#fafafa]">
+                          <span className="text-[#86868b]">Lab ล่าสุด:</span> <span className="text-[#1d1d1f]">HbA1c 7.2%, FBS 142, Cr 0.9</span>
+                        </div>
+                        <div className="p-1.5 rounded bg-[#ff9500]/5">
+                          <span className="text-[#ff9500] font-medium">Note:</span> <span className="text-[#1d1d1f]">HbA1c สูงขึ้นจาก 6.8% ควรปรับยา</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ),
+              },
+              {
+                icon: <Shield size={20} />, title: "Insurance Claim Auto-fill", color: "#2997ff", desc: "AI กรอกฟอร์มเคลมประกันอัตโนมัติจากเวชระเบียน", saved: "20นาที→2นาที", cost: "~฿300/เดือน",
+                demo: (
+                  <div className="mt-3 p-3 rounded-xl bg-[#f5f5f7]">
+                    <div className="p-3 rounded-lg bg-white shadow-sm">
+                      <p className="text-[11px] font-semibold text-[#2997ff] mb-2">ฟอร์มเคลมประกัน — Auto-filled</p>
+                      <div className="space-y-1.5 text-[10px]">
+                        {[
+                          { label: "ชื่อผู้ป่วย", value: "นางสมศรี วงศ์ดี" },
+                          { label: "เลขกรมธรรม์", value: "AIA-2024-XXXXX" },
+                          { label: "วินิจฉัย", value: "E11.9 Type 2 DM without complications" },
+                          { label: "ICD-10", value: "E11.9, I10, E78.5" },
+                          { label: "ค่ารักษา", value: "฿2,450" },
+                        ].map(f => (
+                          <div key={f.label} className="flex items-center gap-2">
+                            <span className="text-[#86868b] w-20 shrink-0">{f.label}:</span>
+                            <span className="text-[#1d1d1f] flex-1 px-2 py-0.5 rounded bg-[#2997ff]/5 font-medium">{f.value}</span>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="flex items-center gap-1 mt-2 text-[9px] text-[#34c759]">
+                        <Check size={10} />
+                        <span>AI กรอกจากเวชระเบียนอัตโนมัติ — ตรวจสอบก่อนส่ง</span>
+                      </div>
+                    </div>
+                  </div>
+                ),
+              },
+              {
+                icon: <BarChart3 size={20} />, title: "Daily Clinic Report", color: "#af52de", desc: "ทุกเช้า AI สรุปสถิติคลินิก ส่ง LINE ให้ผู้บริหาร", saved: "ไม่ต้องทำรายงานเอง", cost: "~฿200/เดือน",
+                demo: (
+                  <div className="mt-3 p-3 rounded-xl bg-[#f5f5f7]">
+                    <div className="p-3 rounded-lg bg-white shadow-sm">
+                      <p className="text-[11px] font-semibold text-[#af52de] mb-2">รายงานประจำวัน — 15 มี.ค. 2026</p>
+                      <div className="grid grid-cols-2 gap-2 mb-2">
+                        {[
+                          { label: "ผู้ป่วยทั้งหมด", value: "48" },
+                          { label: "รอเฉลี่ย", value: "12 นาที" },
+                          { label: "รายได้", value: "฿67,200" },
+                          { label: "Satisfaction", value: "4.8/5" },
+                        ].map(s => (
+                          <div key={s.label} className="p-1.5 rounded bg-[#fafafa] text-center">
+                            <p className="text-[9px] text-[#86868b]">{s.label}</p>
+                            <p className="text-[12px] font-semibold text-[#1d1d1f]">{s.value}</p>
+                          </div>
+                        ))}
+                      </div>
+                      <p className="text-[9px] text-[#86868b]">Top: อายุรกรรม 18 คน | ผิวหนัง 12 คน | กระดูก 8 คน</p>
+                    </div>
+                  </div>
+                ),
+              },
+            ].map((wf, i) => (
+              <motion.div key={wf.title} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }} className="apple-card overflow-hidden">
+                <button onClick={() => setExpandedWorkflow(expandedWorkflow === i ? null : i)} className="w-full text-left p-5">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: wf.color + "10", color: wf.color }}>{wf.icon}</div>
+                    <div className="flex-1"><h3 className="text-[15px] font-semibold text-[#1d1d1f] mb-0.5">{wf.title}</h3><p className="text-[13px] text-[#86868b]">{wf.desc}</p></div>
+                    <div className="flex items-center gap-3 shrink-0">
+                      <div className="hidden sm:block text-right"><p className="text-[11px] font-medium" style={{ color: wf.color }}>{wf.saved}</p><p className="text-[10px] text-[#86868b]">{wf.cost}</p></div>
+                      <motion.div animate={{ rotate: expandedWorkflow === i ? 180 : 0 }}><ChevronDown size={16} className="text-[#d2d2d7]" /></motion.div>
+                    </div>
+                  </div>
+                </button>
+                <AnimatePresence>
+                  {expandedWorkflow === i && wf.demo && (
+                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden"><div className="px-5 pb-5">{wf.demo}</div></motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ DASHBOARD MOCKUP ═══ */}
+      <section className="py-20 px-6">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-[28px] sm:text-[32px] font-semibold text-[#1d1d1f] text-center mb-3">Dashboard คลินิกของคุณ</h2>
+          <p className="text-[17px] text-[#86868b] text-center mb-10">ดูทุกอย่างในที่เดียว</p>
+
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="apple-card p-0 overflow-hidden shadow-xl shadow-black/[0.05]">
+            <div className="flex items-center gap-3 px-5 py-3 bg-[#f5f5f7] border-b border-black/[0.04]">
+              <div className="flex gap-1.5"><div className="w-3 h-3 rounded-full bg-[#ff5f57]" /><div className="w-3 h-3 rounded-full bg-[#febc2e]" /><div className="w-3 h-3 rounded-full bg-[#28c840]" /></div>
+              <span className="text-[12px] text-[#86868b] font-medium ml-2">Healthcare AI Dashboard</span>
+            </div>
+            <div className="p-6">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+                {[
+                  { label: "นัดหมายวันนี้", value: "32", change: "จอง LINE 78%", color: "#2997ff" },
+                  { label: "ตรวจแล้ว", value: "24/32", change: "75%", color: "#34c759" },
+                  { label: "เวลารอเฉลี่ย", value: "12 นาที", change: "-73%", color: "#5856d6" },
+                  { label: "Satisfaction", value: "4.8", change: "★★★★★", color: "#ff9500" },
+                ].map((s) => (
+                  <div key={s.label} className="p-3 rounded-xl bg-[#fafafa]">
+                    <p className="text-[10px] text-[#86868b]">{s.label}</p>
+                    <p className="text-[18px] font-semibold text-[#1d1d1f]">{s.value}</p>
+                    <p className="text-[10px] font-medium" style={{ color: s.color }}>{s.change}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="mb-4">
+                <p className="text-[12px] font-semibold text-[#1d1d1f] mb-2">นัดหมายถัดไป</p>
+                <div className="space-y-1.5">
+                  {[
+                    { time: "14:00", name: "คุณสมศรี", dept: "อายุรกรรม — นพ.สมชาย", room: "ห้อง 3", sc: "#2997ff" },
+                    { time: "14:30", name: "คุณวิชัย", dept: "กระดูก — นพ.ประเสริฐ", room: "ห้อง 5", sc: "#ff9500" },
+                    { time: "15:00", name: "คุณนภา", dept: "ผิวหนัง — พญ.มาลี", room: "ห้อง 2", sc: "#5856d6" },
+                    { time: "15:00", name: "คุณแก้ว", dept: "อายุรกรรม — นพ.สมชาย", room: "ห้อง 3", sc: "#34c759" },
+                  ].map((a, i) => (
+                    <div key={i} className="flex items-center justify-between p-2.5 rounded-lg bg-[#fafafa]">
+                      <div className="flex items-center gap-3">
+                        <span className="text-[12px] font-mono text-[#86868b]">{a.time}</span>
+                        <div><p className="text-[12px] font-medium text-[#1d1d1f]">{a.name}</p><p className="text-[10px] text-[#86868b]">{a.dept}</p></div>
+                      </div>
+                      <span className="text-[9px] font-medium px-1.5 py-0.5 rounded-full" style={{ background: a.sc + "12", color: a.sc }}>{a.room}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ═══ PRICING with ROI ═══ */}
+      <section className="py-20 px-6 bg-[#f5f5f7]">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-[28px] sm:text-[32px] font-semibold text-[#1d1d1f] text-center mb-3">แพ็คเกจสำหรับสถานพยาบาล</h2>
+          <p className="text-[17px] text-[#86868b] text-center mb-10">Setup fee ครั้งเดียว + ค่า API ตามใช้จริง</p>
+
+          <div className="grid md:grid-cols-3 gap-5">
+            {[
+              { name: "Clinic", price: "฿19,900", monthly: "฿800-2,000", color: "#34c759", features: ["Appointment bot (LINE)", "Drug info RAG", "Patient summary AI", "3 workflows", "Support 30 วัน"], best: "คลินิกเดี่ยว 1-3 หมอ" },
+              { name: "Hospital", price: "฿49,900", monthly: "฿3,000-6,000", color: "#2997ff", badge: "แนะนำ", features: ["ทุกอย่างใน Clinic", "Insurance claim auto-fill", "Daily report dashboard", "Multi-department", "10 workflows", "Training 4 ชม."], best: "คลินิกรวม / รพ.ขนาดเล็ก" },
+              { name: "Enterprise", price: "฿89,900", monthly: "฿5,000-12,000", color: "#af52de", features: ["ทุกอย่างใน Hospital", "เชื่อมต่อ HIS/EMR", "Custom AI models", "BI dashboard ครบ", "Workflow ไม่จำกัด", "Training on-site"], best: "โรงพยาบาลขนาดกลาง-ใหญ่" },
+            ].map((plan) => (
+              <div key={plan.name} className={`apple-card p-6 ${plan.badge ? "ring-2 ring-[#2997ff]/20" : ""}`}>
+                {plan.badge && <div className="text-center mb-3"><span className="text-[11px] font-semibold px-4 py-1 rounded-full text-white" style={{ background: plan.color }}>{plan.badge}</span></div>}
+                <h3 className="text-[17px] font-semibold text-[#1d1d1f] text-center">{plan.name}</h3>
+                <p className="text-[32px] font-semibold text-center mt-1 mb-0.5" style={{ color: plan.color }}>{plan.price}</p>
+                <p className="text-[11px] text-[#86868b] text-center mb-1">Setup fee (ครั้งเดียว)</p>
+                <p className="text-[11px] text-[#86868b] text-center mb-5 pb-5 border-b border-black/[0.04]">+ {plan.monthly}/เดือน</p>
+                <div className="space-y-2 mb-5">{plan.features.map((f) => <div key={f} className="flex items-start gap-2"><Check size={13} className="mt-0.5 shrink-0" style={{ color: plan.color }} /><span className="text-[12px] text-[#86868b]">{f}</span></div>)}</div>
+                <p className="text-[11px] text-[#86868b] mb-3">เหมาะกับ: {plan.best}</p>
+                <a href="/#contact" className="block text-center text-[13px] font-medium py-2.5 rounded-full" style={plan.badge ? { background: plan.color, color: "#fff" } : { background: "#f5f5f7" }}>เริ่มต้นใช้งาน</a>
+              </div>
+            ))}
+          </div>
+
+          {/* ROI */}
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="apple-card p-6 mt-8">
+            <h3 className="text-[15px] font-semibold text-[#1d1d1f] mb-4">คุ้มค่าแค่ไหน?</h3>
+            <div className="grid sm:grid-cols-3 gap-4 text-center">
+              <div className="p-4 rounded-xl bg-[#ff3b30]/5"><p className="text-[11px] text-[#86868b]">จ้าง admin + โทรติดตาม</p><p className="text-[20px] font-semibold text-[#ff3b30]">฿18,000/เดือน</p></div>
+              <div className="p-4 rounded-xl bg-[#34c759]/5"><p className="text-[11px] text-[#86868b]">ใช้ AI แทน</p><p className="text-[20px] font-semibold text-[#34c759]">฿2,000/เดือน</p></div>
+              <div className="p-4 rounded-xl bg-[#2997ff]/5"><p className="text-[11px] text-[#86868b]">ประหยัด/ปี</p><p className="text-[20px] font-semibold text-[#2997ff]">฿192,000</p></div>
             </div>
           </motion.div>
         </div>
       </section>
 
       {/* ═══ CTA ═══ */}
-      <section className="py-24 px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <div className="apple-card p-10">
-              <div className="relative z-10">
-                <HeartPulse size={40} className="text-[#30d158] mx-auto mb-4" />
-                <h2 className="text-2xl md:text-3xl font-bold text-[#1d1d1f] mb-3">
-                  พร้อมให้ AI ช่วยคลินิก & โรงพยาบาลของคุณ?
-                </h2>
-                <p className="text-base text-[#86868b] mb-8 max-w-lg mx-auto">
-                  ปรึกษาฟรี — เราเข้าไปสำรวจระบบที่ใช้อยู่แล้วออกแบบ solution ที่เชื่อมต่อกับ HIS ของคุณได้ทันที
-                  ทดลองใช้ฟรี 14 วัน ไม่มี commitment
-                </p>
-                <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                  <a
-                    href="https://lin.ee/cloudai"
-                    className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-[#30d158] text-white font-medium text-[15px] hover:bg-[#28a745] transition-all shadow-lg shadow-[#30d158]/20"
-                  >
-                    <MessageSquare size={18} /> ปรึกษาฟรีผ่าน LINE
-                  </a>
-                  <a
-                    href="#pricing"
-                    className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-[#f5f5f7] text-[#30d158] font-medium text-[15px] hover:bg-white/60 transition-all"
-                  >
-                    ดูแพ็คเกจ <ArrowRight size={16} />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+      <section className="py-20 px-6">
+        <div className="max-w-lg mx-auto text-center">
+          <h2 className="text-[24px] sm:text-[28px] font-semibold text-[#1d1d1f] mb-3">พร้อมให้ AI ช่วยดูแลคลินิก?</h2>
+          <p className="text-[15px] text-[#86868b] mb-6">ปรึกษาฟรี บอกเราว่าคลินิกคุณมีกี่หมอ ดูกี่คนต่อวัน เราออกแบบ workflow ให้</p>
+          <a href="/#contact" className="apple-btn apple-btn-blue">ปรึกษาฟรี</a>
         </div>
       </section>
     </div>
