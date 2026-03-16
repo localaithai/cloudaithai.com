@@ -122,25 +122,30 @@ function NetworkVisualization() {
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Floating particles */}
-      {Array.from({ length: 20 }).map((_, i) => (
+      {/* Floating particles (deterministic positions to avoid hydration mismatch) */}
+      {[
+        { x: 15, y: 25 }, { x: 72, y: 18 }, { x: 45, y: 70 }, { x: 88, y: 42 }, { x: 28, y: 58 },
+        { x: 62, y: 82 }, { x: 35, y: 15 }, { x: 80, y: 65 }, { x: 18, y: 78 }, { x: 55, y: 35 },
+        { x: 42, y: 48 }, { x: 75, y: 28 }, { x: 22, y: 42 }, { x: 68, y: 55 }, { x: 50, y: 20 },
+        { x: 85, y: 75 }, { x: 30, y: 88 }, { x: 60, y: 12 }, { x: 48, y: 62 }, { x: 14, y: 50 },
+      ].map((pos, i) => (
         <motion.div
           key={`p-${i}`}
           className="absolute w-[3px] h-[3px] rounded-full"
           style={{
-            left: `${10 + Math.random() * 80}%`,
-            top: `${10 + Math.random() * 80}%`,
+            left: `${pos.x}%`,
+            top: `${pos.y}%`,
             background: ["#0071e3", "#5856d6", "#bf5af2", "#30d158", "#34aadc"][i % 5],
           }}
           animate={{
             opacity: [0, 0.5, 0],
-            y: [0, -15 - Math.random() * 25],
-            x: [0, (Math.random() - 0.5) * 15],
+            y: [0, -20 - (i % 5) * 6],
+            x: [0, ((i % 3) - 1) * 8],
           }}
           transition={{
-            duration: 2.5 + Math.random() * 2,
+            duration: 2.5 + (i % 4) * 0.5,
             repeat: Infinity,
-            delay: Math.random() * 4,
+            delay: (i % 7) * 0.6,
             ease: "easeOut",
           }}
         />
