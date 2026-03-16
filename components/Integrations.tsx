@@ -3,7 +3,10 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 
 /* ─── Real brand icons from simpleicons CDN + emoji fallback ─── */
+const VERIFIED_SLUGS = new Set(["openai", "anthropic", "google", "deepseek", "x", "n8n", "line", "whatsapp", "facebook", "instagram", "telegram", "slack", "discord", "tiktok", "github", "docker", "python", "nodedotjs", "postgresql", "redis", "mongodb", "supabase", "vercel", "cloudflare", "digitalocean", "amazonaws", "amazonec2", "googlecloud", "hetzner", "railway", "render", "tailscale", "notion", "obsidian", "trello", "gmail", "googlecalendar", "googledrive", "googlesheets", "airtable", "zapier", "vultr", "hostinger", "pinecone", "huggingface"]);
+
 function BrandIcon({ slug, fallback, color }: { slug: string; fallback: string; color: string }) {
+  if (!VERIFIED_SLUGS.has(slug)) return <span className="text-lg">{fallback}</span>;
   const [err, setErr] = useState(false);
   if (err) return <span className="text-lg">{fallback}</span>;
   return (

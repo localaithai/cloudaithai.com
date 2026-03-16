@@ -2,10 +2,14 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 
+// Verified simpleicons slugs — only use these, others get emoji fallback
+const VERIFIED_SLUGS = new Set(["openai", "anthropic", "google", "x", "n8n", "line", "whatsapp", "facebook", "instagram", "telegram", "slack", "discord", "tiktok", "github", "docker", "python", "nodedotjs", "postgresql", "redis", "mongodb", "supabase", "vercel", "cloudflare", "digitalocean", "amazonaws", "googlecloud", "hetzner", "railway", "render", "tailscale", "notion", "obsidian", "trello", "gmail", "googlecalendar", "googledrive", "googlesheets", "airtable", "zapier"]);
+
 function BrandIcon({ slug, fallback, size = 20 }: { slug: string; fallback: string; size?: number }) {
+  if (!VERIFIED_SLUGS.has(slug)) return <span style={{ fontSize: size * 0.9 }}>{fallback}</span>;
   const [err, setErr] = useState(false);
-  if (err) return <span style={{ fontSize: size }}>{fallback}</span>;
-  return <img src={`https://cdn.simpleicons.org/${slug}`} alt={slug} width={size} height={size} onError={() => setErr(true)} className="opacity-80" />;
+  if (err) return <span style={{ fontSize: size * 0.9 }}>{fallback}</span>;
+  return <img src={`https://cdn.simpleicons.org/${slug}`} alt={slug} width={size} height={size} onError={() => setErr(true)} className="opacity-90" />;
 }
 
 /* ─── Bold, visible model pills with real presence ─── */
