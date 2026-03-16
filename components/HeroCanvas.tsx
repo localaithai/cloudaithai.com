@@ -60,7 +60,7 @@ export default function HeroCanvas() {
         lastTime = time;
         frameRef.current = (frameRef.current + 1) % TOTAL_FRAMES;
         const img = imagesRef.current[frameRef.current];
-        if (img && loadedRef.current[frameRef.current]) {
+        if (img && loadedRef.current[frameRef.current] && img.complete && img.naturalWidth > 0) {
           ctx.clearRect(0, 0, canvas.width, canvas.height);
           ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
         }

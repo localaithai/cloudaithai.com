@@ -13,11 +13,10 @@ export default function Hero() {
         className="w-full max-w-[1100px] mx-auto px-6"
       >
         <div
-          className="relative rounded-3xl overflow-hidden shadow-2xl shadow-black/[0.06]"
-          style={{ aspectRatio: "16/9" }}
+          className="relative overflow-hidden aspect-[9/14] sm:aspect-[16/9]"
         >
           <HeroCanvas />
-          <div className="absolute inset-0 rounded-3xl border border-black/[0.04] pointer-events-none z-10" />
+          {/* No border — clean edge */}
         </div>
       </motion.div>
 

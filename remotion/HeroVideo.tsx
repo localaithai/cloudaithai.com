@@ -188,7 +188,7 @@ function HeroText({ frame }: { frame: number }) {
   return (
     <div style={{ position: "absolute", top: 140, left: 0, right: 0, textAlign: "center", zIndex: 10 }}>
       <div style={{
-        fontSize: 18,
+        fontSize: 22,
         color: BLUE,
         fontWeight: 500,
         fontFamily: "Bai Jamjuree, -apple-system, sans-serif",
@@ -198,11 +198,11 @@ function HeroText({ frame }: { frame: number }) {
         AI Automation สำหรับธุรกิจไทย
       </div>
       <div style={{
-        fontSize: 82,
+        fontSize: 110,
         fontWeight: 600,
         color: "#1d1d1f",
         letterSpacing: "-0.03em",
-        lineHeight: 1.1,
+        lineHeight: 1.25,
         fontFamily: "Bai Jamjuree, -apple-system, sans-serif",
         opacity: titleOp,
         transform: `translateY(${titleY}px)`,
@@ -210,13 +210,13 @@ function HeroText({ frame }: { frame: number }) {
         ให้ AI ทำงานแทน
       </div>
       <div style={{
-        fontSize: 52,
+        fontSize: 68,
         fontWeight: 500,
         background: "linear-gradient(90deg, #2997ff, #5856d6)",
         WebkitBackgroundClip: "text",
         WebkitTextFillColor: "transparent",
         letterSpacing: "-0.02em",
-        lineHeight: 1.15,
+        lineHeight: 1.3,
         fontFamily: "Bai Jamjuree, -apple-system, sans-serif",
         opacity: subOp,
         transform: `translateY(${subY}px)`,
