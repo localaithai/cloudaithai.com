@@ -14,7 +14,9 @@
       "WebFetch(domain:upload.wikimedia.org)",
       "WebFetch(domain:cdn.worldvectorlogo.com)",
       "WebFetch(domain:api.iconify.design)",
-      "WebFetch(domain:uxwing.com)"
+      "WebFetch(domain:uxwing.com)",
+      "Bash(find:*)",
+      "Bash(wc:*)"
     ]
   }
 }

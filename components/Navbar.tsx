@@ -20,20 +20,30 @@ const navItems: NavItem[] = [
       { href: "/solutions/realestate", label: "อสังหาริมทรัพย์", desc: "Real Estate" },
       { href: "/solutions/restaurant", label: "ร้านอาหาร & F&B", desc: "Food & Beverage" },
       { href: "/home-ai", label: "Home AI", desc: "ผู้ช่วย AI ส่วนตัว" },
+      { href: "/case-studies", label: "Case Studies", desc: "ตัวอย่างผลลัพธ์จริง" },
     ],
   },
   {
     label: "วิธีทำงาน",
     children: [
       { href: "/how-it-works", label: "ขั้นตอนทำงาน", desc: "ปรึกษา → ติดตั้ง → ใช้งาน" },
+      { href: "/prototype", label: "Prototype & Demo", desc: "ทดลองก่อน จ่ายทีหลัง" },
       { href: "/tech-stack", label: "Tech Stack", desc: "เครื่องมือที่เราใช้" },
-      { href: "/methodology", label: "หลักการ & Security", desc: "Principles, PDPA, Risk" },
       { href: "/integrations", label: "55+ Integrations", desc: "เชื่อมต่อทุกแอป" },
+      { href: "/methodology", label: "หลักการ & Security", desc: "Principles, PDPA, Risk" },
+      { href: "/compare", label: "เปรียบเทียบ", desc: "ChatGPT vs Custom AI" },
     ],
   },
   { href: "/pricing", label: "ราคา" },
-  { href: "/support", label: "Support" },
-  { href: "/about", label: "เกี่ยวกับเรา" },
+  {
+    label: "เพิ่มเติม",
+    children: [
+      { href: "/resources", label: "Resources", desc: "คู่มือ + เครื่องมือคำนวณ" },
+      { href: "/ecosystem", label: "Ecosystem", desc: "Cloud + Local AI" },
+      { href: "/support", label: "Support", desc: "ดูแลระบบรายเดือน" },
+      { href: "/about", label: "เกี่ยวกับเรา", desc: "CloudAI Thailand" },
+    ],
+  },
 ];
 
 function DesktopDropdown({ group }: { group: NavGroup }) {
