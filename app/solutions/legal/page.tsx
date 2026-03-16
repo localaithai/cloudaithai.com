@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function LegalSolutionPage() {
   return (
-    <main className="bg-[#f2f2f7] mesh-gradient min-h-screen">
+    <main className="bg-[#fbfbfd] min-h-screen">
       <Navbar />
       <div className="pt-20" />
       <LegalSection />

@@ -11,12 +11,12 @@ export const metadata: Metadata = {
 
 export default function CreatorSolutionPage() {
   return (
-    <main className="bg-[#f2f2f7] mesh-gradient min-h-screen">
+    <main className="bg-[#fbfbfd] min-h-screen">
       <Navbar />
       <div className="pt-20" />
       <section className="py-24">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-[#1c1c1e] mb-4">
+          <h1 className="text-4xl md:text-6xl font-bold text-[#1d1d1f] mb-4">
             AI สำหรับ Content Creator & Agency
           </h1>
           <p className="text-lg text-[#6e6e73]">Coming soon</p>

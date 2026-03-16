@@ -6,7 +6,7 @@ import {
   Plane, Newspaper, Tv, Wifi, MessageCircle, ArrowRight,
   CheckCircle2, Send, Bot, User, Sun, Cloud, Moon, Coffee,
   Clock, Smartphone, Speaker, Thermometer, Lock, Eye,
-  Music, Radio, Globe, Zap, Heart, Star
+  Music, Radio, Globe, Zap, Heart, Star, ChevronDown
 } from "lucide-react";
 
 /* ─── 8 Capabilities ─── */
