@@ -3,6 +3,8 @@ import Hero from "@/components/Hero";
 import Models from "@/components/Models";
 import ScrollShowcase from "@/components/ScrollShowcase";
 import Tools from "@/components/Tools";
+import Solutions from "@/components/Solutions";
+import HomeAI from "@/components/HomeAI";
 import UseCases from "@/components/UseCases";
 import HowItWorks from "@/components/HowItWorks";
 import Pricing from "@/components/Pricing";
@@ -18,6 +20,8 @@ export default function Home() {
       <Models />
       <ScrollShowcase />
       <Tools />
+      <Solutions />
+      <HomeAI />
       <UseCases />
       <HowItWorks />
       <Pricing />

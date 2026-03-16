@@ -45,11 +45,11 @@ export default function Contact() {
                 className="space-y-4"
               >
                 <div>
-                  <input name="name" type="text" required placeholder="ชื่อ-นามสกุล" className="w-full px-4 py-3 rounded-xl bg-white border border-black/[0.08] text-[14px] text-[#1d1d1f] placeholder:text-[#d2d2d7] focus:outline-none focus:border-[#0071e3] focus:ring-2 focus:ring-[#0071e3]/10 transition-all" />
+                  <input name="name" type="text" required placeholder="ชื่อ-นามสกุล" className="w-full px-4 py-3 text-[14px] text-[#1c1c1e] placeholder:text-[#c7c7cc] glass-input" />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                  <input name="email" type="email" required placeholder="อีเมล" className="w-full px-4 py-3 rounded-xl bg-white border border-black/[0.08] text-[14px] text-[#1d1d1f] placeholder:text-[#d2d2d7] focus:outline-none focus:border-[#0071e3] focus:ring-2 focus:ring-[#0071e3]/10 transition-all" />
-                  <input name="phone" type="tel" placeholder="เบอร์โทร" className="w-full px-4 py-3 rounded-xl bg-white border border-black/[0.08] text-[14px] text-[#1d1d1f] placeholder:text-[#d2d2d7] focus:outline-none focus:border-[#0071e3] focus:ring-2 focus:ring-[#0071e3]/10 transition-all" />
+                  <input name="email" type="email" required placeholder="อีเมล" className="w-full px-4 py-3 text-[14px] text-[#1c1c1e] placeholder:text-[#c7c7cc] glass-input" />
+                  <input name="phone" type="tel" placeholder="เบอร์โทร" className="w-full px-4 py-3 text-[14px] text-[#1c1c1e] placeholder:text-[#c7c7cc] glass-input" />
                 </div>
                 <div>
                   <select name="package" className="w-full px-4 py-3 rounded-xl bg-white border border-black/[0.08] text-[14px] text-[#1d1d1f] focus:outline-none focus:border-[#0071e3] focus:ring-2 focus:ring-[#0071e3]/10 transition-all">
@@ -61,7 +61,7 @@ export default function Contact() {
                   </select>
                 </div>
                 <div>
-                  <textarea name="message" rows={4} required placeholder="ธุรกิจทำอะไร? ต้องการ AI ช่วยส่วนไหน?" className="w-full px-4 py-3 rounded-xl bg-white border border-black/[0.08] text-[14px] text-[#1d1d1f] placeholder:text-[#d2d2d7] focus:outline-none focus:border-[#0071e3] focus:ring-2 focus:ring-[#0071e3]/10 transition-all resize-none" />
+                  <textarea name="message" rows={4} required placeholder="ธุรกิจทำอะไร? ต้องการ AI ช่วยส่วนไหน?" className="w-full px-4 py-3 text-[14px] text-[#1c1c1e] placeholder:text-[#c7c7cc] glass-input resize-none" />
                 </div>
                 <button type="submit" className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#0071e3] text-white font-medium text-[15px] hover:bg-[#0077ed] transition-all shadow-lg shadow-[#0071e3]/20">
                   <Send size={16} /> ส่งข้อความ
