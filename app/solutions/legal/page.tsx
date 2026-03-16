@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
+import LegalSection from "@/components/LegalSection";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "AI สำหรับสำนักงานกฎหมาย",
+  title: "AI สำหรับสำนักงานกฎหมาย — วิเคราะห์สัญญา ค้นข้อกฎหมาย Draft เอกสาร",
   description:
-    "ระบบ AI Automation สำหรับสำนักงานกฎหมาย วิเคราะห์เอกสารกฎหมาย สรุปสัญญา ค้นหาคำพิพากษา ร่างเอกสาร และจัดการคดีความด้วย AI",
+    "ระบบ AI สำหรับสำนักงานกฎหมาย วิเคราะห์สัญญา 50 หน้าใน 5 นาที ค้นข้อกฎหมายใน 30 วินาที Draft เอกสารใน 10 นาที ตรวจ PDPA compliance อัตโนมัติ เริ่มต้น ฿19,900",
 };
 
 export default function LegalSolutionPage() {
@@ -14,14 +15,7 @@ export default function LegalSolutionPage() {
     <main className="bg-[#f2f2f7] mesh-gradient min-h-screen">
       <Navbar />
       <div className="pt-20" />
-      <section className="py-24">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-[#1c1c1e] mb-4">
-            AI สำหรับสำนักงานกฎหมาย
-          </h1>
-          <p className="text-lg text-[#6e6e73]">Coming soon</p>
-        </div>
-      </section>
+      <LegalSection />
       <Contact />
       <Footer />
     </main>
