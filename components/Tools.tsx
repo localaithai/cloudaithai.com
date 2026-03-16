@@ -1,47 +1,59 @@
 "use client";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+
+function ToolIcon({ slug, fallback, size = 28 }: { slug: string; fallback: string; size?: number }) {
+  const [err, setErr] = useState(false);
+  if (err) return <span style={{ fontSize: size }}>{fallback}</span>;
+  return <img src={`/brands/${slug}.svg`} alt={slug} width={size} height={size} onError={() => setErr(true)} loading="lazy" />;
+}
 
 const tools = [
   {
     name: "n8n",
+    slug: "n8n",
     tagline: "Workflow Automation",
     description: "เชื่อมทุกแอป สร้าง workflow อัตโนมัติ ลากวาง 400+ integrations — LINE, Slack, Gmail, Sheets, CRM",
     features: ["400+ Integrations", "Visual Builder", "Webhook & Cron", "AI Nodes"],
     color: "#ff6d5a",
-    icon: "⚡",
+    fallback: "⚡",
   },
   {
     name: "OpenClaw",
+    slug: "openclaw",
     tagline: "AI Agent ส่วนตัว",
     description: "AI Assistant ที่จำบริบท สั่งผ่าน LINE/WhatsApp/Telegram จัดการปฏิทิน อีเมล ไฟล์ browse เว็บ",
     features: ["100+ AgentSkills", "Chat Integration", "Memory", "Browser AI"],
     color: "#e74c3c",
-    icon: "🦞",
+    fallback: "🦞",
   },
   {
     name: "Flowise",
+    slug: "flowise",
     tagline: "Chatbot & RAG Builder",
     description: "สร้าง AI Chatbot และ RAG pipeline แบบ drag-and-drop ฝัง chatbot ลงเว็บไซต์ได้ทันที",
     features: ["Drag & Drop", "RAG Pipeline", "Embed Widget", "100+ LLMs"],
     color: "#3b82f6",
-    icon: "🌊",
+    fallback: "🌊",
   },
   {
     name: "Dify",
+    slug: "dify",
     tagline: "AI App Platform",
     description: "สร้าง AI application ครบวงจร ตั้งแต่ prototype ถึง production — workflow, RAG, agent, analytics",
     features: ["AI Workflow", "Knowledge Base", "50+ Tools", "Analytics"],
     color: "#8b5cf6",
-    icon: "🔮",
+    fallback: "🔮",
   },
   {
     name: "ActivePieces",
+    slug: "activepieces",
     tagline: "No-Code Automation",
     description: "ใช้ง่ายที่สุด ออกแบบมาให้คนไม่เขียนโค้ดใช้ได้ ใช้แทน Zapier/Make ได้เลย",
     features: ["No-Code", "200+ Apps", "AI Pieces", "Team Collab"],
     color: "#30d158",
-    icon: "🧩",
+    fallback: "🧩",
   },
 ];
 

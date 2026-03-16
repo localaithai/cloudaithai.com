@@ -42,6 +42,7 @@ const navItems: NavItem[] = [
       { href: "/ecosystem", label: "Ecosystem", desc: "Cloud + Local AI" },
       { href: "/support", label: "Support", desc: "ดูแลระบบรายเดือน" },
       { href: "/about", label: "เกี่ยวกับเรา", desc: "CloudAI Thailand" },
+      { href: "https://www.localaithai.com", label: "Local AI Thailand", desc: "ต้องการ Privacy 100% →" },
     ],
   },
 ];
