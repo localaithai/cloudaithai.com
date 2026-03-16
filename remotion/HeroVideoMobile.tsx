@@ -75,14 +75,14 @@ export default function HeroVideoMobile() {
           AI Automation สำหรับธุรกิจไทย
         </div>
         <div style={{
-          fontSize: 48, fontWeight: 600, color: "#1d1d1f", letterSpacing: "-0.025em", lineHeight: 1.1,
+          fontSize: 56, fontWeight: 600, color: "#1d1d1f", letterSpacing: "-0.025em", lineHeight: 1.25,
           fontFamily: "Bai Jamjuree, -apple-system, sans-serif",
           opacity: titleOp, transform: `translateY(${titleY}px)`,
         }}>
           ให้ AI ทำงานแทน
         </div>
         <div style={{
-          fontSize: 32, fontWeight: 500,
+          fontSize: 38, fontWeight: 500,
           background: "linear-gradient(90deg, #2997ff, #5856d6)",
           WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
           letterSpacing: "-0.02em", lineHeight: 1.15,
