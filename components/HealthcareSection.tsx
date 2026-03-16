@@ -1198,18 +1198,21 @@ export default function HealthcareSection() {
             {/* Header */}
             <div className="px-8 py-6 bg-gradient-to-r from-[#34c759]/5 to-[#2997ff]/5 border-b border-black/[0.04] text-center">
               <span className="text-[11px] font-semibold px-4 py-1 rounded-full bg-[#34c759] text-white">
-                Healthcare AI Package
+                Professional — แนะนำ
               </span>
               <div className="mt-4 flex items-baseline justify-center gap-2">
                 <span className="text-[48px] font-semibold text-[#34c759]">
-                  ฿29,900
+                  ฿59,900
                 </span>
                 <span className="text-[14px] text-[#6e6e73]">
                   setup fee ครั้งเดียว
                 </span>
               </div>
               <p className="text-[13px] text-[#6e6e73] mt-1">
-                + ฿1,500-4,000/เดือน (ค่า API ตามใช้จริง)
+                + ฿1,500-5,000/เดือน (ค่า API ตามใช้จริง)
+              </p>
+              <p className="text-[11px] text-[#8e8e93] mt-1">
+                หรือใช้ Mac Mini แทน VPS — ข้อมูลผู้ป่วยอยู่ในคลินิก ไม่มีค่า hosting
               </p>
             </div>
 
@@ -1281,6 +1284,9 @@ export default function HealthcareSection() {
                 </a>
                 <p className="text-[12px] text-[#6e6e73] mt-3">
                   บอกเราว่าคลินิกมีกี่หมอ ดูกี่คนต่อวัน เราออกแบบ workflow ให้
+                </p>
+                <p className="text-[12px] text-[#6e6e73] mt-4">
+                  Starter ฿29,900 · <span className="font-semibold text-[#34c759]">Professional ฿59,900</span> · Enterprise ฿99,900
                 </p>
               </div>
             </div>

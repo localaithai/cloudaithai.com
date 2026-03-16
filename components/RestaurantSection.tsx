@@ -686,9 +686,10 @@ export default function RestaurantSection() {
           >
             {/* Pricing header */}
             <div className="bg-[#ff9500] px-6 py-5 text-center text-white">
-              <p className="text-[13px] font-medium text-white/80 mb-1">Kitchen Command Center</p>
-              <p className="text-[42px] font-bold tracking-tight">฿14,900</p>
-              <p className="text-[13px] text-white/70">Setup fee ครั้งเดียว + ฿500-1,500/เดือน (ค่า API ตามใช้จริง)</p>
+              <p className="text-[13px] font-medium text-white/80 mb-1">Starter — Kitchen Command Center</p>
+              <p className="text-[42px] font-bold tracking-tight">฿19,900</p>
+              <p className="text-[13px] text-white/70">Setup fee ครั้งเดียว + ฿700-2,500/เดือน (ค่า API ตามใช้จริง)</p>
+              <p className="text-[11px] text-white/50 mt-1">หรือใช้ Mini PC ฿5,900 แทน VPS — ค่า hosting เดือนละ ฿0</p>
             </div>
 
             {/* Features */}
@@ -744,6 +745,9 @@ export default function RestaurantSection() {
               </a>
               <p className="text-[11px] text-[#6e6e73] text-center mt-3">
                 บอกเราว่าร้านคุณขายอะไร กี่สาขา — เราออกแบบ workflow ให้
+              </p>
+              <p className="text-[12px] text-[#6e6e73] text-center mt-4">
+                <span className="font-semibold text-[#ff9500]">Starter ฿19,900</span> · Professional ฿34,900 · Enterprise ฿69,900
               </p>
             </div>
           </motion.div>

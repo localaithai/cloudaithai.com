@@ -30,6 +30,7 @@ import {
   Wrench,
   TrendingUp,
 } from "lucide-react";
+import CrossSiteLink from "./CrossSiteLink";
 
 /* ═══════════════════════════════════════════════════════════
    TYPES
@@ -646,6 +647,20 @@ function CtaButton({
   label: string;
   color: string;
 }) {
+  const isExternal = href.includes("localaithai.com");
+  const className = "inline-flex items-center gap-2 px-6 py-3 rounded-full text-white text-sm font-semibold transition-shadow hover:shadow-lg";
+
+  if (isExternal) {
+    return (
+      <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="inline-block">
+        <CrossSiteLink href={href} className={className} style={{ backgroundColor: color }}>
+          {label}
+          <ArrowRight size={16} />
+        </CrossSiteLink>
+      </motion.div>
+    );
+  }
+
   return (
     <motion.a
       href={href}
@@ -653,7 +668,7 @@ function CtaButton({
       rel="noopener noreferrer"
       whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.98 }}
-      className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white text-sm font-semibold transition-shadow hover:shadow-lg"
+      className={className}
       style={{ backgroundColor: color }}
     >
       {label}

@@ -832,7 +832,7 @@ export default function LegalSection() {
             <div className="inline-flex items-center gap-2 bg-[#5856d6]/8 rounded-full px-4 py-1.5 mb-5">
               <Scale size={13} className="text-[#5856d6]" />
               <span className="text-[11px] font-semibold text-[#5856d6]">
-                Law Firm Package
+                Professional — แนะนำ
               </span>
             </div>
 
@@ -845,10 +845,13 @@ export default function LegalSection() {
 
             <div className="mb-6">
               <span className="text-[48px] sm:text-[56px] font-bold text-[#5856d6]">
-                ฿49,900
+                ฿59,900
               </span>
               <p className="text-[13px] text-[#6e6e73] mt-1">
-                Setup fee ครั้งเดียว + API ตามใช้จริง ~฿3,000-8,000/เดือน
+                Setup fee ครั้งเดียว + API ตามใช้จริง ~฿1,500-5,000/เดือน
+              </p>
+              <p className="text-[11px] text-[#8e8e93] mt-1">
+                ใช้ Mac Mini M4 Pro แทน VPS ได้ — ข้อมูลอยู่ในสำนักงาน ไม่มีค่า hosting รายเดือน
               </p>
             </div>
 
@@ -903,6 +906,9 @@ export default function LegalSection() {
             </a>
             <p className="text-[11px] text-[#6e6e73] mt-3">
               ไม่มีค่าใช้จ่ายจนกว่าจะตกลง | Demo ให้ดูก่อนตัดสินใจ
+            </p>
+            <p className="text-[12px] text-[#6e6e73] mt-4">
+              Starter ฿29,900 · <span className="font-semibold text-[#5856d6]">Professional ฿59,900</span> · Enterprise ฿99,900
             </p>
           </motion.div>
         </div>

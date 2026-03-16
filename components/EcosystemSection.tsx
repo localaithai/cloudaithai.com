@@ -17,6 +17,7 @@ import {
   Plus,
   RefreshCcw,
 } from "lucide-react";
+import CrossSiteLink from "./CrossSiteLink";
 
 /* ─── Animation helpers ─── */
 const fadeUp = {
@@ -307,15 +308,13 @@ function EcosystemOverview() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="text-center mt-10"
         >
-          <a
+          <CrossSiteLink
             href="https://www.localaithai.com"
-            target="_blank"
-            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-[#2997ff] hover:text-[#2997ff]/80 text-sm font-semibold transition-colors"
           >
             เยี่ยมชม LocalAI Thailand
             <ExternalLink className="w-4 h-4" />
-          </a>
+          </CrossSiteLink>
         </motion.div>
       </div>
     </section>

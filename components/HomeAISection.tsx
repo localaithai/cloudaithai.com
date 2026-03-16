@@ -695,7 +695,7 @@ export default function HomeAISection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className={`glass-card p-7 relative ${plan.best ? "ring-2 ring-[#af52de]/30" : ""}`}
+                className={`glass-card p-7 relative !overflow-visible ${plan.best ? "ring-2 ring-[#af52de]/30" : ""}`}
               >
                 {plan.best && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 text-[11px] font-semibold px-4 py-1 rounded-full bg-[#af52de] text-white">
@@ -706,7 +706,8 @@ export default function HomeAISection() {
                   <h3 className="text-[18px] font-semibold text-[#1c1c1e] mb-1">{plan.name}</h3>
                   <p className="text-4xl font-bold mb-0.5" style={{ color: plan.color }}>{plan.price}</p>
                   <p className="text-[12px] text-[#8e8e93] mb-1">{plan.period}</p>
-                  <p className="text-[13px] text-[#6e6e73] mb-6">+ ค่า API {plan.apiCost}</p>
+                  <p className="text-[13px] text-[#6e6e73] mb-1">+ ค่า API {plan.apiCost}</p>
+                  <p className="text-[11px] text-[#8e8e93] mb-6">หรือใช้ Mac Mini แทน VPS — ไม่มีค่า hosting</p>
 
                   <div className="space-y-2.5 mb-7">
                     {plan.features.map((f) => (

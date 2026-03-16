@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, Check, Phone, Mail, MessageCircle } from "lucide-react";
+import CrossSiteLink from "./CrossSiteLink";
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
@@ -103,9 +104,9 @@ export default function Contact() {
               <p className="text-[13px] text-[#6e6e73] mb-3">
                 ถ้าข้อมูลต้องอยู่ในออฟฟิศ 100% ไม่ส่งออกเลย — ดูบริการ Local AI ติดตั้ง AI บนเครื่องของคุณเอง
               </p>
-              <a href="https://www.localaithai.com" target="_blank" className="text-[13px] font-medium text-[#2997ff] hover:underline">
+              <CrossSiteLink href="https://www.localaithai.com" className="text-[13px] font-medium text-[#2997ff] hover:underline">
                 LocalAI Thailand →
-              </a>
+              </CrossSiteLink>
             </div>
           </motion.div>
         </div>

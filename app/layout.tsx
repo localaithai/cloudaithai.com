@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Bai_Jamjuree } from "next/font/google";
 import "./globals.css";
+import PageTransition from "@/components/PageTransition";
 
 const baiJamjuree = Bai_Jamjuree({
   variable: "--font-bai",
@@ -42,6 +43,16 @@ export const metadata: Metadata = {
     description: "AI Automation สำหรับธุรกิจไทย เริ่ม ฿19,900",
   },
   robots: { index: true, follow: true },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "32x32" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180" }],
+  },
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
@@ -52,7 +63,7 @@ export default function RootLayout({
   return (
     <html lang="th">
       <body className={`${baiJamjuree.variable} antialiased`}>
-        {children}
+        <PageTransition>{children}</PageTransition>
       </body>
     </html>
   );

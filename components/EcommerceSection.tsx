@@ -1077,8 +1077,9 @@ export default function EcommerceSection() {
                 </span>
               </div>
               <p className="text-[16px] mt-3 font-medium">
-                Setup fee (ครั้งเดียว) + ฿2,000-5,000/เดือน (API ตามใช้จริง)
+                Setup fee (ครั้งเดียว) + ฿1,500-5,000/เดือน (API ตามใช้จริง)
               </p>
+              <p className="text-[12px] mt-1.5 text-white/50">หรือใช้ Mac Mini แทน VPS — ไม่มีค่า hosting รายเดือน</p>
             </div>
 
             {/* Features grid */}
@@ -1150,7 +1151,7 @@ export default function EcommerceSection() {
                   href="/#contact"
                   className="text-[13px] text-[#2997ff] font-medium hover:underline"
                 >
-                  ดูแพ็คเกจอื่น (Starter ฿19,900 / Enterprise ฿69,900) →
+                  ดูแพ็คเกจอื่น (Starter ฿19,900 / Enterprise ฿79,900) →
                 </a>
               </p>
             </div>

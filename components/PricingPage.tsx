@@ -24,6 +24,9 @@ import {
   Clock,
   HeadphonesIcon,
   TrendingUp,
+  HardDrive,
+  Cpu,
+  Wifi,
 } from "lucide-react";
 
 /* ═══════════════════════════════════════════════════════════
@@ -57,7 +60,7 @@ const pricingComponents = [
 const mainPlans = [
   {
     name: "Starter",
-    price: "9,900",
+    price: "19,900",
     monthly: "฿700 - 2,500",
     desc: "เริ่มต้น AI Automation สำหรับธุรกิจเล็ก",
     color: "#2997ff",
@@ -83,7 +86,7 @@ const mainPlans = [
   {
     name: "Professional",
     price: "39,900",
-    monthly: "฿1,200 - 5,000",
+    monthly: "฿1,500 - 5,000",
     desc: "AI Automation ครบชุดสำหรับทีม",
     color: "#5856d6",
     badge: "แนะนำ",
@@ -106,7 +109,7 @@ const mainPlans = [
   {
     name: "Enterprise",
     price: "89,900",
-    monthly: "฿2,500 - 15,000",
+    monthly: "฿3,000 - 15,000",
     desc: "AI Automation ระดับองค์กร ครบทุกอย่าง",
     color: "#bf5af2",
     tools: ["n8n", "OpenClaw", "Flowise", "Dify", "ActivePieces"],
@@ -147,9 +150,9 @@ type IndustryPackage = {
 const industryPackages: Record<string, IndustryPackage[]> = {
   ecommerce: [
     {
-      name: "ร้านค้าเริ่มต้น",
-      price: "9,900",
-      monthly: "~฿842",
+      name: "Starter",
+      price: "19,900",
+      monthly: "~฿700-2,500",
       features: [
         "Chatbot ตอบลูกค้า LINE/Messenger",
         "สร้าง product description อัตโนมัติ",
@@ -157,11 +160,11 @@ const industryPackages: Record<string, IndustryPackage[]> = {
       ],
     },
     {
-      name: "ร้านค้ามืออาชีพ",
-      price: "29,900",
-      monthly: "~฿2,400",
+      name: "Professional",
+      price: "39,900",
+      monthly: "~฿1,500-5,000",
       features: [
-        "ทุกอย่างใน เริ่มต้น +",
+        "ทุกอย่างใน Starter +",
         "วิเคราะห์ยอดขาย + forecast",
         "จัดการ stock อัตโนมัติ",
         "Reply review อัตโนมัติ",
@@ -169,11 +172,11 @@ const industryPackages: Record<string, IndustryPackage[]> = {
       ],
     },
     {
-      name: "ร้านค้าขนาดใหญ่",
-      price: "59,900",
-      monthly: "~฿5,000",
+      name: "Enterprise",
+      price: "79,900",
+      monthly: "~฿3,000-15,000",
       features: [
-        "ทุกอย่างใน มืออาชีพ +",
+        "ทุกอย่างใน Professional +",
         "Multi-platform sync",
         "AI pricing optimization",
         "Customer segmentation",
@@ -183,9 +186,9 @@ const industryPackages: Record<string, IndustryPackage[]> = {
   ],
   creator: [
     {
-      name: "Creator Lite",
-      price: "9,900",
-      monthly: "~฿950",
+      name: "Starter",
+      price: "19,900",
+      monthly: "~฿700-2,500",
       features: [
         "AI สร้าง caption + hashtag",
         "Content calendar automation",
@@ -193,11 +196,11 @@ const industryPackages: Record<string, IndustryPackage[]> = {
       ],
     },
     {
-      name: "Creator Pro",
-      price: "24,900",
-      monthly: "~฿1,800",
+      name: "Professional",
+      price: "39,900",
+      monthly: "~฿1,500-5,000",
       features: [
-        "ทุกอย่างใน Lite +",
+        "ทุกอย่างใน Starter +",
         "Script generator จาก trending",
         "Thumbnail idea generator",
         "Analytics dashboard",
@@ -205,11 +208,11 @@ const industryPackages: Record<string, IndustryPackage[]> = {
       ],
     },
     {
-      name: "Creator Studio",
-      price: "49,900",
-      monthly: "~฿3,500",
+      name: "Enterprise",
+      price: "69,900",
+      monthly: "~฿3,000-15,000",
       features: [
-        "ทุกอย่างใน Pro +",
+        "ทุกอย่างใน Professional +",
         "Multi-platform publishing",
         "AI video summarizer",
         "Sponsorship proposal generator",
@@ -219,9 +222,9 @@ const industryPackages: Record<string, IndustryPackage[]> = {
   ],
   legal: [
     {
-      name: "สำนักงานเล็ก",
-      price: "19,900",
-      monthly: "~฿1,500",
+      name: "Starter",
+      price: "29,900",
+      monthly: "~฿700-2,500",
       features: [
         "AI ค้นหากฎหมาย + คำพิพากษา",
         "สรุปเอกสารยาว",
@@ -229,11 +232,11 @@ const industryPackages: Record<string, IndustryPackage[]> = {
       ],
     },
     {
-      name: "สำนักงานกลาง",
-      price: "49,900",
-      monthly: "~฿3,800",
+      name: "Professional",
+      price: "59,900",
+      monthly: "~฿1,500-5,000",
       features: [
-        "ทุกอย่างใน เล็ก +",
+        "ทุกอย่างใน Starter +",
         "Case management automation",
         "Client intake chatbot",
         "Due diligence assistant",
@@ -241,11 +244,11 @@ const industryPackages: Record<string, IndustryPackage[]> = {
       ],
     },
     {
-      name: "สำนักงานใหญ่",
-      price: "89,900",
-      monthly: "~฿8,000",
+      name: "Enterprise",
+      price: "99,900",
+      monthly: "~฿3,000-15,000",
       features: [
-        "ทุกอย่างใน กลาง +",
+        "ทุกอย่างใน Professional +",
         "Multi-language contract",
         "Compliance monitoring",
         "Knowledge base ไม่จำกัด",
@@ -255,9 +258,9 @@ const industryPackages: Record<string, IndustryPackage[]> = {
   ],
   healthcare: [
     {
-      name: "คลินิกเดี่ยว",
-      price: "19,900",
-      monthly: "~฿1,200",
+      name: "Starter",
+      price: "29,900",
+      monthly: "~฿700-2,500",
       features: [
         "Chatbot นัดหมาย LINE",
         "เตือนนัด + follow-up อัตโนมัติ",
@@ -265,11 +268,11 @@ const industryPackages: Record<string, IndustryPackage[]> = {
       ],
     },
     {
-      name: "คลินิกเครือข่าย",
-      price: "49,900",
-      monthly: "~฿3,500",
+      name: "Professional",
+      price: "59,900",
+      monthly: "~฿1,500-5,000",
       features: [
-        "ทุกอย่างใน เดี่ยว +",
+        "ทุกอย่างใน Starter +",
         "Patient triage chatbot",
         "สรุป medical record",
         "Multi-branch management",
@@ -277,9 +280,9 @@ const industryPackages: Record<string, IndustryPackage[]> = {
       ],
     },
     {
-      name: "โรงพยาบาล",
-      price: "89,900",
-      monthly: "~฿10,000",
+      name: "Enterprise",
+      price: "99,900",
+      monthly: "~฿3,000-15,000",
       features: [
         "ทุกอย่างใน เครือข่าย +",
         "Integration กับ HIS/EMR",
@@ -291,9 +294,9 @@ const industryPackages: Record<string, IndustryPackage[]> = {
   ],
   realestate: [
     {
-      name: "นายหน้าอิสระ",
-      price: "9,900",
-      monthly: "~฿850",
+      name: "Starter",
+      price: "19,900",
+      monthly: "~฿700-2,500",
       features: [
         "Chatbot ตอบลูกค้าสนใจ",
         "สร้าง listing description",
@@ -301,11 +304,11 @@ const industryPackages: Record<string, IndustryPackage[]> = {
       ],
     },
     {
-      name: "สำนักงานอสังหาฯ",
+      name: "Professional",
       price: "39,900",
-      monthly: "~฿2,800",
+      monthly: "~฿1,500-5,000",
       features: [
-        "ทุกอย่างใน อิสระ +",
+        "ทุกอย่างใน Starter +",
         "Property matching AI",
         "Market analysis automation",
         "Virtual tour script",
@@ -313,11 +316,11 @@ const industryPackages: Record<string, IndustryPackage[]> = {
       ],
     },
     {
-      name: "Developer / โครงการ",
+      name: "Enterprise",
       price: "79,900",
-      monthly: "~฿6,000",
+      monthly: "~฿3,000-15,000",
       features: [
-        "ทุกอย่างใน สำนักงาน +",
+        "ทุกอย่างใน Professional +",
         "Lead scoring AI",
         "Sales pipeline automation",
         "Multi-project dashboard",
@@ -327,9 +330,9 @@ const industryPackages: Record<string, IndustryPackage[]> = {
   ],
   restaurant: [
     {
-      name: "ร้านอาหารเดี่ยว",
-      price: "9,900",
-      monthly: "~฿750",
+      name: "Starter",
+      price: "19,900",
+      monthly: "~฿700-2,500",
       features: [
         "Chatbot รับ order LINE",
         "เมนูแนะนำอัตโนมัติ",
@@ -337,11 +340,11 @@ const industryPackages: Record<string, IndustryPackage[]> = {
       ],
     },
     {
-      name: "ร้านอาหาร + Delivery",
-      price: "29,900",
-      monthly: "~฿2,200",
+      name: "Professional",
+      price: "34,900",
+      monthly: "~฿1,500-5,000",
       features: [
-        "ทุกอย่างใน เดี่ยว +",
+        "ทุกอย่างใน Starter +",
         "Multi-platform order sync",
         "Review management AI",
         "สร้าง social content",
@@ -349,11 +352,11 @@ const industryPackages: Record<string, IndustryPackage[]> = {
       ],
     },
     {
-      name: "เชนร้านอาหาร",
+      name: "Enterprise",
       price: "69,900",
-      monthly: "~฿5,500",
+      monthly: "~฿3,000-15,000",
       features: [
-        "ทุกอย่างใน Delivery +",
+        "ทุกอย่างใน Professional +",
         "Multi-branch dashboard",
         "Menu optimization AI",
         "Staff scheduling assist",
@@ -363,9 +366,9 @@ const industryPackages: Record<string, IndustryPackage[]> = {
   ],
   homeai: [
     {
-      name: "Home Assistant Basic",
+      name: "Starter",
       price: "14,900",
-      monthly: "~฿350",
+      monthly: "~฿700-2,500",
       features: [
         "ติดตั้ง Home Assistant",
         "ควบคุมอุปกรณ์ 10 ตัว",
@@ -373,9 +376,9 @@ const industryPackages: Record<string, IndustryPackage[]> = {
       ],
     },
     {
-      name: "Smart Home Pro",
-      price: "34,900",
-      monthly: "~฿650",
+      name: "Professional",
+      price: "29,900",
+      monthly: "~฿1,500-5,000",
       features: [
         "ทุกอย่างใน Basic +",
         "Automation scene ไม่จำกัด",
@@ -386,10 +389,10 @@ const industryPackages: Record<string, IndustryPackage[]> = {
     },
     {
       name: "Full Smart Home",
-      price: "79,900",
-      monthly: "~฿1,200",
+      price: "Custom",
+      monthly: "ปรึกษาทีมงาน",
       features: [
-        "ทุกอย่างใน Pro +",
+        "ทุกอย่างใน Professional +",
         "AI ปรับ automation ตาม pattern",
         "Multi-zone climate control",
         "EV charger integration",
@@ -444,6 +447,39 @@ const apiModels = [
   { name: "Gemini 2.5 Flash", inputCost: 0.15, outputCost: 0.6 },
   { name: "DeepSeek V3", inputCost: 0.28, outputCost: 1.1 },
   { name: "Llama 4 (Groq)", inputCost: 0.05, outputCost: 0.1 },
+];
+
+const hardwareOptions = [
+  {
+    name: "Mac Mini M4",
+    price: "฿22,900",
+    specs: "10-core CPU / 16 GB RAM / 256 GB SSD",
+    monthly: "฿0 (ค่าไฟ ~฿150)",
+    pros: ["ไม่มีค่ารายเดือน VPS", "เร็วกว่า VPS ถูก", "ข้อมูลอยู่ในออฟฟิศ 100%", "รัน local AI model เพิ่มได้"],
+    cons: ["ต้องมี internet เสถียร", "ถ้าไฟดับ = ระบบหยุด", "ต้องดูแล hardware เอง"],
+    best: "ออฟฟิศ / ร้านที่มี internet ดี",
+    color: "#1d1d1f",
+  },
+  {
+    name: "Mac Mini M4 Pro",
+    price: "฿56,900",
+    specs: "14-core CPU / 24 GB RAM / 512 GB SSD",
+    monthly: "฿0 (ค่าไฟ ~฿200)",
+    pros: ["RAM 24GB รัน RAG + หลาย tool พร้อมกัน", "ประหยัดค่า VPS ฿1,500+/เดือน", "รัน Ollama + local model ได้", "คืนทุนใน 12-18 เดือน"],
+    cons: ["ลงทุนสูงกว่าตอนแรก", "ต้องมี UPS กันไฟดับ", "ต้อง setup Tailscale สำหรับ remote access"],
+    best: "สำนักงานกฎหมาย / คลินิก / Enterprise",
+    color: "#bf5af2",
+  },
+  {
+    name: "Mini PC (Intel N100)",
+    price: "฿5,900 - ฿8,900",
+    specs: "4-core CPU / 8-16 GB RAM / 256 GB SSD",
+    monthly: "฿0 (ค่าไฟ ~฿80)",
+    pros: ["ราคาถูกที่สุด", "เล็ก เงียบ ประหยัดไฟ", "พอสำหรับ n8n + Flowise"],
+    cons: ["ช้ากว่า Mac Mini มาก", "RAM จำกัด ไม่เหมาะหลาย tool", "ไม่รองรับ local AI model"],
+    best: "ร้านอาหาร / ร้านค้าเล็ก Starter",
+    color: "#34c759",
+  },
 ];
 
 const maintenancePlans = [
@@ -695,12 +731,12 @@ export default function PricingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className={`apple-card relative p-8 ${
+                className={`apple-card relative p-8 !overflow-visible ${
                   plan.badge ? "!bg-white/65 md:-mt-4 md:mb-4" : ""
                 }`}
               >
                 {plan.badge && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
                     <span
                       className="text-[11px] font-semibold px-4 py-1 rounded-full text-white"
                       style={{ background: plan.color }}
@@ -968,6 +1004,78 @@ export default function PricingPage() {
             </div>
           </motion.div>
 
+          {/* Hardware Add-on — Mac Mini / Mini PC instead of VPS */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="apple-card p-6 md:p-8 mb-8 !overflow-visible"
+          >
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-10 h-10 rounded-xl bg-[#1d1d1f]/10 flex items-center justify-center">
+                <Cpu size={20} className="text-[#1d1d1f]" />
+              </div>
+              <div>
+                <h3 className="text-[17px] font-semibold text-[#1d1d1f]">
+                  Hardware Add-on
+                </h3>
+                <p className="text-[13px] text-[#6e6e73]">
+                  ใช้ Mac Mini / Mini PC แทน VPS — ไม่มีค่ารายเดือน ข้อมูลอยู่ที่คุณ 100%
+                </p>
+              </div>
+            </div>
+            <p className="text-[12px] text-[#8e8e93] mb-6 ml-[52px]">
+              ซื้อ hardware เพิ่ม → เราติดตั้ง n8n, Flowise, OpenClaw ให้บนเครื่อง → ไม่ต้องจ่ายค่า VPS อีก
+            </p>
+
+            <div className="grid md:grid-cols-3 gap-4">
+              {hardwareOptions.map((hw) => (
+                <div
+                  key={hw.name}
+                  className="rounded-2xl border border-black/[0.06] p-5 relative"
+                >
+                  <h4 className="text-[15px] font-semibold text-[#1d1d1f] mb-1">{hw.name}</h4>
+                  <p className="text-[22px] font-bold mb-1" style={{ color: hw.color }}>{hw.price}</p>
+                  <p className="text-[11px] text-[#8e8e93] mb-1">{hw.specs}</p>
+                  <p className="text-[12px] font-medium text-[#34c759] mb-4">รายเดือน: {hw.monthly}</p>
+
+                  <div className="space-y-1.5 mb-3">
+                    {hw.pros.map((p) => (
+                      <div key={p} className="flex items-start gap-2">
+                        <Check size={12} className="text-[#34c759] shrink-0 mt-0.5" />
+                        <span className="text-[12px] text-[#1d1d1f]/80">{p}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="space-y-1.5 mb-4">
+                    {hw.cons.map((c) => (
+                      <div key={c} className="flex items-start gap-2">
+                        <X size={12} className="text-[#ff3b30] shrink-0 mt-0.5" />
+                        <span className="text-[12px] text-[#6e6e73]">{c}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="pt-3 border-t border-black/[0.04]">
+                    <p className="text-[11px] text-[#6e6e73]">เหมาะกับ</p>
+                    <p className="text-[12px] font-medium text-[#1d1d1f]">{hw.best}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-5 p-4 rounded-xl bg-[#f5f5f7] flex items-start gap-3">
+              <Wifi size={16} className="text-[#ff9500] shrink-0 mt-0.5" />
+              <div>
+                <p className="text-[13px] font-medium text-[#1d1d1f] mb-0.5">ต้องมี internet เสถียร</p>
+                <p className="text-[12px] text-[#6e6e73]">
+                  Hardware ต้องเชื่อม internet ตลอดเพื่อเรียก API (GPT-5, Claude, Gemini) และรับ webhook จาก LINE
+                  — แนะนำ internet บ้าน/ออฟฟิศ 100Mbps+ พร้อม Tailscale สำหรับ remote access
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
           {/* API Cost Calculator */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -1149,12 +1257,12 @@ export default function PricingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className={`apple-card relative p-8 ${
+                className={`apple-card relative p-8 !overflow-visible ${
                   plan.badge ? "!bg-white/65 md:-mt-4 md:mb-4" : ""
                 }`}
               >
                 {plan.badge && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
                     <span
                       className="text-[11px] font-semibold px-4 py-1 rounded-full text-white"
                       style={{ background: plan.color }}

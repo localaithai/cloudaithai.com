@@ -425,10 +425,10 @@ export default function SupportPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className={`apple-card relative p-8 ${plan.badge ? "!bg-white/65 lg:-mt-4 lg:mb-4" : ""}`}
+                className={`apple-card relative p-8 !overflow-visible ${plan.badge ? "!bg-white/65 lg:-mt-4 lg:mb-4" : ""}`}
               >
                 {plan.badge && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
                     <span
                       className="text-[11px] font-semibold px-4 py-1 rounded-full text-white"
                       style={{ background: plan.color }}

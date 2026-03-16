@@ -688,14 +688,15 @@ export default function CreatorSection() {
             <div className="bg-[#1d1d1f] px-6 py-8 text-center text-white">
               <div className="inline-flex items-center gap-1.5 bg-white/20 rounded-full px-3 py-1 mb-3">
                 <Award size={12} className="text-white" />
-                <span className="text-[11px] font-semibold">แพ็คเกจยอดนิยม</span>
+                <span className="text-[11px] font-semibold">Professional — แนะนำ</span>
               </div>
-              <h3 className="text-[24px] font-bold">Creator Studio Pro</h3>
+              <h3 className="text-[24px] font-bold">Creator Studio</h3>
               <div className="flex items-baseline justify-center gap-1 mt-2">
-                <span className="text-[48px] font-bold tracking-tight">฿14,900</span>
+                <span className="text-[48px] font-bold tracking-tight">฿39,900</span>
                 <span className="text-[14px]">setup fee</span>
               </div>
-              <p className="text-[14px] mt-2 font-medium">+ ค่า API ประมาณ ฿800–2,500/เดือน</p>
+              <p className="text-[14px] mt-2 font-medium">+ ค่า API ประมาณ ฿1,500–5,000/เดือน</p>
+              <p className="text-[11px] mt-1.5 text-white/60">หรือใช้ Mac Mini แทน VPS — ไม่มีค่ารายเดือน hosting</p>
             </div>
 
             {/* Features */}
@@ -746,6 +747,9 @@ export default function CreatorSection() {
               </a>
               <p className="text-[11px] text-[#6e6e73] text-center mt-3">
                 ไม่มีค่าใช้จ่ายล่วงหน้า — คุยก่อน ตัดสินใจทีหลัง
+              </p>
+              <p className="text-[12px] text-[#6e6e73] text-center mt-4">
+                Starter ฿19,900 · <span className="font-semibold text-[#af52de]">Professional ฿39,900</span> · Enterprise ฿69,900
               </p>
             </div>
           </motion.div>

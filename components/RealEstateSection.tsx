@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Building2, MapPin, Eye, Phone, Calendar, TrendingUp, Users, Check, ArrowRight, Star, DollarSign, ChevronDown, Search, Heart } from "lucide-react";
+import { Building2, MapPin, Eye, Phone, Calendar, TrendingUp, Users, Check, ArrowRight, Star, DollarSign, ChevronDown, Search, Heart, AlertTriangle } from "lucide-react";
 
 /* ═══════════════════════════════════════════════════════
    REAL ESTATE — "Property Search Experience"
@@ -255,10 +255,11 @@ export default function RealEstateSection() {
           {/* Featured plan */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="apple-card p-8 max-w-md mx-auto ring-2 ring-[#2997ff]/20 mb-6">
             <span className="text-[11px] font-semibold px-4 py-1 rounded-full bg-[#2997ff] text-white">แนะนำ</span>
-            <h3 className="text-[20px] font-semibold text-[#1d1d1f] mt-3">Agency Plan</h3>
+            <h3 className="text-[20px] font-semibold text-[#1d1d1f] mt-3">Professional</h3>
             <p className="text-[40px] font-semibold text-[#2997ff] mt-1">฿39,900</p>
             <p className="text-[12px] text-[#6e6e73] mb-1">Setup fee (ครั้งเดียว)</p>
-            <p className="text-[12px] text-[#6e6e73] mb-6">+ ฿3,500-8,000/เดือน (API)</p>
+            <p className="text-[12px] text-[#6e6e73] mb-1">+ ฿1,500-5,000/เดือน (API)</p>
+            <p className="text-[11px] text-[#8e8e93] mb-6">หรือใช้ Mac Mini แทน VPS — ไม่มีค่า hosting รายเดือน</p>
             <div className="space-y-2 text-left mb-6">
               {["LINE Inquiry Bot ไม่จำกัด", "AI Listing Generator", "Appointment Scheduler + Reminder", "Market Price Analysis", "Lead Scoring & Follow-up", "Training ทีม 2 ชม.", "Support 60 วัน"].map((f) => (
                 <div key={f} className="flex items-start gap-2"><Check size={14} className="mt-0.5 text-[#2997ff] shrink-0" /><span className="text-[13px] text-[#6e6e73]">{f}</span></div>
@@ -268,9 +269,9 @@ export default function RealEstateSection() {
           </motion.div>
 
           <div className="flex justify-center gap-6 text-[13px] text-[#6e6e73]">
-            <span>Solo Agent: ฿14,900</span>
+            <span>Starter: ฿19,900</span>
             <span>|</span>
-            <span>Developer: ฿79,900</span>
+            <span>Enterprise: ฿79,900</span>
           </div>
 
           {/* ROI */}

@@ -178,6 +178,12 @@ export default function Pricing() {
               <p>VPS (2 vCPU, 4GB): ~฿500-900/เดือน</p>
               <p>VPS (4 vCPU, 8GB): ~฿1,200-2,000/เดือน</p>
               <p>Managed Cloud: ~฿700-3,000/เดือน</p>
+              <p className="mt-2 pt-2 border-t border-black/[0.04]">
+                <span className="font-medium text-[#1d1d1f]">Hardware แทน VPS</span>
+              </p>
+              <p>Mini PC (N100): ฿5,900-8,900 <span className="text-[#34c759]">ค่าเดือน ฿0</span></p>
+              <p>Mac Mini M4: ฿22,900 <span className="text-[#34c759]">ค่าเดือน ฿0</span></p>
+              <p>Mac Mini M4 Pro: ฿56,900 <span className="text-[#34c759]">ค่าเดือน ฿0</span></p>
             </div>
             <div>
               <p className="font-medium text-[#1d1d1f] mb-2">ค่า API (ตามใช้จริง)</p>
