@@ -1,100 +1,61 @@
 "use client";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import HeroCanvas from "./HeroCanvas";
 
 export default function Hero() {
-  const ref = useRef(null);
-
   return (
-    <section ref={ref} className="relative bg-[#fbfbfd] pb-24">
-      {/* ═══ TOP: Clean text zone ═══ */}
-      <div className="relative z-20 pt-32 sm:pt-40 pb-16 text-center px-6">
-        {/* Overline */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="mb-6"
-        >
-          <span className="text-[#2997ff] text-[17px] font-medium">AI Automation สำหรับธุรกิจไทย</span>
-        </motion.div>
-
-        {/* Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.35, duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="text-[52px] sm:text-[68px] md:text-[80px] lg:text-[96px] font-semibold leading-[1.08] tracking-[-0.03em] text-[#1d1d1f] mb-3 max-w-[900px] mx-auto"
-        >
-          ให้ AI ทำงานแทน<br />
-          <span className="gradient-text">คุณทำสิ่งที่สำคัญ</span>
-        </motion.h1>
-
-        {/* Body */}
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.55, duration: 0.6 }}
-          className="text-[17px] sm:text-[19px] text-[#86868b] max-w-[520px] mx-auto mb-8 leading-[1.5]"
-        >
-          ติดตั้งระบบ AI Automation ใช้ Frontier Model อย่าง GPT-5, Claude, Gemini
-          สร้าง workflow อัตโนมัติ ลดงานซ้ำ 80%
-        </motion.p>
-
-        {/* CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.5 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-        >
-          <a href="#pricing" className="apple-btn apple-btn-blue">ดูแพ็คเกจ</a>
-          <a href="#solutions" className="apple-link">ดูว่า AI ทำอะไรได้บ้าง</a>
-        </motion.div>
-      </div>
-
-      {/* ═══ BOTTOM: Cinematic Remotion video zone ═══ */}
-      <div className="relative z-10 w-full max-w-[1100px] mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.8 }}
+    <section className="relative bg-[#fbfbfd] pt-20 pb-24">
+      {/* ═══ Cinematic Remotion video — text is IN the video ═══ */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.8 }}
+        className="w-full max-w-[1100px] mx-auto px-6"
+      >
+        <div
           className="relative rounded-3xl overflow-hidden shadow-2xl shadow-black/[0.06]"
           style={{ aspectRatio: "16/9" }}
         >
-          {/* Remotion canvas fills this container */}
           <HeroCanvas />
-
-          {/* Subtle inner border */}
           <div className="absolute inset-0 rounded-3xl border border-black/[0.04] pointer-events-none z-10" />
-        </motion.div>
+        </div>
+      </motion.div>
 
-        {/* Stats below the video */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2 }}
-          className="flex justify-center gap-16 md:gap-24 mt-10"
-        >
-          {[
-            { value: "6+", label: "Frontier Models" },
-            { value: "55+", label: "Integrations" },
-            { value: "฿19,900", label: "เริ่มต้น" },
-          ].map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              className="text-center"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.3 + i * 0.1 }}
-            >
-              <p className="text-[24px] md:text-[28px] font-semibold text-[#1d1d1f] tracking-tight">{stat.value}</p>
-              <p className="text-[12px] text-[#86868b] mt-1">{stat.label}</p>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
+      {/* ═══ CTAs below video ═══ */}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6 }}
+        className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-10"
+      >
+        <a href="#pricing" className="apple-btn apple-btn-blue">ดูแพ็คเกจ</a>
+        <a href="#solutions" className="apple-link">ดูว่า AI ทำอะไรได้บ้าง</a>
+      </motion.div>
+
+      {/* ═══ Stats ═══ */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.9 }}
+        className="flex justify-center gap-16 md:gap-24 mt-10"
+      >
+        {[
+          { value: "6+", label: "Frontier Models" },
+          { value: "55+", label: "Integrations" },
+          { value: "฿19,900", label: "เริ่มต้น" },
+        ].map((stat, i) => (
+          <motion.div
+            key={stat.label}
+            className="text-center"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1 + i * 0.1 }}
+          >
+            <p className="text-[24px] md:text-[28px] font-semibold text-[#1d1d1f] tracking-tight">{stat.value}</p>
+            <p className="text-[12px] text-[#86868b] mt-1">{stat.label}</p>
+          </motion.div>
+        ))}
+      </motion.div>
     </section>
   );
 }
