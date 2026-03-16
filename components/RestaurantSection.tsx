@@ -17,6 +17,7 @@ import {
   ThumbsDown,
   Reply,
   ChefHat,
+  AlertTriangle,
 } from "lucide-react";
 
 /* ═══════════════════════════════════════════════════════════════════════════

@@ -723,6 +723,15 @@ export default function PricingPage() {
             subtitle="เลือกแพ็คเกจที่เหมาะกับธุรกิจของคุณ"
           />
 
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center text-[13px] sm:text-[15px] text-[#86868b] max-w-2xl mx-auto -mt-8 mb-12"
+          >
+            แพ็คเกจคือ tier ราคา ไม่ใช่ของสำเร็จรูป — ทุกโปรเจกต์ออกแบบและสร้างเฉพาะสำหรับธุรกิจคุณ
+          </motion.p>
+
           <div className="grid md:grid-cols-3 gap-6 items-start">
             {mainPlans.map((plan, i) => (
               <motion.div

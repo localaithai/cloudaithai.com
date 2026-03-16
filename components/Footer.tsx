@@ -52,9 +52,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="flex flex-col sm:flex-row justify-between items-center pt-8 border-t border-black/[0.04] gap-4">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-md bg-gradient-to-br from-[#2997ff] to-[#5856d6] flex items-center justify-center">
-              <span className="text-white text-[9px] font-black">C</span>
-            </div>
+            <img src="/icon.svg" alt="CloudAI" className="w-6 h-6 rounded-md" />
             <span className="text-[13px] font-semibold text-[#1d1d1f]">CloudAI Thailand</span>
           </div>
           <p className="text-[11px] text-[#d2d2d7]">&copy; 2026 CloudAI Thailand — AI Automation สำหรับธุรกิจไทย</p>

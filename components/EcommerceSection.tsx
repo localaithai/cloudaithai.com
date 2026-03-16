@@ -1039,6 +1039,39 @@ export default function EcommerceSection() {
         </div>
       </section>
 
+      {/* ═══ CLOUD AI RISKS ═══ */}
+      <section className="py-16 px-6">
+        <div className="max-w-3xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <div className="rounded-2xl border border-[#ff9500]/20 bg-[#ff9500]/[0.03] p-6 sm:p-8">
+              <div className="flex items-center gap-2.5 mb-4">
+                <AlertTriangle size={18} className="text-[#ff9500]" />
+                <h3 className="text-[16px] font-semibold text-[#1d1d1f]">ข้อควรรู้เกี่ยวกับ Cloud AI</h3>
+              </div>
+              <div className="space-y-3">
+                {[
+                  { title: "ข้อมูลลูกค้าถูกส่งไป Cloud", desc: "ข้อมูลออเดอร์ แชทลูกค้า และ stock อาจถูกส่งผ่าน API ไปยัง server ต่างประเทศ (OpenAI, Claude) — ควรตรวจสอบ Privacy Policy ของ provider" },
+                  { title: "ค่าใช้จ่าย API ไม่คงที่", desc: "ยอดขายสูง = แชทเยอะ = ค่า API สูงขึ้น อาจเกินงบที่ตั้งไว้ในช่วง peak season เช่น 11.11, 12.12" },
+                  { title: "พึ่งพา Internet 100%", desc: "ถ้าเน็ตล่มหรือ API provider มีปัญหา ระบบ AI จะหยุดทำงานทั้งหมด — ต้องมี fallback plan สำหรับรับออเดอร์" },
+                  { title: "AI อาจตอบลูกค้าผิด", desc: "AI อาจให้ข้อมูลสินค้าหรือราคาผิดพลาด ควรมีคนตรวจสอบและตั้ง guardrails ที่ชัดเจน" },
+                ].map((risk) => (
+                  <div key={risk.title} className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#ff9500] mt-2 shrink-0" />
+                    <div>
+                      <p className="text-[13px] font-medium text-[#1d1d1f]">{risk.title}</p>
+                      <p className="text-[12px] text-[#6e6e73] leading-relaxed">{risk.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p className="text-[11px] text-[#8e8e93] mt-4 pt-3 border-t border-[#ff9500]/10">
+                เราช่วยประเมินความเสี่ยงและออกแบบ guardrails ให้ — ปรึกษาฟรีก่อนตัดสินใจ
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ══════════════════════════════════════════════════════════════
           6. PRICING — single recommended plan prominently
       ══════════════════════════════════════════════════════════════ */}

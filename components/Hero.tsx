@@ -95,6 +95,15 @@ export default function Hero() {
             สร้าง workflow อัตโนมัติ ลดงานซ้ำ 80%
           </motion.p>
 
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.68 }}
+            className="text-[13px] sm:text-[15px] text-[#86868b] max-w-[480px] mx-auto mb-8 tracking-wide"
+          >
+            ทุกโปรเจกต์ออกแบบเฉพาะสำหรับธุรกิจคุณ ไม่มี solution สำเร็จรูป
+          </motion.p>
+
           {/* CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}

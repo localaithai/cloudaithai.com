@@ -94,6 +94,13 @@ function SectionHeading({
    ══════════════════════════════════════════════ */
 const principles = [
   {
+    icon: Hammer,
+    color: "#2997ff",
+    title: "Custom-Built, Every Time",
+    subtitle: "ไม่มี solution สำเร็จรูป ทุกโปรเจกต์ออกแบบและสร้างเฉพาะสำหรับธุรกิจคุณ",
+    quote: "แพ็คเกจคือ tier ราคา ไม่ใช่ของสำเร็จรูป — สิ่งที่ส่งมอบทุกชิ้นไม่เหมือนกัน",
+  },
+  {
     icon: GitBranch,
     color: "#ff6d5a",
     title: "Open-Source First",
@@ -155,7 +162,7 @@ function PrinciplesSection() {
         <SectionHeading
           badge="Our Principles"
           title="หลักการของเรา"
-          subtitle="5 หลักการที่เราถือปฏิบัติทุกโปรเจกต์ ไม่มีข้อยกเว้น"
+          subtitle="6 หลักการที่เราถือปฏิบัติทุกโปรเจกต์ ไม่มีข้อยกเว้น"
         />
 
         <motion.div

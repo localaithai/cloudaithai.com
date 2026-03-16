@@ -140,9 +140,7 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
         {/* Logo */}
         <a href="/" className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#007aff] to-[#5856d6] flex items-center justify-center shadow-sm">
-            <span className="text-white text-xs font-black">C</span>
-          </div>
+          <img src="/icon.svg" alt="CloudAI" className="w-7 h-7 rounded-lg shadow-sm" />
           <span className="text-[15px] font-semibold text-[#1c1c1e] tracking-tight">
             Cloud<span className="text-[#007aff]">AI</span>
             <span className="text-[#8e8e93] text-[10px] font-normal ml-1 hidden sm:inline">Thailand</span>

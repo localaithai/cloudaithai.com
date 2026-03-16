@@ -820,6 +820,39 @@ export default function LegalSection() {
         </div>
       </section>
 
+      {/* ═══ CLOUD AI RISKS ═══ */}
+      <section className="py-16 px-6">
+        <div className="max-w-3xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <div className="rounded-2xl border border-[#ff9500]/20 bg-[#ff9500]/[0.03] p-6 sm:p-8">
+              <div className="flex items-center gap-2.5 mb-4">
+                <AlertTriangle size={18} className="text-[#ff9500]" />
+                <h3 className="text-[16px] font-semibold text-[#1d1d1f]">ข้อควรรู้เกี่ยวกับ Cloud AI</h3>
+              </div>
+              <div className="space-y-3">
+                {[
+                  { title: "ข้อมูลสัญญาถูกส่งไป Cloud", desc: "เนื้อหาสัญญาลับ ข้อมูลคู่สัญญา และเอกสารทางกฎหมายถูกส่งผ่าน API ไปยัง server ต่างประเทศ — อาจขัด attorney-client privilege" },
+                  { title: "AI ไม่ใช่ทนายความ", desc: "ผลวิเคราะห์จาก AI เป็นเพียงข้อมูลประกอบ ไม่ใช่คำปรึกษาทางกฎหมาย — ต้องมีทนายตรวจสอบก่อนใช้งานจริงเสมอ" },
+                  { title: "กฎหมายเปลี่ยนแปลงตลอด", desc: "AI อาจอ้างอิงกฎหมายที่ถูกแก้ไขหรือยกเลิกแล้ว — ฐานข้อมูลต้องอัพเดทสม่ำเสมอ" },
+                  { title: "ความเสี่ยง PDPA ซ้อน", desc: "การส่งข้อมูลส่วนบุคคลในสัญญาไปยัง Cloud อาจเข้าข่ายการโอนข้อมูลข้ามประเทศตาม PDPA มาตรา 28-29" },
+                ].map((risk) => (
+                  <div key={risk.title} className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#ff9500] mt-2 shrink-0" />
+                    <div>
+                      <p className="text-[13px] font-medium text-[#1d1d1f]">{risk.title}</p>
+                      <p className="text-[12px] text-[#6e6e73] leading-relaxed">{risk.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p className="text-[11px] text-[#8e8e93] mt-4 pt-3 border-t border-[#ff9500]/10">
+                เราช่วยประเมินความเสี่ยงและออกแบบ guardrails ให้ — ปรึกษาฟรีก่อนตัดสินใจ
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ═══ 6. SINGLE PROMINENT PRICING + CTA ═══ */}
       <section className="py-20 px-6">
         <div className="max-w-2xl mx-auto">
