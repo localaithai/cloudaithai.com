@@ -2,11 +2,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Models from "@/components/Models";
 import ScrollVideo from "@/components/ScrollVideo";
-import Integrations from "@/components/Integrations";
 import Solutions from "@/components/Solutions";
-import HomeAI from "@/components/HomeAI";
-import UseCases from "@/components/UseCases";
-import HowItWorks from "@/components/HowItWorks";
 import Pricing from "@/components/Pricing";
 import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
@@ -17,13 +13,9 @@ export default function Home() {
     <main className="bg-[#fbfbfd]">
       <Navbar />
       <Hero />
-      <Models />
       <ScrollVideo />
-      <Integrations />
+      <Models />
       <Solutions />
-      <HomeAI />
-      <UseCases />
-      <HowItWorks />
       <Pricing />
       <FAQ />
       <Contact />
