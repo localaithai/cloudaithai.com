@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "CloudAI Thailand — AI Automation สำหรับธุรกิจไทย",
     description: "ติดตั้งระบบ AI Automation ใช้ Frontier Model เริ่มต้น ฿19,900",
-    url: "https://cloudaithai.com",
+    url: "https://www.cloudaithai.com",
     siteName: "CloudAI Thailand",
     locale: "th_TH",
     type: "website",

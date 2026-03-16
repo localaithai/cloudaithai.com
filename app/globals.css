@@ -36,8 +36,9 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-bai), "Bai Jamjuree", sans-serif;
   color: #1d1d1f;
   letter-spacing: -0.02em;
-  line-height: 1.12;
+  line-height: 1.35;
   font-weight: 600;
+  overflow: visible;
 }
 
 /* ═══ Apple-style gradient text ═══ */

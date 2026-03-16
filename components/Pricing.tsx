@@ -70,7 +70,7 @@ const plans = [
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="pricing" className="py-24 md:py-32 relative">
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -79,7 +79,7 @@ export default function Pricing() {
           className="text-center mb-16"
         >
           <p className="text-[13px] font-semibold text-[#2997ff] uppercase tracking-widest mb-3">Pricing</p>
-          <h2 className="text-3xl md:text-5xl font-bold text-[#1d1d1f] tracking-tight mb-4 leading-[1.3]">
+          <h2 className="text-3xl md:text-5xl font-bold text-[#1d1d1f] tracking-tight mb-4 pt-2">
             Setup fee ครั้งเดียว
           </h2>
           <p className="text-lg text-[#6e6e73] max-w-xl mx-auto">
@@ -95,12 +95,12 @@ export default function Pricing() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className={`apple-card relative p-8 ${
+              className={`apple-card relative p-8 !overflow-visible ${
                 plan.badge ? "!bg-white/65 md:-mt-4 md:mb-4" : ""
               }`}
             >
               {plan.badge && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
                   <span className="text-[11px] font-semibold px-4 py-1 rounded-full text-white" style={{ background: plan.color }}>
                     {plan.badge}
                   </span>

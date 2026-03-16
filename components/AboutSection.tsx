@@ -120,13 +120,13 @@ function WhoWeAre() {
             </p>
             <div className="flex gap-3">
               <a
-                href="https://cloudaithai.com"
+                href="https://www.cloudaithai.com"
                 className="text-[13px] font-medium px-4 py-2 rounded-full bg-[#2997ff] text-white"
               >
                 Cloud AI
               </a>
               <a
-                href="https://localaithai.com"
+                href="https://www.localaithai.com"
                 target="_blank"
                 className="text-[13px] font-medium px-4 py-2 rounded-full bg-[#f5f5f7] text-[#1d1d1f] hover:bg-[#e8e8ed] transition-colors"
               >
@@ -453,7 +453,7 @@ function ReasonVisual({ type, color }: { type: string; color: string }) {
             ))}
           </div>
           <a
-            href="https://localaithai.com"
+            href="https://www.localaithai.com"
             target="_blank"
             className="inline-flex items-center gap-1.5 text-[13px] font-medium text-[#2997ff] hover:text-[#5ac8fa] transition-colors"
           >
@@ -667,7 +667,7 @@ function CloudVsLocal() {
               ))}
             </div>
             <a
-              href="https://localaithai.com"
+              href="https://www.localaithai.com"
               target="_blank"
               className="inline-flex items-center justify-center w-full gap-2 px-6 py-3 rounded-full bg-white/10 text-white text-[14px] font-medium hover:bg-white/20 transition-colors border border-white/10"
             >

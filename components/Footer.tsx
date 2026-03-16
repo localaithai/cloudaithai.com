@@ -32,7 +32,7 @@ export default function Footer() {
             <div className="space-y-2 text-[13px] text-[#6e6e73]">
               <a href="/#pricing" className="block hover:text-[#1d1d1f] transition-colors">ราคา</a>
               <a href="/#contact" className="block hover:text-[#1d1d1f] transition-colors">ติดต่อเรา</a>
-              <a href="https://localaithai.com" target="_blank" className="block hover:text-[#2997ff] transition-colors">LocalAI Thailand</a>
+              <a href="https://www.localaithai.com" target="_blank" className="block hover:text-[#2997ff] transition-colors">LocalAI Thailand</a>
             </div>
           </div>
 

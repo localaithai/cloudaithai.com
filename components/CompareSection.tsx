@@ -198,37 +198,37 @@ const cloudVsLocalRecs = [
     useCase: "ร้านค้าออนไลน์ / ร้านอาหาร",
     rec: "Cloud AI",
     reason: "ราคาถูก ใช้งานง่าย เริ่มได้เลย",
-    link: "https://cloudaithai.com",
+    link: "https://www.cloudaithai.com",
   },
   {
     useCase: "คลินิก / โรงพยาบาล",
     rec: "Local AI",
     reason: "ข้อมูลผู้ป่วยต้องอยู่ภายใน ตาม PDPA",
-    link: "https://localaithai.com",
+    link: "https://www.localaithai.com",
   },
   {
     useCase: "สำนักงานบัญชี / กฎหมาย",
     rec: "Local AI",
     reason: "เอกสารลับ ต้อง air-gapped",
-    link: "https://localaithai.com",
+    link: "https://www.localaithai.com",
   },
   {
     useCase: "อสังหาริมทรัพย์",
     rec: "Cloud AI",
     reason: "ตอบแชทลูกค้า 24/7 เชื่อม LINE",
-    link: "https://cloudaithai.com",
+    link: "https://www.cloudaithai.com",
   },
   {
     useCase: "โรงงาน / Manufacturing",
     rec: "Local AI",
     reason: "ไม่มี internet ในโรงงาน + ข้อมูล sensitive",
-    link: "https://localaithai.com",
+    link: "https://www.localaithai.com",
   },
   {
     useCase: "E-commerce หลายสาขา",
     rec: "Cloud AI",
     reason: "Scale ง่าย เชื่อมหลายช่องทาง",
-    link: "https://cloudaithai.com",
+    link: "https://www.cloudaithai.com",
   },
 ];
 
@@ -854,12 +854,12 @@ export default function CompareSection() {
             className="mt-10 flex flex-wrap justify-center gap-4"
           >
             <CtaButton
-              href="https://cloudaithai.com"
+              href="https://www.cloudaithai.com"
               label="Cloud AI Thailand"
               color="#2997ff"
             />
             <CtaButton
-              href="https://localaithai.com"
+              href="https://www.localaithai.com"
               label="Local AI Thailand"
               color="#5856d6"
             />
@@ -1016,12 +1016,12 @@ export default function CompareSection() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <CtaButton
-                href="https://cloudaithai.com"
+                href="https://www.cloudaithai.com"
                 label="Cloud AI — เริ่ม ฿9,900"
                 color="#2997ff"
               />
               <CtaButton
-                href="https://localaithai.com"
+                href="https://www.localaithai.com"
                 label="Local AI — ปรึกษาฟรี"
                 color="#5856d6"
               />

@@ -308,7 +308,7 @@ function EcosystemOverview() {
           className="text-center mt-10"
         >
           <a
-            href="https://localaithai.com"
+            href="https://www.localaithai.com"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-[#2997ff] hover:text-[#2997ff]/80 text-sm font-semibold transition-colors"

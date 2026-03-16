@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://cloudaithai.com";
+  const baseUrl = "https://www.cloudaithai.com";
   const lastModified = new Date();
 
   return [
