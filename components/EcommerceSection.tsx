@@ -1066,7 +1066,7 @@ export default function EcommerceSection() {
             className="apple-card p-0 overflow-hidden ring-2 ring-[#2997ff]/20 shadow-xl shadow-[#2997ff]/[0.06]"
           >
             {/* Plan header */}
-            <div className="bg-gradient-to-br from-[#0d47a1] to-[#311b92] px-6 sm:px-8 py-10 text-center text-white">
+            <div className="bg-[#1d1d1f] px-6 sm:px-8 py-10 text-center text-white">
               <span className="text-[13px] font-bold uppercase tracking-widest">
                 แนะนำ
               </span>

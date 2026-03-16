@@ -551,7 +551,7 @@ export default function CreatorSection() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="bg-gradient-to-r from-[#7b1fa2] via-[#3f1f9e] to-[#0d47a1]"
+          className="bg-[#1d1d1f]"
         >
           <div className="max-w-5xl mx-auto grid grid-cols-2 sm:grid-cols-4">
             {[
@@ -685,7 +685,7 @@ export default function CreatorSection() {
             className="apple-card p-0 overflow-hidden ring-2 ring-[#af52de]/20 shadow-xl shadow-[#af52de]/[0.06]"
           >
             {/* Header banner */}
-            <div className="bg-gradient-to-br from-[#7b1fa2] to-[#311b92] px-6 py-8 text-center text-white">
+            <div className="bg-[#1d1d1f] px-6 py-8 text-center text-white">
               <div className="inline-flex items-center gap-1.5 bg-white/20 rounded-full px-3 py-1 mb-3">
                 <Award size={12} className="text-white" />
                 <span className="text-[11px] font-semibold">แพ็คเกจยอดนิยม</span>
