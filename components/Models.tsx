@@ -30,7 +30,7 @@ export default function Models() {
           <h2 className="text-[40px] sm:text-[56px] md:text-[64px] font-semibold tracking-[-0.04em] mb-4">
             Frontier Models.
           </h2>
-          <p className="text-[19px] sm:text-[21px] text-[#86868b] max-w-[600px] mx-auto leading-[1.47]">
+          <p className="text-[19px] sm:text-[21px] text-[#6e6e73] max-w-[600px] mx-auto leading-[1.47]">
             เชื่อมต่อกับ AI ที่ฉลาดที่สุดในโลก แต่ละตัวมีจุดเด่นต่างกัน เราช่วยเลือกให้เหมาะกับธุรกิจคุณ
           </p>
         </motion.div>
@@ -60,16 +60,16 @@ export default function Models() {
                         {m.badge}
                       </span>
                     </div>
-                    <span className="text-[14px] text-[#86868b]">{m.desc}</span>
+                    <span className="text-[14px] text-[#6e6e73]">{m.desc}</span>
                   </div>
 
                   <div className="text-right shrink-0 hidden sm:block">
                     <span className="text-[14px] font-medium text-[#1d1d1f]">{m.monthly}</span>
-                    <span className="text-[12px] text-[#86868b] block">ต่อเดือน</span>
+                    <span className="text-[12px] text-[#6e6e73] block">ต่อเดือน</span>
                   </div>
 
                   <motion.div animate={{ rotate: expanded === i ? 180 : 0 }} className="shrink-0">
-                    <ChevronDown size={18} className="text-[#86868b]" />
+                    <ChevronDown size={18} className="text-[#6e6e73]" />
                   </motion.div>
                 </button>
 
@@ -92,7 +92,7 @@ export default function Models() {
                             { label: "Speed", value: m.speed },
                           ].map((stat) => (
                             <div key={stat.label}>
-                              <p className="text-[11px] text-[#86868b] mb-0.5">{stat.label}</p>
+                              <p className="text-[11px] text-[#6e6e73] mb-0.5">{stat.label}</p>
                               <p className="text-[14px] font-medium text-[#1d1d1f]">{stat.value}</p>
                             </div>
                           ))}
@@ -114,7 +114,7 @@ export default function Models() {
           className="text-center mb-10"
         >
           <h3 className="text-[28px] sm:text-[32px] font-semibold tracking-[-0.03em] mb-2">ค่าใช้จ่ายจริง</h3>
-          <p className="text-[17px] text-[#86868b]">ตัวอย่างค่า API ต่อเดือนสำหรับธุรกิจแต่ละขนาด</p>
+          <p className="text-[17px] text-[#6e6e73]">ตัวอย่างค่า API ต่อเดือนสำหรับธุรกิจแต่ละขนาด</p>
         </motion.div>
 
         <div className="grid sm:grid-cols-3 gap-4">
@@ -131,10 +131,10 @@ export default function Models() {
               transition={{ delay: i * 0.1 }}
               className="apple-card p-6 text-center"
             >
-              <p className="text-[14px] text-[#86868b] mb-1">{s.title}</p>
+              <p className="text-[14px] text-[#6e6e73] mb-1">{s.title}</p>
               <p className="text-[32px] font-semibold tracking-[-0.03em] mb-1" style={{ color: s.color }}>{s.cost}</p>
-              <p className="text-[12px] text-[#86868b]">{s.desc}</p>
-              <p className="text-[11px] text-[#86868b] mt-2">Model: {s.model}</p>
+              <p className="text-[12px] text-[#6e6e73]">{s.desc}</p>
+              <p className="text-[11px] text-[#6e6e73] mt-2">Model: {s.model}</p>
             </motion.div>
           ))}
         </div>

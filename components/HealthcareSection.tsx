@@ -84,10 +84,10 @@ function CheckInMockup() {
         </div>
         <div className="text-center">
           <p className="text-[18px] font-bold text-[#1d1d1f]">A-07</p>
-          <p className="text-[8px] text-[#86868b]">หมายเลขคิวของคุณ</p>
+          <p className="text-[8px] text-[#6e6e73]">หมายเลขคิวของคุณ</p>
         </div>
         <div className="text-center p-1.5 rounded-lg bg-[#f5f5f7]">
-          <p className="text-[8px] text-[#86868b]">เวลานัด</p>
+          <p className="text-[8px] text-[#6e6e73]">เวลานัด</p>
           <p className="text-[11px] font-semibold text-[#1d1d1f]">10:30 น.</p>
           <p className="text-[8px] text-[#34c759]">อีก 2 คิว</p>
         </div>
@@ -118,11 +118,11 @@ function DrugInfoMockup() {
           <p className="text-[8px] text-[#ff9500] font-medium">
             Interaction:
           </p>
-          <p className="text-[7px] text-[#86868b]">
+          <p className="text-[7px] text-[#6e6e73]">
             Warfarin - monitor INR
           </p>
         </div>
-        <div className="text-[8px] text-[#86868b]">
+        <div className="text-[8px] text-[#6e6e73]">
           <span className="text-[#1d1d1f] font-medium">Dose:</span> 500mg
           bid pc
         </div>
@@ -176,7 +176,7 @@ function FollowUpMockup() {
       </div>
       <div className="p-2.5 space-y-1.5">
         <div className="p-2 rounded-lg bg-[#f5f5f7]">
-          <p className="text-[8px] text-[#86868b]">LINE Notification</p>
+          <p className="text-[8px] text-[#6e6e73]">LINE Notification</p>
           <p className="text-[9px] text-[#1d1d1f] font-medium mt-0.5">
             คุณสมศรีคะ นัดพบแพทย์
           </p>
@@ -369,7 +369,7 @@ export default function HealthcareSection() {
                 ทุกขั้นตอนในคลินิก
               </span>
             </h1>
-            <p className="text-[17px] text-[#86868b] max-w-[540px] mx-auto">
+            <p className="text-[17px] text-[#6e6e73] max-w-[540px] mx-auto">
               ตั้งแต่นัดหมาย ตรวจรักษา จ่ายยา จนถึง follow-up --- AI ดูแลทุก
               journey ของผู้ป่วย
             </p>
@@ -391,7 +391,7 @@ export default function HealthcareSection() {
             <h2 className="text-[28px] sm:text-[32px] font-semibold text-[#1d1d1f] mb-2">
               Patient Journey
             </h2>
-            <p className="text-[15px] text-[#86868b]">
+            <p className="text-[15px] text-[#6e6e73]">
               เส้นทางผู้ป่วยตั้งแต่เริ่มต้นจนจบ ทุกขั้นตอนมี AI ช่วย
             </p>
           </motion.div>
@@ -442,7 +442,7 @@ export default function HealthcareSection() {
                               ? "#fff"
                               : isPast
                               ? step.color
-                              : "#86868b",
+                              : "#6e6e73",
                           }}
                           whileHover={{ scale: 1.08 }}
                           whileTap={{ scale: 0.95 }}
@@ -457,7 +457,7 @@ export default function HealthcareSection() {
                         >
                           {step.title}
                         </h3>
-                        <p className="text-[10px] text-[#86868b] text-center mt-0.5 leading-tight">
+                        <p className="text-[10px] text-[#6e6e73] text-center mt-0.5 leading-tight">
                           {step.desc}
                         </p>
                       </div>
@@ -526,7 +526,7 @@ export default function HealthcareSection() {
             <h2 className="text-[28px] sm:text-[32px] font-semibold text-[#1d1d1f] mb-2">
               ค้นข้อมูลยาทันที
             </h2>
-            <p className="text-[15px] text-[#86868b]">
+            <p className="text-[15px] text-[#6e6e73]">
               AI ดึงข้อมูลยาจาก database มาให้ใน 3 วินาที แทนเปิดหนังสือ 8
               นาที
             </p>
@@ -541,7 +541,7 @@ export default function HealthcareSection() {
           >
             <div className="apple-card p-2 flex items-center gap-3 shadow-lg shadow-black/[0.04]">
               <div className="w-10 h-10 rounded-xl bg-[#f5f5f7] flex items-center justify-center shrink-0">
-                <Search size={18} className="text-[#86868b]" />
+                <Search size={18} className="text-[#6e6e73]" />
               </div>
               <input
                 type="text"
@@ -563,7 +563,7 @@ export default function HealthcareSection() {
               </button>
             </div>
             <div className="flex items-center gap-2 mt-3 px-2">
-              <span className="text-[11px] text-[#86868b]">ลองค้นหา:</span>
+              <span className="text-[11px] text-[#6e6e73]">ลองค้นหา:</span>
               {["Metformin", "Warfarin", "Amlodipine"].map((drug) => (
                 <button
                   key={drug}
@@ -596,7 +596,7 @@ export default function HealthcareSection() {
                       <h3 className="text-[20px] font-semibold text-[#1d1d1f]">
                         {activeDrug.name}
                       </h3>
-                      <p className="text-[12px] text-[#86868b]">
+                      <p className="text-[12px] text-[#6e6e73]">
                         {activeDrug.generic} --- {activeDrug.category}
                       </p>
                     </div>
@@ -622,13 +622,13 @@ export default function HealthcareSection() {
                     </h4>
                     <div className="rounded-xl border border-black/[0.04] overflow-hidden">
                       <div className="grid grid-cols-3 bg-[#f5f5f7] px-4 py-2">
-                        <span className="text-[10px] font-semibold text-[#86868b] uppercase tracking-wider">
+                        <span className="text-[10px] font-semibold text-[#6e6e73] uppercase tracking-wider">
                           รูปแบบ
                         </span>
-                        <span className="text-[10px] font-semibold text-[#86868b] uppercase tracking-wider">
+                        <span className="text-[10px] font-semibold text-[#6e6e73] uppercase tracking-wider">
                           ขนาด
                         </span>
-                        <span className="text-[10px] font-semibold text-[#86868b] uppercase tracking-wider">
+                        <span className="text-[10px] font-semibold text-[#6e6e73] uppercase tracking-wider">
                           วิธีรับประทาน
                         </span>
                       </div>
@@ -643,7 +643,7 @@ export default function HealthcareSection() {
                           <span className="text-[12px] text-[#1d1d1f] font-medium">
                             {d.strength}
                           </span>
-                          <span className="text-[11px] text-[#86868b]">
+                          <span className="text-[11px] text-[#6e6e73]">
                             {d.frequency}
                           </span>
                         </div>
@@ -685,7 +685,7 @@ export default function HealthcareSection() {
                               {ix.severity}
                             </span>
                           </div>
-                          <p className="text-[11px] text-[#86868b]">
+                          <p className="text-[11px] text-[#6e6e73]">
                             {ix.note}
                           </p>
                         </div>
@@ -732,8 +732,8 @@ export default function HealthcareSection() {
                             key={s}
                             className="flex items-start gap-2 p-2 rounded-lg bg-[#f5f5f7]"
                           >
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#86868b] mt-1.5 shrink-0" />
-                            <span className="text-[11px] text-[#86868b]">
+                            <div className="w-1.5 h-1.5 rounded-full bg-[#6e6e73] mt-1.5 shrink-0" />
+                            <span className="text-[11px] text-[#6e6e73]">
                               {s}
                             </span>
                           </div>
@@ -760,7 +760,7 @@ export default function HealthcareSection() {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-1 text-[10px] text-[#86868b]">
+                  <div className="flex items-center gap-1 text-[10px] text-[#6e6e73]">
                     <Clock size={10} />
                     <span>
                       AI ค้นข้อมูลจาก MIMS Thailand + DrugBank ใน 2.3 วินาที
@@ -788,7 +788,7 @@ export default function HealthcareSection() {
             <h2 className="text-[28px] sm:text-[32px] font-semibold text-[#1d1d1f] mb-2">
               Today at the Clinic
             </h2>
-            <p className="text-[15px] text-[#86868b]">
+            <p className="text-[15px] text-[#6e6e73]">
               Dashboard real-time ดูทุกอย่างในจอเดียว
             </p>
           </motion.div>
@@ -806,7 +806,7 @@ export default function HealthcareSection() {
                 <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
                 <div className="w-3 h-3 rounded-full bg-[#28c840]" />
               </div>
-              <span className="text-[12px] text-[#86868b] font-medium ml-2">
+              <span className="text-[12px] text-[#6e6e73] font-medium ml-2">
                 Clinic Dashboard --- วันจันทร์ 16 มี.ค. 2026
               </span>
               <div className="ml-auto flex items-center gap-1">
@@ -831,7 +831,7 @@ export default function HealthcareSection() {
                 <p className="text-[12px] font-semibold text-[#ff3b30]">
                   Drug Interaction Alert
                 </p>
-                <p className="text-[11px] text-[#86868b]">
+                <p className="text-[11px] text-[#6e6e73]">
                   คุณสมศรี (A-07): Warfarin + Metformin --- ต้อง monitor INR
                   ใกล้ชิด
                 </p>
@@ -885,7 +885,7 @@ export default function HealthcareSection() {
                   >
                     <div className="flex items-center gap-1.5 mb-1">
                       <span style={{ color: stat.color }}>{stat.icon}</span>
-                      <span className="text-[10px] text-[#86868b]">
+                      <span className="text-[10px] text-[#6e6e73]">
                         {stat.label}
                       </span>
                     </div>
@@ -896,7 +896,7 @@ export default function HealthcareSection() {
                       >
                         {stat.value}
                       </span>
-                      <span className="text-[11px] text-[#86868b]">
+                      <span className="text-[11px] text-[#6e6e73]">
                         {stat.sub}
                       </span>
                     </div>
@@ -912,7 +912,7 @@ export default function HealthcareSection() {
                     <h3 className="text-[13px] font-semibold text-[#1d1d1f]">
                       คิวผู้ป่วย (Real-time)
                     </h3>
-                    <span className="text-[10px] text-[#86868b]">
+                    <span className="text-[10px] text-[#6e6e73]">
                       อัพเดตอัตโนมัติ
                     </span>
                   </div>
@@ -962,7 +962,7 @@ export default function HealthcareSection() {
                         queue: "B-02",
                         name: "คุณมาลี",
                         status: "นัด 14:00",
-                        statusColor: "#86868b",
+                        statusColor: "#6e6e73",
                         doctor: "นพ.สมชาย",
                         room: "ห้อง 3",
                       },
@@ -970,7 +970,7 @@ export default function HealthcareSection() {
                         queue: "B-03",
                         name: "คุณพงษ์",
                         status: "นัด 14:30",
-                        statusColor: "#86868b",
+                        statusColor: "#6e6e73",
                         doctor: "นพ.ประวิทย์",
                         room: "ห้อง 5",
                       },
@@ -978,7 +978,7 @@ export default function HealthcareSection() {
                         queue: "B-04",
                         name: "คุณสุดา",
                         status: "นัด 15:00",
-                        statusColor: "#86868b",
+                        statusColor: "#6e6e73",
                         doctor: "พญ.มาลี",
                         room: "ห้อง 2",
                       },
@@ -1006,7 +1006,7 @@ export default function HealthcareSection() {
                             <p className="text-[11px] font-medium text-[#1d1d1f]">
                               {p.name}
                             </p>
-                            <p className="text-[9px] text-[#86868b]">
+                            <p className="text-[9px] text-[#6e6e73]">
                               {p.doctor} | {p.room}
                             </p>
                           </div>
@@ -1031,7 +1031,7 @@ export default function HealthcareSection() {
                     <h3 className="text-[13px] font-semibold text-[#1d1d1f]">
                       ตารางแพทย์วันนี้
                     </h3>
-                    <span className="text-[10px] text-[#86868b]">
+                    <span className="text-[10px] text-[#6e6e73]">
                       3 แพทย์ออกตรวจ
                     </span>
                   </div>
@@ -1099,7 +1099,7 @@ export default function HealthcareSection() {
                               <p className="text-[11px] font-semibold text-[#1d1d1f]">
                                 {doc.name}
                               </p>
-                              <p className="text-[9px] text-[#86868b]">
+                              <p className="text-[9px] text-[#6e6e73]">
                                 {doc.dept} | {doc.room}
                               </p>
                             </div>
@@ -1111,7 +1111,7 @@ export default function HealthcareSection() {
                             >
                               {doc.seen}/{doc.totalToday}
                             </p>
-                            <p className="text-[8px] text-[#86868b]">
+                            <p className="text-[8px] text-[#6e6e73]">
                               ตรวจแล้ว
                             </p>
                           </div>
@@ -1129,7 +1129,7 @@ export default function HealthcareSection() {
                                     : doc.color + "10",
                               }}
                             >
-                              <p className="text-[8px] text-[#86868b]">
+                              <p className="text-[8px] text-[#6e6e73]">
                                 {slot.time}
                               </p>
                               <p
@@ -1183,7 +1183,7 @@ export default function HealthcareSection() {
             <h2 className="text-[28px] sm:text-[32px] font-semibold text-[#1d1d1f] mb-2">
               เริ่มต้นใช้ AI ในคลินิก
             </h2>
-            <p className="text-[15px] text-[#86868b]">
+            <p className="text-[15px] text-[#6e6e73]">
               Setup ครั้งเดียว ใช้งานได้ตลอด ค่า API ตามใช้จริง
             </p>
           </motion.div>
@@ -1204,11 +1204,11 @@ export default function HealthcareSection() {
                 <span className="text-[48px] font-semibold text-[#34c759]">
                   ฿29,900
                 </span>
-                <span className="text-[14px] text-[#86868b]">
+                <span className="text-[14px] text-[#6e6e73]">
                   setup fee ครั้งเดียว
                 </span>
               </div>
-              <p className="text-[13px] text-[#86868b] mt-1">
+              <p className="text-[13px] text-[#6e6e73] mt-1">
                 + ฿1,500-4,000/เดือน (ค่า API ตามใช้จริง)
               </p>
             </div>
@@ -1242,27 +1242,27 @@ export default function HealthcareSection() {
                 </p>
                 <div className="grid grid-cols-3 gap-3 text-center">
                   <div className="p-3 rounded-xl bg-white">
-                    <p className="text-[10px] text-[#86868b]">
+                    <p className="text-[10px] text-[#6e6e73]">
                       จ้าง admin + โทร
                     </p>
                     <p className="text-[18px] font-semibold text-[#ff3b30]">
                       ฿18,000
                     </p>
-                    <p className="text-[9px] text-[#86868b]">/เดือน</p>
+                    <p className="text-[9px] text-[#6e6e73]">/เดือน</p>
                   </div>
                   <div className="p-3 rounded-xl bg-white">
-                    <p className="text-[10px] text-[#86868b]">ใช้ AI แทน</p>
+                    <p className="text-[10px] text-[#6e6e73]">ใช้ AI แทน</p>
                     <p className="text-[18px] font-semibold text-[#34c759]">
                       ฿2,500
                     </p>
-                    <p className="text-[9px] text-[#86868b]">/เดือน</p>
+                    <p className="text-[9px] text-[#6e6e73]">/เดือน</p>
                   </div>
                   <div className="p-3 rounded-xl bg-white">
-                    <p className="text-[10px] text-[#86868b]">ประหยัด/ปี</p>
+                    <p className="text-[10px] text-[#6e6e73]">ประหยัด/ปี</p>
                     <p className="text-[18px] font-semibold text-[#2997ff]">
                       ฿186,000
                     </p>
-                    <p className="text-[9px] text-[#86868b]">
+                    <p className="text-[9px] text-[#6e6e73]">
                       คืนทุนใน 2 เดือน
                     </p>
                   </div>
@@ -1279,7 +1279,7 @@ export default function HealthcareSection() {
                   ปรึกษาฟรี --- ออกแบบ AI ให้คลินิกคุณ
                   <ArrowRight size={16} />
                 </a>
-                <p className="text-[12px] text-[#86868b] mt-3">
+                <p className="text-[12px] text-[#6e6e73] mt-3">
                   บอกเราว่าคลินิกมีกี่หมอ ดูกี่คนต่อวัน เราออกแบบ workflow ให้
                 </p>
               </div>

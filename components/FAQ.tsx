@@ -41,7 +41,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
       <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between py-5 text-left">
         <span className="text-[15px] font-medium text-[#1d1d1f] pr-4">{q}</span>
         <motion.div animate={{ rotate: open ? 45 : 0 }} transition={{ duration: 0.2 }}>
-          <Plus size={18} className="text-[#86868b] shrink-0" />
+          <Plus size={18} className="text-[#6e6e73] shrink-0" />
         </motion.div>
       </button>
       <AnimatePresence>
@@ -53,7 +53,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
             transition={{ duration: 0.25 }}
             className="overflow-hidden"
           >
-            <p className="text-[14px] text-[#86868b] leading-relaxed pb-5">{a}</p>
+            <p className="text-[14px] text-[#6e6e73] leading-relaxed pb-5">{a}</p>
           </motion.div>
         )}
       </AnimatePresence>

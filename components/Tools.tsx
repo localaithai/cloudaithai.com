@@ -59,7 +59,7 @@ export default function Tools() {
           <h2 className="text-3xl md:text-5xl font-bold text-[#1d1d1f] tracking-tight mb-4">
             เครื่องมือ 5 ตัวที่ทำทุกอย่าง
           </h2>
-          <p className="text-lg text-[#86868b] max-w-xl mx-auto">
+          <p className="text-lg text-[#6e6e73] max-w-xl mx-auto">
             Open-source ทั้งหมด ไม่มีค่า license — เราติดตั้ง ตั้งค่า สอนใช้ให้ครบ
           </p>
         </motion.div>
@@ -80,7 +80,7 @@ export default function Tools() {
                     <span className="text-3xl">{tool.icon}</span>
                     <div>
                       <h3 className="text-xl font-bold text-[#1d1d1f]">{tool.name}</h3>
-                      <p className="text-[13px] text-[#86868b]">{tool.tagline}</p>
+                      <p className="text-[13px] text-[#6e6e73]">{tool.tagline}</p>
                     </div>
                   </div>
                   <p className="text-[15px] text-[#1d1d1f]/70 leading-relaxed mb-4">{tool.description}</p>

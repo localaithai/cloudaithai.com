@@ -42,7 +42,7 @@ export default function HowItWorks() {
           <h2 className="text-3xl md:text-5xl font-bold text-[#1d1d1f] tracking-tight mb-4">
             4 ขั้นตอนง่ายๆ
           </h2>
-          <p className="text-lg text-[#86868b]">จากปรึกษาถึงใช้งานจริง ภายใน 1-2 สัปดาห์</p>
+          <p className="text-lg text-[#6e6e73]">จากปรึกษาถึงใช้งานจริง ภายใน 1-2 สัปดาห์</p>
         </motion.div>
 
         <div className="relative">
@@ -69,7 +69,7 @@ export default function HowItWorks() {
                 </div>
                 <div className="pt-1 md:pt-3">
                   <h3 className="text-lg md:text-xl font-semibold text-[#1d1d1f] mb-1">{step.title}</h3>
-                  <p className="text-[15px] text-[#86868b] leading-relaxed">{step.desc}</p>
+                  <p className="text-[15px] text-[#6e6e73] leading-relaxed">{step.desc}</p>
                 </div>
               </motion.div>
             ))}

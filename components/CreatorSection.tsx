@@ -88,9 +88,9 @@ const contentCards = [
         </div>
         <p className="text-[10px] font-semibold text-[#1d1d1f]">Morning Routine เดือน มี.ค. | สกินแคร์ + แต่งหน้า</p>
         <div className="space-y-1">
-          <p className="text-[9px] text-[#86868b]">0:00 Intro</p>
-          <p className="text-[9px] text-[#86868b]">1:30 Skincare Step</p>
-          <p className="text-[9px] text-[#86868b]">5:00 Makeup Look</p>
+          <p className="text-[9px] text-[#6e6e73]">0:00 Intro</p>
+          <p className="text-[9px] text-[#6e6e73]">1:30 Skincare Step</p>
+          <p className="text-[9px] text-[#6e6e73]">5:00 Makeup Look</p>
         </div>
         <div className="flex flex-wrap gap-1">
           {["skincare", "routine", "makeup"].map((t) => (
@@ -114,15 +114,15 @@ const contentCards = [
           </div>
           <div>
             <p className="text-[10px] font-semibold text-[#1d1d1f]">Your Page</p>
-            <p className="text-[8px] text-[#86868b]">Just now</p>
+            <p className="text-[8px] text-[#6e6e73]">Just now</p>
           </div>
         </div>
         <p className="text-[11px] text-[#1d1d1f] leading-relaxed mb-3">มีใครเคยรู้สึกแบบนี้บ้างไหมคะ? ช่วง 3 เดือนที่ผ่านมา ชีวิตเปลี่ยนไปเยอะมาก อยากเล่าให้ฟัง...</p>
         <p className="text-[10px] text-[#2997ff] font-medium">อ่านต่อ...</p>
         <div className="flex items-center gap-4 mt-3 pt-2 border-t border-black/[0.04]">
-          <span className="text-[9px] text-[#86868b] flex items-center gap-1"><ThumbsUp size={9} /> 234</span>
-          <span className="text-[9px] text-[#86868b] flex items-center gap-1"><MessageCircle size={9} /> 45</span>
-          <span className="text-[9px] text-[#86868b] flex items-center gap-1"><Share2 size={9} /> 12</span>
+          <span className="text-[9px] text-[#6e6e73] flex items-center gap-1"><ThumbsUp size={9} /> 234</span>
+          <span className="text-[9px] text-[#6e6e73] flex items-center gap-1"><MessageCircle size={9} /> 45</span>
+          <span className="text-[9px] text-[#6e6e73] flex items-center gap-1"><Share2 size={9} /> 12</span>
         </div>
       </div>
     ),
@@ -199,7 +199,7 @@ export default function CreatorSection() {
             <h1 className="text-[36px] sm:text-[48px] md:text-[56px] font-semibold tracking-tight text-[#1d1d1f] mb-2">
               AI ที่สร้าง<span className="gradient-text">ทุก content</span>ให้คุณ
             </h1>
-            <p className="text-[17px] text-[#86868b] max-w-[560px] mx-auto">
+            <p className="text-[17px] text-[#6e6e73] max-w-[560px] mx-auto">
               Workspace สำหรับครีเอเตอร์ — วางแผน สร้าง วิเคราะห์ content ทุก platform ในที่เดียว
             </p>
           </motion.div>
@@ -222,7 +222,7 @@ export default function CreatorSection() {
               <div className="w-3 h-3 rounded-full bg-[#28c840]" />
             </div>
             <div className="flex-1 mx-8">
-              <div className="bg-white rounded-md px-3 py-1 text-[11px] text-[#86868b] text-center font-mono">
+              <div className="bg-white rounded-md px-3 py-1 text-[11px] text-[#6e6e73] text-center font-mono">
                 creator-studio.ai / dashboard
               </div>
             </div>
@@ -239,12 +239,12 @@ export default function CreatorSection() {
                   <Calendar size={14} className="text-[#5856d6]" />
                   <span className="text-[12px] font-semibold text-[#1d1d1f]">Content Calendar</span>
                 </div>
-                <p className="text-[10px] text-[#86868b] mb-3">สัปดาห์นี้ — มี.ค. 2026</p>
+                <p className="text-[10px] text-[#6e6e73] mb-3">สัปดาห์นี้ — มี.ค. 2026</p>
 
                 {/* 7-day grid header */}
                 <div className="grid grid-cols-7 gap-1 mb-1.5">
                   {calendarDays.map((d) => (
-                    <div key={d} className="text-center text-[9px] text-[#86868b] font-medium">{d}</div>
+                    <div key={d} className="text-center text-[9px] text-[#6e6e73] font-medium">{d}</div>
                   ))}
                 </div>
 
@@ -287,7 +287,7 @@ export default function CreatorSection() {
                     <div key={p.label} className="flex items-center justify-between">
                       <div className="flex items-center gap-1.5">
                         <div className="w-2 h-2 rounded-full" style={{ background: p.color }} />
-                        <span className="text-[10px] text-[#86868b]">{p.label}</span>
+                        <span className="text-[10px] text-[#6e6e73]">{p.label}</span>
                       </div>
                       <span className="text-[10px] font-medium text-[#1d1d1f]">{p.count} โพสต์</span>
                     </div>
@@ -299,7 +299,7 @@ export default function CreatorSection() {
                     <Sparkles size={10} className="text-[#af52de]" />
                     <span className="text-[10px] font-semibold text-[#af52de]">AI แนะนำ</span>
                   </div>
-                  <p className="text-[9px] text-[#86868b] leading-relaxed">
+                  <p className="text-[9px] text-[#6e6e73] leading-relaxed">
                     วันอาทิตย์ควรเพิ่ม TikTok 1 คลิป — engagement สูงกว่าวันธรรมดา 40%
                   </p>
                 </div>
@@ -405,7 +405,7 @@ export default function CreatorSection() {
 
                 {/* Hashtags */}
                 <div className="mb-3">
-                  <p className="text-[10px] font-semibold text-[#86868b] uppercase tracking-wider mb-2">Hashtags</p>
+                  <p className="text-[10px] font-semibold text-[#6e6e73] uppercase tracking-wider mb-2">Hashtags</p>
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={studioInView ? { opacity: 1 } : {}}
@@ -429,12 +429,12 @@ export default function CreatorSection() {
                     <Clock size={10} className="text-[#2997ff]" />
                     <span className="text-[10px] font-semibold text-[#2997ff]">Best Time to Post</span>
                   </div>
-                  <p className="text-[10px] text-[#86868b]">วันพุธ 19:00 — engagement สูงสุดของคุณ</p>
+                  <p className="text-[10px] text-[#6e6e73]">วันพุธ 19:00 — engagement สูงสุดของคุณ</p>
                 </motion.div>
 
                 {/* Tone selector */}
                 <div className="mb-3">
-                  <p className="text-[10px] font-semibold text-[#86868b] uppercase tracking-wider mb-2">Tone</p>
+                  <p className="text-[10px] font-semibold text-[#6e6e73] uppercase tracking-wider mb-2">Tone</p>
                   <div className="flex gap-1.5">
                     {["สนุก", "จริงจัง", "น่ารัก", "มืออาชีพ"].map((t, i) => (
                       <span
@@ -442,7 +442,7 @@ export default function CreatorSection() {
                         className={`text-[9px] px-2 py-1 rounded-full font-medium cursor-pointer transition-colors ${
                           i === 0
                             ? "bg-[#af52de] text-white"
-                            : "bg-[#f5f5f7] text-[#86868b] hover:bg-[#e8e8ed]"
+                            : "bg-[#f5f5f7] text-[#6e6e73] hover:bg-[#e8e8ed]"
                         }`}
                       >
                         {t}
@@ -471,7 +471,7 @@ export default function CreatorSection() {
             <h2 className="text-[28px] sm:text-[32px] font-semibold text-[#1d1d1f] mb-2">
               What AI creates for you
             </h2>
-            <p className="text-[15px] text-[#86868b]">
+            <p className="text-[15px] text-[#6e6e73]">
               Content ทุก platform — สร้างเสร็จพร้อมโพสต์ใน 30 วินาที
             </p>
           </motion.div>
@@ -584,7 +584,7 @@ export default function CreatorSection() {
             <h2 className="text-[28px] sm:text-[32px] font-semibold text-[#1d1d1f] mb-2">
               Your AI Team
             </h2>
-            <p className="text-[15px] text-[#86868b]">
+            <p className="text-[15px] text-[#6e6e73]">
               ทีม AI 3 คน ทำงานให้คุณ 24/7 ไม่มีวันหยุด
             </p>
           </motion.div>
@@ -616,7 +616,7 @@ export default function CreatorSection() {
                     {member.avatar}
                   </motion.div>
                   <h3 className="text-[16px] font-semibold text-[#1d1d1f]">{member.name}</h3>
-                  <p className="text-[12px] text-[#86868b] mt-0.5">{member.tagline}</p>
+                  <p className="text-[12px] text-[#6e6e73] mt-0.5">{member.tagline}</p>
 
                   {/* Online indicator */}
                   <div className="absolute top-4 right-4 flex items-center gap-1">
@@ -627,7 +627,7 @@ export default function CreatorSection() {
 
                 {/* Skills */}
                 <div className="px-5 py-4 border-t border-black/[0.04]">
-                  <p className="text-[10px] font-semibold text-[#86868b] uppercase tracking-wider mb-2.5">Skills</p>
+                  <p className="text-[10px] font-semibold text-[#6e6e73] uppercase tracking-wider mb-2.5">Skills</p>
                   <div className="flex flex-wrap gap-1.5 mb-4">
                     {member.skills.map((skill) => (
                       <span
@@ -644,15 +644,15 @@ export default function CreatorSection() {
                   </div>
 
                   {/* What they do */}
-                  <p className="text-[10px] font-semibold text-[#86868b] uppercase tracking-wider mb-1.5">สิ่งที่ทำให้คุณ</p>
+                  <p className="text-[10px] font-semibold text-[#6e6e73] uppercase tracking-wider mb-1.5">สิ่งที่ทำให้คุณ</p>
                   <p className="text-[11px] text-[#1d1d1f] leading-relaxed">{member.does}</p>
                 </div>
 
                 {/* Activity bar */}
                 <div className="px-5 py-3 bg-[#fafafa] border-t border-black/[0.04] flex items-center justify-between">
                   <div className="flex items-center gap-1">
-                    <Bot size={10} className="text-[#86868b]" />
-                    <span className="text-[9px] text-[#86868b]">ทำงานไปแล้ว 1,240 ครั้ง</span>
+                    <Bot size={10} className="text-[#6e6e73]" />
+                    <span className="text-[9px] text-[#6e6e73]">ทำงานไปแล้ว 1,240 ครั้ง</span>
                   </div>
                   <div className="flex items-center gap-0.5">
                     {[1, 2, 3, 4, 5].map((s) => (
@@ -673,7 +673,7 @@ export default function CreatorSection() {
             <h2 className="text-[28px] sm:text-[32px] font-semibold text-[#1d1d1f] mb-2">
               เริ่มต้นใช้ Creator Studio
             </h2>
-            <p className="text-[15px] text-[#86868b]">
+            <p className="text-[15px] text-[#6e6e73]">
               Setup ครั้งเดียว ใช้ได้ตลอด + ค่า AI ตามใช้จริง
             </p>
           </motion.div>
@@ -721,19 +721,19 @@ export default function CreatorSection() {
               {/* ROI callout */}
               <div className="grid grid-cols-3 gap-3 mb-6 p-4 rounded-xl bg-[#f5f5f7]">
                 <div className="text-center">
-                  <p className="text-[10px] text-[#86868b] mb-0.5">จ้าง content writer</p>
+                  <p className="text-[10px] text-[#6e6e73] mb-0.5">จ้าง content writer</p>
                   <p className="text-[16px] font-semibold text-[#ff3b30]">฿20,000</p>
-                  <p className="text-[9px] text-[#86868b]">/เดือน</p>
+                  <p className="text-[9px] text-[#6e6e73]">/เดือน</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-[10px] text-[#86868b] mb-0.5">ใช้ AI แทน</p>
+                  <p className="text-[10px] text-[#6e6e73] mb-0.5">ใช้ AI แทน</p>
                   <p className="text-[16px] font-semibold text-[#34c759]">฿1,500</p>
-                  <p className="text-[9px] text-[#86868b]">/เดือน</p>
+                  <p className="text-[9px] text-[#6e6e73]">/เดือน</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-[10px] text-[#86868b] mb-0.5">ประหยัด/ปี</p>
+                  <p className="text-[10px] text-[#6e6e73] mb-0.5">ประหยัด/ปี</p>
                   <p className="text-[16px] font-semibold text-[#2997ff]">฿222,000</p>
-                  <p className="text-[9px] text-[#86868b]">ROI 1,233%</p>
+                  <p className="text-[9px] text-[#6e6e73]">ROI 1,233%</p>
                 </div>
               </div>
 
@@ -744,7 +744,7 @@ export default function CreatorSection() {
               >
                 เริ่มต้นใช้งาน — ปรึกษาฟรี
               </a>
-              <p className="text-[11px] text-[#86868b] text-center mt-3">
+              <p className="text-[11px] text-[#6e6e73] text-center mt-3">
                 ไม่มีค่าใช้จ่ายล่วงหน้า — คุยก่อน ตัดสินใจทีหลัง
               </p>
             </div>

@@ -86,7 +86,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
-            className="text-[16px] sm:text-[19px] text-[#86868b] max-w-[540px] mx-auto mb-8 leading-[1.55]"
+            className="text-[16px] sm:text-[19px] text-[#6e6e73] max-w-[540px] mx-auto mb-8 leading-[1.55]"
           >
             ติดตั้งระบบ AI Automation ใช้ Frontier Model อย่าง GPT-5, Claude, Gemini
             สร้าง workflow อัตโนมัติ ลดงานซ้ำ 80%
@@ -110,7 +110,7 @@ export default function Hero() {
             transition={{ delay: 0.9 }}
             className="mb-6"
           >
-            <p className="text-[11px] sm:text-[12px] text-[#86868b] uppercase tracking-[0.15em] font-medium mb-4">Frontier Models</p>
+            <p className="text-[11px] sm:text-[12px] text-[#6e6e73] uppercase tracking-[0.15em] font-medium mb-4">Frontier Models</p>
             <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
               {models.map((m, i) => (
                 <motion.div
@@ -142,7 +142,7 @@ export default function Hero() {
             transition={{ delay: 1.4 }}
             className="mb-12"
           >
-            <p className="text-[11px] sm:text-[12px] text-[#86868b] uppercase tracking-[0.15em] font-medium mb-4">Automation Tools</p>
+            <p className="text-[11px] sm:text-[12px] text-[#6e6e73] uppercase tracking-[0.15em] font-medium mb-4">Automation Tools</p>
             <div className="flex justify-center gap-3 sm:gap-4">
               {tools.map((t, i) => (
                 <motion.div
@@ -156,7 +156,7 @@ export default function Hero() {
                   <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white shadow-md shadow-black/[0.04] border border-black/[0.04] flex items-center justify-center">
                     <BrandIcon slug={t.slug} fallback={t.fallback} size={24} />
                   </div>
-                  <span className="text-[10px] sm:text-[11px] text-[#86868b] font-medium">{t.name}</span>
+                  <span className="text-[10px] sm:text-[11px] text-[#6e6e73] font-medium">{t.name}</span>
                 </motion.div>
               ))}
             </div>
@@ -182,7 +182,7 @@ export default function Hero() {
                 transition={{ delay: 1.9 + i * 0.1 }}
               >
                 <p className="text-[22px] sm:text-[28px] font-semibold text-[#1d1d1f] tracking-tight">{stat.value}</p>
-                <p className="text-[11px] sm:text-[12px] text-[#86868b] mt-1">{stat.label}</p>
+                <p className="text-[11px] sm:text-[12px] text-[#6e6e73] mt-1">{stat.label}</p>
               </motion.div>
             ))}
           </motion.div>

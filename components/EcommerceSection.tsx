@@ -123,7 +123,7 @@ export default function EcommerceSection() {
             <h1 className="text-[32px] sm:text-[44px] md:text-[52px] font-semibold tracking-tight text-[#1d1d1f] leading-[1.1] mb-2">
               ร้านค้าที่<span className="gradient-text">ไม่เคยหลับ</span>
             </h1>
-            <p className="text-[17px] text-[#86868b] max-w-[480px] mx-auto">
+            <p className="text-[17px] text-[#6e6e73] max-w-[480px] mx-auto">
               AI ตอบแชท ปิดการขาย จัดการ order สร้าง content — ทำงาน 24/7
               ไม่ต้องจ้างคนเพิ่ม
             </p>
@@ -150,22 +150,22 @@ export default function EcommerceSection() {
                 <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
                 <div className="w-3 h-3 rounded-full bg-[#28c840]" />
               </div>
-              <span className="text-[12px] text-[#86868b] font-medium hidden sm:inline">
+              <span className="text-[12px] text-[#6e6e73] font-medium hidden sm:inline">
                 myshop.co.th
               </span>
             </div>
             <div className="flex items-center gap-2 flex-1 max-w-[280px] mx-4">
               <div className="flex items-center gap-2 w-full bg-[#f5f5f7] rounded-full px-3 py-1.5">
-                <Search size={12} className="text-[#86868b]" />
+                <Search size={12} className="text-[#6e6e73]" />
                 <span className="text-[11px] text-[#d2d2d7]">
                   ค้นหาสินค้า...
                 </span>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <Heart size={16} className="text-[#86868b]" />
+              <Heart size={16} className="text-[#6e6e73]" />
               <div className="relative">
-                <ShoppingCart size={16} className="text-[#86868b]" />
+                <ShoppingCart size={16} className="text-[#6e6e73]" />
                 <span className="absolute -top-1.5 -right-1.5 w-3.5 h-3.5 bg-[#ff3b30] rounded-full text-[8px] text-white flex items-center justify-center font-bold">
                   2
                 </span>
@@ -235,10 +235,10 @@ export default function EcommerceSection() {
                     <span className="text-[11px] text-[#1d1d1f] font-medium">
                       {product.rating}
                     </span>
-                    <span className="text-[11px] text-[#86868b]">
+                    <span className="text-[11px] text-[#6e6e73]">
                       ({product.reviews})
                     </span>
-                    <span className="text-[10px] text-[#86868b] ml-auto">
+                    <span className="text-[10px] text-[#6e6e73] ml-auto">
                       ขายแล้ว {product.sold.toLocaleString()}
                     </span>
                   </div>
@@ -246,7 +246,7 @@ export default function EcommerceSection() {
                     <span className="text-[18px] font-bold text-[#ff3b30]">
                       ฿{product.price.toLocaleString()}
                     </span>
-                    <span className="text-[12px] text-[#86868b] line-through">
+                    <span className="text-[12px] text-[#6e6e73] line-through">
                       ฿{product.originalPrice.toLocaleString()}
                     </span>
                   </div>
@@ -259,7 +259,7 @@ export default function EcommerceSection() {
                         style={{ background: c }}
                       />
                     ))}
-                    <span className="text-[10px] text-[#86868b] ml-1">
+                    <span className="text-[10px] text-[#6e6e73] ml-1">
                       +{product.colors.length} สี
                     </span>
                   </div>
@@ -313,10 +313,10 @@ export default function EcommerceSection() {
                       <div className="flex justify-start">
                         <div className="bg-[#f5f5f7] text-[#1d1d1f] text-[11px] px-3 py-2 rounded-2xl rounded-bl-sm max-w-[85%]">
                           <p className="font-medium">มีค่ะ! Champagne Gold</p>
-                          <p className="text-[#86868b] text-[10px] mt-0.5">
+                          <p className="text-[#6e6e73] text-[10px] mt-0.5">
                             เหลือ 12 ชิ้น | ฿890 (ลด 15%)
                           </p>
-                          <p className="text-[#86868b] text-[10px]">
+                          <p className="text-[#6e6e73] text-[10px]">
                             ส่งฟรี ถึงพรุ่งนี้
                           </p>
                           <p className="text-[#2997ff] text-[10px] mt-1">
@@ -328,7 +328,7 @@ export default function EcommerceSection() {
                         <span className="text-[8px] px-1.5 py-0.5 rounded bg-[#34c759]/10 text-[#34c759] font-bold">
                           AI
                         </span>
-                        <span className="text-[9px] text-[#86868b]">
+                        <span className="text-[9px] text-[#6e6e73]">
                           ตอบใน 1.8 วินาที
                         </span>
                       </div>
@@ -359,11 +359,11 @@ export default function EcommerceSection() {
                   AI Active
                 </span>
               </div>
-              <span className="text-[10px] text-[#86868b]">
+              <span className="text-[10px] text-[#6e6e73]">
                 วันนี้: ตอบแชท 156 | ปิดการขาย 23
               </span>
             </div>
-            <span className="text-[10px] text-[#86868b] hidden sm:inline">
+            <span className="text-[10px] text-[#6e6e73] hidden sm:inline">
               Powered by Cloud AI Thailand
             </span>
           </div>
@@ -429,7 +429,7 @@ export default function EcommerceSection() {
             <h2 className="text-[28px] sm:text-[36px] font-semibold text-[#1d1d1f] mb-2">
               ทุกอย่างที่ AI ทำให้คุณ
             </h2>
-            <p className="text-[15px] text-[#86868b]">
+            <p className="text-[15px] text-[#6e6e73]">
               ดูผลลัพธ์จริงจาก dashboard
             </p>
           </motion.div>
@@ -452,7 +452,7 @@ export default function EcommerceSection() {
                   <h3 className="text-[14px] font-semibold text-[#1d1d1f]">
                     AI Chat Demo
                   </h3>
-                  <p className="text-[10px] text-[#86868b]">
+                  <p className="text-[10px] text-[#6e6e73]">
                     สนทนาจริงระหว่าง AI กับลูกค้า
                   </p>
                 </div>
@@ -512,15 +512,15 @@ export default function EcommerceSection() {
                     <div className="bg-[#f5f5f7] px-4 py-2.5 rounded-2xl">
                       <div className="flex gap-1">
                         <div
-                          className="w-1.5 h-1.5 rounded-full bg-[#86868b] animate-bounce"
+                          className="w-1.5 h-1.5 rounded-full bg-[#6e6e73] animate-bounce"
                           style={{ animationDelay: "0ms" }}
                         />
                         <div
-                          className="w-1.5 h-1.5 rounded-full bg-[#86868b] animate-bounce"
+                          className="w-1.5 h-1.5 rounded-full bg-[#6e6e73] animate-bounce"
                           style={{ animationDelay: "150ms" }}
                         />
                         <div
-                          className="w-1.5 h-1.5 rounded-full bg-[#86868b] animate-bounce"
+                          className="w-1.5 h-1.5 rounded-full bg-[#6e6e73] animate-bounce"
                           style={{ animationDelay: "300ms" }}
                         />
                       </div>
@@ -529,7 +529,7 @@ export default function EcommerceSection() {
                 )}
               </div>
               <div className="px-5 py-3 border-t border-black/[0.04] bg-[#fafafa] flex items-center justify-between">
-                <span className="text-[10px] text-[#86868b]">
+                <span className="text-[10px] text-[#6e6e73]">
                   ค่าเฉลี่ย: ตอบใน 1.8 วินาที | ปิดการขาย 68%
                 </span>
                 <span className="text-[10px] font-medium text-[#2997ff]">
@@ -561,7 +561,7 @@ export default function EcommerceSection() {
                     <p className="text-[42px] font-bold text-[#1d1d1f] leading-none">
                       47
                     </p>
-                    <p className="text-[11px] text-[#86868b] mt-1">ออเดอร์</p>
+                    <p className="text-[11px] text-[#6e6e73] mt-1">ออเดอร์</p>
                   </div>
                   <div className="text-right">
                     <div className="flex items-center gap-1 justify-end">
@@ -570,7 +570,7 @@ export default function EcommerceSection() {
                         +12%
                       </span>
                     </div>
-                    <p className="text-[10px] text-[#86868b]">vs เมื่อวาน</p>
+                    <p className="text-[10px] text-[#6e6e73]">vs เมื่อวาน</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#34c759]/5">
@@ -579,7 +579,7 @@ export default function EcommerceSection() {
                     <p className="text-[12px] font-semibold text-[#34c759]">
                       0 errors
                     </p>
-                    <p className="text-[10px] text-[#86868b]">
+                    <p className="text-[10px] text-[#6e6e73]">
                       AI ตรวจทุก order ก่อนส่ง
                     </p>
                   </div>
@@ -605,7 +605,7 @@ export default function EcommerceSection() {
                 <p className="text-[42px] font-bold text-[#1d1d1f] leading-none mb-1">
                   12
                 </p>
-                <p className="text-[11px] text-[#86868b] mb-3">
+                <p className="text-[11px] text-[#6e6e73] mb-3">
                   listings ใหม่
                 </p>
                 <div className="space-y-1.5">
@@ -619,7 +619,7 @@ export default function EcommerceSection() {
                       className="flex items-center gap-2 text-[10px]"
                     >
                       <Check size={10} className="text-[#5856d6] shrink-0" />
-                      <span className="text-[#86868b] truncate">{item}</span>
+                      <span className="text-[#6e6e73] truncate">{item}</span>
                     </div>
                   ))}
                 </div>
@@ -734,9 +734,9 @@ export default function EcommerceSection() {
                   )}
                 </div>
                 <div className="flex justify-between mt-1">
-                  <span className="text-[8px] text-[#86868b]">08:00</span>
-                  <span className="text-[8px] text-[#86868b]">14:00</span>
-                  <span className="text-[8px] text-[#86868b]">20:00</span>
+                  <span className="text-[8px] text-[#6e6e73]">08:00</span>
+                  <span className="text-[8px] text-[#6e6e73]">14:00</span>
+                  <span className="text-[8px] text-[#6e6e73]">20:00</span>
                 </div>
               </motion.div>
             </div>
@@ -756,7 +756,7 @@ export default function EcommerceSection() {
                   <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
                   <div className="w-3 h-3 rounded-full bg-[#28c840]" />
                 </div>
-                <span className="text-[12px] text-[#86868b] font-medium">
+                <span className="text-[12px] text-[#6e6e73] font-medium">
                   E-commerce AI Dashboard
                 </span>
               </div>
@@ -798,7 +798,7 @@ export default function EcommerceSection() {
                       className="p-3 rounded-xl bg-[#fafafa] border border-black/[0.03]"
                     >
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-[10px] text-[#86868b]">
+                        <span className="text-[10px] text-[#6e6e73]">
                           {s.label}
                         </span>
                         <div
@@ -874,14 +874,14 @@ export default function EcommerceSection() {
                         className="flex items-center justify-between p-2.5 rounded-lg bg-[#fafafa]"
                       >
                         <div className="flex items-center gap-3">
-                          <span className="text-[11px] font-mono text-[#86868b]">
+                          <span className="text-[11px] font-mono text-[#6e6e73]">
                             {o.id}
                           </span>
                           <div>
                             <p className="text-[12px] font-medium text-[#1d1d1f]">
                               {o.cust}
                             </p>
-                            <p className="text-[10px] text-[#86868b]">
+                            <p className="text-[10px] text-[#6e6e73]">
                               {o.items}
                             </p>
                           </div>
@@ -948,7 +948,7 @@ export default function EcommerceSection() {
                           <p className="text-[10px] text-[#1d1d1f] font-medium">
                             {a.text}
                           </p>
-                          <p className="text-[9px] text-[#86868b]">
+                          <p className="text-[9px] text-[#6e6e73]">
                             {a.time}
                           </p>
                         </div>
@@ -1053,7 +1053,7 @@ export default function EcommerceSection() {
             <h2 className="text-[28px] sm:text-[36px] font-semibold text-[#1d1d1f] mb-2">
               แพ็คเกจที่เราแนะนำ
             </h2>
-            <p className="text-[15px] text-[#86868b]">
+            <p className="text-[15px] text-[#6e6e73]">
               เหมาะกับร้านค้าออนไลน์ 50-200 orders/วัน
             </p>
           </motion.div>
@@ -1115,7 +1115,7 @@ export default function EcommerceSection() {
                     <p className="text-[18px] font-bold text-[#ff3b30]">
                       ฿15,000
                     </p>
-                    <p className="text-[10px] text-[#86868b]">
+                    <p className="text-[10px] text-[#6e6e73]">
                       จ้างคนตอบแชท/เดือน
                     </p>
                   </div>
@@ -1123,7 +1123,7 @@ export default function EcommerceSection() {
                     <p className="text-[18px] font-bold text-[#34c759]">
                       ฿2,500
                     </p>
-                    <p className="text-[10px] text-[#86868b]">
+                    <p className="text-[10px] text-[#6e6e73]">
                       ใช้ AI แทน/เดือน
                     </p>
                   </div>
@@ -1131,7 +1131,7 @@ export default function EcommerceSection() {
                     <p className="text-[18px] font-bold text-[#2997ff]">
                       ฿150K+
                     </p>
-                    <p className="text-[10px] text-[#86868b]">ประหยัด/ปี</p>
+                    <p className="text-[10px] text-[#6e6e73]">ประหยัด/ปี</p>
                   </div>
                 </div>
               </div>
@@ -1177,10 +1177,10 @@ export default function EcommerceSection() {
           <h2 className="text-[28px] sm:text-[36px] font-semibold text-[#1d1d1f] mb-3">
             พร้อมให้ AI ช่วยขายของ?
           </h2>
-          <p className="text-[15px] text-[#86868b] mb-3 max-w-[420px] mx-auto">
+          <p className="text-[15px] text-[#6e6e73] mb-3 max-w-[420px] mx-auto">
             บอกเราว่าร้านคุณขายอะไร ขายที่ไหน — เราออกแบบ AI workflow ให้ฟรี
           </p>
-          <div className="flex items-center justify-center gap-4 text-[12px] text-[#86868b] mb-8">
+          <div className="flex items-center justify-center gap-4 text-[12px] text-[#6e6e73] mb-8">
             <span className="flex items-center gap-1">
               <Check size={12} className="text-[#34c759]" /> ปรึกษาฟรี
             </span>

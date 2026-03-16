@@ -19,7 +19,7 @@ export default function Contact() {
           <h2 className="text-3xl md:text-5xl font-bold text-[#1d1d1f] tracking-tight mb-4">
             ปรึกษาฟรี
           </h2>
-          <p className="text-lg text-[#86868b]">บอกเราว่าต้องการ automate อะไร — เราออกแบบ solution ให้ฟรี</p>
+          <p className="text-lg text-[#6e6e73]">บอกเราว่าต้องการ automate อะไร — เราออกแบบ solution ให้ฟรี</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-10">
@@ -35,7 +35,7 @@ export default function Contact() {
                   <Check size={24} className="text-[#30d158]" />
                 </div>
                 <h3 className="text-lg font-semibold text-[#1d1d1f] mb-2">ส่งเรียบร้อย!</h3>
-                <p className="text-[14px] text-[#86868b]">เราจะติดต่อกลับภายใน 24 ชั่วโมง</p>
+                <p className="text-[14px] text-[#6e6e73]">เราจะติดต่อกลับภายใน 24 ชั่วโมง</p>
               </div>
             ) : (
               <form
@@ -90,7 +90,7 @@ export default function Contact() {
                       {item.icon}
                     </div>
                     <div>
-                      <p className="text-[11px] text-[#86868b]">{item.label}</p>
+                      <p className="text-[11px] text-[#6e6e73]">{item.label}</p>
                       <p className="text-[14px] font-medium text-[#1d1d1f] group-hover:text-[#2997ff] transition-colors">{item.value}</p>
                     </div>
                   </a>
@@ -100,7 +100,7 @@ export default function Contact() {
 
             <div className="bg-gradient-to-br from-[#2997ff]/5 to-[#5856d6]/5 rounded-2xl p-6 border border-[#2997ff]/10">
               <h3 className="text-[15px] font-semibold text-[#1d1d1f] mb-2">ต้องการ Privacy 100%?</h3>
-              <p className="text-[13px] text-[#86868b] mb-3">
+              <p className="text-[13px] text-[#6e6e73] mb-3">
                 ถ้าข้อมูลต้องอยู่ในออฟฟิศ 100% ไม่ส่งออกเลย — ดูบริการ Local AI ติดตั้ง AI บนเครื่องของคุณเอง
               </p>
               <a href="https://localaithai.com" target="_blank" className="text-[13px] font-medium text-[#2997ff] hover:underline">

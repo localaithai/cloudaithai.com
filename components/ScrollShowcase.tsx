@@ -31,7 +31,7 @@ export default function ScrollShowcase() {
           <h2 className="text-[40px] sm:text-[56px] md:text-[64px] font-semibold tracking-[-0.04em] mb-4">
             ดูว่า AI ทำงานยังไง.
           </h2>
-          <p className="text-[19px] sm:text-[21px] text-[#86868b] max-w-[600px] mx-auto leading-[1.47]">
+          <p className="text-[19px] sm:text-[21px] text-[#6e6e73] max-w-[600px] mx-auto leading-[1.47]">
             จากข้อความลูกค้า ถึงคำตอบอัจฉริยะ ใน 3 วินาที
           </p>
         </motion.div>
@@ -74,7 +74,7 @@ export default function ScrollShowcase() {
                 </motion.div>
 
                 <h3 className="text-[15px] font-semibold text-[#1d1d1f] mb-0.5">{step.title}</h3>
-                <p className="text-[12px] text-[#86868b]">{step.sub}</p>
+                <p className="text-[12px] text-[#6e6e73]">{step.sub}</p>
               </motion.div>
             ))}
           </div>
@@ -96,7 +96,7 @@ export default function ScrollShowcase() {
                 <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
                 <div className="w-3 h-3 rounded-full bg-[#28c840]" />
               </div>
-              <span className="text-[12px] text-[#86868b] font-medium ml-2">AI Chat — ร้านค้าออนไลน์</span>
+              <span className="text-[12px] text-[#6e6e73] font-medium ml-2">AI Chat — ร้านค้าออนไลน์</span>
               <span className="ml-auto relative w-2 h-2">
                 <span className="absolute inset-0 rounded-full bg-[#34c759]" />
                 <span className="absolute inset-0 rounded-full bg-[#34c759] animate-ping opacity-30" />
@@ -145,9 +145,9 @@ export default function ScrollShowcase() {
               >
                 <div className="bg-[#f5f5f7] text-[#1d1d1f] text-[14px] px-5 py-4 rounded-2xl rounded-bl-sm max-w-[85%] space-y-2">
                   <p>สินค้ารุ่น <strong>X200</strong> ค่ะ:</p>
-                  <p className="text-[#86868b]">💰 ราคา: <strong className="text-[#1d1d1f]">฿12,900</strong> (รวม VAT)</p>
-                  <p className="text-[#86868b]">📦 Stock: <strong className="text-[#34c759]">มี 23 ชิ้น</strong> พร้อมส่ง</p>
-                  <p className="text-[#86868b]">🚚 จัดส่ง: <strong className="text-[#1d1d1f]">1-2 วันทำการ</strong></p>
+                  <p className="text-[#6e6e73]">💰 ราคา: <strong className="text-[#1d1d1f]">฿12,900</strong> (รวม VAT)</p>
+                  <p className="text-[#6e6e73]">📦 Stock: <strong className="text-[#34c759]">มี 23 ชิ้น</strong> พร้อมส่ง</p>
+                  <p className="text-[#6e6e73]">🚚 จัดส่ง: <strong className="text-[#1d1d1f]">1-2 วันทำการ</strong></p>
                   <p className="text-[#2997ff] text-[13px] mt-1">ต้องการสั่งซื้อเลยไหมคะ? 😊</p>
                 </div>
               </motion.div>
@@ -158,7 +158,7 @@ export default function ScrollShowcase() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 2.2 }}
-                className="flex items-center gap-2 text-[11px] text-[#86868b]"
+                className="flex items-center gap-2 text-[11px] text-[#6e6e73]"
               >
                 <span className="px-2 py-0.5 rounded-full bg-[#2997ff]/8 text-[#2997ff] font-medium">RAG</span>
                 <span>ข้อมูลจาก product_catalog + stock_db</span>

@@ -222,7 +222,7 @@ export default function RestaurantSection() {
             <h1 className="text-[36px] sm:text-[48px] md:text-[56px] font-semibold tracking-tight text-[#1d1d1f] mb-2">
               AI ที่<span className="text-[#ff9500]">คุมครัว</span>ได้จริง
             </h1>
-            <p className="text-[17px] text-[#86868b] max-w-[540px] mx-auto">
+            <p className="text-[17px] text-[#6e6e73] max-w-[540px] mx-auto">
               รับออเดอร์ จัดคิว ติดตาม stock ตอบรีวิว สรุปยอด — ทุกอย่างอัตโนมัติ
             </p>
           </motion.div>
@@ -330,7 +330,7 @@ export default function RestaurantSection() {
             <h2 className="text-[28px] sm:text-[32px] font-semibold text-[#1d1d1f] text-center mb-2">
               AI รับ Order ผ่าน LINE
             </h2>
-            <p className="text-[15px] text-[#86868b] text-center mb-8">
+            <p className="text-[15px] text-[#6e6e73] text-center mb-8">
               ลูกค้าพิมพ์สั่ง — AI ตอบทันที พร้อม upsell อัตโนมัติ
             </p>
           </motion.div>
@@ -396,7 +396,7 @@ export default function RestaurantSection() {
                       {[0, 1, 2].map((d) => (
                         <motion.div
                           key={d}
-                          className="w-1.5 h-1.5 rounded-full bg-[#86868b]"
+                          className="w-1.5 h-1.5 rounded-full bg-[#6e6e73]"
                           animate={{ opacity: [0.3, 1, 0.3] }}
                           transition={{ duration: 1, repeat: Infinity, delay: d * 0.2 }}
                         />
@@ -410,7 +410,7 @@ export default function RestaurantSection() {
             {/* Chat input */}
             <div className="flex items-center gap-3 px-4 py-3 border-t border-black/[0.04] bg-white">
               <div className="flex-1 h-9 rounded-full bg-[#f5f5f7] flex items-center px-4">
-                <span className="text-[12px] text-[#86868b]">พิมพ์สั่งอาหาร...</span>
+                <span className="text-[12px] text-[#6e6e73]">พิมพ์สั่งอาหาร...</span>
               </div>
               <div className="w-8 h-8 rounded-full bg-[#06c755] flex items-center justify-center">
                 <Send size={14} className="text-white" />
@@ -418,7 +418,7 @@ export default function RestaurantSection() {
             </div>
           </motion.div>
 
-          <div className="flex items-center justify-center gap-6 mt-4 text-[11px] text-[#86868b]">
+          <div className="flex items-center justify-center gap-6 mt-4 text-[11px] text-[#6e6e73]">
             <span className="flex items-center gap-1"><Clock size={10} /> ตอบใน 1.5 วินาที</span>
             <span className="flex items-center gap-1"><TrendingUp size={10} /> Upsell +18% ต่อบิล</span>
             <span className="flex items-center gap-1"><ShoppingBag size={10} /> 0 order หลุด</span>
@@ -433,7 +433,7 @@ export default function RestaurantSection() {
             <h2 className="text-[28px] sm:text-[32px] font-semibold text-[#1d1d1f] text-center mb-2">
               Ingredient Intelligence
             </h2>
-            <p className="text-[15px] text-[#86868b] text-center mb-10">
+            <p className="text-[15px] text-[#6e6e73] text-center mb-10">
               AI monitor วัตถุดิบ real-time — รู้ก่อนหมด สั่งก่อนขาด
             </p>
           </motion.div>
@@ -453,7 +453,7 @@ export default function RestaurantSection() {
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-[#34c759] animate-pulse" />
-                <span className="text-[10px] text-[#86868b]">อัพเดทล่าสุด 2 นาทีที่แล้ว</span>
+                <span className="text-[10px] text-[#6e6e73]">อัพเดทล่าสุด 2 นาทีที่แล้ว</span>
               </div>
             </div>
 
@@ -475,7 +475,7 @@ export default function RestaurantSection() {
                     <div className="text-center mb-3">
                       <span className="text-[28px]">{item.emoji}</span>
                       <p className="text-[13px] font-semibold text-[#1d1d1f] mt-1">{item.name}</p>
-                      <p className="text-[10px] text-[#86868b]">{item.unit}</p>
+                      <p className="text-[10px] text-[#6e6e73]">{item.unit}</p>
                     </div>
 
                     {/* Fill level bar — vertical style */}
@@ -511,7 +511,7 @@ export default function RestaurantSection() {
                 </div>
                 <div>
                   <p className="text-[12px] font-semibold text-[#1d1d1f] mb-1">AI แนะนำ</p>
-                  <p className="text-[12px] text-[#86868b] leading-relaxed">
+                  <p className="text-[12px] text-[#6e6e73] leading-relaxed">
                     สั่ง<span className="text-[#ff3b30] font-semibold"> กุ้ง 2 กก. </span>+
                     <span className="text-[#ff3b30] font-semibold"> ผักชี 500 กรัม </span>+
                     <span className="text-[#ff9500] font-semibold"> หมู 1 กก. </span>+
@@ -540,7 +540,7 @@ export default function RestaurantSection() {
             {/* Subtle background pattern */}
             <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: "repeating-linear-gradient(45deg, #ff9500 0, #ff9500 1px, transparent 1px, transparent 10px)" }} />
             <div className="relative">
-              <p className="text-[13px] text-[#86868b] mb-2">ยอดขายวันนี้ (real-time)</p>
+              <p className="text-[13px] text-[#6e6e73] mb-2">ยอดขายวันนี้ (real-time)</p>
               <p className="text-[48px] sm:text-[64px] font-bold text-[#1d1d1f] tracking-tight">
                 <AnimatedCounter target={18450} prefix="฿" />
               </p>
@@ -549,21 +549,21 @@ export default function RestaurantSection() {
                   <p className="text-[24px] font-semibold text-[#2997ff]">
                     <AnimatedCounter target={67} />
                   </p>
-                  <p className="text-[11px] text-[#86868b]">บิลวันนี้</p>
+                  <p className="text-[11px] text-[#6e6e73]">บิลวันนี้</p>
                 </div>
                 <div className="w-px h-8 bg-black/[0.06]" />
                 <div className="text-center">
                   <p className="text-[24px] font-semibold text-[#34c759]">
                     ฿<AnimatedCounter target={275} />
                   </p>
-                  <p className="text-[11px] text-[#86868b]">เฉลี่ย/บิล</p>
+                  <p className="text-[11px] text-[#6e6e73]">เฉลี่ย/บิล</p>
                 </div>
                 <div className="w-px h-8 bg-black/[0.06]" />
                 <div className="text-center">
                   <p className="text-[24px] font-semibold text-[#ff9500]">
                     <AnimatedCounter target={33} suffix="%" />
                   </p>
-                  <p className="text-[11px] text-[#86868b]">Food Cost</p>
+                  <p className="text-[11px] text-[#6e6e73]">Food Cost</p>
                 </div>
               </div>
               <div className="flex items-center justify-center gap-1.5 mt-4">
@@ -582,7 +582,7 @@ export default function RestaurantSection() {
             <h2 className="text-[28px] sm:text-[32px] font-semibold text-[#1d1d1f] text-center mb-2">
               AI Review Manager
             </h2>
-            <p className="text-[15px] text-[#86868b] text-center mb-10">
+            <p className="text-[15px] text-[#6e6e73] text-center mb-10">
               รีวิวเชิงลบ? AI ร่าง reply ให้ทันที — ปกป้อง rating ร้านคุณ
             </p>
           </motion.div>
@@ -601,7 +601,7 @@ export default function RestaurantSection() {
               </div>
               <div className="p-5">
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-9 h-9 rounded-full bg-[#e5e5ea] flex items-center justify-center text-[14px] font-semibold text-[#86868b]">ส</div>
+                  <div className="w-9 h-9 rounded-full bg-[#e5e5ea] flex items-center justify-center text-[14px] font-semibold text-[#6e6e73]">ส</div>
                   <div>
                     <p className="text-[13px] font-semibold text-[#1d1d1f]">สมศักดิ์</p>
                     <div className="flex items-center gap-0.5">
@@ -611,7 +611,7 @@ export default function RestaurantSection() {
                       {[3, 4, 5].map((n) => (
                         <Star key={n} size={11} className="text-[#d2d2d7]" />
                       ))}
-                      <span className="text-[10px] text-[#86868b] ml-1">3 ชั่วโมงก่อน</span>
+                      <span className="text-[10px] text-[#6e6e73] ml-1">3 ชั่วโมงก่อน</span>
                     </div>
                   </div>
                 </div>
@@ -638,7 +638,7 @@ export default function RestaurantSection() {
                   </div>
                   <div>
                     <p className="text-[13px] font-semibold text-[#1d1d1f]">เจ้าของร้าน (AI Draft)</p>
-                    <p className="text-[10px] text-[#86868b]">รอคุณ approve ก่อนโพสต์</p>
+                    <p className="text-[10px] text-[#6e6e73]">รอคุณ approve ก่อนโพสต์</p>
                   </div>
                 </div>
                 <div className="text-[13px] text-[#1d1d1f] leading-relaxed space-y-2">
@@ -656,7 +656,7 @@ export default function RestaurantSection() {
                   <button className="flex-1 py-2 rounded-full bg-[#34c759] text-white text-[12px] font-semibold flex items-center justify-center gap-1">
                     <Check size={13} /> Approve & โพสต์
                   </button>
-                  <button className="px-4 py-2 rounded-full bg-[#f5f5f7] text-[12px] text-[#86868b] font-medium">
+                  <button className="px-4 py-2 rounded-full bg-[#f5f5f7] text-[12px] text-[#6e6e73] font-medium">
                     แก้ไข
                   </button>
                 </div>
@@ -673,7 +673,7 @@ export default function RestaurantSection() {
             <h2 className="text-[28px] sm:text-[32px] font-semibold text-[#1d1d1f] text-center mb-2">
               เริ่มต้นคุมครัวด้วย AI
             </h2>
-            <p className="text-[15px] text-[#86868b] text-center mb-10">
+            <p className="text-[15px] text-[#6e6e73] text-center mb-10">
               ครบทุกระบบใน package เดียว
             </p>
           </motion.div>
@@ -718,19 +718,19 @@ export default function RestaurantSection() {
                 <p className="text-[12px] font-semibold text-[#1d1d1f] mb-3">คุ้มค่าแค่ไหน?</p>
                 <div className="grid grid-cols-3 gap-3 text-center">
                   <div>
-                    <p className="text-[9px] text-[#86868b]">จ้างพนักงาน</p>
+                    <p className="text-[9px] text-[#6e6e73]">จ้างพนักงาน</p>
                     <p className="text-[17px] font-semibold text-[#ff3b30]">฿18,000</p>
-                    <p className="text-[9px] text-[#86868b]">/เดือน</p>
+                    <p className="text-[9px] text-[#6e6e73]">/เดือน</p>
                   </div>
                   <div>
-                    <p className="text-[9px] text-[#86868b]">ใช้ AI แทน</p>
+                    <p className="text-[9px] text-[#6e6e73]">ใช้ AI แทน</p>
                     <p className="text-[17px] font-semibold text-[#34c759]">฿1,500</p>
-                    <p className="text-[9px] text-[#86868b]">/เดือน</p>
+                    <p className="text-[9px] text-[#6e6e73]">/เดือน</p>
                   </div>
                   <div>
-                    <p className="text-[9px] text-[#86868b]">ประหยัด/ปี</p>
+                    <p className="text-[9px] text-[#6e6e73]">ประหยัด/ปี</p>
                     <p className="text-[17px] font-semibold text-[#ff9500]">฿198,000</p>
-                    <p className="text-[9px] text-[#86868b]">+ upsell revenue</p>
+                    <p className="text-[9px] text-[#6e6e73]">+ upsell revenue</p>
                   </div>
                 </div>
               </div>
@@ -742,7 +742,7 @@ export default function RestaurantSection() {
               >
                 ปรึกษาฟรี — เริ่มคุมครัวด้วย AI
               </a>
-              <p className="text-[11px] text-[#86868b] text-center mt-3">
+              <p className="text-[11px] text-[#6e6e73] text-center mt-3">
                 บอกเราว่าร้านคุณขายอะไร กี่สาขา — เราออกแบบ workflow ให้
               </p>
             </div>

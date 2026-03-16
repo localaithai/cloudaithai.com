@@ -6,7 +6,7 @@ export default function Footer() {
           {/* Solutions */}
           <div>
             <p className="text-[12px] font-semibold text-[#1d1d1f] uppercase tracking-wider mb-3">Solutions</p>
-            <div className="space-y-2 text-[13px] text-[#86868b]">
+            <div className="space-y-2 text-[13px] text-[#6e6e73]">
               <a href="/solutions/ecommerce" className="block hover:text-[#1d1d1f] transition-colors">ร้านค้าออนไลน์</a>
               <a href="/solutions/creator" className="block hover:text-[#1d1d1f] transition-colors">Content Creator</a>
               <a href="/solutions/legal" className="block hover:text-[#1d1d1f] transition-colors">สำนักงานกฎหมาย</a>
@@ -19,7 +19,7 @@ export default function Footer() {
           {/* Tools */}
           <div>
             <p className="text-[12px] font-semibold text-[#1d1d1f] uppercase tracking-wider mb-3">เครื่องมือ</p>
-            <div className="space-y-2 text-[13px] text-[#86868b]">
+            <div className="space-y-2 text-[13px] text-[#6e6e73]">
               <a href="/integrations" className="block hover:text-[#1d1d1f] transition-colors">55+ Integrations</a>
               <a href="/home-ai" className="block hover:text-[#1d1d1f] transition-colors">Home AI Assistant</a>
               <a href="/#models" className="block hover:text-[#1d1d1f] transition-colors">Frontier Models</a>
@@ -29,7 +29,7 @@ export default function Footer() {
           {/* Company */}
           <div>
             <p className="text-[12px] font-semibold text-[#1d1d1f] uppercase tracking-wider mb-3">Company</p>
-            <div className="space-y-2 text-[13px] text-[#86868b]">
+            <div className="space-y-2 text-[13px] text-[#6e6e73]">
               <a href="/#pricing" className="block hover:text-[#1d1d1f] transition-colors">ราคา</a>
               <a href="/#contact" className="block hover:text-[#1d1d1f] transition-colors">ติดต่อเรา</a>
               <a href="https://localaithai.com" target="_blank" className="block hover:text-[#2997ff] transition-colors">LocalAI Thailand</a>
@@ -39,7 +39,7 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <p className="text-[12px] font-semibold text-[#1d1d1f] uppercase tracking-wider mb-3">ติดต่อ</p>
-            <div className="space-y-2 text-[13px] text-[#86868b]">
+            <div className="space-y-2 text-[13px] text-[#6e6e73]">
               <a href="tel:0827047606" className="block hover:text-[#1d1d1f] transition-colors">082-704-7606</a>
               <a href="mailto:chavin@pace-design.co.th" className="block hover:text-[#1d1d1f] transition-colors">chavin@pace-design.co.th</a>
               <a href="https://line.me/R/ti/p/@542mgysj" className="block hover:text-[#1d1d1f] transition-colors">LINE @542mgysj</a>

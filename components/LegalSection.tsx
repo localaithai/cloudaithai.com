@@ -77,14 +77,14 @@ function CircularGauge({
           <span className="text-[22px] font-bold" style={{ color }}>
             {value}
           </span>
-          <span className="text-[10px] text-[#86868b]">/ {max}</span>
+          <span className="text-[10px] text-[#6e6e73]">/ {max}</span>
         </div>
       </div>
       {label && (
         <p className="text-[12px] font-semibold text-[#1d1d1f] mt-2">{label}</p>
       )}
       {sublabel && (
-        <p className="text-[10px] text-[#86868b]">{sublabel}</p>
+        <p className="text-[10px] text-[#6e6e73]">{sublabel}</p>
       )}
     </div>
   );
@@ -300,7 +300,7 @@ export default function LegalSection() {
             <h1 className="text-[36px] sm:text-[48px] md:text-[56px] font-semibold tracking-tight text-[#1d1d1f] mb-2">
               AI วิเคราะห์สัญญา<span className="gradient-text">ใน 5 นาที</span>
             </h1>
-            <p className="text-[17px] text-[#86868b] max-w-[540px] mx-auto">
+            <p className="text-[17px] text-[#6e6e73] max-w-[540px] mx-auto">
               จากสัญญา 54 หน้าที่ต้องอ่านทั้งวัน เป็นรายงานข้อเสี่ยง + ข้อเสนอแนะพร้อมมาตราอ้างอิง
             </p>
           </motion.div>
@@ -323,7 +323,7 @@ export default function LegalSection() {
                 <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
                 <div className="w-3 h-3 rounded-full bg-[#28c840]" />
               </div>
-              <span className="text-[12px] text-[#86868b] font-medium ml-2">
+              <span className="text-[12px] text-[#6e6e73] font-medium ml-2">
                 Cloud AI — Contract Analyzer
               </span>
               <div className="ml-auto flex items-center gap-2">
@@ -344,7 +344,7 @@ export default function LegalSection() {
                       สัญญาเช่าอาคารพาณิชย์
                     </span>
                   </div>
-                  <span className="text-[10px] text-[#86868b]">54 หน้า | 23 ข้อ</span>
+                  <span className="text-[10px] text-[#6e6e73]">54 หน้า | 23 ข้อ</span>
                 </div>
 
                 {/* Document body */}
@@ -352,7 +352,7 @@ export default function LegalSection() {
                   <p className="text-center text-[14px] font-bold text-[#1d1d1f] font-sans tracking-wide">
                     สัญญาเช่าอาคารพาณิชย์
                   </p>
-                  <p className="text-center text-[11px] text-[#86868b] font-sans">
+                  <p className="text-center text-[11px] text-[#6e6e73] font-sans">
                     เลขที่ L-2568/0234
                   </p>
                   <hr className="border-black/[0.06]" />
@@ -405,7 +405,7 @@ export default function LegalSection() {
                     </motion.div>
                   ))}
 
-                  <p className="text-center text-[11px] text-[#86868b] font-sans py-2">
+                  <p className="text-center text-[11px] text-[#6e6e73] font-sans py-2">
                     ... ข้อ 16-23 (ไม่พบข้อเสี่ยงเพิ่มเติม) ...
                   </p>
                 </div>
@@ -415,7 +415,7 @@ export default function LegalSection() {
               <div className="lg:w-[40%] p-5 sm:p-6 bg-[#fafafa]">
                 {/* Risk Score Gauge */}
                 <div className="text-center mb-6">
-                  <p className="text-[11px] font-semibold text-[#86868b] uppercase tracking-wider mb-3">
+                  <p className="text-[11px] font-semibold text-[#6e6e73] uppercase tracking-wider mb-3">
                     Risk Score
                   </p>
                   <CircularGauge
@@ -462,7 +462,7 @@ export default function LegalSection() {
                             {risk.severity}
                           </span>
                         </div>
-                        <p className="text-[10px] text-[#86868b] leading-relaxed">
+                        <p className="text-[10px] text-[#6e6e73] leading-relaxed">
                           {risk.desc}
                         </p>
                       </motion.div>
@@ -501,7 +501,7 @@ export default function LegalSection() {
 
                 {/* Legal references */}
                 <div>
-                  <p className="text-[11px] font-semibold text-[#86868b] mb-2">
+                  <p className="text-[11px] font-semibold text-[#6e6e73] mb-2">
                     มาตราอ้างอิง
                   </p>
                   <div className="flex flex-wrap gap-1.5">
@@ -533,7 +533,7 @@ export default function LegalSection() {
             <h2 className="text-[28px] sm:text-[36px] font-semibold text-[#1d1d1f] mb-2">
               Search Any Law
             </h2>
-            <p className="text-[15px] text-[#86868b]">
+            <p className="text-[15px] text-[#6e6e73]">
               ค้นข้อกฎหมายด้วยภาษาธรรมชาติ AI หาให้ใน 2 วินาที
             </p>
           </motion.div>
@@ -557,7 +557,7 @@ export default function LegalSection() {
               <Search
                 size={20}
                 className={`shrink-0 transition-colors ${
-                  searchFocused ? "text-[#2997ff]" : "text-[#86868b]"
+                  searchFocused ? "text-[#2997ff]" : "text-[#6e6e73]"
                 }`}
               />
               <span className="text-[15px] text-[#1d1d1f]">
@@ -601,7 +601,7 @@ export default function LegalSection() {
                         className="text-[#d2d2d7] group-hover:text-[#2997ff] transition-colors shrink-0 ml-auto"
                       />
                     </div>
-                    <p className="text-[12px] text-[#86868b] leading-relaxed line-clamp-2">
+                    <p className="text-[12px] text-[#6e6e73] leading-relaxed line-clamp-2">
                       {result.desc}
                     </p>
                     <div className="flex gap-1.5 mt-2">
@@ -620,7 +620,7 @@ export default function LegalSection() {
             ))}
           </div>
 
-          <p className="text-[11px] text-[#86868b] text-center mt-4">
+          <p className="text-[11px] text-[#6e6e73] text-center mt-4">
             ค้นจากฐานข้อมูล พ.ร.บ. + ป.พ.พ. + คำพิพากษาศาลฎีกา | ค้นใน 2.1 วินาที
           </p>
         </div>
@@ -638,7 +638,7 @@ export default function LegalSection() {
             <h2 className="text-[28px] sm:text-[36px] font-semibold text-[#1d1d1f] mb-2">
               1 วันของทนาย + AI
             </h2>
-            <p className="text-[15px] text-[#86868b]">
+            <p className="text-[15px] text-[#6e6e73]">
               งานที่เคยใช้ทั้งวัน เสร็จก่อนบ่ายสอง
             </p>
           </motion.div>
@@ -678,7 +678,7 @@ export default function LegalSection() {
                     <h3 className="text-[14px] font-semibold text-[#1d1d1f] mb-1">
                       {item.title}
                     </h3>
-                    <p className="text-[12px] text-[#86868b] mb-3 leading-relaxed">
+                    <p className="text-[12px] text-[#6e6e73] mb-3 leading-relaxed">
                       {item.detail}
                     </p>
                     <div className="flex items-center gap-3 flex-wrap">
@@ -688,7 +688,7 @@ export default function LegalSection() {
                       >
                         {item.aiTime}
                       </span>
-                      <span className="text-[10px] text-[#86868b] line-through">
+                      <span className="text-[10px] text-[#6e6e73] line-through">
                         {item.oldTime}
                       </span>
                     </div>
@@ -709,7 +709,7 @@ export default function LegalSection() {
                 <span className="text-[13px] font-semibold text-[#1d1d1f]">
                   ประหยัดเวลารวม: 6+ ชั่วโมง/วัน
                 </span>
-                <span className="text-[11px] text-[#86868b]">
+                <span className="text-[11px] text-[#6e6e73]">
                   = 120+ ชั่วโมง/เดือน
                 </span>
               </div>
@@ -730,7 +730,7 @@ export default function LegalSection() {
             <h2 className="text-[28px] sm:text-[36px] font-semibold text-[#1d1d1f] mb-2">
               PDPA Compliance Meter
             </h2>
-            <p className="text-[15px] text-[#86868b]">
+            <p className="text-[15px] text-[#6e6e73]">
               AI ตรวจสอบให้ครบทุกหมวด รู้ทันทีว่าต้องแก้ตรงไหน
             </p>
           </motion.div>
@@ -802,17 +802,17 @@ export default function LegalSection() {
             <div className="flex flex-wrap items-center gap-3 mt-8 pt-6 border-t border-black/[0.06]">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-[#34c759]" />
-                <span className="text-[11px] text-[#86868b]">ผ่าน (80%+)</span>
+                <span className="text-[11px] text-[#6e6e73]">ผ่าน (80%+)</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-[#ff9500]" />
-                <span className="text-[11px] text-[#86868b]">ควรปรับปรุง (50-79%)</span>
+                <span className="text-[11px] text-[#6e6e73]">ควรปรับปรุง (50-79%)</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-[#ff3b30]" />
-                <span className="text-[11px] text-[#86868b]">ไม่ผ่าน (&lt;50%)</span>
+                <span className="text-[11px] text-[#6e6e73]">ไม่ผ่าน (&lt;50%)</span>
               </div>
-              <span className="text-[10px] text-[#86868b] ml-auto">
+              <span className="text-[10px] text-[#6e6e73] ml-auto">
                 โทษปรับสูงสุด: 5 ล้านบาท (ม.90 PDPA)
               </span>
             </div>
@@ -839,7 +839,7 @@ export default function LegalSection() {
             <h2 className="text-[24px] sm:text-[28px] font-semibold text-[#1d1d1f] mb-2">
               เริ่มใช้ AI สำหรับงานกฎหมาย
             </h2>
-            <p className="text-[15px] text-[#86868b] mb-6">
+            <p className="text-[15px] text-[#6e6e73] mb-6">
               วิเคราะห์สัญญา + ค้นกฎหมาย + ร่างเอกสาร + ตรวจ PDPA
             </p>
 
@@ -847,7 +847,7 @@ export default function LegalSection() {
               <span className="text-[48px] sm:text-[56px] font-bold text-[#5856d6]">
                 ฿49,900
               </span>
-              <p className="text-[13px] text-[#86868b] mt-1">
+              <p className="text-[13px] text-[#6e6e73] mt-1">
                 Setup fee ครั้งเดียว + API ตามใช้จริง ~฿3,000-8,000/เดือน
               </p>
             </div>
@@ -869,7 +869,7 @@ export default function LegalSection() {
                     size={13}
                     className="text-[#5856d6] shrink-0 mt-0.5"
                   />
-                  <span className="text-[12px] text-[#86868b]">{f}</span>
+                  <span className="text-[12px] text-[#6e6e73]">{f}</span>
                 </div>
               ))}
             </div>
@@ -880,17 +880,17 @@ export default function LegalSection() {
                 <p className="text-[18px] font-bold text-[#ff3b30] line-through">
                   ฿25,000
                 </p>
-                <p className="text-[10px] text-[#86868b]">จ้างทนายจูเนียร์/เดือน</p>
+                <p className="text-[10px] text-[#6e6e73]">จ้างทนายจูเนียร์/เดือน</p>
               </div>
-              <ArrowRight size={16} className="text-[#86868b]" />
+              <ArrowRight size={16} className="text-[#6e6e73]" />
               <div className="text-center">
                 <p className="text-[18px] font-bold text-[#34c759]">฿3,000</p>
-                <p className="text-[10px] text-[#86868b]">AI ค่าใช้จ่าย/เดือน</p>
+                <p className="text-[10px] text-[#6e6e73]">AI ค่าใช้จ่าย/เดือน</p>
               </div>
-              <ArrowRight size={16} className="text-[#86868b]" />
+              <ArrowRight size={16} className="text-[#6e6e73]" />
               <div className="text-center">
                 <p className="text-[18px] font-bold text-[#2997ff]">฿264,000</p>
-                <p className="text-[10px] text-[#86868b]">ประหยัด/ปี</p>
+                <p className="text-[10px] text-[#6e6e73]">ประหยัด/ปี</p>
               </div>
             </div>
 
@@ -901,7 +901,7 @@ export default function LegalSection() {
               ปรึกษาฟรี — ออกแบบระบบให้
               <ArrowRight size={16} />
             </a>
-            <p className="text-[11px] text-[#86868b] mt-3">
+            <p className="text-[11px] text-[#6e6e73] mt-3">
               ไม่มีค่าใช้จ่ายจนกว่าจะตกลง | Demo ให้ดูก่อนตัดสินใจ
             </p>
           </motion.div>

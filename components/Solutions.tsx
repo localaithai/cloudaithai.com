@@ -85,7 +85,7 @@ export default function Solutions() {
           <h2 className="text-3xl md:text-5xl font-bold text-[#1d1d1f] tracking-tight mb-4">
             AI สำหรับทุกธุรกิจ
           </h2>
-          <p className="text-base text-[#86868b] max-w-xl mx-auto">
+          <p className="text-base text-[#6e6e73] max-w-xl mx-auto">
             ไม่ว่าคุณทำธุรกิจอะไร เรามี solution AI ที่ออกแบบมาเฉพาะ — พร้อม workflow, model, และค่าใช้จ่ายที่ชัดเจน
           </p>
         </motion.div>
@@ -115,13 +115,13 @@ export default function Solutions() {
                 </div>
 
                 <h3 className="text-[17px] font-semibold text-[#1d1d1f] mb-0.5">{sol.title}</h3>
-                <p className="text-[12px] text-[#86868b] mb-3">{sol.subtitle}</p>
-                <p className="text-[13px] text-[#86868b] mb-4 leading-relaxed">{sol.desc}</p>
+                <p className="text-[12px] text-[#6e6e73] mb-3">{sol.subtitle}</p>
+                <p className="text-[13px] text-[#6e6e73] mb-4 leading-relaxed">{sol.desc}</p>
 
                 {/* Example pills */}
                 <div className="flex flex-wrap gap-1.5 mb-4">
                   {sol.examples.map((ex) => (
-                    <span key={ex} className="text-[10px] px-2.5 py-1 rounded-full bg-[#f5f5f7] rounded-full text-[#86868b]">
+                    <span key={ex} className="text-[10px] px-2.5 py-1 rounded-full bg-[#f5f5f7] rounded-full text-[#6e6e73]">
                       {ex}
                     </span>
                   ))}

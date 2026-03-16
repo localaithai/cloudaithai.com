@@ -195,10 +195,10 @@ function UseCaseCard({ useCase, index }: { useCase: UseCase; index: number }) {
             </div>
             <div className="flex-1 min-w-0">
               <h3 className="text-[15px] font-semibold text-[#1d1d1f] mb-0.5">{useCase.title}</h3>
-              <p className="text-[13px] text-[#86868b]">{useCase.subtitle}</p>
+              <p className="text-[13px] text-[#6e6e73]">{useCase.subtitle}</p>
             </div>
             <div className="flex items-center gap-3 shrink-0">
-              <div className="hidden sm:flex items-center gap-3 text-[11px] text-[#86868b]">
+              <div className="hidden sm:flex items-center gap-3 text-[11px] text-[#6e6e73]">
                 <span className="flex items-center gap-1"><Clock size={11} /> {useCase.timeSaved}</span>
                 <span className="flex items-center gap-1"><DollarSign size={11} /> {useCase.monthlyCost}</span>
               </div>
@@ -219,11 +219,11 @@ function UseCaseCard({ useCase, index }: { useCase: UseCase; index: number }) {
               <div className="px-6 pb-6 space-y-5">
                 <div className="h-[1px] bg-gradient-to-r from-transparent via-black/[0.06] to-transparent" />
 
-                <p className="text-[14px] text-[#86868b] leading-relaxed">{useCase.description}</p>
+                <p className="text-[14px] text-[#6e6e73] leading-relaxed">{useCase.description}</p>
 
                 {/* Workflow steps */}
                 <div>
-                  <p className="text-[11px] font-medium text-[#86868b] uppercase tracking-wider mb-3">Workflow</p>
+                  <p className="text-[11px] font-medium text-[#6e6e73] uppercase tracking-wider mb-3">Workflow</p>
                   <div className="space-y-2">
                     {useCase.workflow.map((step, i) => (
                       <div key={i} className="flex items-start gap-3">
@@ -239,7 +239,7 @@ function UseCaseCard({ useCase, index }: { useCase: UseCase; index: number }) {
                 {/* Tools + Models + Stats */}
                 <div className="grid sm:grid-cols-3 gap-4">
                   <div className="bg-[#fafafa] rounded-xl p-4">
-                    <p className="text-[10px] font-medium text-[#86868b] uppercase tracking-wider mb-2">เครื่องมือ</p>
+                    <p className="text-[10px] font-medium text-[#6e6e73] uppercase tracking-wider mb-2">เครื่องมือ</p>
                     <div className="flex flex-wrap gap-1.5">
                       {useCase.tools.map((t) => (
                         <span key={t} className="text-[11px] px-2.5 py-1 rounded-full bg-white border border-black/[0.06] text-[#1d1d1f]">{t}</span>
@@ -247,7 +247,7 @@ function UseCaseCard({ useCase, index }: { useCase: UseCase; index: number }) {
                     </div>
                   </div>
                   <div className="bg-[#fafafa] rounded-xl p-4">
-                    <p className="text-[10px] font-medium text-[#86868b] uppercase tracking-wider mb-2">AI Model</p>
+                    <p className="text-[10px] font-medium text-[#6e6e73] uppercase tracking-wider mb-2">AI Model</p>
                     <div className="space-y-1">
                       {useCase.models.map((m) => (
                         <p key={m} className="text-[11px] text-[#1d1d1f]">{m}</p>
@@ -255,15 +255,15 @@ function UseCaseCard({ useCase, index }: { useCase: UseCase; index: number }) {
                     </div>
                   </div>
                   <div className="bg-[#fafafa] rounded-xl p-4">
-                    <p className="text-[10px] font-medium text-[#86868b] uppercase tracking-wider mb-2">ผลลัพธ์</p>
+                    <p className="text-[10px] font-medium text-[#6e6e73] uppercase tracking-wider mb-2">ผลลัพธ์</p>
                     <p className="text-[13px] font-medium" style={{ color: useCase.color }}>{useCase.timeSaved}</p>
-                    <p className="text-[12px] text-[#86868b] mt-1">ค่า API ~{useCase.monthlyCost}/เดือน</p>
+                    <p className="text-[12px] text-[#6e6e73] mt-1">ค่า API ~{useCase.monthlyCost}/เดือน</p>
                   </div>
                 </div>
 
                 {/* Real example */}
                 <div className="rounded-xl p-4 border-l-3 border border-black/[0.04]" style={{ borderLeftColor: useCase.color, borderLeftWidth: 3 }}>
-                  <p className="text-[11px] font-medium text-[#86868b] uppercase tracking-wider mb-1">ตัวอย่างจริง</p>
+                  <p className="text-[11px] font-medium text-[#6e6e73] uppercase tracking-wider mb-1">ตัวอย่างจริง</p>
                   <p className="text-[13px] text-[#1d1d1f]">{useCase.example}</p>
                 </div>
               </div>
@@ -289,7 +289,7 @@ export default function UseCases() {
           <h2 className="text-3xl md:text-5xl font-bold text-[#1d1d1f] tracking-tight mb-4">
             ทุกอย่างที่ AI ทำแทนคุณได้
           </h2>
-          <p className="text-base text-[#86868b] max-w-xl mx-auto">
+          <p className="text-base text-[#6e6e73] max-w-xl mx-auto">
             8 ตัวอย่าง automation จริงที่ธุรกิจไทยใช้ — พร้อม workflow, เครื่องมือ, model ที่ใช้, และค่าใช้จ่ายจริง
           </p>
         </motion.div>
@@ -314,7 +314,7 @@ export default function UseCases() {
           ].map((stat) => (
             <div key={stat.label} className="text-center py-6 bg-white rounded-2xl border border-black/[0.04]">
               <p className="text-xl md:text-2xl font-semibold" style={{ color: stat.color }}>{stat.value}</p>
-              <p className="text-[12px] text-[#86868b] mt-1">{stat.label}</p>
+              <p className="text-[12px] text-[#6e6e73] mt-1">{stat.label}</p>
             </div>
           ))}
         </motion.div>

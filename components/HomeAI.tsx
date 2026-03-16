@@ -33,7 +33,7 @@ export default function HomeAI() {
           <h2 className="text-3xl md:text-5xl font-bold text-[#1d1d1f] tracking-tight mb-4">
             ผู้ช่วย AI ที่บ้าน
           </h2>
-          <p className="text-base text-[#86868b] max-w-xl mx-auto">
+          <p className="text-base text-[#6e6e73] max-w-xl mx-auto">
             เหมือนมี JARVIS ส่วนตัว — สั่งผ่าน LINE จัดการปฏิทิน สั่งของ ควบคุม smart home ได้หมด
           </p>
         </motion.div>
@@ -56,7 +56,7 @@ export default function HomeAI() {
                       {f.icon}
                     </div>
                     <h3 className="text-[13px] font-semibold text-[#1d1d1f] mb-0.5">{f.title}</h3>
-                    <p className="text-[11px] text-[#86868b] leading-relaxed">{f.desc}</p>
+                    <p className="text-[11px] text-[#6e6e73] leading-relaxed">{f.desc}</p>
                   </div>
                 </motion.div>
               ))}
@@ -87,7 +87,7 @@ export default function HomeAI() {
                   <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
                   <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
                 </div>
-                <span className="text-[12px] text-[#86868b] font-medium ml-2">Home AI Assistant</span>
+                <span className="text-[12px] text-[#6e6e73] font-medium ml-2">Home AI Assistant</span>
                 <span className="ml-auto relative w-2 h-2 rounded-full bg-[#34c759]">
                   <span className="absolute inset-0 rounded-full bg-[#34c759] animate-ping opacity-50" />
                 </span>

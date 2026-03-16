@@ -38,7 +38,7 @@ export default function RealEstateSection() {
             <h1 className="text-[36px] sm:text-[48px] md:text-[56px] font-semibold tracking-tight text-[#1d1d1f] mb-2">
               ค้นหาทรัพย์ด้วย <span className="gradient-text">AI</span>
             </h1>
-            <p className="text-[17px] text-[#86868b] mb-8">
+            <p className="text-[17px] text-[#6e6e73] mb-8">
               บอก AI ว่าต้องการอะไร — ตอบทันที พร้อมนัดชม
             </p>
           </motion.div>
@@ -54,7 +54,7 @@ export default function RealEstateSection() {
             transition={{ delay: 0.3 }}
             className="apple-card p-2 flex items-center gap-3"
           >
-            <Search size={20} className="text-[#86868b] ml-3" />
+            <Search size={20} className="text-[#6e6e73] ml-3" />
             <input
               type="text"
               value={search}
@@ -69,7 +69,7 @@ export default function RealEstateSection() {
               AI ค้นหา
             </button>
           </motion.div>
-          <p className="text-[11px] text-[#86868b] text-center mt-2">ลองพิมพ์ "1BR" หรือ "วิว" เพื่อกรอง</p>
+          <p className="text-[11px] text-[#6e6e73] text-center mt-2">ลองพิมพ์ "1BR" หรือ "วิว" เพื่อกรอง</p>
         </div>
       </section>
 
@@ -77,7 +77,7 @@ export default function RealEstateSection() {
       <section className="px-6 pb-16">
         <div className="max-w-5xl mx-auto">
           <div className="flex items-center justify-between mb-4">
-            <p className="text-[14px] text-[#86868b]">พบ <span className="font-medium text-[#1d1d1f]">{filtered.length}</span> ทรัพย์</p>
+            <p className="text-[14px] text-[#6e6e73]">พบ <span className="font-medium text-[#1d1d1f]">{filtered.length}</span> ทรัพย์</p>
             <p className="text-[11px] text-[#2997ff] font-medium">AI จัดอันดับตาม relevance</p>
           </div>
 
@@ -101,7 +101,7 @@ export default function RealEstateSection() {
                     <span className="absolute top-3 right-3 text-[9px] font-bold px-2 py-0.5 rounded-full bg-[#ff9500] text-white">จองแล้ว</span>
                   )}
                   <button className="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-white/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Heart size={14} className="text-[#86868b]" />
+                    <Heart size={14} className="text-[#6e6e73]" />
                   </button>
                 </div>
 
@@ -110,9 +110,9 @@ export default function RealEstateSection() {
                     <h3 className="text-[14px] font-semibold text-[#1d1d1f]">{listing.name}</h3>
                     <span className="text-[13px] font-semibold text-[#2997ff]">฿{listing.price}</span>
                   </div>
-                  <p className="text-[12px] text-[#86868b] mb-2">{listing.type} · {listing.sqm} ตร.ม. · ชั้น {listing.floor} · {listing.view}</p>
+                  <p className="text-[12px] text-[#6e6e73] mb-2">{listing.type} · {listing.sqm} ตร.ม. · ชั้น {listing.floor} · {listing.view}</p>
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] text-[#86868b]">{listing.psm}/ตร.ม.</span>
+                    <span className="text-[10px] text-[#6e6e73]">{listing.psm}/ตร.ม.</span>
                     <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${listing.status === "ว่าง" ? "bg-[#34c759]/10 text-[#34c759]" : "bg-[#ff9500]/10 text-[#ff9500]"}`}>{listing.status}</span>
                   </div>
                 </div>
@@ -159,7 +159,7 @@ export default function RealEstateSection() {
             >
               <div className="flex items-center justify-between px-5 py-3 bg-[#f5f5f7] border-b border-black/[0.04]">
                 <span className="text-[13px] font-semibold text-[#1d1d1f]">🏠 AI Property Assistant</span>
-                <button onClick={() => setShowAIChat(false)} className="text-[#86868b] text-[18px]">×</button>
+                <button onClick={() => setShowAIChat(false)} className="text-[#6e6e73] text-[18px]">×</button>
               </div>
               <div className="p-5 space-y-3 max-h-[400px] overflow-y-auto">
                 <div className="flex justify-end"><div className="bg-[#2997ff] text-white text-[13px] px-4 py-2.5 rounded-2xl rounded-br-sm max-w-[75%]">หาคอนโด พระราม 9 งบ 3 ล้าน</div></div>
@@ -169,13 +169,13 @@ export default function RealEstateSection() {
                     {listings.slice(0, 3).filter(l => parseFloat(l.price) <= 3.5).map((l) => (
                       <div key={l.name} className="p-2 rounded-lg bg-white mb-1.5 text-[12px]">
                         <p className="font-medium">{l.name}</p>
-                        <p className="text-[#86868b]">{l.type} {l.sqm} ตร.ม. ชั้น {l.floor} · ฿{l.price}</p>
+                        <p className="text-[#6e6e73]">{l.type} {l.sqm} ตร.ม. ชั้น {l.floor} · ฿{l.price}</p>
                       </div>
                     ))}
                     <p className="text-[#2997ff] text-[12px] mt-1">สนใจนัดดูห้องไหนคะ? 📅</p>
                   </div>
                 </div>
-                <div className="text-[10px] text-[#86868b] text-center">AI ตอบใน 2.1 วินาที · ข้อมูลจาก listing database</div>
+                <div className="text-[10px] text-[#6e6e73] text-center">AI ตอบใน 2.1 วินาที · ข้อมูลจาก listing database</div>
               </div>
             </motion.div>
           </motion.div>
@@ -186,7 +186,7 @@ export default function RealEstateSection() {
       <section className="py-20 px-6 bg-[#f5f5f7]">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-[28px] sm:text-[36px] font-semibold text-[#1d1d1f] text-center mb-3">จาก Lead ถึงปิดดีล</h2>
-          <p className="text-[17px] text-[#86868b] text-center mb-12">AI ดูแลทุกขั้นตอน</p>
+          <p className="text-[17px] text-[#6e6e73] text-center mb-12">AI ดูแลทุกขั้นตอน</p>
 
           {/* Visual funnel — NOT a standard list */}
           <div className="flex flex-col sm:flex-row items-stretch gap-3">
@@ -210,7 +210,7 @@ export default function RealEstateSection() {
                   <span className="text-3xl mb-2 block">{stage.icon}</span>
                   <p className="text-[28px] font-semibold" style={{ color: stage.color }}>{stage.count}</p>
                   <p className="text-[13px] font-medium text-[#1d1d1f] mb-1">{stage.label}</p>
-                  <p className="text-[11px] text-[#86868b]">{stage.desc}</p>
+                  <p className="text-[11px] text-[#6e6e73]">{stage.desc}</p>
                 </div>
                 {i < 3 && <div className="hidden sm:block absolute right-[-14px] top-1/2 -translate-y-1/2 text-[#d2d2d7] text-xl z-20">→</div>}
               </motion.div>
@@ -250,24 +250,24 @@ export default function RealEstateSection() {
       <section className="py-20 px-6 bg-[#f5f5f7]">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-[28px] sm:text-[36px] font-semibold text-[#1d1d1f] mb-3">เริ่มต้นใช้งาน</h2>
-          <p className="text-[17px] text-[#86868b] mb-10">Setup fee ครั้งเดียว ทดลองใช้ 14 วันฟรี</p>
+          <p className="text-[17px] text-[#6e6e73] mb-10">Setup fee ครั้งเดียว ทดลองใช้ 14 วันฟรี</p>
 
           {/* Featured plan */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="apple-card p-8 max-w-md mx-auto ring-2 ring-[#2997ff]/20 mb-6">
             <span className="text-[11px] font-semibold px-4 py-1 rounded-full bg-[#2997ff] text-white">แนะนำ</span>
             <h3 className="text-[20px] font-semibold text-[#1d1d1f] mt-3">Agency Plan</h3>
             <p className="text-[40px] font-semibold text-[#2997ff] mt-1">฿39,900</p>
-            <p className="text-[12px] text-[#86868b] mb-1">Setup fee (ครั้งเดียว)</p>
-            <p className="text-[12px] text-[#86868b] mb-6">+ ฿3,500-8,000/เดือน (API)</p>
+            <p className="text-[12px] text-[#6e6e73] mb-1">Setup fee (ครั้งเดียว)</p>
+            <p className="text-[12px] text-[#6e6e73] mb-6">+ ฿3,500-8,000/เดือน (API)</p>
             <div className="space-y-2 text-left mb-6">
               {["LINE Inquiry Bot ไม่จำกัด", "AI Listing Generator", "Appointment Scheduler + Reminder", "Market Price Analysis", "Lead Scoring & Follow-up", "Training ทีม 2 ชม.", "Support 60 วัน"].map((f) => (
-                <div key={f} className="flex items-start gap-2"><Check size={14} className="mt-0.5 text-[#2997ff] shrink-0" /><span className="text-[13px] text-[#86868b]">{f}</span></div>
+                <div key={f} className="flex items-start gap-2"><Check size={14} className="mt-0.5 text-[#2997ff] shrink-0" /><span className="text-[13px] text-[#6e6e73]">{f}</span></div>
               ))}
             </div>
             <a href="/#contact" className="block text-center py-3 rounded-full bg-[#2997ff] text-white font-medium">เริ่มต้นใช้งาน</a>
           </motion.div>
 
-          <div className="flex justify-center gap-6 text-[13px] text-[#86868b]">
+          <div className="flex justify-center gap-6 text-[13px] text-[#6e6e73]">
             <span>Solo Agent: ฿14,900</span>
             <span>|</span>
             <span>Developer: ฿79,900</span>
@@ -275,11 +275,11 @@ export default function RealEstateSection() {
 
           {/* ROI */}
           <div className="mt-8 flex justify-center gap-6">
-            <div className="text-center"><p className="text-[11px] text-[#86868b]">จ้างแอดมิน</p><p className="text-[18px] font-semibold text-[#ff3b30]">฿25K/เดือน</p></div>
-            <div className="text-center text-[#86868b] pt-4">vs</div>
-            <div className="text-center"><p className="text-[11px] text-[#86868b]">ใช้ AI</p><p className="text-[18px] font-semibold text-[#34c759]">฿3K/เดือน</p></div>
-            <div className="text-center text-[#86868b] pt-4">=</div>
-            <div className="text-center"><p className="text-[11px] text-[#86868b]">ประหยัด/ปี</p><p className="text-[18px] font-semibold text-[#2997ff]">฿264K</p></div>
+            <div className="text-center"><p className="text-[11px] text-[#6e6e73]">จ้างแอดมิน</p><p className="text-[18px] font-semibold text-[#ff3b30]">฿25K/เดือน</p></div>
+            <div className="text-center text-[#6e6e73] pt-4">vs</div>
+            <div className="text-center"><p className="text-[11px] text-[#6e6e73]">ใช้ AI</p><p className="text-[18px] font-semibold text-[#34c759]">฿3K/เดือน</p></div>
+            <div className="text-center text-[#6e6e73] pt-4">=</div>
+            <div className="text-center"><p className="text-[11px] text-[#6e6e73]">ประหยัด/ปี</p><p className="text-[18px] font-semibold text-[#2997ff]">฿264K</p></div>
           </div>
         </div>
       </section>
@@ -288,7 +288,7 @@ export default function RealEstateSection() {
       <section className="py-20 px-6">
         <div className="max-w-lg mx-auto text-center">
           <h2 className="text-[24px] sm:text-[28px] font-semibold text-[#1d1d1f] mb-3">พร้อมให้ AI ช่วยปิดดีล?</h2>
-          <p className="text-[15px] text-[#86868b] mb-6">ปรึกษาฟรี ไม่มีค่าใช้จ่าย</p>
+          <p className="text-[15px] text-[#6e6e73] mb-6">ปรึกษาฟรี ไม่มีค่าใช้จ่าย</p>
           <a href="/#contact" className="apple-btn apple-btn-blue">ปรึกษาฟรี</a>
         </div>
       </section>

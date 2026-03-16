@@ -124,7 +124,7 @@ export default function Integrations() {
           <h2 className="text-[40px] sm:text-[56px] font-semibold tracking-[-0.04em] mb-4">
             เชื่อมต่อทุกอย่าง.
           </h2>
-          <p className="text-[19px] text-[#86868b] max-w-[600px] mx-auto leading-[1.47]">
+          <p className="text-[19px] text-[#6e6e73] max-w-[600px] mx-auto leading-[1.47]">
             {integrations.length}+ integrations — ตั้งแต่ AI models, chat platforms, hosting, databases ถึง productivity tools ทั้งหมดเชื่อมกันได้
           </p>
         </motion.div>
@@ -138,7 +138,7 @@ export default function Integrations() {
               className={`px-4 py-2 rounded-full text-[13px] font-medium transition-all ${
                 activeCategory === cat.id
                   ? "text-white shadow-sm"
-                  : "bg-[#f5f5f7] text-[#86868b] hover:text-[#1d1d1f]"
+                  : "bg-[#f5f5f7] text-[#6e6e73] hover:text-[#1d1d1f]"
               }`}
               style={activeCategory === cat.id ? { background: cat.color } : {}}
             >
@@ -168,14 +168,14 @@ export default function Integrations() {
               </div>
               <div className="min-w-0">
                 <p className="text-[13px] font-medium text-[#1d1d1f] truncate">{item.name}</p>
-                <p className="text-[11px] text-[#86868b] truncate">{item.desc}</p>
+                <p className="text-[11px] text-[#6e6e73] truncate">{item.desc}</p>
               </div>
             </motion.div>
           ))}
         </motion.div>
 
         {/* Count badge */}
-        <p className="text-center text-[14px] text-[#86868b] mt-8">
+        <p className="text-center text-[14px] text-[#6e6e73] mt-8">
           รวม <span className="font-medium text-[#1d1d1f]">{integrations.length}+</span> integrations — และเพิ่มเติมได้ตลอด
         </p>
       </div>
