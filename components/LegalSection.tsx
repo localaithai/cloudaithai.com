@@ -46,7 +46,7 @@ const workflows = [
 ];
 
 const pricing = [
-  { name: "Solo Lawyer", price: "฿19,900", monthly: "฿1,000-2,500", features: ["Contract analysis (10/เดือน)", "Legal RAG 1 ฐานข้อมูล", "Document draft 3 templates", "Support 30 วัน"], color: "#007aff" },
+  { name: "Solo Lawyer", price: "฿19,900", monthly: "฿1,000-2,500", features: ["Contract analysis (10/เดือน)", "Legal RAG 1 ฐานข้อมูล", "Document draft 3 templates", "Support 30 วัน"], color: "#2997ff" },
   { name: "Law Firm", price: "฿49,900", monthly: "฿3,000-8,000", features: ["Contract analysis ไม่จำกัด", "Legal RAG หลายฐานข้อมูล", "Document draft ไม่จำกัด template", "PDPA compliance checker", "Training ทีม 2 ชม.", "Support 60 วัน"], color: "#5856d6", badge: "แนะนำ" },
   { name: "Enterprise", price: "฿89,900", monthly: "฿5,000-15,000", features: ["ทุกอย่างใน Law Firm", "Custom template development", "API integration กับระบบที่มี", "Multi-user + permissions", "On-site training 1 วัน", "Priority support 90 วัน"], color: "#af52de" },
 ];
@@ -59,14 +59,14 @@ export default function LegalSection() {
       <div className="max-w-5xl mx-auto px-6">
         {/* Hero */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 glass-pill px-4 py-1.5 mb-6">
+          <div className="inline-flex items-center gap-2 bg-[#f5f5f7] rounded-full px-4 py-1.5 mb-6">
             <Scale size={14} className="text-[#5856d6]" />
             <span className="text-[12px] font-medium text-[#5856d6]">Legal AI Solution</span>
           </div>
-          <h1 className="text-3xl md:text-5xl font-bold text-[#1c1c1e] tracking-tight mb-4">
+          <h1 className="text-3xl md:text-5xl font-bold text-[#1d1d1f] tracking-tight mb-4">
             AI สำหรับ<span className="gradient-text">สำนักงานกฎหมาย</span>
           </h1>
-          <p className="text-base text-[#6e6e73] max-w-xl mx-auto">
+          <p className="text-base text-[#86868b] max-w-xl mx-auto">
             วิเคราะห์สัญญา 50 หน้าใน 5 นาที ค้นข้อกฎหมายใน 30 วินาที Draft เอกสารใน 10 นาที
           </p>
         </motion.div>
@@ -74,12 +74,12 @@ export default function LegalSection() {
         {/* Pain points */}
         <div className="grid sm:grid-cols-2 gap-4 mb-20">
           {painPoints.map((p, i) => (
-            <motion.div key={p.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="glass-card relative p-5">
+            <motion.div key={p.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="apple-card relative p-5">
               <div className="relative z-10 flex items-start gap-3">
-                <div className="w-10 h-10 rounded-xl glass-pill flex items-center justify-center shrink-0" style={{ color: p.color }}>{p.icon}</div>
+                <div className="w-10 h-10 rounded-xl bg-[#f5f5f7] rounded-full flex items-center justify-center shrink-0" style={{ color: p.color }}>{p.icon}</div>
                 <div>
-                  <h3 className="text-[14px] font-semibold text-[#1c1c1e] mb-0.5">{p.title}</h3>
-                  <p className="text-[12px] text-[#8e8e93]">{p.desc}</p>
+                  <h3 className="text-[14px] font-semibold text-[#1d1d1f] mb-0.5">{p.title}</h3>
+                  <p className="text-[12px] text-[#86868b]">{p.desc}</p>
                 </div>
               </div>
             </motion.div>
@@ -88,18 +88,18 @@ export default function LegalSection() {
 
         {/* Workflows */}
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-20">
-          <h2 className="text-2xl md:text-3xl font-bold text-[#1c1c1e] text-center mb-10">สิ่งที่ AI ทำให้ได้</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-[#1d1d1f] text-center mb-10">สิ่งที่ AI ทำให้ได้</h2>
           <div className="space-y-4">
             {workflows.map((wf, i) => (
-              <div key={wf.title} className="glass-card relative overflow-hidden">
+              <div key={wf.title} className="apple-card relative overflow-hidden">
                 <button onClick={() => setExpandedWorkflow(expandedWorkflow === i ? null : i)} className="w-full text-left p-6 relative z-10">
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <h3 className="text-[15px] font-semibold text-[#1c1c1e] mb-1">{wf.title}</h3>
-                      <p className="text-[13px] text-[#6e6e73]">{wf.desc}</p>
+                      <h3 className="text-[15px] font-semibold text-[#1d1d1f] mb-1">{wf.title}</h3>
+                      <p className="text-[13px] text-[#86868b]">{wf.desc}</p>
                     </div>
                     <div className="flex items-center gap-3 shrink-0">
-                      <span className="hidden sm:block text-[11px] glass-pill px-3 py-1 text-[#5856d6] font-medium">{wf.timeSaved}</span>
+                      <span className="hidden sm:block text-[11px] bg-[#f5f5f7] rounded-full px-3 py-1 text-[#5856d6] font-medium">{wf.timeSaved}</span>
                       <motion.div animate={{ rotate: expandedWorkflow === i ? 180 : 0 }}><ChevronDown size={16} className="text-[#c7c7cc]" /></motion.div>
                     </div>
                   </div>
@@ -113,14 +113,14 @@ export default function LegalSection() {
                           {wf.steps.map((step, si) => (
                             <div key={si} className="flex items-start gap-3">
                               <span className="w-5 h-5 rounded-full bg-[#5856d6] text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">{si + 1}</span>
-                              <span className="text-[13px] text-[#1c1c1e]/80">{step}</span>
+                              <span className="text-[13px] text-[#1d1d1f]/80">{step}</span>
                             </div>
                           ))}
                         </div>
                         <div className="grid grid-cols-3 gap-3">
-                          <div className="glass-pill px-3 py-2 text-center"><p className="text-[10px] text-[#8e8e93]">Model</p><p className="text-[11px] font-medium text-[#1c1c1e]">{wf.model}</p></div>
-                          <div className="glass-pill px-3 py-2 text-center"><p className="text-[10px] text-[#8e8e93]">ค่าใช้จ่าย</p><p className="text-[11px] font-medium text-[#5856d6]">{wf.cost}</p></div>
-                          <div className="glass-pill px-3 py-2 text-center"><p className="text-[10px] text-[#8e8e93]">ประหยัดเวลา</p><p className="text-[11px] font-medium text-[#34c759]">{wf.timeSaved}</p></div>
+                          <div className="bg-[#f5f5f7] rounded-full px-3 py-2 text-center"><p className="text-[10px] text-[#86868b]">Model</p><p className="text-[11px] font-medium text-[#1d1d1f]">{wf.model}</p></div>
+                          <div className="bg-[#f5f5f7] rounded-full px-3 py-2 text-center"><p className="text-[10px] text-[#86868b]">ค่าใช้จ่าย</p><p className="text-[11px] font-medium text-[#5856d6]">{wf.cost}</p></div>
+                          <div className="bg-[#f5f5f7] rounded-full px-3 py-2 text-center"><p className="text-[10px] text-[#86868b]">ประหยัดเวลา</p><p className="text-[11px] font-medium text-[#34c759]">{wf.timeSaved}</p></div>
                         </div>
                       </div>
                     </motion.div>
@@ -133,19 +133,19 @@ export default function LegalSection() {
 
         {/* Pricing */}
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-16">
-          <h2 className="text-2xl md:text-3xl font-bold text-[#1c1c1e] text-center mb-10">แพ็คเกจสำหรับสำนักงานกฎหมาย</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-[#1d1d1f] text-center mb-10">แพ็คเกจสำหรับสำนักงานกฎหมาย</h2>
           <div className="grid md:grid-cols-3 gap-5">
             {pricing.map((plan) => (
-              <div key={plan.name} className={`glass-card relative p-6 ${plan.badge ? "shimmer-bg" : ""}`}>
+              <div key={plan.name} className={`apple-card relative p-6 ${plan.badge ? "" : ""}`}>
                 {plan.badge && <div className="absolute -top-3 left-1/2 -translate-x-1/2"><span className="text-[11px] font-semibold px-4 py-1 rounded-full text-white" style={{ background: plan.color }}>{plan.badge}</span></div>}
                 <div className="relative z-10">
-                  <h3 className="text-base font-semibold text-[#1c1c1e] text-center mb-2">{plan.name}</h3>
+                  <h3 className="text-base font-semibold text-[#1d1d1f] text-center mb-2">{plan.name}</h3>
                   <p className="text-2xl font-bold text-center mb-1" style={{ color: plan.color }}>{plan.price}</p>
-                  <p className="text-[11px] text-[#8e8e93] text-center mb-1">Setup fee (ครั้งเดียว)</p>
-                  <p className="text-[11px] text-[#8e8e93] text-center mb-4 pb-4 border-b border-black/5">+ {plan.monthly}/เดือน</p>
+                  <p className="text-[11px] text-[#86868b] text-center mb-1">Setup fee (ครั้งเดียว)</p>
+                  <p className="text-[11px] text-[#86868b] text-center mb-4 pb-4 border-b border-black/5">+ {plan.monthly}/เดือน</p>
                   <div className="space-y-2 mb-5">
                     {plan.features.map((f) => (
-                      <div key={f} className="flex items-start gap-2"><Check size={13} className="mt-0.5 shrink-0" style={{ color: plan.color }} /><span className="text-[12px] text-[#6e6e73]">{f}</span></div>
+                      <div key={f} className="flex items-start gap-2"><Check size={13} className="mt-0.5 shrink-0" style={{ color: plan.color }} /><span className="text-[12px] text-[#86868b]">{f}</span></div>
                     ))}
                   </div>
                   <a href="/#contact" className="block text-center text-[13px] font-medium py-2.5 rounded-full transition-all" style={plan.badge ? { background: plan.color, color: "white" } : { background: "rgba(0,0,0,0.04)" }}>

@@ -13,7 +13,7 @@ const painPoints = [
   { icon: <MessageSquare size={20} />, text: "ตอบแชทลูกค้าไม่ทัน", detail: "ลูกค้าส่งข้อความมา 200+ ครั้ง/วัน ตอบไม่ไหว ลูกค้าหนีไปร้านอื่น", color: "#ff3b30" },
   { icon: <Package size={20} />, text: "Order ผิดบ่อย", detail: "จดออเดอร์มือ ส่งผิดไซส์ ผิดสี ต้อง return เสียค่าส่งซ้ำ", color: "#ff9500" },
   { icon: <FileText size={20} />, text: "ไม่มีเวลาเขียน content", detail: "ต้อง caption สินค้าใหม่ 20 รายการ/สัปดาห์ เขียนไม่ทัน", color: "#5856d6" },
-  { icon: <BarChart3 size={20} />, text: "ไม่รู้ว่าขายอะไรดี", detail: "ไม่มี data วิเคราะห์ ตัดสินใจจากความรู้สึก สต็อกสินค้าไม่ตรง demand", color: "#007aff" },
+  { icon: <BarChart3 size={20} />, text: "ไม่รู้ว่าขายอะไรดี", detail: "ไม่มี data วิเคราะห์ ตัดสินใจจากความรู้สึก สต็อกสินค้าไม่ตรง demand", color: "#2997ff" },
   { icon: <Star size={20} />, text: "Review ลบไม่มีใครตอบ", detail: "ลูกค้ารีวิว 1 ดาว ทิ้งไว้ 3 เดือน คนอื่นเห็นแล้วไม่กล้าซื้อ", color: "#ff2d55" },
   { icon: <Bell size={20} />, text: "สต็อกหมดไม่รู้ตัว", detail: "ของหมด stock แต่ยังรับออเดอร์ ต้องคืนเงิน เสียความเชื่อมั่น", color: "#ff9500" },
 ];
@@ -42,7 +42,7 @@ const workflows = [
     icon: <Package size={22} />,
     title: "Order Processing อัตโนมัติ",
     subtitle: "ออเดอร์เข้า → AI จัดการทุกขั้นตอน",
-    color: "#007aff",
+    color: "#2997ff",
     steps: [
       "ลูกค้าสั่งของผ่าน LINE / Shopee / Lazada / เว็บ",
       "n8n รับ webhook → AI extract ข้อมูลออเดอร์",
@@ -162,7 +162,7 @@ const pricingItems = [
 /* ─── Tools ─── */
 const toolsUsed = [
   { name: "n8n", desc: "Workflow automation — เชื่อมทุก API เข้าด้วยกัน", color: "#ff6d5a" },
-  { name: "Flowise", desc: "AI Chatbot builder — สร้าง RAG chatbot ง่ายๆ", color: "#007aff" },
+  { name: "Flowise", desc: "AI Chatbot builder — สร้าง RAG chatbot ง่ายๆ", color: "#2997ff" },
   { name: "LINE Messaging API", desc: "ส่ง/รับข้อความ LINE OA อัตโนมัติ", color: "#30d158" },
   { name: "Google Sheets", desc: "Database สำหรับ stock, orders, analytics", color: "#34c759" },
   { name: "Shopee/Lazada API", desc: "เชื่อมข้อมูลร้านค้า marketplace", color: "#ff9500" },
@@ -173,7 +173,7 @@ export default function EcommerceSection() {
   const [expandedWorkflow, setExpandedWorkflow] = useState<number | null>(null);
 
   return (
-    <div className="mesh-gradient min-h-screen">
+    <div className="bg-[#fbfbfd] min-h-screen">
       {/* ═══ HERO ═══ */}
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-5xl mx-auto text-center">
@@ -182,13 +182,13 @@ export default function EcommerceSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="inline-flex items-center gap-2 glass-pill px-5 py-2 mb-6 text-[13px] text-[#007aff] font-medium">
+            <div className="inline-flex items-center gap-2 bg-[#f5f5f7] rounded-full px-5 py-2 mb-6 text-[13px] text-[#2997ff] font-medium">
               <ShoppingCart size={16} /> E-commerce AI Solutions
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold text-[#1c1c1e] tracking-tight mb-6">
+            <h1 className="text-4xl md:text-6xl font-bold text-[#1d1d1f] tracking-tight mb-6">
               AI สำหรับ<span className="gradient-text">ร้านค้าออนไลน์</span>
             </h1>
-            <p className="text-lg md:text-xl text-[#6e6e73] max-w-2xl mx-auto mb-10 leading-relaxed">
+            <p className="text-lg md:text-xl text-[#86868b] max-w-2xl mx-auto mb-10 leading-relaxed">
               ตอบแชท, จัดการออเดอร์, เขียน caption, เช็คสต็อก, ตอบรีวิว, วิเคราะห์ยอดขาย
               — ทั้งหมดอัตโนมัติ เริ่มต้นแค่ ฿450/เดือน
             </p>
@@ -203,13 +203,13 @@ export default function EcommerceSection() {
           >
             {[
               { value: "85%", label: "ลดงานตอบแชท", color: "#30d158" },
-              { value: "3 วิ", label: "ตอบลูกค้า", color: "#007aff" },
+              { value: "3 วิ", label: "ตอบลูกค้า", color: "#2997ff" },
               { value: "฿3,750", label: "ค่า API เฉลี่ย/เดือน", color: "#ff9500" },
               { value: "10x", label: "เขียน caption เร็วขึ้น", color: "#af52de" },
             ].map((stat) => (
-              <div key={stat.label} className="glass-card p-4 text-center">
+              <div key={stat.label} className="apple-card p-4 text-center">
                 <p className="text-2xl md:text-3xl font-bold" style={{ color: stat.color }}>{stat.value}</p>
-                <p className="text-[12px] text-[#6e6e73] mt-1">{stat.label}</p>
+                <p className="text-[12px] text-[#86868b] mt-1">{stat.label}</p>
               </div>
             ))}
           </motion.div>
@@ -226,10 +226,10 @@ export default function EcommerceSection() {
             className="text-center mb-12"
           >
             <p className="text-[13px] font-semibold text-[#ff3b30] uppercase tracking-widest mb-3">Pain Points</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1c1c1e] tracking-tight mb-3">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#1d1d1f] tracking-tight mb-3">
               ปัญหาที่ร้านค้าออนไลน์เจอทุกวัน
             </h2>
-            <p className="text-base text-[#6e6e73] max-w-xl mx-auto">
+            <p className="text-base text-[#86868b] max-w-xl mx-auto">
               ถ้าคุณเจอปัญหาเหล่านี้ AI ช่วยแก้ได้ทั้งหมด
             </p>
           </motion.div>
@@ -242,14 +242,14 @@ export default function EcommerceSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
-                className="glass-card p-5"
+                className="apple-card p-5"
               >
                 <div className="relative z-10">
-                  <div className="w-10 h-10 rounded-xl glass-pill flex items-center justify-center mb-3" style={{ color: p.color }}>
+                  <div className="w-10 h-10 rounded-xl bg-[#f5f5f7] rounded-full flex items-center justify-center mb-3" style={{ color: p.color }}>
                     {p.icon}
                   </div>
-                  <h3 className="text-[15px] font-semibold text-[#1c1c1e] mb-1">{p.text}</h3>
-                  <p className="text-[12px] text-[#8e8e93] leading-relaxed">{p.detail}</p>
+                  <h3 className="text-[15px] font-semibold text-[#1d1d1f] mb-1">{p.text}</h3>
+                  <p className="text-[12px] text-[#86868b] leading-relaxed">{p.detail}</p>
                 </div>
               </motion.div>
             ))}
@@ -266,11 +266,11 @@ export default function EcommerceSection() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <p className="text-[13px] font-semibold text-[#007aff] uppercase tracking-widest mb-3">Automation Workflows</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1c1c1e] tracking-tight mb-3">
+            <p className="text-[13px] font-semibold text-[#2997ff] uppercase tracking-widest mb-3">Automation Workflows</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#1d1d1f] tracking-tight mb-3">
               6 ระบบ AI สำหรับร้านค้าออนไลน์
             </h2>
-            <p className="text-base text-[#6e6e73] max-w-xl mx-auto">
+            <p className="text-base text-[#86868b] max-w-xl mx-auto">
               แต่ละระบบทำงานอัตโนมัติ — เลือกใช้ทีละตัว หรือใช้ทั้งหมดก็ได้
             </p>
           </motion.div>
@@ -284,7 +284,7 @@ export default function EcommerceSection() {
                 viewport={{ once: true, margin: "-30px" }}
                 transition={{ delay: i * 0.05 }}
               >
-                <div className={`glass-card relative overflow-hidden ${expandedWorkflow === i ? "!bg-white/70" : ""}`}>
+                <div className={`apple-card relative overflow-hidden ${expandedWorkflow === i ? "!bg-white/70" : ""}`}>
                   <button
                     onClick={() => setExpandedWorkflow(expandedWorkflow === i ? null : i)}
                     className="w-full text-left p-6"
@@ -294,11 +294,11 @@ export default function EcommerceSection() {
                         {wf.icon}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-[15px] font-semibold text-[#1c1c1e] mb-0.5">{wf.title}</h3>
-                        <p className="text-[13px] text-[#6e6e73]">{wf.subtitle}</p>
+                        <h3 className="text-[15px] font-semibold text-[#1d1d1f] mb-0.5">{wf.title}</h3>
+                        <p className="text-[13px] text-[#86868b]">{wf.subtitle}</p>
                       </div>
                       <div className="flex items-center gap-3 shrink-0">
-                        <span className="hidden sm:block text-[11px] text-[#6e6e73]">{wf.cost}</span>
+                        <span className="hidden sm:block text-[11px] text-[#86868b]">{wf.cost}</span>
                         <motion.div animate={{ rotate: expandedWorkflow === i ? 180 : 0 }}>
                           <ChevronDown size={16} className="text-[#d2d2d7]" />
                         </motion.div>
@@ -320,14 +320,14 @@ export default function EcommerceSection() {
 
                           {/* Steps */}
                           <div>
-                            <p className="text-[11px] font-medium text-[#6e6e73] uppercase tracking-wider mb-3">ขั้นตอนการทำงาน</p>
+                            <p className="text-[11px] font-medium text-[#86868b] uppercase tracking-wider mb-3">ขั้นตอนการทำงาน</p>
                             <div className="space-y-2">
                               {wf.steps.map((step, si) => (
                                 <div key={si} className="flex items-start gap-3">
                                   <span className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-[10px] font-bold text-white mt-0.5" style={{ background: wf.color }}>
                                     {si + 1}
                                   </span>
-                                  <span className="text-[13px] text-[#1c1c1e]/80">{step}</span>
+                                  <span className="text-[13px] text-[#1d1d1f]/80">{step}</span>
                                 </div>
                               ))}
                             </div>
@@ -336,25 +336,25 @@ export default function EcommerceSection() {
                           {/* Tools + Models + Cost */}
                           <div className="grid sm:grid-cols-3 gap-4">
                             <div className="bg-[#fafafa] rounded-xl p-4">
-                              <p className="text-[10px] font-medium text-[#6e6e73] uppercase tracking-wider mb-2">เครื่องมือ</p>
+                              <p className="text-[10px] font-medium text-[#86868b] uppercase tracking-wider mb-2">เครื่องมือ</p>
                               <div className="flex flex-wrap gap-1.5">
                                 {wf.tools.map((t) => (
-                                  <span key={t} className="text-[11px] px-2.5 py-1 rounded-full bg-white border border-black/[0.06] text-[#1c1c1e]">{t}</span>
+                                  <span key={t} className="text-[11px] px-2.5 py-1 rounded-full bg-white border border-black/[0.06] text-[#1d1d1f]">{t}</span>
                                 ))}
                               </div>
                             </div>
                             <div className="bg-[#fafafa] rounded-xl p-4">
-                              <p className="text-[10px] font-medium text-[#6e6e73] uppercase tracking-wider mb-2">AI Model</p>
+                              <p className="text-[10px] font-medium text-[#86868b] uppercase tracking-wider mb-2">AI Model</p>
                               <div className="space-y-1">
                                 {wf.models.map((m) => (
-                                  <p key={m} className="text-[11px] text-[#1c1c1e]">{m}</p>
+                                  <p key={m} className="text-[11px] text-[#1d1d1f]">{m}</p>
                                 ))}
                               </div>
                             </div>
                             <div className="bg-[#fafafa] rounded-xl p-4">
-                              <p className="text-[10px] font-medium text-[#6e6e73] uppercase tracking-wider mb-2">ผลลัพธ์</p>
+                              <p className="text-[10px] font-medium text-[#86868b] uppercase tracking-wider mb-2">ผลลัพธ์</p>
                               <p className="text-[13px] font-medium" style={{ color: wf.color }}>{wf.result}</p>
-                              <p className="text-[11px] text-[#6e6e73] mt-1">ค่า API ~{wf.cost}/เดือน</p>
+                              <p className="text-[11px] text-[#86868b] mt-1">ค่า API ~{wf.cost}/เดือน</p>
                             </div>
                           </div>
                         </div>
@@ -378,19 +378,19 @@ export default function EcommerceSection() {
             className="text-center mb-12"
           >
             <p className="text-[13px] font-semibold text-[#34c759] uppercase tracking-widest mb-3">Before / After</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1c1c1e] tracking-tight mb-3">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#1d1d1f] tracking-tight mb-3">
               เดิม vs ใช้ AI
             </h2>
           </motion.div>
 
-          <div className="glass-card overflow-hidden">
+          <div className="apple-card overflow-hidden">
             <div className="relative z-10">
               {/* Header */}
-              <div className="grid grid-cols-12 gap-4 p-5 border-b border-black/[0.04] liquid-glass-strong">
-                <div className="col-span-3 text-[12px] font-semibold text-[#6e6e73]">งาน</div>
+              <div className="grid grid-cols-12 gap-4 p-5 border-b border-black/[0.04] nav-glass">
+                <div className="col-span-3 text-[12px] font-semibold text-[#86868b]">งาน</div>
                 <div className="col-span-4 text-[12px] font-semibold text-[#ff3b30] flex items-center gap-1"><XCircle size={13} /> เดิม (ทำมือ)</div>
                 <div className="col-span-4 text-[12px] font-semibold text-[#34c759] flex items-center gap-1"><CheckCircle2 size={13} /> ใช้ AI</div>
-                <div className="col-span-1 text-[12px] font-semibold text-[#007aff] text-center">ผล</div>
+                <div className="col-span-1 text-[12px] font-semibold text-[#2997ff] text-center">ผล</div>
               </div>
 
               {comparisons.map((c, i) => (
@@ -402,11 +402,11 @@ export default function EcommerceSection() {
                   transition={{ delay: i * 0.06 }}
                   className="grid grid-cols-12 gap-4 p-5 border-b border-black/[0.03] hover:bg-white/30 transition-colors"
                 >
-                  <div className="col-span-3 text-[13px] font-medium text-[#1c1c1e]">{c.aspect}</div>
-                  <div className="col-span-4 text-[12px] text-[#8e8e93]">{c.before}</div>
-                  <div className="col-span-4 text-[12px] text-[#1c1c1e]">{c.after}</div>
+                  <div className="col-span-3 text-[13px] font-medium text-[#1d1d1f]">{c.aspect}</div>
+                  <div className="col-span-4 text-[12px] text-[#86868b]">{c.before}</div>
+                  <div className="col-span-4 text-[12px] text-[#1d1d1f]">{c.after}</div>
                   <div className="col-span-1 text-center">
-                    <span className="text-[11px] font-semibold text-[#34c759] glass-pill px-2 py-0.5">{c.saving}</span>
+                    <span className="text-[11px] font-semibold text-[#34c759] bg-[#f5f5f7] rounded-full px-2 py-0.5">{c.saving}</span>
                   </div>
                 </motion.div>
               ))}
@@ -425,10 +425,10 @@ export default function EcommerceSection() {
               viewport={{ once: true }}
             >
               <p className="text-[13px] font-semibold text-[#30d158] uppercase tracking-widest mb-3">Live Demo</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1c1c1e] tracking-tight mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-[#1d1d1f] tracking-tight mb-4">
                 ลูกค้าถาม → AI ตอบทันที
               </h2>
-              <p className="text-base text-[#6e6e73] leading-relaxed mb-6">
+              <p className="text-base text-[#86868b] leading-relaxed mb-6">
                 ดู AI chatbot จริงที่ตอบลูกค้า — ดึงข้อมูลสินค้า, เช็ค stock, สร้าง order, ส่ง payment link ได้ทันที
                 ไม่ต้องรอพนักงาน ลูกค้าได้คำตอบภายใน 3 วินาที
               </p>
@@ -439,7 +439,7 @@ export default function EcommerceSection() {
                   "สร้าง order + payment link อัตโนมัติ",
                   "ส่งต่อพนักงานถ้าคำถามซับซ้อน",
                 ].map((item) => (
-                  <div key={item} className="flex items-center gap-2 text-[13px] text-[#1c1c1e]">
+                  <div key={item} className="flex items-center gap-2 text-[13px] text-[#1d1d1f]">
                     <CheckCircle2 size={16} className="text-[#30d158] shrink-0" />
                     {item}
                   </div>
@@ -452,15 +452,15 @@ export default function EcommerceSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <div className="glass-card relative p-0 overflow-hidden">
+              <div className="apple-card relative p-0 overflow-hidden">
                 {/* Header */}
-                <div className="liquid-glass-strong px-5 py-3 flex items-center gap-3">
+                <div className="nav-glass px-5 py-3 flex items-center gap-3">
                   <div className="flex gap-1.5">
                     <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
                     <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
                     <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
                   </div>
-                  <span className="text-[12px] text-[#6e6e73] font-medium ml-2">LINE OA — ร้านเสื้อผ้า</span>
+                  <span className="text-[12px] text-[#86868b] font-medium ml-2">LINE OA — ร้านเสื้อผ้า</span>
                   <span className="ml-auto relative w-2 h-2 rounded-full bg-[#34c759]">
                     <span className="absolute inset-0 rounded-full bg-[#34c759] animate-ping opacity-50" />
                   </span>
@@ -485,15 +485,15 @@ export default function EcommerceSection() {
                       <div
                         className={`text-[13px] px-4 py-2.5 max-w-[80%] whitespace-pre-line leading-relaxed ${
                           msg.role === "customer"
-                            ? "bg-[#007aff] text-white rounded-2xl rounded-br-md"
-                            : "glass-card relative !rounded-2xl !rounded-bl-md p-4 text-[#1c1c1e]"
+                            ? "bg-[#2997ff] text-white rounded-2xl rounded-br-md"
+                            : "apple-card relative !rounded-2xl !rounded-bl-md p-4 text-[#1d1d1f]"
                         }`}
                       >
                         {msg.text}
                       </div>
                       {msg.role === "customer" && (
-                        <div className="w-7 h-7 rounded-full bg-[#007aff]/10 flex items-center justify-center ml-2 shrink-0 mt-1">
-                          <User size={14} className="text-[#007aff]" />
+                        <div className="w-7 h-7 rounded-full bg-[#2997ff]/10 flex items-center justify-center ml-2 shrink-0 mt-1">
+                          <User size={14} className="text-[#2997ff]" />
                         </div>
                       )}
                     </motion.div>
@@ -502,9 +502,9 @@ export default function EcommerceSection() {
 
                 {/* Input */}
                 <div className="p-4 border-t border-black/[0.04]">
-                  <div className="glass-input flex items-center gap-2 px-4 py-3">
+                  <div className="bg-white rounded-[14px] border border-[#d2d2d7]/40 focus:border-[#2997ff] focus:ring-2 focus:ring-[#2997ff]/10 focus:outline-none flex items-center gap-2 px-4 py-3">
                     <span className="text-[13px] text-[#c7c7cc] flex-1">พิมพ์ข้อความ...</span>
-                    <Send size={16} className="text-[#007aff]" />
+                    <Send size={16} className="text-[#2997ff]" />
                   </div>
                 </div>
               </div>
@@ -523,10 +523,10 @@ export default function EcommerceSection() {
             className="text-center mb-12"
           >
             <p className="text-[13px] font-semibold text-[#ff9500] uppercase tracking-widest mb-3">Pricing</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1c1c1e] tracking-tight mb-3">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#1d1d1f] tracking-tight mb-3">
               ค่าใช้จ่าย API จริง
             </h2>
-            <p className="text-base text-[#6e6e73] max-w-xl mx-auto">
+            <p className="text-base text-[#86868b] max-w-xl mx-auto">
               ค่า API ที่ต้องจ่ายจริง — ไม่มีค่า license ซ่อน ไม่มีค่า subscription ต่อ user
             </p>
           </motion.div>
@@ -535,25 +535,25 @@ export default function EcommerceSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="glass-card overflow-hidden"
+            className="apple-card overflow-hidden"
           >
             <div className="relative z-10">
-              <div className="grid grid-cols-3 gap-4 p-5 border-b border-black/[0.04] liquid-glass-strong">
-                <div className="text-[12px] font-semibold text-[#6e6e73]">ระบบ</div>
-                <div className="text-[12px] font-semibold text-[#6e6e73]">ปริมาณใช้งาน</div>
-                <div className="text-[12px] font-semibold text-[#6e6e73] text-right">ค่า API/เดือน</div>
+              <div className="grid grid-cols-3 gap-4 p-5 border-b border-black/[0.04] nav-glass">
+                <div className="text-[12px] font-semibold text-[#86868b]">ระบบ</div>
+                <div className="text-[12px] font-semibold text-[#86868b]">ปริมาณใช้งาน</div>
+                <div className="text-[12px] font-semibold text-[#86868b] text-right">ค่า API/เดือน</div>
               </div>
               {pricingItems.map((item, i) => (
                 <div key={item.name} className="grid grid-cols-3 gap-4 p-5 border-b border-black/[0.03]">
-                  <div className="text-[13px] text-[#1c1c1e] font-medium">{item.name}</div>
-                  <div className="text-[12px] text-[#8e8e93]">{item.usage}</div>
-                  <div className="text-[13px] text-[#007aff] font-semibold text-right">{item.cost}</div>
+                  <div className="text-[13px] text-[#1d1d1f] font-medium">{item.name}</div>
+                  <div className="text-[12px] text-[#86868b]">{item.usage}</div>
+                  <div className="text-[13px] text-[#2997ff] font-semibold text-right">{item.cost}</div>
                 </div>
               ))}
-              <div className="grid grid-cols-3 gap-4 p-5 bg-[#007aff]/5">
-                <div className="text-[14px] text-[#1c1c1e] font-bold">รวมทั้งหมด</div>
-                <div className="text-[12px] text-[#8e8e93]">ร้านขนาดกลาง</div>
-                <div className="text-[16px] text-[#007aff] font-bold text-right">~฿3,750/เดือน</div>
+              <div className="grid grid-cols-3 gap-4 p-5 bg-[#2997ff]/5">
+                <div className="text-[14px] text-[#1d1d1f] font-bold">รวมทั้งหมด</div>
+                <div className="text-[12px] text-[#86868b]">ร้านขนาดกลาง</div>
+                <div className="text-[16px] text-[#2997ff] font-bold text-right">~฿3,750/เดือน</div>
               </div>
             </div>
           </motion.div>
@@ -562,7 +562,7 @@ export default function EcommerceSection() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-center text-[12px] text-[#8e8e93] mt-4"
+            className="text-center text-[12px] text-[#86868b] mt-4"
           >
             * ค่า setup ครั้งแรก ฿15,000-35,000 (ขึ้นกับจำนวนระบบ) + ค่า API ตามใช้งานจริง
           </motion.p>
@@ -579,7 +579,7 @@ export default function EcommerceSection() {
             className="text-center mb-12"
           >
             <p className="text-[13px] font-semibold text-[#5856d6] uppercase tracking-widest mb-3">Tech Stack</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1c1c1e] tracking-tight mb-3">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#1d1d1f] tracking-tight mb-3">
               เครื่องมือที่ใช้
             </h2>
           </motion.div>
@@ -592,14 +592,14 @@ export default function EcommerceSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06 }}
-                className="glass-card p-5"
+                className="apple-card p-5"
               >
                 <div className="relative z-10">
-                  <div className="w-10 h-10 rounded-xl glass-pill flex items-center justify-center mb-3">
+                  <div className="w-10 h-10 rounded-xl bg-[#f5f5f7] rounded-full flex items-center justify-center mb-3">
                     <Workflow size={18} style={{ color: tool.color }} />
                   </div>
-                  <h3 className="text-[15px] font-semibold text-[#1c1c1e] mb-1">{tool.name}</h3>
-                  <p className="text-[12px] text-[#8e8e93] leading-relaxed">{tool.desc}</p>
+                  <h3 className="text-[15px] font-semibold text-[#1d1d1f] mb-1">{tool.name}</h3>
+                  <p className="text-[12px] text-[#86868b] leading-relaxed">{tool.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -615,26 +615,26 @@ export default function EcommerceSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="glass-card p-10 shimmer-bg">
+            <div className="apple-card p-10">
               <div className="relative z-10">
-                <ShoppingCart size={40} className="text-[#007aff] mx-auto mb-4" />
-                <h2 className="text-2xl md:text-3xl font-bold text-[#1c1c1e] mb-3">
+                <ShoppingCart size={40} className="text-[#2997ff] mx-auto mb-4" />
+                <h2 className="text-2xl md:text-3xl font-bold text-[#1d1d1f] mb-3">
                   พร้อมให้ AI ช่วยร้านค้าของคุณ?
                 </h2>
-                <p className="text-base text-[#6e6e73] mb-8 max-w-lg mx-auto">
+                <p className="text-base text-[#86868b] mb-8 max-w-lg mx-auto">
                   ปรึกษาฟรี — เราวิเคราะห์ร้านคุณแล้วแนะนำ solution ที่เหมาะสมที่สุด
                   ไม่มี commitment เริ่มต้นได้ภายใน 1 สัปดาห์
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <a
                     href="https://lin.ee/cloudai"
-                    className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-[#007aff] text-white font-medium text-[15px] hover:bg-[#0066d6] transition-all shadow-lg shadow-[#007aff]/20"
+                    className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-[#2997ff] text-white font-medium text-[15px] hover:bg-[#0066d6] transition-all shadow-lg shadow-[#2997ff]/20"
                   >
                     <MessageSquare size={18} /> ปรึกษาฟรีผ่าน LINE
                   </a>
                   <a
                     href="#pricing"
-                    className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full glass-pill text-[#007aff] font-medium text-[15px] hover:bg-white/60 transition-all"
+                    className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-[#f5f5f7] rounded-full text-[#2997ff] font-medium text-[15px] hover:bg-white/60 transition-all"
                   >
                     ดูแพ็คเกจ <ArrowRight size={16} />
                   </a>

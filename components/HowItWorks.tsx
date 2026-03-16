@@ -6,7 +6,7 @@ const steps = [
     num: "01",
     title: "ปรึกษาฟรี",
     desc: "บอกเราว่าธุรกิจคุณทำอะไร ต้องการ automate ส่วนไหน — เราออกแบบ solution ให้ฟรี",
-    color: "#0071e3",
+    color: "#2997ff",
   },
   {
     num: "02",
@@ -38,16 +38,16 @@ export default function HowItWorks() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <p className="text-[13px] font-semibold text-[#0071e3] uppercase tracking-widest mb-3">How It Works</p>
+          <p className="text-[13px] font-semibold text-[#2997ff] uppercase tracking-widest mb-3">How It Works</p>
           <h2 className="text-3xl md:text-5xl font-bold text-[#1d1d1f] tracking-tight mb-4">
             4 ขั้นตอนง่ายๆ
           </h2>
-          <p className="text-lg text-[#6e6e73]">จากปรึกษาถึงใช้งานจริง ภายใน 1-2 สัปดาห์</p>
+          <p className="text-lg text-[#86868b]">จากปรึกษาถึงใช้งานจริง ภายใน 1-2 สัปดาห์</p>
         </motion.div>
 
         <div className="relative">
           {/* Vertical line */}
-          <div className="absolute left-6 md:left-8 top-0 bottom-0 w-[1px] bg-gradient-to-b from-[#0071e3]/20 via-[#5856d6]/20 to-[#30d158]/20 hidden sm:block" />
+          <div className="absolute left-6 md:left-8 top-0 bottom-0 w-[1px] bg-gradient-to-b from-[#2997ff]/20 via-[#5856d6]/20 to-[#30d158]/20 hidden sm:block" />
 
           <div className="space-y-8">
             {steps.map((step, i) => (
@@ -69,7 +69,7 @@ export default function HowItWorks() {
                 </div>
                 <div className="pt-1 md:pt-3">
                   <h3 className="text-lg md:text-xl font-semibold text-[#1d1d1f] mb-1">{step.title}</h3>
-                  <p className="text-[15px] text-[#6e6e73] leading-relaxed">{step.desc}</p>
+                  <p className="text-[15px] text-[#86868b] leading-relaxed">{step.desc}</p>
                 </div>
               </motion.div>
             ))}

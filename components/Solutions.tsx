@@ -11,8 +11,8 @@ const solutions = [
     examples: ["ตอบแชทลูกค้า 24/7", "สร้าง caption สินค้า", "สรุปยอดขายรายวัน", "แจ้ง stock ใกล้หมด"],
     savings: "ลดงาน 80%",
     href: "/solutions/ecommerce",
-    color: "#007aff",
-    gradient: "from-[#007aff]/10 to-[#5ac8fa]/10",
+    color: "#2997ff",
+    gradient: "from-[#2997ff]/10 to-[#5ac8fa]/10",
   },
   {
     icon: <PenTool size={24} />,
@@ -81,11 +81,11 @@ export default function Solutions() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <p className="text-[13px] font-semibold text-[#007aff] uppercase tracking-widest mb-3">Solutions</p>
-          <h2 className="text-3xl md:text-5xl font-bold text-[#1c1c1e] tracking-tight mb-4">
+          <p className="text-[13px] font-semibold text-[#2997ff] uppercase tracking-widest mb-3">Solutions</p>
+          <h2 className="text-3xl md:text-5xl font-bold text-[#1d1d1f] tracking-tight mb-4">
             AI สำหรับทุกธุรกิจ
           </h2>
-          <p className="text-base text-[#6e6e73] max-w-xl mx-auto">
+          <p className="text-base text-[#86868b] max-w-xl mx-auto">
             ไม่ว่าคุณทำธุรกิจอะไร เรามี solution AI ที่ออกแบบมาเฉพาะ — พร้อม workflow, model, และค่าใช้จ่ายที่ชัดเจน
           </p>
         </motion.div>
@@ -99,29 +99,29 @@ export default function Solutions() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-30px" }}
               transition={{ delay: i * 0.06 }}
-              className="glass-card relative p-6 group cursor-pointer"
+              className="apple-card relative p-6 group cursor-pointer"
             >
               {/* Tinted gradient overlay */}
               <div className={`absolute inset-0 bg-gradient-to-br ${sol.gradient} rounded-[24px] opacity-50 group-hover:opacity-100 transition-opacity duration-500`} />
 
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 rounded-2xl glass-pill flex items-center justify-center" style={{ color: sol.color }}>
+                  <div className="w-12 h-12 rounded-2xl bg-[#f5f5f7] rounded-full flex items-center justify-center" style={{ color: sol.color }}>
                     {sol.icon}
                   </div>
-                  <span className="text-[11px] font-semibold glass-pill px-3 py-1" style={{ color: sol.color }}>
+                  <span className="text-[11px] font-semibold bg-[#f5f5f7] rounded-full px-3 py-1" style={{ color: sol.color }}>
                     {sol.savings}
                   </span>
                 </div>
 
-                <h3 className="text-[17px] font-semibold text-[#1c1c1e] mb-0.5">{sol.title}</h3>
-                <p className="text-[12px] text-[#8e8e93] mb-3">{sol.subtitle}</p>
-                <p className="text-[13px] text-[#6e6e73] mb-4 leading-relaxed">{sol.desc}</p>
+                <h3 className="text-[17px] font-semibold text-[#1d1d1f] mb-0.5">{sol.title}</h3>
+                <p className="text-[12px] text-[#86868b] mb-3">{sol.subtitle}</p>
+                <p className="text-[13px] text-[#86868b] mb-4 leading-relaxed">{sol.desc}</p>
 
                 {/* Example pills */}
                 <div className="flex flex-wrap gap-1.5 mb-4">
                   {sol.examples.map((ex) => (
-                    <span key={ex} className="text-[10px] px-2.5 py-1 rounded-full glass-pill text-[#6e6e73]">
+                    <span key={ex} className="text-[10px] px-2.5 py-1 rounded-full bg-[#f5f5f7] rounded-full text-[#86868b]">
                       {ex}
                     </span>
                   ))}
