@@ -186,7 +186,7 @@ function UseCaseCard({ useCase, index }: { useCase: UseCase; index: number }) {
       transition={{ delay: index * 0.05, duration: 0.5 }}
     >
       <div className={`apple-card relative overflow-hidden ${
-        expanded ? "!bg-white/70" : ""
+        expanded ? "" : ""
       }`}>
         <button onClick={() => setExpanded(!expanded)} className="w-full text-left p-6">
           <div className="flex items-start gap-4">

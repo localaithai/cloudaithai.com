@@ -10,7 +10,6 @@ type NavItem = NavLink | NavGroup;
 function isGroup(item: NavItem): item is NavGroup { return "children" in item; }
 
 const navItems: NavItem[] = [
-  { href: "/#models", label: "AI Models" },
   {
     label: "Solutions",
     children: [
@@ -20,17 +19,21 @@ const navItems: NavItem[] = [
       { href: "/solutions/healthcare", label: "คลินิก & โรงพยาบาล", desc: "Healthcare" },
       { href: "/solutions/realestate", label: "อสังหาริมทรัพย์", desc: "Real Estate" },
       { href: "/solutions/restaurant", label: "ร้านอาหาร & F&B", desc: "Food & Beverage" },
+      { href: "/home-ai", label: "Home AI", desc: "ผู้ช่วย AI ส่วนตัว" },
     ],
   },
   {
-    label: "เครื่องมือ",
+    label: "วิธีทำงาน",
     children: [
+      { href: "/how-it-works", label: "ขั้นตอนทำงาน", desc: "ปรึกษา → ติดตั้ง → ใช้งาน" },
+      { href: "/tech-stack", label: "Tech Stack", desc: "เครื่องมือที่เราใช้" },
+      { href: "/methodology", label: "หลักการ & Security", desc: "Principles, PDPA, Risk" },
       { href: "/integrations", label: "55+ Integrations", desc: "เชื่อมต่อทุกแอป" },
-      { href: "/home-ai", label: "Home AI Assistant", desc: "ผู้ช่วย AI ส่วนตัว" },
     ],
   },
-  { href: "/#pricing", label: "ราคา" },
-  { href: "/#contact", label: "ติดต่อ" },
+  { href: "/pricing", label: "ราคา" },
+  { href: "/support", label: "Support" },
+  { href: "/about", label: "เกี่ยวกับเรา" },
 ];
 
 function DesktopDropdown({ group }: { group: NavGroup }) {
@@ -58,8 +61,8 @@ function DesktopDropdown({ group }: { group: NavGroup }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 6, scale: 0.97 }}
             transition={{ duration: 0.15 }}
-            className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-60 rounded-2xl nav-glass overflow-hidden p-1"
-            style={{ boxShadow: "0 12px 40px rgba(0,0,0,0.08), 0 0 0 0.5px rgba(255,255,255,0.5)" }}
+            className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-60 rounded-2xl overflow-hidden p-1"
+            style={{ background: "rgba(251,251,253,0.96)", backdropFilter: "blur(60px) saturate(180%)", WebkitBackdropFilter: "blur(60px) saturate(180%)", boxShadow: "0 12px 40px rgba(0,0,0,0.1), 0 0 0 0.5px rgba(0,0,0,0.06), inset 0 0.5px 0 rgba(255,255,255,0.7)" }}
           >
             {group.children.map((child) => (
               <a
@@ -170,7 +173,7 @@ export default function Navbar() {
             transition={{ duration: 0.25 }}
             className="lg:hidden overflow-hidden"
           >
-            <div className="nav-glass px-6 pb-6 pt-2">
+            <div className="px-6 pb-6 pt-2" style={{ background: "rgba(251,251,253,0.98)", backdropFilter: "blur(40px) saturate(180%)", WebkitBackdropFilter: "blur(40px) saturate(180%)" }}>
               {navItems.map((item) =>
                 isGroup(item) ? (
                   <MobileGroup key={item.label} group={item} onNav={() => setOpen(false)} />

@@ -381,7 +381,7 @@ export default function HomeAISection() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06 }}
               >
-                <div className={`glass-card relative overflow-hidden ${expandedCap === i ? "!bg-white/70" : ""}`}>
+                <div className={`glass-card relative overflow-hidden ${expandedCap === i ? "!bg-white/95" : ""}`}>
                   <button
                     onClick={() => setExpandedCap(expandedCap === i ? null : i)}
                     className="w-full text-left p-5"

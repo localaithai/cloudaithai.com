@@ -19,9 +19,20 @@ export default function ScrollVideo() {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  const frameDir = isMobile ? "/frames-mobile" : "/frames";
-  const WIDTH = isMobile ? 780 : 1920;
-  const HEIGHT = isMobile ? 1400 : 1080;
+  const [useDesktopFrames, setUseDesktopFrames] = useState(!isMobile);
+
+  // Probe desktop frames — fallback to mobile if missing
+  useEffect(() => {
+    if (isMobile) { setUseDesktopFrames(false); return; }
+    const probe = new Image();
+    probe.src = "/frames/element-000.jpeg";
+    probe.onload = () => setUseDesktopFrames(true);
+    probe.onerror = () => setUseDesktopFrames(false);
+  }, [isMobile]);
+
+  const frameDir = useDesktopFrames ? "/frames" : "/frames-mobile";
+  const WIDTH = useDesktopFrames ? 1920 : 780;
+  const HEIGHT = useDesktopFrames ? 1080 : 1400;
 
   useEffect(() => {
     let count = 0;

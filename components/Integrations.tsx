@@ -2,21 +2,23 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-/* ─── Real brand icons from simpleicons CDN + emoji fallback ─── */
-const VERIFIED_SLUGS = new Set(["openai", "anthropic", "google", "deepseek", "x", "n8n", "line", "whatsapp", "facebook", "instagram", "telegram", "slack", "discord", "tiktok", "github", "docker", "python", "nodedotjs", "postgresql", "redis", "mongodb", "supabase", "vercel", "cloudflare", "digitalocean", "amazonaws", "amazonec2", "googlecloud", "hetzner", "railway", "render", "tailscale", "notion", "obsidian", "trello", "gmail", "googlecalendar", "googledrive", "googlesheets", "airtable", "zapier", "vultr", "hostinger", "pinecone", "huggingface"]);
+/* ─── Brand icons: local /brands/ SVGs with emoji fallback ─── */
+/* Map special slugs to local filenames where they differ */
+const SLUG_TO_FILE: Record<string, string> = { x: "xai" };
 
 function BrandIcon({ slug, fallback, color }: { slug: string; fallback: string; color: string }) {
-  if (!VERIFIED_SLUGS.has(slug)) return <span className="text-lg">{fallback}</span>;
   const [err, setErr] = useState(false);
+  const file = SLUG_TO_FILE[slug] || slug;
   if (err) return <span className="text-lg">{fallback}</span>;
   return (
     <img
-      src={`https://cdn.simpleicons.org/${slug}/${color.replace("#", "")}`}
+      src={`/brands/${file}.svg`}
       alt={slug}
       width={22}
       height={22}
       onError={() => setErr(true)}
       className="w-[22px] h-[22px]"
+      loading="lazy"
     />
   );
 }
@@ -44,7 +46,7 @@ const integrations: Integration[] = [
   // AI Models
   { name: "OpenAI (GPT-5)", slug: "openai", fallback: "🤖", color: "#412991", desc: "GPT-5, o3, DALL·E", category: "ai" },
   { name: "Anthropic (Claude)", slug: "anthropic", fallback: "🧠", color: "#191919", desc: "Claude Opus, Sonnet, Haiku", category: "ai" },
-  { name: "Google (Gemini)", slug: "google", fallback: "🔵", color: "#4285F4", desc: "Gemini 3.1 Pro, Flash", category: "ai" },
+  { name: "Google (Gemini)", slug: "googlegemini", fallback: "🔵", color: "#4285F4", desc: "Gemini 3.1 Pro, Flash", category: "ai" },
   { name: "DeepSeek", slug: "deepseek", fallback: "🔮", color: "#5b6abf", desc: "V3, R1 Reasoning", category: "ai" },
   { name: "xAI (Grok)", slug: "x", fallback: "𝕏", color: "#000000", desc: "Grok 3 Real-time", category: "ai" },
   { name: "Ollama", slug: "ollama", fallback: "🦙", color: "#000000", desc: "Local model inference", category: "ai" },

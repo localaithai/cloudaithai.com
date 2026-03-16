@@ -3,20 +3,21 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
+const SLUG_TO_FILE: Record<string, string> = { x: "xai" };
+
 function ModelIcon({ slug, fallback, size = 18 }: { slug: string; fallback: string; size?: number }) {
-  const VALID = new Set(["openai", "anthropic", "google", "x"]);
-  if (!VALID.has(slug)) return <span style={{ fontSize: size }}>{fallback}</span>;
   const [err, setErr] = useState(false);
+  const file = SLUG_TO_FILE[slug] || slug;
   if (err) return <span style={{ fontSize: size }}>{fallback}</span>;
-  return <img src={`https://cdn.simpleicons.org/${slug}`} alt={slug} width={size} height={size} onError={() => setErr(true)} />;
+  return <img src={`/brands/${file}.svg`} alt={slug} width={size} height={size} onError={() => setErr(true)} loading="lazy" />;
 }
 
 const models = [
   { name: "GPT-5", provider: "OpenAI", color: "#10a37f", slug: "openai", fallback: "🤖", input: "$1.25", output: "$10", context: "128K", speed: "~80 tok/s", badge: "Flagship", desc: "ครบเครื่องทุกด้าน คุ้มค่าที่สุดสำหรับงานทั่วไป", monthly: "~฿800-2,500" },
   { name: "Claude Opus 4.6", provider: "Anthropic", color: "#c96442", slug: "anthropic", fallback: "🧠", input: "$5.00", output: "$25", context: "1M", speed: "~40 tok/s", badge: "Most Capable", desc: "ฉลาดที่สุด 1M context อ่านเอกสาร 700+ หน้า", monthly: "~฿2,000-8,000" },
   { name: "Claude Sonnet 4.6", provider: "Anthropic", color: "#c96442", slug: "anthropic", fallback: "🧠", input: "$3.00", output: "$15", context: "200K", speed: "~70 tok/s", badge: "Best Balance", desc: "Balance คุณภาพ-ราคาดีที่สุด เหมาะเป็น default", monthly: "~฿1,000-4,000" },
-  { name: "Gemini 3.1 Pro", provider: "Google", color: "#4285f4", slug: "google", fallback: "🔵", input: "$2.00", output: "$12", context: "1M", speed: "~90 tok/s", badge: "#1 Benchmark", desc: "อันดับ 1 benchmark + multimodal (รูป/video)", monthly: "~฿1,200-5,000" },
-  { name: "Gemini 3 Flash", provider: "Google", color: "#4285f4", slug: "google", fallback: "⚡", input: "$0.50", output: "$3", context: "1M", speed: "~150 tok/s", badge: "Speed King", desc: "เร็วสุด ถูกสุด เหมาะงาน high-volume", monthly: "~฿300-1,500" },
+  { name: "Gemini 3.1 Pro", provider: "Google", color: "#4285f4", slug: "googlegemini", fallback: "🔵", input: "$2.00", output: "$12", context: "1M", speed: "~90 tok/s", badge: "#1 Benchmark", desc: "อันดับ 1 benchmark + multimodal (รูป/video)", monthly: "~฿1,200-5,000" },
+  { name: "Gemini 3 Flash", provider: "Google", color: "#4285f4", slug: "googlegemini", fallback: "⚡", input: "$0.50", output: "$3", context: "1M", speed: "~150 tok/s", badge: "Speed King", desc: "เร็วสุด ถูกสุด เหมาะงาน high-volume", monthly: "~฿300-1,500" },
   { name: "DeepSeek V3", provider: "DeepSeek", color: "#5b6abf", slug: "deepseek", fallback: "🔮", input: "$0.28", output: "$0.42", context: "128K", speed: "~100 tok/s", badge: "Budget King", desc: "ถูกกว่า GPT-5 ถึง 25 เท่า คุณภาพใกล้เคียง", monthly: "~฿200-800" },
   { name: "o3", provider: "OpenAI", color: "#10a37f", slug: "openai", fallback: "🤖", input: "$2.00", output: "$8", context: "200K", speed: "~30 tok/s", badge: "Reasoning", desc: "คิดก่อนตอบ เหมาะโจทย์ซับซ้อน คณิตศาสตร์ code", monthly: "~฿500-3,000" },
   { name: "Grok 3", provider: "xAI", color: "#1d9bf0", slug: "x", fallback: "𝕏", input: "$3.00", output: "$15", context: "128K", speed: "~60 tok/s", badge: "Real-time", desc: "เข้าถึงข้อมูล real-time ข่าว trend ตลาด", monthly: "~฿1,000-4,000" },

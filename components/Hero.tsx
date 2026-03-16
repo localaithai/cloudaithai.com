@@ -2,21 +2,20 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-// Verified simpleicons slugs — only use these, others get emoji fallback
-const VERIFIED_SLUGS = new Set(["openai", "anthropic", "google", "x", "n8n", "line", "whatsapp", "facebook", "instagram", "telegram", "slack", "discord", "tiktok", "github", "docker", "python", "nodedotjs", "postgresql", "redis", "mongodb", "supabase", "vercel", "cloudflare", "digitalocean", "amazonaws", "googlecloud", "hetzner", "railway", "render", "tailscale", "notion", "obsidian", "trello", "gmail", "googlecalendar", "googledrive", "googlesheets", "airtable", "zapier"]);
+const SLUG_TO_FILE: Record<string, string> = { x: "xai" };
 
 function BrandIcon({ slug, fallback, size = 20 }: { slug: string; fallback: string; size?: number }) {
-  if (!VERIFIED_SLUGS.has(slug)) return <span style={{ fontSize: size * 0.9 }}>{fallback}</span>;
   const [err, setErr] = useState(false);
+  const file = SLUG_TO_FILE[slug] || slug;
   if (err) return <span style={{ fontSize: size * 0.9 }}>{fallback}</span>;
-  return <img src={`https://cdn.simpleicons.org/${slug}`} alt={slug} width={size} height={size} onError={() => setErr(true)} className="opacity-90" />;
+  return <img src={`/brands/${file}.svg`} alt={slug} width={size} height={size} onError={() => setErr(true)} className="opacity-90" loading="lazy" />;
 }
 
 /* ─── Bold, visible model pills with real presence ─── */
 const models = [
   { name: "GPT-5", color: "#10a37f", bg: "#10a37f15", slug: "openai", fallback: "🤖" },
   { name: "Claude 4.6", color: "#c96442", bg: "#c9644215", slug: "anthropic", fallback: "🧠" },
-  { name: "Gemini 3.1", color: "#4285f4", bg: "#4285f415", slug: "google", fallback: "🔵" },
+  { name: "Gemini 3.1", color: "#4285f4", bg: "#4285f415", slug: "googlegemini", fallback: "🔵" },
   { name: "DeepSeek V3", color: "#5b6abf", bg: "#5b6abf15", slug: "deepseek", fallback: "🔮" },
   { name: "Grok 3", color: "#1d9bf0", bg: "#1d9bf015", slug: "x", fallback: "𝕏" },
   { name: "o3", color: "#10a37f", bg: "#10a37f15", slug: "openai", fallback: "🤖" },

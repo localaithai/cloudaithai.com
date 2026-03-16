@@ -1,4 +1,4 @@
-import { AbsoluteFill, useCurrentFrame, interpolate, Easing, Img } from "remotion";
+import { AbsoluteFill, useCurrentFrame, interpolate, Easing, staticFile } from "remotion";
 
 const BG = "#fbfbfd";
 const BLUE = "#2997ff";
@@ -8,14 +8,14 @@ const GREEN = "#34c759";
 const GRAY = "#86868b";
 const DARK = "#1d1d1f";
 
-/* ─── Icon component with simpleicons ─── */
+/* ─── Icon component with local SVGs ─── */
+const SLUG_TO_FILE: Record<string, string> = { x: "xai" };
+
 function Icon({ slug, fallback, size = 28, color }: { slug: string; fallback: string; size?: number; color?: string }) {
-  const url = color
-    ? `https://cdn.simpleicons.org/${slug}/${color.replace("#", "")}`
-    : `https://cdn.simpleicons.org/${slug}`;
+  const file = SLUG_TO_FILE[slug] || slug;
   return (
-    <Img src={url} width={size} height={size} style={{ objectFit: "contain" }}
-      onError={() => {}} // Remotion handles errors
+    <img src={staticFile(`brands/${file}.svg`)} width={size} height={size} style={{ objectFit: "contain" }}
+      onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
     />
   );
 }
