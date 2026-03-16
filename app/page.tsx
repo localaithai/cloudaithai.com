@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Models from "@/components/Models";
-import ScrollShowcase from "@/components/ScrollShowcase";
+import ScrollVideo from "@/components/ScrollVideo";
 import Integrations from "@/components/Integrations";
 import Solutions from "@/components/Solutions";
 import HomeAI from "@/components/HomeAI";
@@ -18,7 +18,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Models />
-      <ScrollShowcase />
+      <ScrollVideo />
       <Integrations />
       <Solutions />
       <HomeAI />

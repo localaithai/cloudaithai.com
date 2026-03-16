@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@remotion/bundler": "^4.0.435",
     "@remotion/cli": "^4.0.435",
     "@remotion/renderer": "^4.0.435",
     "framer-motion": "^12.36.0",
