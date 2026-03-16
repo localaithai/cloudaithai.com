@@ -55,3 +55,29 @@ html {
 ::selection {
   background: #0071e320;
 }
+
+/* Section transitions */
+section {
+  position: relative;
+}
+
+/* Lighter paragraph text */
+p {
+  font-weight: 300;
+}
+
+/* Headings stay medium-bold */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+}
+
+/* Smooth transitions globally */
+* {
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Subtle divider between sections */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #0071e310, transparent);
+}

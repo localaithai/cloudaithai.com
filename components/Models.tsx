@@ -103,7 +103,7 @@ export default function Models() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              className="group relative bg-white rounded-2xl p-5 border border-black/[0.04] hover:border-black/[0.08] transition-all hover:shadow-lg hover:shadow-black/[0.04] hover:-translate-y-1"
+              className="group relative bg-white rounded-2xl p-5 border border-black/[0.04] hover:border-black/[0.08] transition-all duration-500 hover:shadow-xl hover:shadow-black/[0.05] hover:-translate-y-2"
             >
               <div className="flex items-center justify-between mb-3">
                 <div className="w-2 h-2 rounded-full" style={{ background: model.color }} />

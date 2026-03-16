@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Models from "@/components/Models";
+import ScrollShowcase from "@/components/ScrollShowcase";
 import Tools from "@/components/Tools";
 import UseCases from "@/components/UseCases";
 import HowItWorks from "@/components/HowItWorks";
@@ -15,6 +16,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Models />
+      <ScrollShowcase />
       <Tools />
       <UseCases />
       <HowItWorks />
