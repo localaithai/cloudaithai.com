@@ -635,6 +635,286 @@ export default function CreatorSection() {
         </div>
       </section>
 
+      {/* ═══ LIVE MOCKUP: ดูตัวอย่างจริง ═══ */}
+      <section className="py-20 px-6">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <p className="text-[13px] font-semibold text-[#af52de] uppercase tracking-widest mb-3">Interactive Preview</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#1c1c1e] tracking-tight mb-3">
+              ดูตัวอย่างจริง
+            </h2>
+            <p className="text-base text-[#6e6e73] max-w-xl mx-auto">
+              AI Dashboard สำหรับ Creator — จัดการ content, สร้าง caption, วางแผนทั้งสัปดาห์ในที่เดียว
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="glass-card p-0 overflow-hidden"
+          >
+            {/* Browser chrome */}
+            <div className="liquid-glass-strong px-5 py-3 flex items-center gap-3 border-b border-black/[0.04]">
+              <div className="flex gap-1.5">
+                <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
+              </div>
+              <div className="flex-1 mx-4">
+                <div className="bg-[#f5f5f7] rounded-lg px-4 py-1.5 text-[11px] text-[#6e6e73] flex items-center gap-2 max-w-md mx-auto">
+                  <span className="text-[#34c759]">&#128274;</span> dashboard.cloudai.th/creator/bella.style
+                </div>
+              </div>
+              <span className="text-[10px] glass-pill px-2 py-0.5 text-[#af52de] font-medium">AI Dashboard</span>
+            </div>
+
+            {/* Dashboard top bar */}
+            <div className="px-6 py-3 border-b border-black/[0.04] flex items-center justify-between bg-white/50">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#ff2d55] to-[#af52de] flex items-center justify-center text-white text-[11px] font-bold">BS</div>
+                <div>
+                  <p className="text-[13px] font-semibold text-[#1c1c1e]">Bella.Style</p>
+                  <p className="text-[10px] text-[#6e6e73]">Fashion & Lifestyle Creator</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-4 text-[11px] text-[#6e6e73]">
+                <span className="flex items-center gap-1"><Users size={12} className="text-[#ff2d55]" /> 128K followers</span>
+                <span className="flex items-center gap-1"><TrendingUp size={12} className="text-[#34c759]" /> +12.4% เดือนนี้</span>
+              </div>
+            </div>
+
+            <div className="grid lg:grid-cols-5 min-h-[500px]">
+              {/* LEFT: TikTok Video Preview (2 cols) */}
+              <div className="lg:col-span-2 p-5 border-r border-black/[0.04]">
+                <p className="text-[11px] font-medium text-[#6e6e73] uppercase tracking-wider mb-3">Video Preview</p>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                  className="relative rounded-2xl bg-gradient-to-b from-[#1c1c1e] to-[#2c2c2e] aspect-[9/14] max-w-[220px] mx-auto overflow-hidden"
+                >
+                  {/* Video content area */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="text-4xl mb-2">&#128087;</div>
+                      <p className="text-white/60 text-[10px]">5 เทคนิคแต่งตัวดูแพง</p>
+                      <p className="text-white/40 text-[9px]">ทั้งตัวไม่ถึงพัน!</p>
+                    </div>
+                  </div>
+
+                  {/* Play button overlay */}
+                  <motion.div
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.5, type: "spring" }}
+                    className="absolute inset-0 flex items-center justify-center"
+                  >
+                    <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                      <Play size={24} className="text-white ml-1" fill="white" />
+                    </div>
+                  </motion.div>
+
+                  {/* TikTok-style right sidebar */}
+                  <div className="absolute right-2 bottom-20 flex flex-col items-center gap-4">
+                    {[
+                      { icon: "&#10084;&#65039;", count: "24.5K" },
+                      { icon: "&#128172;", count: "1,842" },
+                      { icon: "&#128279;", count: "3,291" },
+                      { icon: "&#128278;", count: "892" },
+                    ].map((item, idx) => (
+                      <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, x: 10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.4 + idx * 0.1 }}
+                        className="flex flex-col items-center"
+                      >
+                        <span className="text-[16px]" dangerouslySetInnerHTML={{ __html: item.icon }} />
+                        <span className="text-white text-[9px] font-medium">{item.count}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  {/* Bottom info */}
+                  <div className="absolute bottom-3 left-3 right-12">
+                    <p className="text-white text-[11px] font-semibold">@bella.style</p>
+                    <p className="text-white/80 text-[9px] leading-relaxed mt-1">5 เทคนิคแต่งตัวดูแพง ทั้งตัวไม่ถึงพัน! &#128176;&#10024;</p>
+                    <div className="flex items-center gap-1 mt-1.5">
+                      <span className="text-[8px] text-white/50">&#127925;</span>
+                      <p className="text-white/50 text-[8px]">original sound — bella.style</p>
+                    </div>
+                  </div>
+
+                  {/* Duration */}
+                  <div className="absolute top-3 right-3">
+                    <span className="bg-black/50 text-white text-[9px] px-2 py-0.5 rounded-full">0:58</span>
+                  </div>
+                </motion.div>
+
+                {/* Engagement stats below video */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.6 }}
+                  className="mt-4 grid grid-cols-3 gap-2 max-w-[220px] mx-auto"
+                >
+                  {[
+                    { label: "Views", value: "482K", color: "#ff2d55" },
+                    { label: "Eng. Rate", value: "6.2%", color: "#af52de" },
+                    { label: "Shares", value: "3.2K", color: "#007aff" },
+                  ].map((s) => (
+                    <div key={s.label} className="text-center bg-[#fafafa] rounded-lg p-2">
+                      <p className="text-[13px] font-bold" style={{ color: s.color }}>{s.value}</p>
+                      <p className="text-[9px] text-[#6e6e73]">{s.label}</p>
+                    </div>
+                  ))}
+                </motion.div>
+              </div>
+
+              {/* RIGHT: AI Caption + Calendar (3 cols) */}
+              <div className="lg:col-span-3 flex flex-col">
+                {/* AI Generated Caption Card */}
+                <div className="p-5 border-b border-black/[0.04] flex-1">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Sparkles size={14} className="text-[#af52de]" />
+                    <p className="text-[11px] font-medium text-[#6e6e73] uppercase tracking-wider">AI-Generated Caption</p>
+                    <span className="ml-auto text-[9px] glass-pill px-2 py-0.5 text-[#34c759] font-medium">Auto-generated 3 sec</span>
+                  </div>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 }}
+                    className="bg-[#fafafa] rounded-xl p-4 space-y-3"
+                  >
+                    <p className="text-[12px] text-[#1c1c1e] leading-relaxed">
+                      &#128087; แต่งตัวดูแพงหลักหมื่น แต่จริงๆ ทั้งตัวไม่ถึงพัน! เทคนิคง่ายๆ 5 ข้อที่ใครก็ทำได้ &#10024;
+                    </p>
+                    <p className="text-[11px] text-[#6e6e73] leading-relaxed">
+                      &#128073; สี neutral เป็นพระเอก<br />
+                      &#128073; ทรง relaxed fit ดูดีทันที<br />
+                      &#128073; Accessories ราคาถูกเปลี่ยนลุคได้เลย<br />
+                      &#128073; รีดผ้าเสมอ! เสื้อ 100 บาทก็ดูแพงได้<br />
+                      &#128073; Layer ซ้อนเสื้อ = มิติ + ดูมีราคา
+                    </p>
+                    <p className="text-[11px] text-[#6e6e73]">
+                      Save ไว้ แล้ว follow สำหรับเทคนิคเพิ่ม! &#128588;
+                    </p>
+
+                    {/* Hashtags */}
+                    <div className="pt-2 border-t border-black/[0.04]">
+                      <p className="text-[10px] font-medium text-[#6e6e73] mb-2">&#127919; Hashtags (10)</p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {[
+                          "#แต่งตัวดูแพง", "#แฟชั่นราคาถูก", "#outfitinspo",
+                          "#budgetfashion", "#เทคนิคแต่งตัว", "#ootdth",
+                          "#fashiontiktok", "#สไตล์วันนี้", "#แต่งตัวทำงาน", "#จตุจักร"
+                        ].map((tag, idx) => (
+                          <motion.span
+                            key={tag}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.4 + idx * 0.05 }}
+                            className="text-[10px] px-2 py-0.5 rounded-full bg-[#af52de]/10 text-[#af52de] font-medium"
+                          >
+                            {tag}
+                          </motion.span>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+
+                {/* Content Calendar Grid */}
+                <div className="p-5 bg-white/30">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Calendar size={14} className="text-[#5856d6]" />
+                    <p className="text-[11px] font-medium text-[#6e6e73] uppercase tracking-wider">Content Calendar — สัปดาห์นี้</p>
+                    <span className="ml-auto text-[10px] text-[#6e6e73]">Mar 10 - 16, 2026</span>
+                  </div>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.5 }}
+                    className="grid grid-cols-7 gap-1.5"
+                  >
+                    {[
+                      { day: "จ.", label: "Mon", posts: [{ type: "tiktok", color: "#ff2d55" }, { type: "ig", color: "#af52de" }] },
+                      { day: "อ.", label: "Tue", posts: [{ type: "ig-story", color: "#ff9500" }] },
+                      { day: "พ.", label: "Wed", posts: [{ type: "tiktok", color: "#ff2d55" }, { type: "fb", color: "#007aff" }] },
+                      { day: "พฤ.", label: "Thu", posts: [{ type: "ig", color: "#af52de" }] },
+                      { day: "ศ.", label: "Fri", posts: [{ type: "tiktok", color: "#ff2d55" }, { type: "ig", color: "#af52de" }, { type: "yt", color: "#ff3b30" }] },
+                      { day: "ส.", label: "Sat", posts: [{ type: "ig-story", color: "#ff9500" }] },
+                      { day: "อา.", label: "Sun", posts: [] },
+                    ].map((d, i) => (
+                      <motion.div
+                        key={d.label}
+                        initial={{ opacity: 0, y: 5 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.6 + i * 0.05 }}
+                        className={`rounded-xl p-2 text-center ${d.day === "ศ." ? "bg-[#af52de]/10 ring-1 ring-[#af52de]/20" : "bg-[#fafafa]"} ${d.posts.length === 0 ? "opacity-50" : ""}`}
+                      >
+                        <p className="text-[10px] font-semibold text-[#1c1c1e] mb-0.5">{d.day}</p>
+                        <p className="text-[8px] text-[#6e6e73] mb-1.5">{d.label}</p>
+                        <div className="flex justify-center gap-1 flex-wrap">
+                          {d.posts.map((p, pi) => (
+                            <motion.div
+                              key={pi}
+                              initial={{ scale: 0 }}
+                              whileInView={{ scale: 1 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: 0.7 + i * 0.05 + pi * 0.1, type: "spring" }}
+                              className="w-2.5 h-2.5 rounded-full"
+                              style={{ background: p.color }}
+                              title={p.type}
+                            />
+                          ))}
+                          {d.posts.length === 0 && (
+                            <span className="text-[8px] text-[#c7c7cc]">&#8212;</span>
+                          )}
+                        </div>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+
+                  {/* Legend */}
+                  <div className="flex items-center gap-3 mt-3 justify-center">
+                    {[
+                      { label: "TikTok", color: "#ff2d55" },
+                      { label: "IG Post", color: "#af52de" },
+                      { label: "IG Story", color: "#ff9500" },
+                      { label: "Facebook", color: "#007aff" },
+                      { label: "YouTube", color: "#ff3b30" },
+                    ].map((l) => (
+                      <div key={l.label} className="flex items-center gap-1">
+                        <div className="w-2 h-2 rounded-full" style={{ background: l.color }} />
+                        <span className="text-[8px] text-[#6e6e73]">{l.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ═══ PRICING PACKAGES ═══ */}
       <section className="py-20 px-6">
         <div className="max-w-5xl mx-auto">

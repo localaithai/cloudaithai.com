@@ -592,6 +592,80 @@ export default function RestaurantSection() {
         </div>
       </section>
 
+      {/* ═══ INTERACTIVE DEMO — Restaurant-specific UI ═══ */}
+      <section className="py-20 px-6">
+        <div className="max-w-5xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
+            <h2 className="text-[28px] sm:text-[36px] font-semibold text-[#1d1d1f] tracking-tight mb-3">ดูตัวอย่างจริง</h2>
+            <p className="text-[17px] text-[#86868b]">ระบบ AI สำหรับร้านอาหาร — จากสั่งอาหารถึงจัดการครัว</p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* LINE Order Bot Mockup */}
+            <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="apple-card p-0 overflow-hidden">
+              <div className="flex items-center gap-3 px-5 py-3 bg-[#00C300] text-white">
+                <span className="text-lg">💬</span>
+                <span className="text-[13px] font-semibold">LINE — สั่งอาหารออนไลน์</span>
+              </div>
+              <div className="p-5 space-y-3 bg-[#7494a5]/5 min-h-[300px]">
+                <div className="flex justify-end">
+                  <div className="bg-[#06C755] text-white text-[13px] px-4 py-2.5 rounded-2xl rounded-br-sm max-w-[75%]">
+                    สั่งข้าวผัดกะเพราหมูสับไข่ดาว 2 จาน กับต้มยำกุ้ง 1 ถ้วยครับ
+                  </div>
+                </div>
+                <div className="flex justify-start">
+                  <div className="bg-white text-[#1d1d1f] text-[13px] px-4 py-3 rounded-2xl rounded-bl-sm max-w-[80%] shadow-sm">
+                    <p className="font-medium mb-2">ออเดอร์ #247 ✅</p>
+                    <p className="text-[#86868b]">🍳 ข้าวผัดกะเพราหมูสับไข่ดาว x2 — ฿120</p>
+                    <p className="text-[#86868b]">🍲 ต้มยำกุ้ง x1 — ฿180</p>
+                    <p className="font-semibold mt-2">รวม: ฿420</p>
+                    <p className="text-[#86868b] text-[12px] mt-1">⏱️ ประมาณ 15-20 นาที</p>
+                    <p className="text-[#2997ff] text-[12px] mt-1">ต้องการเพิ่มเมนูอื่นไหมคะ?</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 text-[10px] text-[#86868b] px-2">
+                  <span className="px-2 py-0.5 rounded-full bg-[#2997ff]/8 text-[#2997ff] font-medium">AI</span>
+                  ตอบอัตโนมัติ • 1.2 วินาที
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Kitchen Dashboard Mockup */}
+            <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="apple-card p-0 overflow-hidden">
+              <div className="flex items-center justify-between px-5 py-3 bg-[#f5f5f7] border-b border-black/[0.04]">
+                <span className="text-[13px] font-semibold text-[#1d1d1f]">🍴 Kitchen Dashboard</span>
+                <span className="text-[11px] text-[#86868b]">Live</span>
+              </div>
+              <div className="p-5 space-y-3">
+                {[
+                  { id: "#247", items: "กะเพราหมูสับ x2, ต้มยำกุ้ง x1", status: "กำลังทำ", color: "#ff9500", time: "5 นาที" },
+                  { id: "#246", items: "ผัดไทย x1, ส้มตำ x2", status: "เสร็จแล้ว", color: "#34c759", time: "12 นาที" },
+                  { id: "#245", items: "ข้าวมันไก่ x3", status: "กำลังส่ง", color: "#2997ff", time: "18 นาที" },
+                ].map((order) => (
+                  <div key={order.id} className="flex items-center justify-between p-3 rounded-xl bg-[#fafafa] border border-black/[0.03]">
+                    <div>
+                      <p className="text-[13px] font-medium text-[#1d1d1f]">{order.id}</p>
+                      <p className="text-[11px] text-[#86868b]">{order.items}</p>
+                    </div>
+                    <div className="text-right">
+                      <span className="text-[11px] font-medium px-2 py-0.5 rounded-full" style={{ background: order.color + "15", color: order.color }}>{order.status}</span>
+                      <p className="text-[10px] text-[#86868b] mt-1">{order.time}</p>
+                    </div>
+                  </div>
+                ))}
+                {/* Inventory alert */}
+                <div className="p-3 rounded-xl bg-[#ff3b30]/5 border border-[#ff3b30]/10">
+                  <p className="text-[12px] font-medium text-[#ff3b30] flex items-center gap-1.5">
+                    <AlertTriangle size={13} /> แจ้งเตือน: กุ้ง เหลือ 8 ตัว (ต่ำกว่า 10)
+                  </p>
+                  <p className="text-[11px] text-[#86868b] mt-0.5">AI แนะนำ: สั่งเพิ่ม 2 กก. จาก Supplier A</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* ═══ PRICING PACKAGES ═══ */}
       <section className="py-20 px-6" id="pricing">
         <div className="max-w-5xl mx-auto">

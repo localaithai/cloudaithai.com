@@ -131,6 +131,201 @@ export default function LegalSection() {
           </div>
         </motion.div>
 
+        {/* ═══ INTERACTIVE MOCKUP: ดูตัวอย่างจริง ═══ */}
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-20">
+          <div className="text-center mb-10">
+            <p className="text-[13px] font-semibold text-[#5856d6] uppercase tracking-widest mb-3">Live Demo</p>
+            <h2 className="text-2xl md:text-3xl font-bold text-[#1d1d1f] tracking-tight mb-3">ดูตัวอย่างจริง</h2>
+            <p className="text-base text-[#86868b] max-w-xl mx-auto">ระบบ AI วิเคราะห์สัญญา + ค้นกฎหมาย ที่ทนายใช้งานจริงได้ทันที</p>
+          </div>
+
+          {/* ── Contract Viewer Mockup ── */}
+          <div className="apple-card overflow-hidden mb-6">
+            <div className="relative z-10">
+              {/* Window chrome */}
+              <div className="flex items-center gap-2 px-5 py-3 border-b border-black/[0.04] bg-[#fafafa]">
+                <div className="flex gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+                  <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
+                  <div className="w-3 h-3 rounded-full bg-[#28c840]" />
+                </div>
+                <div className="flex-1 text-center">
+                  <span className="text-[11px] text-[#86868b] bg-white rounded-md px-4 py-1 border border-black/[0.06]">
+                    Cloud AI Legal — Contract Analyzer
+                  </span>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-5 divide-x divide-black/[0.04]">
+                {/* Left: Contract document */}
+                <div className="md:col-span-3 p-6">
+                  <div className="flex items-center gap-2 mb-4">
+                    <FileText size={16} className="text-[#5856d6]" />
+                    <span className="text-[13px] font-semibold text-[#1d1d1f]">สัญญาเช่า_อาคารพาณิชย์_2568.pdf</span>
+                    <span className="text-[10px] bg-[#f5f5f7] text-[#86868b] rounded-full px-2 py-0.5 ml-auto">32 หน้า</span>
+                  </div>
+
+                  <div className="bg-white border border-black/[0.06] rounded-xl p-5 space-y-4 font-serif text-[13px] text-[#1d1d1f]/80 leading-relaxed">
+                    <h3 className="text-center text-[15px] font-bold text-[#1d1d1f] font-sans">สัญญาเช่าอาคารพาณิชย์</h3>
+                    <p className="text-center text-[12px] text-[#86868b] font-sans">เลขที่ RENT-2568-00147</p>
+                    <div className="h-[0.5px] bg-black/10 my-3" />
+                    <p>ทำที่ กรุงเทพมหานคร วันที่ 15 มีนาคม 2568</p>
+                    <p>สัญญานี้ทำขึ้นระหว่าง <span className="font-semibold">บริษัท ก้าวหน้า พร็อพเพอร์ตี้ จำกัด</span> (ผู้ให้เช่า) กับ <span className="font-semibold">บริษัท เทค สตาร์ท จำกัด</span> (ผู้เช่า)</p>
+
+                    <div className="bg-[#ff3b30]/[0.06] border border-[#ff3b30]/20 rounded-lg p-3 relative">
+                      <div className="absolute -top-2 left-3 bg-[#ff3b30] text-white text-[9px] font-bold px-2 py-0.5 rounded-full">ข้อเสี่ยง</div>
+                      <p className="text-[12px]"><span className="font-semibold">ข้อ 5.3</span> ผู้เช่าจะต้องรับผิดชอบค่าเสียหายทั้งหมดที่เกิดขึ้นกับทรัพย์สินที่เช่า <span className="underline decoration-[#ff3b30] decoration-wavy">ไม่ว่าจะเกิดจากสาเหตุใดก็ตาม รวมถึงเหตุสุดวิสัย</span></p>
+                    </div>
+
+                    <p><span className="font-semibold">ข้อ 6</span> อัตราค่าเช่ารายเดือน เดือนละ 45,000 บาท (สี่หมื่นห้าพันบาทถ้วน) ชำระภายในวันที่ 5 ของทุกเดือน</p>
+
+                    <div className="bg-[#ff3b30]/[0.06] border border-[#ff3b30]/20 rounded-lg p-3 relative">
+                      <div className="absolute -top-2 left-3 bg-[#ff3b30] text-white text-[9px] font-bold px-2 py-0.5 rounded-full">ข้อเสี่ยง</div>
+                      <p className="text-[12px]"><span className="font-semibold">ข้อ 8.2</span> หากผู้เช่าผิดนัดชำระค่าเช่า ให้ผู้ให้เช่ามีสิทธิเรียกค่าปรับ <span className="underline decoration-[#ff3b30] decoration-wavy">ร้อยละ 5 ต่อวัน</span> ของยอดค้างชำระ</p>
+                    </div>
+
+                    <p><span className="font-semibold">ข้อ 12</span> ระยะเวลาเช่า 3 ปี นับแต่วันที่ลงนามในสัญญา ต่อสัญญาได้โดยต้องแจ้งล่วงหน้า 90 วัน</p>
+                  </div>
+                </div>
+
+                {/* Right: AI Analysis panel */}
+                <div className="md:col-span-2 p-6 bg-[#fafafa]">
+                  <div className="flex items-center gap-2 mb-5">
+                    <Brain size={16} className="text-[#5856d6]" />
+                    <span className="text-[13px] font-semibold text-[#1d1d1f]">AI Analysis</span>
+                    <span className="text-[10px] bg-[#34c759]/10 text-[#34c759] rounded-full px-2 py-0.5 ml-auto font-medium">วิเคราะห์แล้ว</span>
+                  </div>
+
+                  {/* Risk items */}
+                  <div className="mb-5">
+                    <p className="text-[11px] font-semibold text-[#ff3b30] uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                      <AlertTriangle size={12} /> ข้อเสี่ยง (3 รายการ)
+                    </p>
+                    <div className="space-y-2">
+                      {[
+                        { clause: "ข้อ 5.3", text: "รับผิดชอบความเสียหายจากเหตุสุดวิสัย — ผิดปกติ ควรยกเว้น force majeure" },
+                        { clause: "ข้อ 8.2", text: "ค่าปรับ 5%/วัน สูงเกินไป — ปกติ 0.5-1.5%/วัน อาจถือเป็นเบี้ยปรับที่ศาลลดได้" },
+                        { clause: "ข้อ 15", text: "ไม่มี clause การคืนเงินประกัน — ควรระบุเงื่อนไขและระยะเวลาคืน" },
+                      ].map((risk, ri) => (
+                        <div key={ri} className="bg-white rounded-lg p-3 border border-[#ff3b30]/10">
+                          <span className="text-[10px] font-bold text-[#ff3b30] bg-[#ff3b30]/10 rounded-full px-2 py-0.5">{risk.clause}</span>
+                          <p className="text-[11px] text-[#1d1d1f]/80 mt-1.5 leading-relaxed">{risk.text}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Recommendations */}
+                  <div className="mb-5">
+                    <p className="text-[11px] font-semibold text-[#2997ff] uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                      <ArrowRight size={12} /> ข้อเสนอแนะ
+                    </p>
+                    <div className="space-y-2">
+                      {[
+                        "เพิ่ม Force Majeure clause ยกเว้นเหตุสุดวิสัย",
+                        "ลดอัตราค่าปรับเป็น 1.5%/วัน (มาตรฐานตลาด)",
+                        "เพิ่มข้อกำหนดเรื่องการคืนเงินประกันภายใน 30 วัน",
+                      ].map((rec, ri) => (
+                        <div key={ri} className="flex items-start gap-2 bg-[#2997ff]/[0.05] rounded-lg p-2.5">
+                          <Check size={13} className="text-[#2997ff] shrink-0 mt-0.5" />
+                          <span className="text-[11px] text-[#1d1d1f]/80">{rec}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Summary */}
+                  <div className="bg-white rounded-xl p-4 border border-black/[0.06]">
+                    <p className="text-[11px] font-semibold text-[#1d1d1f] mb-2 flex items-center gap-1.5">
+                      <Shield size={12} className="text-[#5856d6]" /> สรุป
+                    </p>
+                    <p className="text-[11px] text-[#86868b] leading-relaxed">
+                      สัญญาฉบับนี้มีข้อที่ <span className="text-[#ff3b30] font-medium">ไม่เป็นธรรมต่อผู้เช่า 3 จุด</span> โดยเฉพาะเรื่องค่าปรับที่สูงกว่ามาตรฐาน
+                      และการรับผิดชอบเหตุสุดวิสัย ควรเจรจาแก้ไขก่อนลงนาม
+                    </p>
+                    <div className="flex items-center gap-2 mt-3">
+                      <div className="flex-1 bg-[#f5f5f7] rounded-full h-2 overflow-hidden">
+                        <div className="h-full rounded-full bg-gradient-to-r from-[#ff9500] to-[#ff3b30]" style={{ width: "35%" }} />
+                      </div>
+                      <span className="text-[10px] font-semibold text-[#ff9500]">ความเสี่ยง: ปานกลาง-สูง</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ── Legal Search Mockup ── */}
+          <div className="apple-card overflow-hidden">
+            <div className="relative z-10">
+              {/* Window chrome */}
+              <div className="flex items-center gap-2 px-5 py-3 border-b border-black/[0.04] bg-[#fafafa]">
+                <div className="flex gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+                  <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
+                  <div className="w-3 h-3 rounded-full bg-[#28c840]" />
+                </div>
+                <div className="flex-1 text-center">
+                  <span className="text-[11px] text-[#86868b] bg-white rounded-md px-4 py-1 border border-black/[0.06]">
+                    Cloud AI Legal — Legal RAG Search
+                  </span>
+                </div>
+              </div>
+
+              <div className="p-6">
+                {/* Search bar */}
+                <div className="flex items-center gap-3 bg-white border border-black/[0.08] rounded-2xl px-5 py-3.5 mb-6 shadow-sm">
+                  <Search size={18} className="text-[#5856d6]" />
+                  <span className="text-[14px] text-[#1d1d1f] flex-1">PDPA มาตราที่เกี่ยวข้องกับการเก็บข้อมูลลูกค้า</span>
+                  <div className="bg-[#5856d6] text-white text-[12px] font-medium px-4 py-1.5 rounded-full shrink-0">ค้นหา</div>
+                </div>
+
+                {/* AI result */}
+                <div className="bg-[#fafafa] rounded-2xl p-5 border border-black/[0.04]">
+                  <div className="flex items-center gap-2 mb-4">
+                    <Brain size={14} className="text-[#5856d6]" />
+                    <span className="text-[12px] font-semibold text-[#1d1d1f]">AI สรุปคำตอบ</span>
+                    <span className="text-[10px] text-[#86868b] ml-auto">ค้นจาก พ.ร.บ. PDPA พ.ศ. 2562 + กฎกระทรวง 3 ฉบับ</span>
+                  </div>
+
+                  <p className="text-[13px] text-[#1d1d1f]/80 leading-relaxed mb-4">
+                    การเก็บรวบรวมข้อมูลส่วนบุคคลของลูกค้า ต้องปฏิบัติตามหลักเกณฑ์ที่กำหนดไว้ใน พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 โดยมีมาตราที่เกี่ยวข้องดังนี้:
+                  </p>
+
+                  <div className="space-y-3">
+                    {[
+                      { section: "มาตรา 19", title: "หลักการเก็บรวบรวมข้อมูล", text: "ต้องเก็บเท่าที่จำเป็น ตามวัตถุประสงค์ที่แจ้งไว้ โดยชอบด้วยกฎหมาย เป็นธรรม และโปร่งใส", tag: "สำคัญ" },
+                      { section: "มาตรา 21", title: "การขอความยินยอม", text: "ต้องขอ consent ก่อนเก็บข้อมูล เป็นหนังสือหรืออิเล็กทรอนิกส์ ภาษาเข้าใจง่าย แยกชัดเจนจากเงื่อนไขอื่น", tag: "บังคับ" },
+                      { section: "มาตรา 23", title: "ข้อมูลที่เก็บได้", text: "ห้ามเก็บข้อมูลเกินวัตถุประสงค์ และต้องลบเมื่อหมดความจำเป็น หรือเจ้าของข้อมูลถอนความยินยอม", tag: "สำคัญ" },
+                      { section: "มาตรา 26", title: "ข้อมูลอ่อนไหว (Sensitive Data)", text: "ห้ามเก็บข้อมูลเชื้อชาติ ศาสนา สุขภาพ พฤติกรรมทางเพศ ฯลฯ เว้นแต่ได้รับ explicit consent", tag: "เข้มงวด" },
+                    ].map((item, si) => (
+                      <motion.div key={si} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: si * 0.08 }}
+                        className="bg-white rounded-xl p-4 border border-black/[0.04] hover:shadow-sm transition-shadow"
+                      >
+                        <div className="flex items-center gap-2 mb-1.5">
+                          <span className="text-[12px] font-bold text-[#5856d6]">{item.section}</span>
+                          <span className="text-[12px] font-semibold text-[#1d1d1f]">{item.title}</span>
+                          <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full ml-auto ${
+                            item.tag === "บังคับ" ? "bg-[#ff3b30]/10 text-[#ff3b30]" :
+                            item.tag === "เข้มงวด" ? "bg-[#af52de]/10 text-[#af52de]" :
+                            "bg-[#ff9500]/10 text-[#ff9500]"
+                          }`}>{item.tag}</span>
+                        </div>
+                        <p className="text-[11px] text-[#86868b] leading-relaxed">{item.text}</p>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  <div className="flex items-center justify-between mt-4 pt-4 border-t border-black/[0.04]">
+                    <span className="text-[10px] text-[#86868b]">ใช้เวลาค้นหา: 2.3 วินาที | แหล่งอ้างอิง: 4 มาตรา จาก 1 พ.ร.บ.</span>
+                    <span className="text-[10px] text-[#5856d6] font-medium cursor-pointer hover:underline">ดูเอกสารต้นฉบับ →</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
         {/* Pricing */}
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-16">
           <h2 className="text-2xl md:text-3xl font-bold text-[#1d1d1f] text-center mb-10">แพ็คเกจสำหรับสำนักงานกฎหมาย</h2>

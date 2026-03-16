@@ -607,6 +607,290 @@ export default function EcommerceSection() {
         </div>
       </section>
 
+      {/* ═══ LIVE MOCKUP: ดูตัวอย่างจริง ═══ */}
+      <section className="py-20 px-6">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <p className="text-[13px] font-semibold text-[#ff9500] uppercase tracking-widest mb-3">Interactive Preview</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#1d1d1f] tracking-tight mb-3">
+              ดูตัวอย่างจริง
+            </h2>
+            <p className="text-base text-[#86868b] max-w-xl mx-auto">
+              ระบบ AI ทำงานร่วมกับหน้าร้านออนไลน์ — ตอบลูกค้า + จัดการออเดอร์อัตโนมัติ
+            </p>
+          </motion.div>
+
+          {/* E-commerce Dashboard Mockup */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="apple-card p-0 overflow-hidden"
+          >
+            {/* Browser chrome */}
+            <div className="nav-glass px-5 py-3 flex items-center gap-3 border-b border-black/[0.04]">
+              <div className="flex gap-1.5">
+                <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
+              </div>
+              <div className="flex-1 mx-4">
+                <div className="bg-[#f5f5f7] rounded-lg px-4 py-1.5 text-[11px] text-[#86868b] flex items-center gap-2 max-w-md mx-auto">
+                  <span className="text-[#34c759]">&#128274;</span> shopee.co.th/shop/aromahouse-official
+                </div>
+              </div>
+            </div>
+
+            <div className="grid lg:grid-cols-5 min-h-[520px]">
+              {/* LEFT: Product Page Mockup (3 cols) */}
+              <div className="lg:col-span-3 p-6 border-r border-black/[0.04]">
+                {/* Shop header */}
+                <div className="flex items-center gap-3 mb-5 pb-4 border-b border-black/[0.04]">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#ff9500] to-[#ff6b35] flex items-center justify-center text-white text-[13px] font-bold">AH</div>
+                  <div>
+                    <p className="text-[13px] font-semibold text-[#1d1d1f]">AromaHouse Official</p>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] text-[#86868b]">&#9733; 4.9 (2.3k รีวิว)</span>
+                      <span className="text-[10px] bg-[#ff9500]/10 text-[#ff9500] px-2 py-0.5 rounded-full font-medium">Preferred Seller</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Product card */}
+                <div className="grid sm:grid-cols-2 gap-5">
+                  {/* Product image placeholder */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    className="aspect-square rounded-2xl bg-gradient-to-br from-[#fdf6ec] to-[#f5e6d0] flex flex-col items-center justify-center relative overflow-hidden"
+                  >
+                    <div className="absolute top-3 left-3 bg-[#ff3b30] text-white text-[10px] font-bold px-2.5 py-1 rounded-full">-35%</div>
+                    <div className="text-5xl mb-2">&#127879;</div>
+                    <p className="text-[11px] text-[#86868b] mt-1">Reed Diffuser 200ml</p>
+                    <div className="absolute bottom-3 flex gap-1.5">
+                      {["#D4A574", "#C9B896", "#8B7355", "#2C1810"].map((c) => (
+                        <div key={c} className="w-4 h-4 rounded-full border-2 border-white shadow-sm" style={{ background: c }} />
+                      ))}
+                    </div>
+                  </motion.div>
+
+                  {/* Product info */}
+                  <div className="space-y-3">
+                    <div>
+                      <h3 className="text-[16px] font-semibold text-[#1d1d1f] leading-snug">Reed Diffuser น้ำหอมปรับอากาศ กลิ่น Champagne Gold 200ml</h3>
+                      <div className="flex items-center gap-2 mt-2">
+                        <span className="text-[20px] font-bold text-[#ff3b30]">&#3647;490</span>
+                        <span className="text-[13px] text-[#86868b] line-through">&#3647;750</span>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2 text-[11px]">
+                        <span className="text-[#86868b]">กลิ่น:</span>
+                        <div className="flex gap-1">
+                          {["Champagne Gold", "Rose Garden", "Ocean Breeze", "Lavender"].map((s, idx) => (
+                            <span key={s} className={`px-2 py-0.5 rounded-full text-[10px] ${idx === 0 ? "bg-[#ff9500]/10 text-[#ff9500] border border-[#ff9500]/20 font-medium" : "bg-[#f5f5f7] text-[#86868b]"}`}>{s}</span>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2 text-[11px]">
+                        <span className="text-[#86868b]">สต็อก:</span>
+                        <span className="text-[#34c759] font-medium">มีสินค้า 24 ชิ้น</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-[11px]">
+                        <span className="text-[#86868b]">จัดส่ง:</span>
+                        <span className="text-[#1d1d1f]">ฟรี! ถึงภายใน 1-3 วัน</span>
+                        <Truck size={12} className="text-[#34c759]" />
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3 pt-2">
+                      <div className="flex items-center gap-1 text-[11px] text-[#86868b]">
+                        <Star size={12} className="text-[#ffcc00] fill-[#ffcc00]" /> 4.9
+                      </div>
+                      <div className="text-[11px] text-[#86868b]">ขายแล้ว 1.2k ชิ้น</div>
+                    </div>
+
+                    <div className="flex gap-2 pt-2">
+                      <button className="flex-1 py-2.5 rounded-xl bg-[#ff9500]/10 text-[#ff9500] text-[12px] font-medium flex items-center justify-center gap-1.5">
+                        <ShoppingBag size={14} /> ใส่ตะกร้า
+                      </button>
+                      <button className="flex-1 py-2.5 rounded-xl bg-[#ff9500] text-white text-[12px] font-medium">
+                        ซื้อเลย
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* RIGHT: AI Chat Widget (2 cols) */}
+              <div className="lg:col-span-2 flex flex-col bg-[#fafafa]">
+                {/* Chat header */}
+                <div className="px-5 py-3 border-b border-black/[0.04] flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-full bg-[#30d158]/10 flex items-center justify-center">
+                    <Bot size={14} className="text-[#30d158]" />
+                  </div>
+                  <div>
+                    <p className="text-[12px] font-semibold text-[#1d1d1f]">AromaHouse AI Assistant</p>
+                    <p className="text-[10px] text-[#34c759] flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#34c759] inline-block" /> ออนไลน์ ตอบภายใน 3 วินาที
+                    </p>
+                  </div>
+                </div>
+
+                {/* Chat messages */}
+                <div className="flex-1 p-4 space-y-3 overflow-y-auto">
+                  {/* Customer message */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
+                    className="flex justify-end"
+                  >
+                    <div className="bg-[#2997ff] text-white text-[12px] px-4 py-2.5 rounded-2xl rounded-br-md max-w-[85%] leading-relaxed">
+                      สินค้านี้มีสี Champagne ไหมคะ?
+                    </div>
+                  </motion.div>
+
+                  {/* AI response */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.6 }}
+                    className="flex gap-2"
+                  >
+                    <div className="w-6 h-6 rounded-full bg-[#30d158]/10 flex items-center justify-center shrink-0 mt-1">
+                      <Bot size={11} className="text-[#30d158]" />
+                    </div>
+                    <div className="apple-card !rounded-2xl !rounded-bl-md p-3.5 max-w-[90%] text-[12px] text-[#1d1d1f] leading-relaxed space-y-2">
+                      <p>มีค่ะ! กลิ่น <span className="font-semibold text-[#ff9500]">Champagne Gold</span> เป็นกลิ่นขายดีอันดับ 1 ของร้านเลยค่ะ</p>
+                      <div className="bg-[#f5f5f7] rounded-xl p-3 space-y-1.5">
+                        <p className="text-[11px]">&#127879; Reed Diffuser — Champagne Gold 200ml</p>
+                        <p className="text-[11px]">&#128176; <span className="text-[#ff3b30] font-semibold">&#3647;490</span> <span className="line-through text-[#86868b]">&#3647;750</span> (ลด 35%)</p>
+                        <p className="text-[11px]">&#128230; คงเหลือ: <span className="text-[#34c759] font-medium">24 ชิ้น</span></p>
+                        <p className="text-[11px]">&#128666; ส่งฟรี ถึงภายใน 1-3 วัน</p>
+                      </div>
+                      <p>สั่งซื้อเลยมั้ยคะ? ตอนนี้ลดราคาพิเศษอยู่ค่ะ &#128522;</p>
+                    </div>
+                  </motion.div>
+
+                  {/* Customer confirms */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 1.0 }}
+                    className="flex justify-end"
+                  >
+                    <div className="bg-[#2997ff] text-white text-[12px] px-4 py-2.5 rounded-2xl rounded-br-md max-w-[85%]">
+                      สั่ง 2 ชิ้นเลยค่ะ
+                    </div>
+                  </motion.div>
+
+                  {/* AI order confirmation */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 1.4 }}
+                    className="flex gap-2"
+                  >
+                    <div className="w-6 h-6 rounded-full bg-[#30d158]/10 flex items-center justify-center shrink-0 mt-1">
+                      <Bot size={11} className="text-[#30d158]" />
+                    </div>
+                    <div className="apple-card !rounded-2xl !rounded-bl-md p-3.5 max-w-[90%] text-[12px] text-[#1d1d1f] leading-relaxed">
+                      <p>รับออเดอร์แล้วค่ะ! &#9989;</p>
+                      <div className="bg-[#f5f5f7] rounded-xl p-3 space-y-1 mt-2">
+                        <p className="text-[11px] font-semibold">&#128203; ออเดอร์ #AH-7821</p>
+                        <p className="text-[11px]">&#127879; Champagne Gold 200ml x2</p>
+                        <p className="text-[11px]">&#128176; รวม &#3647;980 (ส่งฟรี)</p>
+                      </div>
+                      <p className="mt-2">&#128179; ชำระเงินที่ลิงก์นี้ค่ะ:<br /><span className="text-[#2997ff] underline">pay.aromahouse.co.th/7821</span></p>
+                    </div>
+                  </motion.div>
+                </div>
+
+                {/* Chat input */}
+                <div className="p-3 border-t border-black/[0.04]">
+                  <div className="bg-white rounded-xl border border-[#d2d2d7]/40 flex items-center gap-2 px-3 py-2.5">
+                    <span className="text-[12px] text-[#c7c7cc] flex-1">พิมพ์ข้อความ...</span>
+                    <Send size={14} className="text-[#2997ff]" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Order Pipeline Animation */}
+            <div className="border-t border-black/[0.04] px-6 py-5 bg-[#fafafa]">
+              <p className="text-[11px] font-medium text-[#86868b] uppercase tracking-wider mb-4 text-center">Order Processing Pipeline — อัตโนมัติทั้งหมด</p>
+              <div className="flex flex-wrap items-center justify-center gap-2 md:gap-0">
+                {[
+                  { label: "Order Received", icon: <ShoppingCart size={14} />, color: "#2997ff", status: "&#9989;" },
+                  { label: "Stock Checked", icon: <Package size={14} />, color: "#34c759", status: "&#9989;" },
+                  { label: "Invoice Created", icon: <FileText size={14} />, color: "#ff9500", status: "&#9989;" },
+                  { label: "Payment Confirmed", icon: <DollarSign size={14} />, color: "#af52de", status: "&#9989;" },
+                  { label: "Shipped", icon: <Truck size={14} />, color: "#30d158", status: "&#128230;" },
+                ].map((step, i, arr) => (
+                  <motion.div
+                    key={step.label}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.15 * i }}
+                    className="flex items-center gap-2"
+                  >
+                    <div className="flex flex-col items-center gap-1">
+                      <motion.div
+                        initial={{ scale: 0.8 }}
+                        whileInView={{ scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.15 * i + 0.1, type: "spring" }}
+                        className="w-10 h-10 rounded-xl flex items-center justify-center"
+                        style={{ background: step.color + "15", color: step.color }}
+                      >
+                        {step.icon}
+                      </motion.div>
+                      <span className="text-[10px] text-[#1d1d1f] font-medium text-center max-w-[80px]">{step.label}</span>
+                      <span className="text-[10px]" dangerouslySetInnerHTML={{ __html: step.status }} />
+                    </div>
+                    {i < arr.length - 1 && (
+                      <motion.div
+                        initial={{ scaleX: 0 }}
+                        whileInView={{ scaleX: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.15 * i + 0.2 }}
+                        className="hidden md:block w-8 h-[2px] origin-left"
+                        style={{ background: `linear-gradient(to right, ${step.color}, ${arr[i + 1].color})` }}
+                      />
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 1.0 }}
+                className="text-center mt-4"
+              >
+                <span className="inline-flex items-center gap-1.5 text-[11px] text-[#34c759] font-medium bg-[#34c759]/10 px-3 py-1 rounded-full">
+                  <Zap size={12} /> ทั้งหมดเสร็จใน 8 วินาที — ไม่ต้องทำมือสักขั้นตอน
+                </span>
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ═══ CTA ═══ */}
       <section className="py-24 px-6">
         <div className="max-w-3xl mx-auto text-center">

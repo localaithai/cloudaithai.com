@@ -485,6 +485,323 @@ export default function HealthcareSection() {
         </div>
       </section>
 
+      {/* ═══ INTERACTIVE MOCKUP: ดูตัวอย่างจริง ═══ */}
+      <section className="py-20 px-6">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <p className="text-[13px] font-semibold text-[#30d158] uppercase tracking-widest mb-3">Live Demo</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#1d1d1f] tracking-tight mb-3">
+              ดูตัวอย่างจริง
+            </h2>
+            <p className="text-base text-[#86868b] max-w-xl mx-auto">
+              ระบบ AI นัดหมาย + ค้นข้อมูลยา ที่ใช้งานได้จริงในคลินิก & โรงพยาบาล
+            </p>
+          </motion.div>
+
+          {/* ── LINE Chat Appointment Mockup ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="apple-card overflow-hidden mb-6"
+          >
+            <div className="relative z-10">
+              {/* Phone frame header */}
+              <div className="bg-[#06c755] px-5 py-3 flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+                  <MessageSquare size={14} className="text-white" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-[13px] font-semibold text-white">คลินิกใจดี Clinic</p>
+                  <p className="text-[10px] text-white/70">LINE Official Account</p>
+                </div>
+                <div className="flex gap-2">
+                  <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center">
+                    <Search size={12} className="text-white/70" />
+                  </div>
+                  <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center">
+                    <Users size={12} className="text-white/70" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Chat area */}
+              <div className="bg-[#7494a5]/10 p-5 space-y-4 min-h-[420px]">
+                {/* Date divider */}
+                <div className="text-center">
+                  <span className="text-[10px] text-[#86868b] bg-white/60 rounded-full px-3 py-1">วันจันทร์ 16 มี.ค. 2568</span>
+                </div>
+
+                {/* Patient message 1 */}
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                  className="flex justify-end"
+                >
+                  <div className="max-w-[70%]">
+                    <div className="bg-[#06c755] rounded-2xl rounded-tr-md px-4 py-2.5">
+                      <p className="text-[13px] text-white">หมอมีคิวว่างวันพุธไหมคะ อยากมาตรวจสุขภาพค่ะ</p>
+                    </div>
+                    <p className="text-[9px] text-[#86868b] text-right mt-1">อ่านแล้ว 10:32</p>
+                  </div>
+                </motion.div>
+
+                {/* AI typing indicator then response */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 }}
+                  className="flex justify-start gap-2"
+                >
+                  <div className="w-8 h-8 rounded-full bg-[#06c755] flex items-center justify-center shrink-0">
+                    <Bot size={14} className="text-white" />
+                  </div>
+                  <div className="max-w-[75%]">
+                    <div className="bg-white rounded-2xl rounded-tl-md px-4 py-3 shadow-sm">
+                      <p className="text-[13px] text-[#1d1d1f] mb-3">สวัสดีค่ะ คุณสมศรี! ตรวจสุขภาพประจำปี วันพุธที่ 18 มี.ค. มีคิวว่างดังนี้ค่ะ:</p>
+                      <div className="space-y-2 mb-3">
+                        {[
+                          { time: "09:00 - 09:30", doctor: "นพ.สมชาย", status: "ว่าง", available: true },
+                          { time: "10:30 - 11:00", doctor: "นพ.สมชาย", status: "ว่าง", available: true },
+                          { time: "13:00 - 13:30", doctor: "พญ.วิลาวรรณ", status: "ว่าง", available: true },
+                          { time: "14:00 - 14:30", doctor: "พญ.วิลาวรรณ", status: "เต็ม", available: false },
+                        ].map((slot, si) => (
+                          <div key={si} className={`flex items-center justify-between rounded-xl px-3 py-2 text-[12px] ${slot.available ? "bg-[#f5f5f7]" : "bg-[#f5f5f7]/50 opacity-50"}`}>
+                            <div className="flex items-center gap-2">
+                              <Clock size={12} className={slot.available ? "text-[#30d158]" : "text-[#86868b]"} />
+                              <span className="font-medium text-[#1d1d1f]">{slot.time}</span>
+                            </div>
+                            <span className="text-[#86868b]">{slot.doctor}</span>
+                            <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${slot.available ? "bg-[#30d158]/10 text-[#30d158]" : "bg-[#ff3b30]/10 text-[#ff3b30]"}`}>
+                              {slot.status}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                      <p className="text-[12px] text-[#86868b] mb-2">กรุณาเลือกช่วงเวลาที่สะดวกค่ะ</p>
+                    </div>
+                    <p className="text-[9px] text-[#86868b] mt-1">10:32</p>
+                  </div>
+                </motion.div>
+
+                {/* Patient selects slot */}
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5 }}
+                  className="flex justify-end"
+                >
+                  <div className="max-w-[70%]">
+                    <div className="bg-[#06c755] rounded-2xl rounded-tr-md px-4 py-2.5">
+                      <p className="text-[13px] text-white">ขอ 09:00 นพ.สมชาย ค่ะ</p>
+                    </div>
+                    <p className="text-[9px] text-[#86868b] text-right mt-1">อ่านแล้ว 10:33</p>
+                  </div>
+                </motion.div>
+
+                {/* AI confirms booking */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.7 }}
+                  className="flex justify-start gap-2"
+                >
+                  <div className="w-8 h-8 rounded-full bg-[#06c755] flex items-center justify-center shrink-0">
+                    <Bot size={14} className="text-white" />
+                  </div>
+                  <div className="max-w-[75%]">
+                    <div className="bg-white rounded-2xl rounded-tl-md px-4 py-3 shadow-sm">
+                      <div className="bg-[#30d158]/10 border border-[#30d158]/20 rounded-xl p-3 mb-3">
+                        <div className="flex items-center gap-2 mb-2">
+                          <CheckCircle2 size={14} className="text-[#30d158]" />
+                          <span className="text-[13px] font-semibold text-[#30d158]">ยืนยันการนัดหมายเรียบร้อย!</span>
+                        </div>
+                        <div className="space-y-1.5 text-[12px] text-[#1d1d1f]/80">
+                          <p><span className="text-[#86868b]">วันที่:</span> พุธ 18 มี.ค. 2568</p>
+                          <p><span className="text-[#86868b]">เวลา:</span> 09:00 - 09:30 น.</p>
+                          <p><span className="text-[#86868b]">แพทย์:</span> นพ.สมชาย วิทยากุล</p>
+                          <p><span className="text-[#86868b]">บริการ:</span> ตรวจสุขภาพประจำปี</p>
+                        </div>
+                      </div>
+                      <p className="text-[12px] text-[#86868b]">จะส่ง reminder ก่อนนัด 24 ชม. พร้อม QR check-in ค่ะ</p>
+                    </div>
+                    <p className="text-[9px] text-[#86868b] mt-1">10:33</p>
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Chat input */}
+              <div className="bg-white border-t border-black/[0.06] px-4 py-3 flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-[#f5f5f7] flex items-center justify-center">
+                  <Syringe size={14} className="text-[#86868b]" />
+                </div>
+                <div className="flex-1 bg-[#f5f5f7] rounded-full px-4 py-2">
+                  <span className="text-[13px] text-[#c7c7cc]">พิมพ์ข้อความ...</span>
+                </div>
+                <div className="w-8 h-8 rounded-full bg-[#06c755] flex items-center justify-center">
+                  <ArrowRight size={14} className="text-white" />
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* ── Drug Info Card Mockup ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="apple-card overflow-hidden"
+          >
+            <div className="relative z-10">
+              {/* Window chrome */}
+              <div className="flex items-center gap-2 px-5 py-3 border-b border-black/[0.04] bg-[#fafafa]">
+                <div className="flex gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+                  <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
+                  <div className="w-3 h-3 rounded-full bg-[#28c840]" />
+                </div>
+                <div className="flex-1 text-center">
+                  <span className="text-[11px] text-[#86868b] bg-white rounded-md px-4 py-1 border border-black/[0.06]">
+                    Cloud AI Drug Info — AI Drug Lookup
+                  </span>
+                </div>
+              </div>
+
+              <div className="p-6">
+                {/* Search */}
+                <div className="flex items-center gap-3 bg-white border border-black/[0.08] rounded-2xl px-5 py-3.5 mb-6 shadow-sm">
+                  <Search size={18} className="text-[#2997ff]" />
+                  <span className="text-[14px] text-[#1d1d1f] flex-1">Metformin 500mg</span>
+                  <div className="bg-[#2997ff] text-white text-[12px] font-medium px-4 py-1.5 rounded-full shrink-0">ค้นหา</div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-5">
+                  {/* Left: Drug main info */}
+                  <div className="space-y-4">
+                    {/* Drug header card */}
+                    <div className="bg-gradient-to-br from-[#2997ff]/5 to-[#30d158]/5 rounded-2xl p-5 border border-[#2997ff]/10">
+                      <div className="flex items-start gap-4">
+                        <div className="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center shrink-0">
+                          <Pill size={28} className="text-[#2997ff]" />
+                        </div>
+                        <div>
+                          <h3 className="text-[17px] font-bold text-[#1d1d1f]">Metformin HCl 500mg</h3>
+                          <p className="text-[12px] text-[#86868b]">Biguanide / Antidiabetic</p>
+                          <div className="flex gap-2 mt-2">
+                            <span className="text-[10px] bg-[#2997ff]/10 text-[#2997ff] px-2 py-0.5 rounded-full font-medium">ยาควบคุม</span>
+                            <span className="text-[10px] bg-[#30d158]/10 text-[#30d158] px-2 py-0.5 rounded-full font-medium">ED List</span>
+                            <span className="text-[10px] bg-[#af52de]/10 text-[#af52de] px-2 py-0.5 rounded-full font-medium">NLEM</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Dosage */}
+                    <div className="bg-white rounded-xl p-4 border border-black/[0.06]">
+                      <p className="text-[11px] font-semibold text-[#1d1d1f] uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                        <Activity size={12} className="text-[#2997ff]" /> ขนาดยาและวิธีใช้
+                      </p>
+                      <div className="space-y-2.5">
+                        {[
+                          { label: "ผู้ใหญ่ (เริ่มต้น)", value: "500 mg วันละ 2 ครั้ง หลังอาหาร", note: "เช้า-เย็น" },
+                          { label: "ผู้ใหญ่ (สูงสุด)", value: "2,550 mg/วัน แบ่ง 3 มื้อ", note: "ค่อยๆ เพิ่ม" },
+                          { label: "ผู้สูงอายุ (>65)", value: "500 mg วันละ 1 ครั้ง", note: "ตรวจ Cr ก่อน" },
+                          { label: "GFR < 30", value: "ห้ามใช้", note: "Contraindicated" },
+                        ].map((d, di) => (
+                          <div key={di} className="flex items-center justify-between bg-[#fafafa] rounded-lg px-3 py-2">
+                            <span className="text-[11px] text-[#86868b]">{d.label}</span>
+                            <span className="text-[12px] font-medium text-[#1d1d1f]">{d.value}</span>
+                            <span className={`text-[9px] px-2 py-0.5 rounded-full font-medium ${d.note === "Contraindicated" ? "bg-[#ff3b30]/10 text-[#ff3b30]" : "bg-[#f5f5f7] text-[#86868b]"}`}>{d.note}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right: Contraindications + Interactions */}
+                  <div className="space-y-4">
+                    {/* Contraindications */}
+                    <div className="bg-white rounded-xl p-4 border border-[#ff3b30]/10">
+                      <p className="text-[11px] font-semibold text-[#ff3b30] uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                        <AlertTriangle size={12} /> ข้อห้ามใช้
+                      </p>
+                      <div className="space-y-2">
+                        {[
+                          "ไตวายรุนแรง (GFR < 30 mL/min)",
+                          "ภาวะ metabolic acidosis รวมถึง diabetic ketoacidosis",
+                          "ภาวะขาดน้ำรุนแรง (dehydration)",
+                          "โรคตับรุนแรง (severe hepatic impairment)",
+                          "แพ้ metformin หรือส่วนประกอบ",
+                        ].map((item, ci) => (
+                          <div key={ci} className="flex items-start gap-2">
+                            <XCircle size={13} className="text-[#ff3b30] shrink-0 mt-0.5" />
+                            <span className="text-[11px] text-[#1d1d1f]/80">{item}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Drug Interactions */}
+                    <div className="bg-white rounded-xl p-4 border border-[#ff9500]/10">
+                      <p className="text-[11px] font-semibold text-[#ff9500] uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                        <AlertTriangle size={12} /> ปฏิกิริยาระหว่างยา
+                      </p>
+                      <div className="space-y-2">
+                        {[
+                          { drug: "Insulin", level: "สูง", desc: "เสริมฤทธิ์ลดน้ำตาล อาจเกิด hypoglycemia" },
+                          { drug: "Alcohol", level: "สูง", desc: "เพิ่มความเสี่ยง lactic acidosis อย่างมาก" },
+                          { drug: "Contrast media", level: "สูง", desc: "หยุดยา 48 ชม. ก่อน-หลังฉีดสารทึบรังสี" },
+                          { drug: "Cimetidine", level: "ปานกลาง", desc: "เพิ่มระดับ metformin ในเลือด 40%" },
+                        ].map((interaction, ii) => (
+                          <div key={ii} className="bg-[#fafafa] rounded-lg px-3 py-2.5">
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="text-[12px] font-medium text-[#1d1d1f]">{interaction.drug}</span>
+                              <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full ${interaction.level === "สูง" ? "bg-[#ff3b30]/10 text-[#ff3b30]" : "bg-[#ff9500]/10 text-[#ff9500]"}`}>
+                                {interaction.level}
+                              </span>
+                            </div>
+                            <p className="text-[10px] text-[#86868b]">{interaction.desc}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* AI note */}
+                    <div className="bg-[#2997ff]/[0.05] rounded-xl p-3 border border-[#2997ff]/10">
+                      <div className="flex items-start gap-2">
+                        <BrainCircuit size={14} className="text-[#2997ff] shrink-0 mt-0.5" />
+                        <div>
+                          <p className="text-[11px] font-semibold text-[#2997ff] mb-1">AI แนะนำ</p>
+                          <p className="text-[10px] text-[#86868b] leading-relaxed">
+                            ผู้ป่วยรายนี้ใช้ Warfarin อยู่ — Metformin ไม่มี significant interaction กับ Warfarin
+                            สามารถใช้ร่วมกันได้ แต่ควรติดตาม blood glucose อย่างใกล้ชิดในช่วง 2 สัปดาห์แรก
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between mt-5 pt-4 border-t border-black/[0.04]">
+                  <span className="text-[10px] text-[#86868b]">แหล่งข้อมูล: MIMS Thailand, Thai FDA, Lexicomp | อัพเดท: มี.ค. 2568</span>
+                  <span className="text-[10px] text-[#2997ff] font-medium cursor-pointer hover:underline">ดู full monograph →</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ═══ PRICING PACKAGES ═══ */}
       <section className="py-20 px-6" id="pricing">
         <div className="max-w-5xl mx-auto">

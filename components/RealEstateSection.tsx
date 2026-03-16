@@ -629,6 +629,106 @@ export default function RealEstateSection() {
         </div>
       </section>
 
+      {/* ═══ INTERACTIVE DEMO — Real Estate UI ═══ */}
+      <section className="py-20 px-6">
+        <div className="max-w-5xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
+            <h2 className="text-[28px] sm:text-[36px] font-semibold text-[#1d1d1f] tracking-tight mb-3">ดูตัวอย่างจริง</h2>
+            <p className="text-[17px] text-[#86868b]">ระบบ AI ช่วยขายอสังหาฯ — จากสอบถามถึงปิดดีล</p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* LINE Inquiry Bot */}
+            <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="apple-card p-0 overflow-hidden">
+              <div className="flex items-center gap-3 px-5 py-3 bg-[#00C300] text-white">
+                <span className="text-lg">💬</span>
+                <span className="text-[13px] font-semibold">LINE — สอบถามโครงการ</span>
+              </div>
+              <div className="p-5 space-y-3 bg-[#7494a5]/5 min-h-[300px]">
+                <div className="flex justify-end">
+                  <div className="bg-[#06C755] text-white text-[13px] px-4 py-2.5 rounded-2xl rounded-br-sm max-w-[75%]">
+                    คอนโดย่านพระราม 9 งบ 3-5 ล้าน มีห้องไหนบ้างครับ
+                  </div>
+                </div>
+                <div className="flex justify-start">
+                  <div className="bg-white text-[#1d1d1f] text-[13px] px-4 py-3 rounded-2xl rounded-bl-sm max-w-[80%] shadow-sm">
+                    <p className="font-medium mb-2">พบ 3 ห้องที่ตรงเงื่อนไข 🏢</p>
+                    <div className="space-y-2 text-[12px]">
+                      <div className="p-2 rounded-lg bg-[#f5f5f7]">
+                        <p className="font-medium">Life Asoke Rama 9</p>
+                        <p className="text-[#86868b]">1BR 30 ตร.ม. • ฿3.29M • ชั้น 22 วิวสวย</p>
+                      </div>
+                      <div className="p-2 rounded-lg bg-[#f5f5f7]">
+                        <p className="font-medium">Ideo Mobi Rama 9</p>
+                        <p className="text-[#86868b]">1BR 35 ตร.ม. • ฿4.15M • ใกล้ MRT</p>
+                      </div>
+                      <div className="p-2 rounded-lg bg-[#f5f5f7]">
+                        <p className="font-medium">Rhythm Asoke</p>
+                        <p className="text-[#86868b]">Studio 28 ตร.ม. • ฿3.65M • พร้อมเฟอร์</p>
+                      </div>
+                    </div>
+                    <p className="text-[#2997ff] text-[12px] mt-2">ต้องการนัดดูห้องไหนคะ? 📅</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Agent Dashboard */}
+            <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="apple-card p-0 overflow-hidden">
+              <div className="flex items-center justify-between px-5 py-3 bg-[#f5f5f7] border-b border-black/[0.04]">
+                <span className="text-[13px] font-semibold text-[#1d1d1f]">🏠 Agent Dashboard</span>
+                <span className="text-[11px] text-[#34c759] font-medium">● Live</span>
+              </div>
+              <div className="p-5 space-y-3">
+                {/* Lead pipeline */}
+                <div>
+                  <p className="text-[11px] text-[#86868b] uppercase tracking-wider font-medium mb-2">Lead Pipeline</p>
+                  <div className="flex gap-2">
+                    {[
+                      { label: "สอบถาม", count: 12, color: "#2997ff" },
+                      { label: "นัดดู", count: 5, color: "#ff9500" },
+                      { label: "เจรจา", count: 3, color: "#5856d6" },
+                      { label: "ปิดดีล", count: 1, color: "#34c759" },
+                    ].map((stage) => (
+                      <div key={stage.label} className="flex-1 text-center p-2 rounded-lg" style={{ background: stage.color + "08" }}>
+                        <p className="text-[16px] font-semibold" style={{ color: stage.color }}>{stage.count}</p>
+                        <p className="text-[9px] text-[#86868b]">{stage.label}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                {/* Today's schedule */}
+                <div>
+                  <p className="text-[11px] text-[#86868b] uppercase tracking-wider font-medium mb-2">นัดดูวันนี้</p>
+                  {[
+                    { time: "10:00", client: "คุณสมชาย", unit: "Life Asoke #2205", status: "confirmed" },
+                    { time: "14:00", client: "คุณพิมพ์", unit: "Ideo Mobi #1803", status: "pending" },
+                  ].map((apt) => (
+                    <div key={apt.time} className="flex items-center justify-between p-2.5 rounded-lg bg-[#fafafa] mb-1.5">
+                      <div className="flex items-center gap-3">
+                        <span className="text-[13px] font-mono font-medium text-[#1d1d1f]">{apt.time}</span>
+                        <div>
+                          <p className="text-[12px] font-medium text-[#1d1d1f]">{apt.client}</p>
+                          <p className="text-[10px] text-[#86868b]">{apt.unit}</p>
+                        </div>
+                      </div>
+                      <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${apt.status === "confirmed" ? "bg-[#34c759]/10 text-[#34c759]" : "bg-[#ff9500]/10 text-[#ff9500]"}`}>
+                        {apt.status === "confirmed" ? "ยืนยันแล้ว" : "รอยืนยัน"}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                {/* AI insight */}
+                <div className="p-3 rounded-xl bg-[#2997ff]/5 border border-[#2997ff]/10">
+                  <p className="text-[12px] text-[#2997ff] font-medium">💡 AI Insight</p>
+                  <p className="text-[11px] text-[#86868b] mt-0.5">คุณสมชาย สนใจห้อง 1BR วิวสวย มี budget 3.5M — แนะนำ upsell ชั้นสูงกว่า (+200K)</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* ═══ PRICING ═══ */}
       <section className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
