@@ -11,7 +11,6 @@ export default function HeroCanvas() {
   const [loaded, setLoaded] = useState(false);
   const frameRef = useRef(0);
 
-  // Preload
   useEffect(() => {
     let count = 0;
     const images: HTMLImageElement[] = [];
@@ -21,7 +20,7 @@ export default function HeroCanvas() {
       img.onload = () => {
         count++;
         loadedRef.current[i] = true;
-        if (count >= TOTAL_FRAMES * 0.3 && !loaded) setLoaded(true); // Show after 30% loaded
+        if (count >= TOTAL_FRAMES * 0.2 && !loaded) setLoaded(true);
       };
       img.onerror = () => { count++; };
       images.push(img);
@@ -29,7 +28,6 @@ export default function HeroCanvas() {
     imagesRef.current = images;
   }, []);
 
-  // Animation loop
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -56,18 +54,20 @@ export default function HeroCanvas() {
   }, []);
 
   return (
-    <div className="absolute inset-0 overflow-hidden">
+    <div className="w-full h-full relative">
       <canvas
         ref={canvasRef}
         width={1920}
         height={1080}
-        className="w-full h-full object-cover"
-        style={{ opacity: loaded ? 0.8 : 0, transition: "opacity 1s ease" }}
+        className="w-full h-full object-contain"
+        style={{ opacity: loaded ? 1 : 0, transition: "opacity 0.8s ease" }}
       />
-      {/* Cinematic overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#fbfbfd]/30 via-transparent to-[#fbfbfd]/60" />
-      {/* Radial vignette for depth */}
-      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(251,251,253,0.4) 100%)" }} />
+      {/* Loading placeholder */}
+      {!loaded && (
+        <div className="absolute inset-0 bg-[#f5f5f7] flex items-center justify-center rounded-3xl">
+          <div className="w-6 h-6 border-2 border-[#2997ff] border-t-transparent rounded-full animate-spin" />
+        </div>
+      )}
     </div>
   );
 }
