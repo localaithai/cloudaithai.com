@@ -57,7 +57,7 @@ export default function Models() {
               <div className="apple-card">
                 <button
                   onClick={() => setExpanded(expanded === i ? null : i)}
-                  className="w-full text-left px-6 py-5 flex items-center gap-5"
+                  className="w-full text-left px-4 py-3 sm:px-6 sm:py-5 flex items-center gap-3 sm:gap-5"
                 >
                   {/* Brand icon */}
                   <div className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0" style={{ background: m.color + "10" }}>
@@ -93,7 +93,7 @@ export default function Models() {
                       transition={{ duration: 0.25 }}
                       className="overflow-hidden"
                     >
-                      <div className="px-6 pb-5 pt-0">
+                      <div className="px-4 pb-4 pt-0 sm:px-6 sm:pb-5">
                         <div className="border-t border-[#d2d2d7]/30 pt-4 grid grid-cols-2 sm:grid-cols-5 gap-4 text-center">
                           {[
                             { label: "Provider", value: m.provider },

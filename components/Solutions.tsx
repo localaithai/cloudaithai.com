@@ -73,7 +73,7 @@ const solutions = [
 
 export default function Solutions() {
   return (
-    <section id="solutions" className="py-24 md:py-32">
+    <section id="solutions" className="py-16 sm:py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -90,7 +90,7 @@ export default function Solutions() {
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {solutions.map((sol, i) => (
             <motion.a
               key={sol.title}
@@ -99,7 +99,7 @@ export default function Solutions() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-30px" }}
               transition={{ delay: i * 0.06 }}
-              className="apple-card relative p-6 group cursor-pointer"
+              className="apple-card relative p-4 sm:p-6 group cursor-pointer"
             >
               {/* Tinted gradient overlay */}
               <div className={`absolute inset-0 bg-gradient-to-br ${sol.gradient} rounded-[24px] opacity-50 group-hover:opacity-100 transition-opacity duration-500`} />

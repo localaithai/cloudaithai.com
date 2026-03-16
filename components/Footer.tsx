@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <footer className="py-12 border-t border-black/[0.04]">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 mb-10">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 mb-10">
           {/* Solutions */}
           <div>
             <p className="text-[12px] font-semibold text-[#1d1d1f] uppercase tracking-wider mb-3">Solutions</p>
@@ -39,10 +39,10 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <p className="text-[12px] font-semibold text-[#1d1d1f] uppercase tracking-wider mb-3">ติดต่อ</p>
-            <div className="space-y-2 text-[13px] text-[#6e6e73]">
-              <a href="tel:0827047606" className="block hover:text-[#1d1d1f] transition-colors">082-704-7606</a>
-              <a href="mailto:chavin@pace-design.co.th" className="block hover:text-[#1d1d1f] transition-colors">chavin@pace-design.co.th</a>
-              <a href="https://line.me/R/ti/p/@542mgysj" className="block hover:text-[#1d1d1f] transition-colors">LINE @542mgysj</a>
+            <div className="space-y-1 text-[13px] text-[#6e6e73]">
+              <a href="tel:0827047606" className="block py-2 -mx-2 px-2 rounded-lg hover:text-[#1d1d1f] active:bg-black/5 transition-colors">082-704-7606</a>
+              <a href="mailto:chavin@pace-design.co.th" className="block py-2 -mx-2 px-2 rounded-lg hover:text-[#1d1d1f] active:bg-black/5 transition-colors break-all">chavin@pace-design.co.th</a>
+              <a href="https://line.me/R/ti/p/@542mgysj" className="block py-2 -mx-2 px-2 rounded-lg hover:text-[#1d1d1f] active:bg-black/5 transition-colors">LINE @542mgysj</a>
             </div>
           </div>
         </div>

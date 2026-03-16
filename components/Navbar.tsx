@@ -166,10 +166,10 @@ export default function Navbar() {
         </div>
 
         {/* Mobile toggle */}
-        <button onClick={() => setOpen(!open)} className="lg:hidden w-8 h-8 flex flex-col justify-center items-center gap-1.5">
-          <motion.span animate={open ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }} className="w-5 h-[1.5px] bg-[#1c1c1e] block" />
-          <motion.span animate={open ? { opacity: 0 } : { opacity: 1 }} className="w-5 h-[1.5px] bg-[#1c1c1e] block" />
-          <motion.span animate={open ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }} className="w-5 h-[1.5px] bg-[#1c1c1e] block" />
+        <button onClick={() => setOpen(!open)} className="lg:hidden w-10 h-10 flex flex-col justify-center items-center gap-1.5 rounded-xl active:bg-black/5 transition-colors">
+          <motion.span animate={open ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }} className="w-6 h-[2px] bg-[#1c1c1e] block rounded-full" />
+          <motion.span animate={open ? { opacity: 0 } : { opacity: 1 }} className="w-6 h-[2px] bg-[#1c1c1e] block rounded-full" />
+          <motion.span animate={open ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }} className="w-6 h-[2px] bg-[#1c1c1e] block rounded-full" />
         </button>
       </div>
 
@@ -183,7 +183,7 @@ export default function Navbar() {
             transition={{ duration: 0.25 }}
             className="lg:hidden overflow-hidden"
           >
-            <div className="px-6 pb-6 pt-2" style={{ background: "rgba(251,251,253,0.98)", backdropFilter: "blur(40px) saturate(180%)", WebkitBackdropFilter: "blur(40px) saturate(180%)" }}>
+            <div className="px-6 pb-8 pt-2 max-h-[calc(100dvh-56px)] overflow-y-auto overscroll-contain" style={{ background: "rgba(251,251,253,0.98)", backdropFilter: "blur(40px) saturate(180%)", WebkitBackdropFilter: "blur(40px) saturate(180%)" }}>
               {navItems.map((item) =>
                 isGroup(item) ? (
                   <MobileGroup key={item.label} group={item} onNav={() => setOpen(false)} />
@@ -196,6 +196,7 @@ export default function Navbar() {
               <a href="/#contact" onClick={() => setOpen(false)} className="block mt-3 text-center text-[15px] font-medium text-white bg-[#007aff] py-3 rounded-full">
                 เริ่มต้นใช้งาน
               </a>
+              <div className="h-6" aria-hidden="true" />
             </div>
           </motion.div>
         )}

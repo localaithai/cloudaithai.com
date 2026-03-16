@@ -122,15 +122,15 @@ export default function Hero() {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 1 + i * 0.08 }}
                   whileHover={{ scale: 1.06, y: -2 }}
-                  className="px-4 py-2 sm:px-5 sm:py-2.5 rounded-full border cursor-default"
+                  className="px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-full border cursor-default"
                   style={{
                     background: m.bg,
                     borderColor: m.color + "20",
                     color: m.color,
                   }}
                 >
-                  <span className="flex items-center gap-2 text-[13px] sm:text-[14px] font-medium">
-                    <BrandIcon slug={m.slug} fallback={m.fallback} size={16} />
+                  <span className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[14px] font-medium">
+                    <BrandIcon slug={m.slug} fallback={m.fallback} size={14} />
                     {m.name}
                   </span>
                 </motion.div>
@@ -146,7 +146,7 @@ export default function Hero() {
             className="mb-12"
           >
             <p className="text-[11px] sm:text-[12px] text-[#6e6e73] uppercase tracking-[0.15em] font-medium mb-4">Automation Tools</p>
-            <div className="flex justify-center gap-3 sm:gap-4">
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
               {tools.map((t, i) => (
                 <motion.div
                   key={t.name}
@@ -170,7 +170,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.8 }}
-            className="flex justify-center gap-10 sm:gap-16 md:gap-24"
+            className="flex justify-center gap-8 sm:gap-16 md:gap-24"
           >
             {[
               { value: "6+", label: "Frontier Models" },
@@ -184,8 +184,8 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.9 + i * 0.1 }}
               >
-                <p className="text-[22px] sm:text-[28px] font-semibold text-[#1d1d1f] tracking-tight">{stat.value}</p>
-                <p className="text-[11px] sm:text-[12px] text-[#6e6e73] mt-1">{stat.label}</p>
+                <p className="text-[18px] sm:text-[28px] font-semibold text-[#1d1d1f] tracking-tight">{stat.value}</p>
+                <p className="text-[10px] sm:text-[12px] text-[#6e6e73] mt-1">{stat.label}</p>
               </motion.div>
             ))}
           </motion.div>

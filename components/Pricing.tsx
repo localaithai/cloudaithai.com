@@ -79,7 +79,7 @@ export default function Pricing() {
           className="text-center mb-16"
         >
           <p className="text-[13px] font-semibold text-[#2997ff] uppercase tracking-widest mb-3">Pricing</p>
-          <h2 className="text-3xl md:text-5xl font-bold text-[#1d1d1f] tracking-tight mb-4">
+          <h2 className="text-3xl md:text-5xl font-bold text-[#1d1d1f] tracking-tight mb-4 leading-[1.3]">
             Setup fee ครั้งเดียว
           </h2>
           <p className="text-lg text-[#6e6e73] max-w-xl mx-auto">
