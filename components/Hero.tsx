@@ -5,19 +5,11 @@ import HeroCanvas from "./HeroCanvas";
 
 export default function Hero() {
   const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const textOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
-  const textY = useTransform(scrollYProgress, [0, 0.3], [0, -50]);
-  const vizScale = useTransform(scrollYProgress, [0, 0.4], [1, 1.1]);
-  const vizOpacity = useTransform(scrollYProgress, [0.3, 0.5], [1, 0]);
 
   return (
-    <section ref={ref} className="relative min-h-[140vh] bg-[#fbfbfd]">
-      {/* ═══ TOP: Clean text zone — NO particles, NO visuals ═══ */}
-      <motion.div
-        style={{ opacity: textOpacity, y: textY }}
-        className="relative z-20 pt-32 sm:pt-40 pb-16 text-center px-6"
-      >
+    <section ref={ref} className="relative bg-[#fbfbfd] pb-24">
+      {/* ═══ TOP: Clean text zone ═══ */}
+      <div className="relative z-20 pt-32 sm:pt-40 pb-16 text-center px-6">
         {/* Overline */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -36,7 +28,7 @@ export default function Hero() {
           className="text-[44px] sm:text-[60px] md:text-[72px] font-semibold leading-[1.08] tracking-[-0.025em] text-[#1d1d1f] mb-3 max-w-[800px] mx-auto"
         >
           ให้ AI ทำงานแทน<br />
-          <span className="text-[#86868b]">คุณทำสิ่งที่สำคัญ</span>
+          <span className="gradient-text">คุณทำสิ่งที่สำคัญ</span>
         </motion.h1>
 
         {/* Body */}
@@ -60,13 +52,10 @@ export default function Hero() {
           <a href="#pricing" className="apple-btn apple-btn-blue">ดูแพ็คเกจ</a>
           <a href="#solutions" className="apple-link">ดูว่า AI ทำอะไรได้บ้าง</a>
         </motion.div>
-      </motion.div>
+      </div>
 
       {/* ═══ BOTTOM: Cinematic Remotion video zone ═══ */}
-      <motion.div
-        style={{ scale: vizScale, opacity: vizOpacity }}
-        className="relative z-10 w-full max-w-[1200px] mx-auto px-6"
-      >
+      <div className="relative z-10 w-full max-w-[1100px] mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -105,7 +94,7 @@ export default function Hero() {
             </motion.div>
           ))}
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }
