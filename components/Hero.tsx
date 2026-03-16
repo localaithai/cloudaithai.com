@@ -1,6 +1,7 @@
 "use client";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import GridCanvas from "./GridCanvas";
 
 /* ─── Animated Cloud Network Visualization ─── */
 const nodes = [
@@ -156,8 +157,11 @@ export default function Hero() {
 
   return (
     <section ref={ref} className="relative min-h-[100vh] flex items-center justify-center overflow-hidden pt-14">
-      {/* Soft gradient background */}
-      <div className="absolute inset-0">
+      {/* Interactive grid canvas */}
+      <GridCanvas />
+
+      {/* Soft gradient overlays */}
+      <div className="absolute inset-0 pointer-events-none">
         <motion.div
           className="absolute top-[-200px] left-1/2 -translate-x-1/2 w-[1000px] h-[1000px] rounded-full"
           style={{ background: "radial-gradient(circle, rgba(0,113,227,0.06) 0%, rgba(88,86,214,0.04) 40%, transparent 70%)" }}

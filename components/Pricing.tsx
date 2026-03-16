@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { Check, X } from "lucide-react";
+import FloatingParticles from "./FloatingParticles";
 
 const plans = [
   {
@@ -70,8 +71,9 @@ const plans = [
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="py-24 md:py-32">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="pricing" className="py-24 md:py-32 relative overflow-hidden">
+      <FloatingParticles count={20} speed={0.15} />
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -95,8 +97,8 @@ export default function Pricing() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className={`relative bg-white rounded-3xl p-8 border transition-all hover:shadow-xl hover:shadow-black/[0.05] ${
-                plan.badge ? "border-[#5856d6]/20 md:-mt-4 md:mb-4 shadow-lg shadow-[#5856d6]/5" : "border-black/[0.06]"
+              className={`relative bg-white rounded-3xl p-8 border card-glow ${
+                plan.badge ? "border-[#5856d6]/20 md:-mt-4 md:mb-4 shadow-lg shadow-[#5856d6]/5 shimmer" : "border-black/[0.06]"
               }`}
             >
               {plan.badge && (
