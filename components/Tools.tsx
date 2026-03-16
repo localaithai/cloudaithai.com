@@ -89,7 +89,7 @@ export default function Tools() {
               <div className="flex flex-col md:flex-row md:items-center gap-6">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-3">
-                    <span className="text-3xl">{tool.icon}</span>
+                    <ToolIcon slug={tool.slug} fallback={tool.fallback} size={30} />
                     <div>
                       <h3 className="text-xl font-bold text-[#1d1d1f]">{tool.name}</h3>
                       <p className="text-[13px] text-[#6e6e73]">{tool.tagline}</p>
@@ -109,7 +109,7 @@ export default function Tools() {
                     className="w-16 h-16 rounded-2xl flex items-center justify-center transition-transform group-hover:scale-110"
                     style={{ background: tool.color + "10" }}
                   >
-                    <span className="text-4xl">{tool.icon}</span>
+                    <ToolIcon slug={tool.slug} fallback={tool.fallback} size={40} />
                   </div>
                 </div>
               </div>

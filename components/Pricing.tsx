@@ -1,6 +1,24 @@
 "use client";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Check, X } from "lucide-react";
+
+const TOOL_SLUGS: Record<string, string> = {
+  "n8n": "n8n", "OpenClaw": "openclaw", "Flowise": "flowise", "Dify": "dify", "ActivePieces": "activepieces",
+};
+
+function ToolPill({ name }: { name: string }) {
+  const [err, setErr] = useState(false);
+  const slug = TOOL_SLUGS[name];
+  return (
+    <span className="text-[11px] font-medium px-2.5 py-1 rounded-full bg-[#f5f5f7] text-[#1d1d1f] inline-flex items-center gap-1.5">
+      {slug && !err ? (
+        <img src={`/brands/${slug}.svg`} alt={name} width={14} height={14} onError={() => setErr(true)} />
+      ) : null}
+      {name}
+    </span>
+  );
+}
 
 const plans = [
   {
@@ -122,7 +140,7 @@ export default function Pricing() {
                 <p className="text-[11px] text-[#6e6e73] mb-2">เครื่องมือที่ติดตั้ง</p>
                 <div className="flex flex-wrap gap-1.5">
                   {plan.tools.map((t) => (
-                    <span key={t} className="text-[11px] font-medium px-2.5 py-1 rounded-full bg-[#f5f5f7] text-[#1d1d1f]">{t}</span>
+                    <ToolPill key={t} name={t} />
                   ))}
                 </div>
               </div>

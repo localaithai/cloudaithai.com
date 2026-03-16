@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Zap,
@@ -115,6 +116,10 @@ function ComparisonCard({
 }
 
 /* ─── Section header with colored accent ─── */
+const TOOL_SLUGS: Record<string, string> = {
+  "n8n": "n8n", "Flowise": "flowise", "OpenClaw": "openclaw", "Dify": "dify", "ActivePieces": "activepieces",
+};
+
 function ToolHeader({
   icon,
   name,
@@ -128,13 +133,17 @@ function ToolHeader({
   color: string;
   number: string;
 }) {
+  const [err, setErr] = useState(false);
+  const slug = TOOL_SLUGS[name];
   return (
     <div className="flex items-start gap-4 mb-6">
       <div
         className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 text-2xl"
         style={{ background: color + "12" }}
       >
-        {icon}
+        {slug && !err ? (
+          <img src={`/brands/${slug}.svg`} alt={name} width={28} height={28} onError={() => setErr(true)} />
+        ) : icon}
       </div>
       <div>
         <p
