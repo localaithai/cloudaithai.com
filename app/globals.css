@@ -3,16 +3,16 @@
 @theme inline {
   --color-background: #fbfbfd;
   --color-foreground: #1d1d1f;
-  --font-sans: var(--font-body);
-  --font-heading: var(--font-heading);
+  --font-sans: var(--font-bai);
+  --font-heading: var(--font-bai);
 }
 
 body {
   background: #fbfbfd;
   color: #1d1d1f;
-  font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", sans-serif;
+  font-family: var(--font-bai), "Bai Jamjuree", -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 400;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -32,10 +32,10 @@ p {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading), var(--font-body), sans-serif;
+  font-family: var(--font-bai), "Bai Jamjuree", sans-serif;
   color: #1d1d1f;
-  letter-spacing: -0.03em;
-  line-height: 1.08;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
   font-weight: 600;
 }
 

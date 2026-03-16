@@ -64,8 +64,10 @@ export default function HeroCanvas() {
         className="w-full h-full object-cover"
         style={{ opacity: loaded ? 0.8 : 0, transition: "opacity 1s ease" }}
       />
-      {/* Gradient overlay for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#fbfbfd]/40 via-[#fbfbfd]/20 to-[#fbfbfd]/70" />
+      {/* Cinematic overlays */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#fbfbfd]/30 via-transparent to-[#fbfbfd]/60" />
+      {/* Radial vignette for depth */}
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(251,251,253,0.4) 100%)" }} />
     </div>
   );
 }

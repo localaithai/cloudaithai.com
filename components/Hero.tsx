@@ -50,17 +50,17 @@ export default function Hero() {
         </motion.div>
 
         {/* Headlines */}
-        <div className="mb-3">
+        <div className="mb-2">
           <RevealText
             text="ให้ AI ทำงานแทน"
-            className="text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] font-semibold leading-[1.05] tracking-[-0.045em] text-[#1d1d1f]"
+            className="text-[40px] sm:text-[56px] md:text-[72px] lg:text-[84px] font-semibold leading-[1.1] tracking-[-0.03em] text-[#1d1d1f]"
             delay={0.4}
           />
         </div>
-        <div className="mb-8">
+        <div className="mb-6">
           <RevealText
             text="คุณทำสิ่งที่สำคัญ"
-            className="text-[28px] sm:text-[40px] md:text-[48px] font-semibold leading-[1.1] tracking-[-0.03em] text-[#86868b]"
+            className="text-[24px] sm:text-[36px] md:text-[44px] font-medium leading-[1.15] tracking-[-0.02em] text-[#86868b]"
             delay={0.55}
           />
         </div>

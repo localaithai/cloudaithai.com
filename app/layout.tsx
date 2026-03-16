@@ -1,19 +1,12 @@
 import type { Metadata } from "next";
-import { DM_Sans, Outfit } from "next/font/google";
+import { Bai_Jamjuree } from "next/font/google";
 import "./globals.css";
 
-const dmSans = DM_Sans({
-  variable: "--font-body",
-  subsets: ["latin"],
+const baiJamjuree = Bai_Jamjuree({
+  variable: "--font-bai",
+  subsets: ["latin", "thai"],
   display: "swap",
   weight: ["200", "300", "400", "500", "600", "700"],
-});
-
-const outfit = Outfit({
-  variable: "--font-heading",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -58,7 +51,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="th">
-      <body className={`${dmSans.variable} ${outfit.variable} antialiased`}>
+      <body className={`${baiJamjuree.variable} antialiased`}>
         {children}
       </body>
     </html>
