@@ -1,514 +1,910 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Scale, FileText, Search, Shield, Clock, AlertTriangle, Check, ChevronDown, ArrowRight, Brain, BookOpen, FilePen, ClipboardCheck, X } from "lucide-react";
+import {
+  Scale,
+  AlertTriangle,
+  Check,
+  Search,
+  Shield,
+  Clock,
+  Mail,
+  FileText,
+  FileEdit,
+  ClipboardCheck,
+  BarChart3,
+  ArrowRight,
+  ChevronRight,
+  Zap,
+} from "lucide-react";
 
-/* ─── LEGAL PAGE — Every section has industry-specific UI ─── */
+/* ─── LEGAL PAGE — "Contract Intelligence" demo concept ─── */
 
+/* ─── Circular Gauge Component ─── */
+function CircularGauge({
+  value,
+  max,
+  size = 120,
+  strokeWidth = 10,
+  color,
+  bgColor = "#f5f5f7",
+  label,
+  sublabel,
+  animated = true,
+}: {
+  value: number;
+  max: number;
+  size?: number;
+  strokeWidth?: number;
+  color: string;
+  bgColor?: string;
+  label?: string;
+  sublabel?: string;
+  animated?: boolean;
+}) {
+  const radius = (size - strokeWidth) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const progress = (value / max) * circumference;
+
+  return (
+    <div className="flex flex-col items-center">
+      <div className="relative" style={{ width: size, height: size }}>
+        <svg width={size} height={size} className="-rotate-90">
+          <circle
+            cx={size / 2}
+            cy={size / 2}
+            r={radius}
+            fill="none"
+            stroke={bgColor}
+            strokeWidth={strokeWidth}
+          />
+          <motion.circle
+            cx={size / 2}
+            cy={size / 2}
+            r={radius}
+            fill="none"
+            stroke={color}
+            strokeWidth={strokeWidth}
+            strokeLinecap="round"
+            strokeDasharray={circumference}
+            initial={animated ? { strokeDashoffset: circumference } : {}}
+            whileInView={animated ? { strokeDashoffset: circumference - progress } : {}}
+            viewport={{ once: true }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+          />
+        </svg>
+        <div className="absolute inset-0 flex flex-col items-center justify-center">
+          <span className="text-[22px] font-bold" style={{ color }}>
+            {value}
+          </span>
+          <span className="text-[10px] text-[#86868b]">/ {max}</span>
+        </div>
+      </div>
+      {label && (
+        <p className="text-[12px] font-semibold text-[#1d1d1f] mt-2">{label}</p>
+      )}
+      {sublabel && (
+        <p className="text-[10px] text-[#86868b]">{sublabel}</p>
+      )}
+    </div>
+  );
+}
+
+/* ─── Highlighted Text Component ─── */
+function HL({
+  children,
+  color = "yellow",
+}: {
+  children: React.ReactNode;
+  color?: "yellow" | "red" | "green";
+}) {
+  const bgMap = {
+    yellow: "bg-yellow-200/70",
+    red: "bg-red-200/70",
+    green: "bg-green-200/50",
+  };
+  return (
+    <span className={`${bgMap[color]} px-0.5 rounded-sm`}>{children}</span>
+  );
+}
+
+/* ─── Main Component ─── */
 export default function LegalSection() {
-  const [expandedWorkflow, setExpandedWorkflow] = useState<number | null>(null);
+  const [searchFocused, setSearchFocused] = useState(false);
+  const [pdpaAnimated, setPdpaAnimated] = useState(false);
+
+  /* contract clauses data */
+  const contractClauses = [
+    {
+      id: "1",
+      number: "ข้อ 1",
+      title: "คู่สัญญา",
+      text: "สัญญาฉบับนี้ทำขึ้นระหว่าง บริษัท เอบีซี พร็อพเพอร์ตี้ จำกัด (\"ผู้ให้เช่า\") กับ บริษัท เทคสตาร์ท จำกัด (\"ผู้เช่า\") เมื่อวันที่ 1 มกราคม 2568",
+      highlight: null,
+    },
+    {
+      id: "2",
+      number: "ข้อ 3",
+      title: "ค่าเช่า",
+      text: "ผู้เช่าตกลงชำระค่าเช่ารายเดือน เดือนละ 45,000 บาท (สี่หมื่นห้าพันบาทถ้วน) ภายในวันที่ 5 ของทุกเดือน",
+      highlight: null,
+    },
+    {
+      id: "3",
+      number: "ข้อ 5.3",
+      title: "ความรับผิด",
+      text: "ผู้เช่าจะต้องรับผิดชอบค่าเสียหายทั้งหมดที่เกิดขึ้นกับอาคาร ไม่ว่าจะเกิดจากสาเหตุใดก็ตาม รวมถึงเหตุสุดวิสัย ภัยธรรมชาติ หรือการกระทำของบุคคลภายนอก",
+      highlight: "red" as const,
+    },
+    {
+      id: "4",
+      number: "ข้อ 8.2",
+      title: "ค่าปรับ",
+      text: "หากผู้เช่าชำระค่าเช่าล่าช้า ผู้เช่าจะต้องชำระค่าปรับในอัตราร้อยละ 5 ต่อวัน ของยอดค้างชำระ จนกว่าจะชำระครบ",
+      highlight: "red" as const,
+    },
+    {
+      id: "5",
+      number: "ข้อ 12",
+      title: "การต่อสัญญา",
+      text: "ผู้ให้เช่ามีสิทธิปรับค่าเช่าได้ไม่เกินร้อยละ 15 ต่อปี โดยแจ้งล่วงหน้าไม่น้อยกว่า 30 วัน",
+      highlight: "yellow" as const,
+    },
+    {
+      id: "6",
+      number: "ข้อ 15",
+      title: "เงินประกัน",
+      text: "ผู้เช่าวางเงินประกันจำนวน 135,000 บาท ผู้ให้เช่าจะพิจารณาคืนเงินประกันตามที่เห็นสมควร",
+      highlight: "red" as const,
+    },
+  ];
+
+  /* risk items */
+  const risks = [
+    {
+      clause: "ข้อ 5.3",
+      title: "รับผิดเหตุสุดวิสัย",
+      desc: "ผิดปกติ — ข้อนี้ทำให้ผู้เช่าต้องรับผิดแม้เหตุสุดวิสัย ซึ่งขัดต่อหลักกฎหมายทั่วไป",
+      severity: "สูง",
+    },
+    {
+      clause: "ข้อ 8.2",
+      title: "ค่าปรับสูงเกินส่วน",
+      desc: "ค่าปรับ 5%/วัน สูงกว่ามาตรฐาน (0.5-1.5%) ศาลอาจใช้ ม.383 ลดค่าปรับ",
+      severity: "สูง",
+    },
+    {
+      clause: "ข้อ 15",
+      title: "ไม่มีเงื่อนไขคืนเงินประกัน",
+      desc: "\"ตามที่เห็นสมควร\" ไม่ชัดเจน ควรกำหนดเงื่อนไข+ระยะเวลาคืนชัด",
+      severity: "ปานกลาง",
+    },
+  ];
+
+  /* recommendations */
+  const recommendations = [
+    { text: "เพิ่ม Force Majeure clause ยกเว้นเหตุสุดวิสัย", ref: "ม.8 พ.ร.บ.เช่า" },
+    { text: "ลดค่าปรับจาก 5% เป็น 1.5%/วัน ตามมาตรฐาน", ref: "ม.383 ป.พ.พ." },
+    { text: "กำหนดคืนเงินประกันภายใน 30 วัน พร้อมรายการหักค่าเสียหาย", ref: "ม.391 ป.พ.พ." },
+  ];
+
+  /* legal references */
+  const legalRefs = [
+    "ม.383 ป.พ.พ.",
+    "ม.391 ป.พ.พ.",
+    "ม.8 พ.ร.บ.เช่า",
+    "ม.420 ป.พ.พ.",
+  ];
+
+  /* search results */
+  const searchResults = [
+    {
+      section: "ม.383 ป.พ.พ.",
+      title: "ลดเบี้ยปรับ",
+      desc: "ถ้าเบี้ยปรับที่กำหนดไว้สูงเกินส่วน ศาลจะลดลงเป็นจำนวนพอสมควรก็ได้ การกำหนดเบี้ยปรับเป็นจำนวนเงินที่แน่นอนให้ถือว่าเป็นการกำหนดจำนวนค่าเสียหายไว้ล่วงหน้า",
+      tags: ["ค่าปรับ", "สัญญา"],
+    },
+    {
+      section: "ม.391 ป.พ.พ.",
+      title: "การเลิกสัญญา",
+      desc: "เมื่อคู่สัญญาฝ่ายหนึ่งได้เลิกสัญญาแล้ว คู่สัญญาแต่ละฝ่ายจำต้องให้อีกฝ่ายหนึ่งได้กลับคืนสู่ฐานะดังที่เป็นอยู่เดิม ส่วนเงินอันจะต้องใช้คืนให้บวกดอกเบี้ยเข้าด้วย",
+      tags: ["เลิกสัญญา", "คืนเงิน"],
+    },
+    {
+      section: "ม.8 พ.ร.บ.เช่า",
+      title: "สิทธิผู้เช่า",
+      desc: "ข้อกำหนดในสัญญาเช่าที่ไม่เป็นธรรมแก่ผู้เช่าอันเป็นข้อสาระสำคัญ ให้ถือว่าข้อสัญญาเช่านั้นเป็นโมฆะ ผู้เช่ามีสิทธิร้องขอให้ศาลวินิจฉัยได้",
+      tags: ["สิทธิผู้เช่า", "โมฆะ"],
+    },
+  ];
+
+  /* timeline items */
+  const timelineItems = [
+    {
+      time: "08:00",
+      icon: <Mail size={16} />,
+      title: "AI สรุปอีเมล 12 ฉบับ",
+      detail: "คัดแยกเร่งด่วน 3 ฉบับ สรุปประเด็นสำคัญทุกฉบับ",
+      aiTime: "AI ทำใน 45 วินาที",
+      oldTime: "เดิมใช้ 40 นาที",
+      color: "#2997ff",
+    },
+    {
+      time: "09:00",
+      icon: <FileText size={16} />,
+      title: "วิเคราะห์สัญญา 3 ฉบับ",
+      detail: "สัญญาเช่า 54 หน้า + NDA 12 หน้า + MOU 27 หน้า — สรุปข้อเสี่ยงครบ",
+      aiTime: "AI ทำใน 15 นาที",
+      oldTime: "เดิมใช้ 1 วัน",
+      color: "#5856d6",
+    },
+    {
+      time: "11:00",
+      icon: <FileEdit size={16} />,
+      title: "Draft หนังสือทวงถาม",
+      detail: "ร่างจดหมายทวงถามตามข้อมูลสัญญาและยอดค้างชำระ",
+      aiTime: "AI ร่างให้ 2 นาที",
+      oldTime: "เดิมใช้ 2 ชม.",
+      color: "#34c759",
+    },
+    {
+      time: "14:00",
+      icon: <ClipboardCheck size={16} />,
+      title: "ตรวจ PDPA Compliance",
+      detail: "สแกนเว็บไซต์ + แอป 2 ตัว ตรวจ Privacy Policy, Consent, Cookie",
+      aiTime: "AI ตรวจ 5 นาที",
+      oldTime: "เดิมใช้ ครึ่งวัน",
+      color: "#af52de",
+    },
+    {
+      time: "16:00",
+      icon: <BarChart3 size={16} />,
+      title: "สรุปรายงานวัน",
+      detail: "สรุปงานที่ทำ เคสที่เปิด ติดตามงาน deadline พรุ่งนี้",
+      aiTime: "AI สรุปให้ 1 นาที",
+      oldTime: "เดิมใช้ 30 นาที",
+      color: "#ff9500",
+    },
+  ];
+
+  /* PDPA categories */
+  const pdpaCategories = [
+    { label: "Privacy Policy", score: 95, color: "#34c759" },
+    { label: "Consent Management", score: 88, color: "#34c759" },
+    { label: "Data Retention", score: 45, color: "#ff3b30" },
+    { label: "Breach Protocol", score: 30, color: "#ff3b30" },
+    { label: "Cookie Banner", score: 92, color: "#34c759" },
+    { label: "DPO Assignment", score: 100, color: "#34c759" },
+    { label: "DPIA Assessment", score: 20, color: "#ff3b30" },
+    { label: "Cross-border Transfer", score: 60, color: "#ff9500" },
+  ];
+  const pdpaOverall = Math.round(
+    pdpaCategories.reduce((s, c) => s + c.score, 0) / pdpaCategories.length
+  );
 
   return (
     <div>
-      {/* ═══ HERO ═══ */}
-      <section className="py-12 px-6">
+      {/* ═══ 1. COMPACT HERO ═══ */}
+      <section className="pt-12 pb-8 px-6">
         <div className="max-w-5xl mx-auto text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <div className="inline-flex items-center gap-2 bg-[#f5f5f7] rounded-full px-4 py-1.5 mb-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <div className="inline-flex items-center gap-2 bg-[#f5f5f7] rounded-full px-4 py-1.5 mb-5">
               <Scale size={14} className="text-[#5856d6]" />
-              <span className="text-[12px] font-medium text-[#5856d6]">Legal AI Solution</span>
+              <span className="text-[12px] font-medium text-[#5856d6]">
+                Contract Intelligence
+              </span>
             </div>
-            <h1 className="text-[36px] sm:text-[48px] md:text-[56px] font-semibold tracking-tight text-[#1d1d1f] mb-3">
-              AI สำหรับ<span className="gradient-text">สำนักงานกฎหมาย</span>
+            <h1 className="text-[36px] sm:text-[48px] md:text-[56px] font-semibold tracking-tight text-[#1d1d1f] mb-2">
+              AI วิเคราะห์สัญญา<span className="gradient-text">ใน 5 นาที</span>
             </h1>
-            <p className="text-[17px] text-[#86868b] max-w-[520px] mx-auto mb-8">
-              วิเคราะห์สัญญา 50 หน้าใน 5 นาที ค้นข้อกฎหมายใน 30 วินาที ร่างเอกสารใน 10 นาที ตรวจ PDPA อัตโนมัติ
+            <p className="text-[17px] text-[#86868b] max-w-[540px] mx-auto">
+              จากสัญญา 54 หน้าที่ต้องอ่านทั้งวัน เป็นรายงานข้อเสี่ยง + ข้อเสนอแนะพร้อมมาตราอ้างอิง
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* ═══ PAIN POINTS — with real UI mockups ═══ */}
-      <section className="py-16 px-6 bg-[#f5f5f7]">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-[28px] sm:text-[32px] font-semibold text-[#1d1d1f] text-center mb-12">ปัญหาที่ทนายและสำนักงานกฎหมายเจอทุกวัน</h2>
-          <div className="grid sm:grid-cols-2 gap-5">
-            {/* Contract stack mockup */}
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="apple-card p-0 overflow-hidden">
-              <div className="px-5 py-3 bg-[#ff3b30]/5 border-b border-[#ff3b30]/10 flex items-center justify-between">
-                <span className="text-[13px] font-medium text-[#ff3b30]">สัญญารอวิเคราะห์</span>
-                <span className="text-[11px] font-bold bg-[#ff3b30] text-white px-2 py-0.5 rounded-full">12 ฉบับ</span>
+      {/* ═══ 2. FULL-WIDTH CONTRACT ANALYZER SPLIT SCREEN ═══ */}
+      <section className="py-10 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="apple-card p-0 overflow-hidden shadow-xl shadow-black/[0.06]"
+          >
+            {/* macOS chrome bar */}
+            <div className="flex items-center gap-3 px-5 py-3 bg-[#f5f5f7] border-b border-black/[0.06]">
+              <div className="flex gap-1.5">
+                <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+                <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
+                <div className="w-3 h-3 rounded-full bg-[#28c840]" />
               </div>
-              <div className="p-4 space-y-2">
-                {[
-                  { name: "สัญญาเช่าอาคาร_2568.pdf", pages: "54 หน้า", deadline: "พรุ่งนี้", urgent: true },
-                  { name: "สัญญาจ้างผลิต_ABC.pdf", pages: "38 หน้า", deadline: "2 วัน", urgent: true },
-                  { name: "MOU_ร่วมทุน.pdf", pages: "27 หน้า", deadline: "3 วัน", urgent: false },
-                  { name: "NDA_บริษัทเทค.pdf", pages: "12 หน้า", deadline: "5 วัน", urgent: false },
-                  { name: "สัญญาซื้อขาย_ที่ดิน.pdf", pages: "63 หน้า", deadline: "7 วัน", urgent: false },
-                ].map((doc, i) => (
-                  <div key={i} className="flex items-center gap-3 p-2 rounded-lg bg-[#fafafa]">
-                    <FileText size={14} className="text-[#86868b] shrink-0" />
-                    <div className="flex-1 min-w-0">
-                      <p className="text-[12px] text-[#1d1d1f] truncate">{doc.name}</p>
-                      <p className="text-[10px] text-[#86868b]">{doc.pages}</p>
-                    </div>
-                    <span className={`text-[9px] font-medium px-2 py-0.5 rounded-full shrink-0 ${doc.urgent ? "bg-[#ff3b30]/10 text-[#ff3b30]" : "text-[#86868b] bg-[#f5f5f7]"}`}>{doc.deadline}</span>
-                  </div>
-                ))}
-                <p className="text-[12px] text-[#ff3b30] text-center font-medium pt-1">อ่านไม่ทัน deadline ตกหล่นได้</p>
+              <span className="text-[12px] text-[#86868b] font-medium ml-2">
+                Cloud AI — Contract Analyzer
+              </span>
+              <div className="ml-auto flex items-center gap-2">
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#34c759]/10 text-[#34c759] font-medium">
+                  วิเคราะห์เสร็จ 4.7 วินาที
+                </span>
               </div>
-            </motion.div>
+            </div>
 
-            {/* Legal search takes forever mockup */}
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="apple-card p-0 overflow-hidden">
-              <div className="px-5 py-3 bg-[#ff9500]/5 border-b border-[#ff9500]/10 flex items-center justify-between">
-                <span className="text-[13px] font-medium text-[#ff9500]">ค้นข้อกฎหมาย</span>
-                <span className="text-[11px] text-[#ff9500] font-medium">ค้นหามา 45 นาที...</span>
-              </div>
-              <div className="p-4">
-                <div className="flex items-center gap-2 bg-white border border-black/[0.08] rounded-xl px-3 py-2.5 mb-3">
-                  <Search size={14} className="text-[#86868b]" />
-                  <span className="text-[12px] text-[#1d1d1f]">พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล มาตราที่เกี่ยวกับ...</span>
+            {/* Split panel */}
+            <div className="flex flex-col lg:flex-row">
+              {/* LEFT — Mock Document (60%) */}
+              <div className="lg:w-[60%] border-r border-black/[0.04] p-5 sm:p-6 bg-white">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <FileText size={14} className="text-[#5856d6]" />
+                    <span className="text-[13px] font-semibold text-[#1d1d1f]">
+                      สัญญาเช่าอาคารพาณิชย์
+                    </span>
+                  </div>
+                  <span className="text-[10px] text-[#86868b]">54 หน้า | 23 ข้อ</span>
                 </div>
-                <div className="space-y-2">
-                  {[
-                    { label: "พ.ร.บ. PDPA 2562", status: "เปิดอ่าน 157 มาตรา" },
-                    { label: "กฎกระทรวง ฉบับที่ 1", status: "ยังไม่ได้ดู" },
-                    { label: "กฎกระทรวง ฉบับที่ 2", status: "ยังไม่ได้ดู" },
-                    { label: "คำพิพากษาศาลฎีกา", status: "หาไม่เจอ" },
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-center justify-between p-2 rounded-lg bg-[#fafafa]">
-                      <span className="text-[12px] text-[#1d1d1f]">{item.label}</span>
-                      <span className="text-[10px] text-[#86868b]">{item.status}</span>
-                    </div>
+
+                {/* Document body */}
+                <div className="border border-black/[0.06] rounded-xl p-4 sm:p-5 bg-[#fefefe] font-serif space-y-4 max-h-[480px] overflow-y-auto">
+                  <p className="text-center text-[14px] font-bold text-[#1d1d1f] font-sans tracking-wide">
+                    สัญญาเช่าอาคารพาณิชย์
+                  </p>
+                  <p className="text-center text-[11px] text-[#86868b] font-sans">
+                    เลขที่ L-2568/0234
+                  </p>
+                  <hr className="border-black/[0.06]" />
+
+                  {contractClauses.map((clause) => (
+                    <motion.div
+                      key={clause.id}
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true }}
+                      className={`p-3 rounded-lg text-[12px] leading-relaxed text-[#1d1d1f]/80 ${
+                        clause.highlight === "red"
+                          ? "border-l-3 border-[#ff3b30] bg-[#ff3b30]/[0.03]"
+                          : clause.highlight === "yellow"
+                          ? "border-l-3 border-[#ff9500] bg-[#ff9500]/[0.03]"
+                          : ""
+                      }`}
+                      style={{
+                        borderLeftWidth: clause.highlight ? "3px" : undefined,
+                        borderLeftColor:
+                          clause.highlight === "red"
+                            ? "#ff3b30"
+                            : clause.highlight === "yellow"
+                            ? "#ff9500"
+                            : undefined,
+                      }}
+                    >
+                      <p className="font-sans text-[11px] font-bold text-[#1d1d1f] mb-1">
+                        {clause.number} — {clause.title}
+                        {clause.highlight === "red" && (
+                          <span className="ml-2 text-[9px] font-medium px-1.5 py-0.5 rounded-full bg-[#ff3b30]/10 text-[#ff3b30]">
+                            ข้อเสี่ยง
+                          </span>
+                        )}
+                        {clause.highlight === "yellow" && (
+                          <span className="ml-2 text-[9px] font-medium px-1.5 py-0.5 rounded-full bg-[#ff9500]/10 text-[#ff9500]">
+                            ควรระวัง
+                          </span>
+                        )}
+                      </p>
+                      <p>
+                        {clause.highlight === "red" ? (
+                          <HL color="red">{clause.text}</HL>
+                        ) : clause.highlight === "yellow" ? (
+                          <HL color="yellow">{clause.text}</HL>
+                        ) : (
+                          clause.text
+                        )}
+                      </p>
+                    </motion.div>
                   ))}
-                </div>
-                <div className="text-center mt-3">
-                  <div className="inline-flex items-center gap-2 text-[#ff9500]">
-                    <Clock size={14} />
-                    <span className="text-[12px] font-medium">เสียเวลาครึ่งวัน ยังหาไม่ครบ</span>
-                  </div>
+
+                  <p className="text-center text-[11px] text-[#86868b] font-sans py-2">
+                    ... ข้อ 16-23 (ไม่พบข้อเสี่ยงเพิ่มเติม) ...
+                  </p>
                 </div>
               </div>
-            </motion.div>
 
-            {/* Draft document manually */}
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="apple-card p-5">
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-xl bg-[#5856d6]/8 flex items-center justify-center shrink-0 text-[#5856d6]"><FilePen size={20} /></div>
-                <div>
-                  <h3 className="text-[14px] font-semibold text-[#1d1d1f] mb-1">ร่างเอกสารใช้เวลานาน</h3>
-                  <p className="text-[12px] text-[#86868b]">ร่างหนังสือทวงถาม <span className="text-[#5856d6] font-medium">2 ชม./ฉบับ</span> สัญญาเช่า <span className="text-[#5856d6] font-medium">4 ชม.</span> MOU <span className="text-[#5856d6] font-medium">3 ชม.</span></p>
-                  <div className="flex items-center gap-2 mt-2">
-                    <div className="flex-1 bg-[#f5f5f7] rounded-full h-1.5 overflow-hidden">
-                      <motion.div className="h-full rounded-full bg-[#5856d6]" initial={{ width: 0 }} whileInView={{ width: "25%" }} viewport={{ once: true }} transition={{ duration: 2 }} />
-                    </div>
-                    <span className="text-[10px] text-[#86868b]">25% เสร็จ (วันนี้)</span>
-                  </div>
+              {/* RIGHT — AI Analysis Sidebar (40%) */}
+              <div className="lg:w-[40%] p-5 sm:p-6 bg-[#fafafa]">
+                {/* Risk Score Gauge */}
+                <div className="text-center mb-6">
+                  <p className="text-[11px] font-semibold text-[#86868b] uppercase tracking-wider mb-3">
+                    Risk Score
+                  </p>
+                  <CircularGauge
+                    value={72}
+                    max={100}
+                    size={130}
+                    strokeWidth={12}
+                    color="#ff9500"
+                    bgColor="#e8e8ed"
+                    label="ความเสี่ยงปานกลาง-สูง"
+                    sublabel="ควรแก้ไขก่อนลงนาม"
+                  />
                 </div>
-              </div>
-            </motion.div>
 
-            {/* PDPA compliance checklist */}
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="apple-card p-5">
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-xl bg-[#af52de]/8 flex items-center justify-center shrink-0 text-[#af52de]"><Shield size={20} /></div>
-                <div className="flex-1">
-                  <h3 className="text-[14px] font-semibold text-[#1d1d1f] mb-2">PDPA Compliance ไม่ครบ</h3>
-                  <div className="space-y-1.5">
-                    {[
-                      { label: "Privacy Policy", done: true },
-                      { label: "Consent Form", done: false },
-                      { label: "Data Processing Agreement", done: false },
-                      { label: "Data Breach Notification", done: false },
-                      { label: "DPIA Assessment", done: false },
-                    ].map((item, i) => (
-                      <div key={i} className="flex items-center gap-2">
-                        <div className={`w-4 h-4 rounded border flex items-center justify-center ${item.done ? "bg-[#34c759] border-[#34c759]" : "border-[#d2d2d7]"}`}>
-                          {item.done && <Check size={10} className="text-white" />}
+                {/* Divider */}
+                <hr className="border-black/[0.06] mb-5" />
+
+                {/* Risks */}
+                <div className="mb-5">
+                  <div className="flex items-center gap-2 mb-3">
+                    <AlertTriangle size={13} className="text-[#ff3b30]" />
+                    <span className="text-[12px] font-semibold text-[#ff3b30]">
+                      ข้อเสี่ยง ({risks.length} รายการ)
+                    </span>
+                  </div>
+                  <div className="space-y-2">
+                    {risks.map((risk, i) => (
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.1 }}
+                        className="bg-white rounded-xl p-3 border border-[#ff3b30]/10"
+                      >
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-[10px] font-bold text-[#ff3b30]">
+                            {risk.clause}
+                          </span>
+                          <span className="text-[10px] font-semibold text-[#1d1d1f]">
+                            {risk.title}
+                          </span>
+                          <span className="ml-auto text-[8px] font-bold px-1.5 py-0.5 rounded-full bg-[#ff3b30]/10 text-[#ff3b30]">
+                            {risk.severity}
+                          </span>
                         </div>
-                        <span className={`text-[11px] ${item.done ? "text-[#86868b] line-through" : "text-[#1d1d1f]"}`}>{item.label}</span>
-                      </div>
+                        <p className="text-[10px] text-[#86868b] leading-relaxed">
+                          {risk.desc}
+                        </p>
+                      </motion.div>
                     ))}
                   </div>
-                  <p className="text-[11px] text-[#af52de] font-medium mt-2">ผ่านแค่ 1/5 รายการ — เสี่ยงโดนปรับ</p>
                 </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
 
-      {/* ═══ BEFORE/AFTER — side-by-side contract review ═══ */}
-      <section className="py-20 px-6">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-[28px] sm:text-[32px] font-semibold text-[#1d1d1f] text-center mb-3">ก่อน vs หลัง ใช้ AI</h2>
-          <p className="text-[17px] text-[#86868b] text-center mb-12">เปลี่ยนจากอ่านเอง เป็น AI วิเคราะห์ให้</p>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* BEFORE */}
-            <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <p className="text-[13px] font-semibold text-[#ff3b30] uppercase tracking-wider mb-3 text-center">ก่อนใช้ AI</p>
-              <div className="apple-card p-0 overflow-hidden border-2 border-[#ff3b30]/10">
-                <div className="px-4 py-2.5 bg-[#ff3b30]/5 text-[12px] text-[#ff3b30] font-medium text-center">ใช้เวลา: 3 ชม. | ตกหล่น: บ่อย</div>
-                <div className="p-4 space-y-3">
-                  {/* Simulated contract with messy highlights */}
-                  <div className="bg-white border border-black/[0.06] rounded-lg p-3 font-serif text-[11px] text-[#1d1d1f]/70 leading-relaxed space-y-2">
-                    <p className="text-center text-[12px] font-bold text-[#1d1d1f] font-sans">สัญญาเช่าอาคารพาณิชย์</p>
-                    <p><span className="bg-yellow-200">ข้อ 5.3 ผู้เช่าจะต้องรับผิดชอบ</span>ค่าเสียหายทั้งหมด <span className="bg-yellow-200">ไม่ว่าจะเกิดจากสาเหตุใด</span></p>
-                    <p><span className="bg-pink-200">ข้อ 8.2 ค่าปรับร้อยละ 5 ต่อวัน</span> ของยอดค้างชำระ</p>
-                    <p className="text-[#86868b]">ข้อ 9 ... ข้อ 10 ... ข้อ 11 ...</p>
-                    <p className="text-[#86868b]">[อีก 40+ หน้า ยังไม่ได้อ่าน]</p>
+                {/* Recommendations */}
+                <div className="mb-5">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Check size={13} className="text-[#2997ff]" />
+                    <span className="text-[12px] font-semibold text-[#2997ff]">
+                      ข้อเสนอแนะ ({recommendations.length} รายการ)
+                    </span>
                   </div>
-                  {/* Sticky notes */}
+                  <div className="space-y-2">
+                    {recommendations.map((rec, i) => (
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.3 + i * 0.1 }}
+                        className="bg-white rounded-xl p-3 border border-[#2997ff]/10"
+                      >
+                        <p className="text-[11px] text-[#1d1d1f] mb-1">
+                          {rec.text}
+                        </p>
+                        <span className="text-[9px] px-2 py-0.5 rounded-full bg-[#5856d6]/8 text-[#5856d6] font-medium">
+                          {rec.ref}
+                        </span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Legal references */}
+                <div>
+                  <p className="text-[11px] font-semibold text-[#86868b] mb-2">
+                    มาตราอ้างอิง
+                  </p>
                   <div className="flex flex-wrap gap-1.5">
-                    <span className="text-[9px] px-2 py-1 rounded bg-yellow-100 text-yellow-700 -rotate-2">ตรวจข้อ 5 อีกที</span>
-                    <span className="text-[9px] px-2 py-1 rounded bg-pink-100 text-pink-700 rotate-1">ค่าปรับสูงไป?</span>
-                    <span className="text-[9px] px-2 py-1 rounded bg-blue-100 text-blue-700 -rotate-1">ถามหุ้นส่วน</span>
-                    <span className="text-[9px] px-2 py-1 rounded bg-green-100 text-green-700 rotate-2">เทียบสัญญาเก่า</span>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-[11px] text-[#ff3b30] font-medium">อ่านไป highlight ไป ไม่แน่ใจว่าครบไหม</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* AFTER */}
-            <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <p className="text-[13px] font-semibold text-[#34c759] uppercase tracking-wider mb-3 text-center">หลังใช้ AI</p>
-              <div className="apple-card p-0 overflow-hidden border-2 border-[#34c759]/10">
-                <div className="px-4 py-2.5 bg-[#34c759]/5 text-[12px] text-[#34c759] font-medium text-center">ใช้เวลา: 5 นาที | ครบถ้วน: 100%</div>
-                <div className="p-4 space-y-3">
-                  {/* AI Summary panel */}
-                  <div className="bg-[#fafafa] rounded-xl p-3 space-y-2.5">
-                    <div className="flex items-center gap-2 mb-1">
-                      <Brain size={13} className="text-[#5856d6]" />
-                      <span className="text-[11px] font-semibold text-[#1d1d1f]">AI สรุปสัญญา 54 หน้า</span>
-                    </div>
-                    {/* Summary */}
-                    <div className="bg-white rounded-lg p-2.5 border border-black/[0.04]">
-                      <p className="text-[10px] font-semibold text-[#5856d6] mb-1">สรุป</p>
-                      <p className="text-[10px] text-[#86868b]">สัญญาเช่าอาคาร 3 ปี ค่าเช่า 45,000/เดือน มีข้อที่ไม่เป็นธรรม 3 จุด</p>
-                    </div>
-                    {/* Risks */}
-                    <div className="bg-white rounded-lg p-2.5 border border-[#ff3b30]/10">
-                      <p className="text-[10px] font-semibold text-[#ff3b30] mb-1">ข้อเสี่ยง 3 รายการ</p>
-                      <div className="space-y-1">
-                        <p className="text-[10px] text-[#1d1d1f]/70">ข้อ 5.3 — รับผิดเหตุสุดวิสัย (ผิดปกติ)</p>
-                        <p className="text-[10px] text-[#1d1d1f]/70">ข้อ 8.2 — ค่าปรับ 5%/วัน (สูงเกิน)</p>
-                        <p className="text-[10px] text-[#1d1d1f]/70">ข้อ 15 — ไม่มีเงื่อนไขคืนเงินประกัน</p>
-                      </div>
-                    </div>
-                    {/* Recommendations */}
-                    <div className="bg-white rounded-lg p-2.5 border border-[#2997ff]/10">
-                      <p className="text-[10px] font-semibold text-[#2997ff] mb-1">ข้อเสนอแนะ</p>
-                      <div className="space-y-1">
-                        <div className="flex items-start gap-1"><Check size={9} className="text-[#2997ff] mt-0.5 shrink-0" /><p className="text-[10px] text-[#1d1d1f]/70">เพิ่ม Force Majeure clause</p></div>
-                        <div className="flex items-start gap-1"><Check size={9} className="text-[#2997ff] mt-0.5 shrink-0" /><p className="text-[10px] text-[#1d1d1f]/70">ลดค่าปรับเป็น 1.5%/วัน</p></div>
-                      </div>
-                    </div>
-                    {/* Related sections */}
-                    <div className="flex flex-wrap gap-1">
-                      {["ม.383 ป.พ.พ.", "ม.391 ป.พ.พ.", "พ.ร.บ.เช่า ม.4"].map(s => (
-                        <span key={s} className="text-[9px] px-2 py-0.5 rounded-full bg-[#5856d6]/8 text-[#5856d6] font-medium">{s}</span>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <div className="inline-flex items-center gap-1.5">
-                      <span className="px-1.5 py-0.5 rounded bg-[#34c759]/10 text-[#34c759] font-medium text-[10px]">AI</span>
-                      <span className="text-[10px] text-[#86868b]">วิเคราะห์ใน 4.7 วินาที</span>
-                    </div>
+                    {legalRefs.map((ref) => (
+                      <span
+                        key={ref}
+                        className="text-[10px] px-2.5 py-1 rounded-full bg-[#5856d6]/8 text-[#5856d6] font-medium"
+                      >
+                        {ref}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </div>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* ═══ WORKFLOWS — with inline mini-demos ═══ */}
-      <section className="py-20 px-6 bg-[#f5f5f7]">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-[28px] sm:text-[32px] font-semibold text-[#1d1d1f] text-center mb-3">4 ระบบ AI สำหรับงานกฎหมาย</h2>
-          <p className="text-[17px] text-[#86868b] text-center mb-12">ทุกอย่างพร้อมใช้งานทันที ไม่ต้อง coding</p>
+      {/* ═══ 3. SEARCH ANY LAW ═══ */}
+      <section className="py-16 px-6 bg-[#f5f5f7]">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-8"
+          >
+            <h2 className="text-[28px] sm:text-[36px] font-semibold text-[#1d1d1f] mb-2">
+              Search Any Law
+            </h2>
+            <p className="text-[15px] text-[#86868b]">
+              ค้นข้อกฎหมายด้วยภาษาธรรมชาติ AI หาให้ใน 2 วินาที
+            </p>
+          </motion.div>
 
-          <div className="space-y-4">
-            {[
-              {
-                icon: <BookOpen size={20} />, title: "วิเคราะห์สัญญาอัตโนมัติ", color: "#5856d6",
-                desc: "Upload สัญญา → AI อ่านทั้งฉบับ → สรุปประเด็น ข้อเสี่ยง ข้อเสนอแนะ",
-                saved: "3 ชม. → 5 นาที", cost: "~฿9/ฉบับ",
-                demo: (
-                  <div className="mt-3 p-4 rounded-xl bg-[#fafafa] border border-black/[0.04]">
-                    <div className="flex items-center gap-2 mb-3">
-                      <FileText size={13} className="text-[#5856d6]" />
-                      <span className="text-[11px] font-semibold text-[#1d1d1f]">ผลวิเคราะห์: สัญญาเช่า_2568.pdf</span>
-                      <span className="text-[9px] bg-[#34c759]/10 text-[#34c759] rounded-full px-2 py-0.5 ml-auto">เสร็จแล้ว</span>
-                    </div>
-                    <div className="grid grid-cols-3 gap-2 mb-3">
-                      <div className="bg-white rounded-lg p-2 text-center border border-black/[0.04]">
-                        <p className="text-[16px] font-semibold text-[#ff3b30]">3</p>
-                        <p className="text-[9px] text-[#86868b]">ข้อเสี่ยง</p>
-                      </div>
-                      <div className="bg-white rounded-lg p-2 text-center border border-black/[0.04]">
-                        <p className="text-[16px] font-semibold text-[#2997ff]">5</p>
-                        <p className="text-[9px] text-[#86868b]">ข้อเสนอแนะ</p>
-                      </div>
-                      <div className="bg-white rounded-lg p-2 text-center border border-black/[0.04]">
-                        <p className="text-[16px] font-semibold text-[#5856d6]">4</p>
-                        <p className="text-[9px] text-[#86868b]">มาตราอ้างอิง</p>
-                      </div>
-                    </div>
-                    <div className="space-y-1.5">
-                      <div className="flex items-start gap-2 bg-white rounded-lg p-2 border border-[#ff3b30]/10">
-                        <AlertTriangle size={11} className="text-[#ff3b30] shrink-0 mt-0.5" />
-                        <div>
-                          <span className="text-[10px] font-bold text-[#ff3b30]">ข้อ 5.3</span>
-                          <p className="text-[10px] text-[#86868b]">รับผิดเหตุสุดวิสัย — ควรเพิ่ม Force Majeure</p>
-                        </div>
-                      </div>
-                      <div className="flex items-start gap-2 bg-white rounded-lg p-2 border border-[#ff3b30]/10">
-                        <AlertTriangle size={11} className="text-[#ff3b30] shrink-0 mt-0.5" />
-                        <div>
-                          <span className="text-[10px] font-bold text-[#ff3b30]">ข้อ 8.2</span>
-                          <p className="text-[10px] text-[#86868b]">ค่าปรับ 5%/วัน — ปกติ 0.5-1.5% ศาลอาจลดได้ (ม.383)</p>
-                        </div>
-                      </div>
-                    </div>
+          {/* Search bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-6"
+          >
+            <div
+              className={`flex items-center gap-3 bg-white rounded-2xl px-5 py-4 shadow-lg shadow-black/[0.04] border-2 transition-colors ${
+                searchFocused
+                  ? "border-[#2997ff]"
+                  : "border-transparent"
+              }`}
+              onMouseEnter={() => setSearchFocused(true)}
+              onMouseLeave={() => setSearchFocused(false)}
+            >
+              <Search
+                size={20}
+                className={`shrink-0 transition-colors ${
+                  searchFocused ? "text-[#2997ff]" : "text-[#86868b]"
+                }`}
+              />
+              <span className="text-[15px] text-[#1d1d1f]">
+                ค่าปรับในสัญญาเช่า สูงเกินไปได้ไหม ศาลลดได้หรือเปล่า
+              </span>
+              <motion.div
+                animate={searchFocused ? { scale: 1.05 } : { scale: 1 }}
+                className="ml-auto shrink-0"
+              >
+                <div className="bg-[#2997ff] text-white text-[12px] font-medium px-4 py-2 rounded-full">
+                  ค้นหา
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+
+          {/* Search results */}
+          <div className="space-y-3">
+            {searchResults.map((result, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="apple-card p-5 hover:shadow-md transition-shadow cursor-pointer group"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-[#5856d6]/8 flex items-center justify-center shrink-0">
+                    <span className="text-[11px] font-bold text-[#5856d6] leading-tight text-center">
+                      {result.section}
+                    </span>
                   </div>
-                ),
-              },
-              {
-                icon: <Search size={20} />, title: "ค้นข้อกฎหมายด้วย AI (Legal RAG)", color: "#2997ff",
-                desc: "ถามภาษาไทย → AI ค้นจากฐานข้อมูล พ.ร.บ. + คำพิพากษา → ตอบพร้อมอ้างมาตรา",
-                saved: "30 นาที → 30 วิ", cost: "~฿1,500/เดือน",
-                demo: (
-                  <div className="mt-3 space-y-2">
-                    <div className="flex items-center gap-2 bg-white border border-black/[0.08] rounded-xl px-3 py-2">
-                      <Search size={12} className="text-[#2997ff]" />
-                      <span className="text-[11px] text-[#1d1d1f]">PDPA บทลงโทษกรณีข้อมูลรั่ว</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <h3 className="text-[14px] font-semibold text-[#1d1d1f]">
+                        {result.section} — {result.title}
+                      </h3>
+                      <ChevronRight
+                        size={14}
+                        className="text-[#d2d2d7] group-hover:text-[#2997ff] transition-colors shrink-0 ml-auto"
+                      />
                     </div>
-                    <div className="space-y-1.5">
-                      {[
-                        { section: "ม.90", text: "ปรับไม่เกิน 5 ล้านบาท — ไม่ปฏิบัติตามคำสั่งคณะกรรมการ", tag: "โทษปรับ" },
-                        { section: "ม.91", text: "จำคุกไม่เกิน 1 ปี หรือปรับไม่เกิน 1 ล้าน — ใช้ sensitive data โดยไม่ได้รับ consent", tag: "โทษอาญา" },
-                      ].map((r, ri) => (
-                        <div key={ri} className="bg-[#fafafa] rounded-lg p-2.5 border border-black/[0.04]">
-                          <div className="flex items-center gap-2 mb-1">
-                            <span className="text-[10px] font-bold text-[#2997ff]">{r.section}</span>
-                            <span className="text-[8px] font-bold px-1.5 py-0.5 rounded-full bg-[#ff3b30]/10 text-[#ff3b30]">{r.tag}</span>
-                          </div>
-                          <p className="text-[10px] text-[#86868b]">{r.text}</p>
-                        </div>
-                      ))}
-                    </div>
-                    <p className="text-[9px] text-[#86868b] text-right">ค้นใน 2.1 วินาที | แหล่ง: พ.ร.บ. PDPA 2562</p>
-                  </div>
-                ),
-              },
-              {
-                icon: <FilePen size={20} />, title: "ร่างเอกสารกฎหมาย", color: "#34c759",
-                desc: "เลือก template → ใส่ข้อมูล → AI ร่างเอกสารพร้อมใช้ ทนาย review แก้ไขได้",
-                saved: "2 ชม. → 10 นาที", cost: "~฿5/ฉบับ",
-                demo: (
-                  <div className="mt-3 p-4 rounded-xl bg-[#fafafa] border border-black/[0.04]">
-                    <div className="flex items-center gap-2 mb-3">
-                      <FilePen size={13} className="text-[#34c759]" />
-                      <span className="text-[11px] font-semibold text-[#1d1d1f]">หนังสือทวงถามให้ชำระหนี้</span>
-                      <span className="text-[9px] bg-[#34c759]/10 text-[#34c759] rounded-full px-2 py-0.5 ml-auto">ร่างเสร็จ</span>
-                    </div>
-                    <div className="bg-white rounded-lg p-3 border border-black/[0.04] font-serif text-[11px] text-[#1d1d1f]/80 leading-relaxed space-y-1.5">
-                      <p className="text-right text-[10px]">วันที่ 15 มีนาคม 2568</p>
-                      <p className="font-semibold">เรื่อง: ขอให้ชำระหนี้ตามสัญญา</p>
-                      <p>เรียน คุณสมชาย ใจดี</p>
-                      <p className="text-[10px]">ตามที่ท่านได้ทำสัญญากู้ยืมเงินกับ บริษัท ABC จำกัด เมื่อวันที่ 1 มกราคม 2568 จำนวน <span className="font-semibold">500,000 บาท</span> กำหนดชำระคืนภายใน 60 วัน...</p>
-                      <p className="text-[10px] text-[#86868b]">[...ร่างอัตโนมัติ ทนาย review ก่อนส่ง]</p>
-                    </div>
-                    <div className="flex flex-wrap gap-1.5 mt-2">
-                      {["หนังสือทวงถาม", "สัญญาเช่า", "MOU", "NDA", "หนังสือมอบอำนาจ"].map(t => (
-                        <span key={t} className="text-[8px] px-1.5 py-0.5 rounded bg-[#34c759]/8 text-[#34c759] font-medium">{t}</span>
+                    <p className="text-[12px] text-[#86868b] leading-relaxed line-clamp-2">
+                      {result.desc}
+                    </p>
+                    <div className="flex gap-1.5 mt-2">
+                      {result.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-[9px] px-2 py-0.5 rounded-full bg-[#2997ff]/8 text-[#2997ff] font-medium"
+                        >
+                          {tag}
+                        </span>
                       ))}
                     </div>
                   </div>
-                ),
-              },
-              {
-                icon: <ClipboardCheck size={20} />, title: "ตรวจ PDPA Compliance", color: "#af52de",
-                desc: "AI ตรวจเว็บไซต์ แอป เอกสาร ว่าเป็นไปตาม PDPA → รายงาน ผ่าน/ไม่ผ่าน + action plan",
-                saved: "1 วัน → 30 นาที", cost: "~฿15/ครั้ง",
-                demo: (
-                  <div className="mt-3 p-4 rounded-xl bg-[#fafafa] border border-black/[0.04]">
-                    <div className="flex items-center gap-2 mb-3">
-                      <Shield size={13} className="text-[#af52de]" />
-                      <span className="text-[11px] font-semibold text-[#1d1d1f]">PDPA Compliance Report</span>
-                      <span className="text-[9px] bg-[#ff9500]/10 text-[#ff9500] rounded-full px-2 py-0.5 ml-auto">72% ผ่าน</span>
-                    </div>
-                    <div className="space-y-1.5">
-                      {[
-                        { label: "Privacy Policy ครบถ้วน", pass: true },
-                        { label: "Consent Form ถูกต้อง", pass: true },
-                        { label: "Cookie Banner มี opt-out", pass: true },
-                        { label: "Data Retention Policy", pass: false, note: "ไม่มี — ต้องจัดทำ" },
-                        { label: "Data Breach Protocol", pass: false, note: "ไม่มี — ต้องแจ้งภายใน 72 ชม." },
-                        { label: "DPO แต่งตั้ง", pass: true },
-                        { label: "DPIA Assessment", pass: false, note: "ยังไม่ได้ทำ" },
-                      ].map((item, i) => (
-                        <div key={i} className="flex items-center gap-2 bg-white rounded-lg p-2 border border-black/[0.04]">
-                          {item.pass ? (
-                            <div className="w-4 h-4 rounded-full bg-[#34c759] flex items-center justify-center shrink-0"><Check size={10} className="text-white" /></div>
-                          ) : (
-                            <div className="w-4 h-4 rounded-full bg-[#ff3b30] flex items-center justify-center shrink-0"><X size={10} className="text-white" /></div>
-                          )}
-                          <span className="text-[10px] text-[#1d1d1f] flex-1">{item.label}</span>
-                          {item.note && <span className="text-[9px] text-[#ff3b30]">{item.note}</span>}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ),
-              },
-            ].map((wf, i) => (
-              <motion.div key={wf.title} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }} className="apple-card overflow-hidden">
-                <button onClick={() => setExpandedWorkflow(expandedWorkflow === i ? null : i)} className="w-full text-left p-5">
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: wf.color + "10", color: wf.color }}>{wf.icon}</div>
-                    <div className="flex-1"><h3 className="text-[15px] font-semibold text-[#1d1d1f] mb-0.5">{wf.title}</h3><p className="text-[13px] text-[#86868b]">{wf.desc}</p></div>
-                    <div className="flex items-center gap-3 shrink-0">
-                      <div className="hidden sm:block text-right"><p className="text-[11px] font-medium" style={{ color: wf.color }}>{wf.saved}</p><p className="text-[10px] text-[#86868b]">{wf.cost}</p></div>
-                      <motion.div animate={{ rotate: expandedWorkflow === i ? 180 : 0 }}><ChevronDown size={16} className="text-[#d2d2d7]" /></motion.div>
-                    </div>
-                  </div>
-                </button>
-                <AnimatePresence>
-                  {expandedWorkflow === i && wf.demo && (
-                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden"><div className="px-5 pb-5">{wf.demo}</div></motion.div>
-                  )}
-                </AnimatePresence>
+                </div>
               </motion.div>
             ))}
           </div>
+
+          <p className="text-[11px] text-[#86868b] text-center mt-4">
+            ค้นจากฐานข้อมูล พ.ร.บ. + ป.พ.พ. + คำพิพากษาศาลฎีกา | ค้นใน 2.1 วินาที
+          </p>
         </div>
       </section>
 
-      {/* ═══ DASHBOARD MOCKUP ═══ */}
+      {/* ═══ 4. TIMELINE — Lawyer's Day with AI ═══ */}
       <section className="py-20 px-6">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-[28px] sm:text-[32px] font-semibold text-[#1d1d1f] text-center mb-3">Dashboard ที่คุณได้</h2>
-          <p className="text-[17px] text-[#86868b] text-center mb-10">ดูทุกอย่างในที่เดียว</p>
+        <div className="max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-[28px] sm:text-[36px] font-semibold text-[#1d1d1f] mb-2">
+              1 วันของทนาย + AI
+            </h2>
+            <p className="text-[15px] text-[#86868b]">
+              งานที่เคยใช้ทั้งวัน เสร็จก่อนบ่ายสอง
+            </p>
+          </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="apple-card p-0 overflow-hidden shadow-xl shadow-black/[0.05]">
-            {/* macOS chrome */}
-            <div className="flex items-center gap-3 px-5 py-3 bg-[#f5f5f7] border-b border-black/[0.04]">
-              <div className="flex gap-1.5"><div className="w-3 h-3 rounded-full bg-[#ff5f57]" /><div className="w-3 h-3 rounded-full bg-[#febc2e]" /><div className="w-3 h-3 rounded-full bg-[#28c840]" /></div>
-              <span className="text-[12px] text-[#86868b] font-medium ml-2">Cloud AI Legal Dashboard</span>
-            </div>
-            <div className="p-6">
-              {/* Stats */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
-                {[
-                  { label: "คดีที่ active", value: "23", change: "+3 เดือนนี้", color: "#5856d6" },
-                  { label: "สัญญาวิเคราะห์แล้ว", value: "147", change: "+12 สัปดาห์นี้", color: "#2997ff" },
-                  { label: "Compliance Score", value: "89%", change: "+7%", color: "#34c759" },
-                  { label: "เวลาที่ประหยัด", value: "340 ชม.", change: "เดือนนี้", color: "#ff9500" },
-                ].map((s) => (
-                  <div key={s.label} className="p-3 rounded-xl bg-[#fafafa]">
-                    <p className="text-[10px] text-[#86868b]">{s.label}</p>
-                    <p className="text-[18px] font-semibold text-[#1d1d1f]">{s.value}</p>
-                    <p className="text-[10px] font-medium" style={{ color: s.color }}>{s.change}</p>
+          {/* Vertical timeline */}
+          <div className="relative">
+            {/* Vertical line */}
+            <div className="absolute left-[52px] sm:left-[60px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#2997ff] via-[#5856d6] to-[#ff9500]" />
+
+            <div className="space-y-0">
+              {timelineItems.map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                  className="flex items-start gap-4 sm:gap-5 relative pb-8 last:pb-0"
+                >
+                  {/* Time label */}
+                  <div className="w-[40px] sm:w-[48px] shrink-0 text-right pt-3">
+                    <span className="text-[14px] sm:text-[16px] font-bold text-[#1d1d1f] font-mono">
+                      {item.time}
+                    </span>
                   </div>
-                ))}
-              </div>
-              {/* Recent analyses */}
-              <div className="mb-4">
-                <p className="text-[12px] font-semibold text-[#1d1d1f] mb-2">สัญญาที่วิเคราะห์ล่าสุด</p>
-              </div>
-              <div className="space-y-1.5">
-                {[
-                  { id: "C-0234", name: "สัญญาเช่าอาคาร_เทคสตาร์ท", risk: "ปานกลาง-สูง", riskColor: "#ff9500", status: "รอ review", sc: "#ff9500" },
-                  { id: "C-0233", name: "NDA_บริษัท XYZ", risk: "ต่ำ", riskColor: "#34c759", status: "approve แล้ว", sc: "#34c759" },
-                  { id: "C-0232", name: "สัญญาจ้างผลิต_ABC Corp", risk: "สูง", riskColor: "#ff3b30", status: "แก้ไข", sc: "#ff3b30" },
-                  { id: "C-0231", name: "MOU ร่วมทุน_พาร์ทเนอร์", risk: "ต่ำ", riskColor: "#34c759", status: "เสร็จ", sc: "#34c759" },
-                ].map((o) => (
-                  <div key={o.id} className="flex items-center justify-between p-2.5 rounded-lg bg-[#fafafa]">
-                    <div className="flex items-center gap-3">
-                      <span className="text-[12px] font-mono text-[#86868b]">{o.id}</span>
-                      <div>
-                        <p className="text-[12px] font-medium text-[#1d1d1f]">{o.name}</p>
-                        <p className="text-[10px]" style={{ color: o.riskColor }}>ความเสี่ยง: {o.risk}</p>
-                      </div>
+
+                  {/* Node */}
+                  <div
+                    className="w-6 h-6 rounded-full shrink-0 flex items-center justify-center mt-3 z-10 ring-4 ring-white"
+                    style={{ background: item.color }}
+                  >
+                    <div className="text-white scale-75">{item.icon}</div>
+                  </div>
+
+                  {/* Content card */}
+                  <div className="flex-1 apple-card p-4 sm:p-5">
+                    <h3 className="text-[14px] font-semibold text-[#1d1d1f] mb-1">
+                      {item.title}
+                    </h3>
+                    <p className="text-[12px] text-[#86868b] mb-3 leading-relaxed">
+                      {item.detail}
+                    </p>
+                    <div className="flex items-center gap-3 flex-wrap">
+                      <span
+                        className="text-[10px] font-semibold px-2.5 py-1 rounded-full text-white"
+                        style={{ background: item.color }}
+                      >
+                        {item.aiTime}
+                      </span>
+                      <span className="text-[10px] text-[#86868b] line-through">
+                        {item.oldTime}
+                      </span>
                     </div>
-                    <span className="text-[9px] font-medium px-1.5 py-0.5 rounded-full" style={{ background: o.sc + "12", color: o.sc }}>{o.status}</span>
                   </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Summary bar */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mt-8 ml-[68px] sm:ml-[80px] apple-card p-4 bg-[#f5f5f7]"
+            >
+              <div className="flex items-center gap-3 flex-wrap">
+                <Zap size={16} className="text-[#ff9500]" />
+                <span className="text-[13px] font-semibold text-[#1d1d1f]">
+                  ประหยัดเวลารวม: 6+ ชั่วโมง/วัน
+                </span>
+                <span className="text-[11px] text-[#86868b]">
+                  = 120+ ชั่วโมง/เดือน
+                </span>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ 5. PDPA COMPLIANCE METER ═══ */}
+      <section className="py-20 px-6 bg-[#f5f5f7]">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-10"
+          >
+            <h2 className="text-[28px] sm:text-[36px] font-semibold text-[#1d1d1f] mb-2">
+              PDPA Compliance Meter
+            </h2>
+            <p className="text-[15px] text-[#86868b]">
+              AI ตรวจสอบให้ครบทุกหมวด รู้ทันทีว่าต้องแก้ตรงไหน
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="apple-card p-6 sm:p-8 shadow-lg shadow-black/[0.04]"
+          >
+            <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+              {/* Big central gauge */}
+              <div className="shrink-0">
+                <CircularGauge
+                  value={pdpaOverall}
+                  max={100}
+                  size={180}
+                  strokeWidth={16}
+                  color={
+                    pdpaOverall >= 80
+                      ? "#34c759"
+                      : pdpaOverall >= 60
+                      ? "#ff9500"
+                      : "#ff3b30"
+                  }
+                  bgColor="#e8e8ed"
+                  label="Overall Compliance"
+                  sublabel="ต้องปรับปรุง 3 หมวด"
+                />
+              </div>
+
+              {/* Category breakdown */}
+              <div className="flex-1 w-full space-y-3">
+                {pdpaCategories.map((cat, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.05 }}
+                  >
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-[12px] text-[#1d1d1f] font-medium">
+                        {cat.label}
+                      </span>
+                      <span
+                        className="text-[11px] font-bold"
+                        style={{ color: cat.color }}
+                      >
+                        {cat.score}%
+                      </span>
+                    </div>
+                    <div className="w-full bg-[#e8e8ed] rounded-full h-2 overflow-hidden">
+                      <motion.div
+                        className="h-full rounded-full"
+                        style={{ background: cat.color }}
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${cat.score}%` }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, delay: i * 0.05 }}
+                      />
+                    </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
-          </motion.div>
-        </div>
-      </section>
 
-      {/* ═══ PRICING with ROI ═══ */}
-      <section className="py-20 px-6 bg-[#f5f5f7]">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-[28px] sm:text-[32px] font-semibold text-[#1d1d1f] text-center mb-3">แพ็คเกจสำหรับสำนักงานกฎหมาย</h2>
-          <p className="text-[17px] text-[#86868b] text-center mb-10">Setup fee ครั้งเดียว + ค่า API ตามใช้จริง</p>
-
-          <div className="grid md:grid-cols-3 gap-5">
-            {[
-              { name: "Solo Lawyer", price: "฿19,900", monthly: "฿1,000-2,500", color: "#2997ff", features: ["Contract analysis (10/เดือน)", "Legal RAG 1 ฐานข้อมูล", "Document draft 3 templates", "PDPA basic checklist", "Support 30 วัน"], best: "ทนายเดี่ยว / ที่ปรึกษา" },
-              { name: "Law Firm", price: "฿49,900", monthly: "฿3,000-8,000", color: "#5856d6", badge: "แนะนำ", features: ["Contract analysis ไม่จำกัด", "Legal RAG หลายฐานข้อมูล", "Document draft ทุก template", "PDPA compliance เต็มรูปแบบ", "Dashboard + analytics", "Training ทีม 2 ชม.", "Support 60 วัน"], best: "สำนักงาน 3-15 คน" },
-              { name: "Enterprise", price: "฿89,900", monthly: "฿5,000-15,000", color: "#af52de", features: ["ทุกอย่างใน Law Firm", "Custom template development", "API integration กับระบบที่มี", "Multi-user + permissions", "Case management system", "On-site training 1 วัน", "Priority support 90 วัน"], best: "สำนักงาน 15+ คน / in-house" },
-            ].map((plan) => (
-              <div key={plan.name} className={`apple-card p-6 ${plan.badge ? "ring-2 ring-[#5856d6]/20" : ""}`}>
-                {plan.badge && <div className="text-center mb-3"><span className="text-[11px] font-semibold px-4 py-1 rounded-full text-white" style={{ background: plan.color }}>{plan.badge}</span></div>}
-                <h3 className="text-[17px] font-semibold text-[#1d1d1f] text-center">{plan.name}</h3>
-                <p className="text-[32px] font-semibold text-center mt-1 mb-0.5" style={{ color: plan.color }}>{plan.price}</p>
-                <p className="text-[11px] text-[#86868b] text-center mb-1">Setup fee (ครั้งเดียว)</p>
-                <p className="text-[11px] text-[#86868b] text-center mb-5 pb-5 border-b border-black/[0.04]">+ {plan.monthly}/เดือน</p>
-                <div className="space-y-2 mb-5">{plan.features.map((f) => <div key={f} className="flex items-start gap-2"><Check size={13} className="mt-0.5 shrink-0" style={{ color: plan.color }} /><span className="text-[12px] text-[#86868b]">{f}</span></div>)}</div>
-                <p className="text-[11px] text-[#86868b] mb-3">เหมาะกับ: {plan.best}</p>
-                <a href="/#contact" className="block text-center text-[13px] font-medium py-2.5 rounded-full" style={plan.badge ? { background: plan.color, color: "#fff" } : { background: "#f5f5f7" }}>เริ่มต้นใช้งาน</a>
+            {/* Bottom actions */}
+            <div className="flex flex-wrap items-center gap-3 mt-8 pt-6 border-t border-black/[0.06]">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-[#34c759]" />
+                <span className="text-[11px] text-[#86868b]">ผ่าน (80%+)</span>
               </div>
-            ))}
-          </div>
-
-          {/* ROI Calculator */}
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="apple-card p-6 mt-8">
-            <h3 className="text-[15px] font-semibold text-[#1d1d1f] mb-4">คุ้มค่าแค่ไหน?</h3>
-            <div className="grid sm:grid-cols-4 gap-4 text-center">
-              <div className="p-4 rounded-xl bg-[#ff3b30]/5">
-                <p className="text-[11px] text-[#86868b]">จ้างทนายจูเนียร์</p>
-                <p className="text-[20px] font-semibold text-[#ff3b30]">฿25,000</p>
-                <p className="text-[10px] text-[#86868b]">/เดือน</p>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-[#ff9500]" />
+                <span className="text-[11px] text-[#86868b]">ควรปรับปรุง (50-79%)</span>
               </div>
-              <div className="p-4 rounded-xl bg-[#34c759]/5">
-                <p className="text-[11px] text-[#86868b]">ใช้ AI แทน</p>
-                <p className="text-[20px] font-semibold text-[#34c759]">฿3,000</p>
-                <p className="text-[10px] text-[#86868b]">/เดือน</p>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-[#ff3b30]" />
+                <span className="text-[11px] text-[#86868b]">ไม่ผ่าน (&lt;50%)</span>
               </div>
-              <div className="p-4 rounded-xl bg-[#2997ff]/5">
-                <p className="text-[11px] text-[#86868b]">ประหยัด/ปี</p>
-                <p className="text-[20px] font-semibold text-[#2997ff]">฿264,000</p>
-                <p className="text-[10px] text-[#86868b]">ลด 88%</p>
-              </div>
-              <div className="p-4 rounded-xl bg-[#5856d6]/5">
-                <p className="text-[11px] text-[#86868b]">เวลาที่ได้คืน</p>
-                <p className="text-[20px] font-semibold text-[#5856d6]">340 ชม.</p>
-                <p className="text-[10px] text-[#86868b]">/เดือน</p>
-              </div>
+              <span className="text-[10px] text-[#86868b] ml-auto">
+                โทษปรับสูงสุด: 5 ล้านบาท (ม.90 PDPA)
+              </span>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* ═══ CTA ═══ */}
+      {/* ═══ 6. SINGLE PROMINENT PRICING + CTA ═══ */}
       <section className="py-20 px-6">
-        <div className="max-w-lg mx-auto text-center">
-          <h2 className="text-[24px] sm:text-[28px] font-semibold text-[#1d1d1f] mb-3">พร้อมให้ AI ช่วยงานกฎหมาย?</h2>
-          <p className="text-[15px] text-[#86868b] mb-6">ปรึกษาฟรี บอกเราว่าสำนักงานคุณทำงานด้านไหน เราออกแบบระบบให้</p>
-          <a href="/#contact" className="apple-btn apple-btn-blue">ปรึกษาฟรี</a>
+        <div className="max-w-2xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="apple-card p-8 sm:p-10 text-center shadow-lg shadow-black/[0.05] ring-2 ring-[#5856d6]/15"
+          >
+            <div className="inline-flex items-center gap-2 bg-[#5856d6]/8 rounded-full px-4 py-1.5 mb-5">
+              <Scale size={13} className="text-[#5856d6]" />
+              <span className="text-[11px] font-semibold text-[#5856d6]">
+                Law Firm Package
+              </span>
+            </div>
+
+            <h2 className="text-[24px] sm:text-[28px] font-semibold text-[#1d1d1f] mb-2">
+              เริ่มใช้ AI สำหรับงานกฎหมาย
+            </h2>
+            <p className="text-[15px] text-[#86868b] mb-6">
+              วิเคราะห์สัญญา + ค้นกฎหมาย + ร่างเอกสาร + ตรวจ PDPA
+            </p>
+
+            <div className="mb-6">
+              <span className="text-[48px] sm:text-[56px] font-bold text-[#5856d6]">
+                ฿49,900
+              </span>
+              <p className="text-[13px] text-[#86868b] mt-1">
+                Setup fee ครั้งเดียว + API ตามใช้จริง ~฿3,000-8,000/เดือน
+              </p>
+            </div>
+
+            {/* Features grid */}
+            <div className="grid grid-cols-2 gap-3 text-left mb-8">
+              {[
+                "วิเคราะห์สัญญาไม่จำกัด",
+                "Legal RAG หลายฐานข้อมูล",
+                "ร่างเอกสารทุก template",
+                "PDPA compliance เต็มรูปแบบ",
+                "Dashboard + analytics",
+                "Training ทีม 2 ชม.",
+                "Support 60 วัน",
+                "คืนทุนใน 2 เดือน",
+              ].map((f) => (
+                <div key={f} className="flex items-start gap-2">
+                  <Check
+                    size={13}
+                    className="text-[#5856d6] shrink-0 mt-0.5"
+                  />
+                  <span className="text-[12px] text-[#86868b]">{f}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* ROI line */}
+            <div className="flex items-center justify-center gap-4 flex-wrap mb-8 p-4 rounded-xl bg-[#f5f5f7]">
+              <div className="text-center">
+                <p className="text-[18px] font-bold text-[#ff3b30] line-through">
+                  ฿25,000
+                </p>
+                <p className="text-[10px] text-[#86868b]">จ้างทนายจูเนียร์/เดือน</p>
+              </div>
+              <ArrowRight size={16} className="text-[#86868b]" />
+              <div className="text-center">
+                <p className="text-[18px] font-bold text-[#34c759]">฿3,000</p>
+                <p className="text-[10px] text-[#86868b]">AI ค่าใช้จ่าย/เดือน</p>
+              </div>
+              <ArrowRight size={16} className="text-[#86868b]" />
+              <div className="text-center">
+                <p className="text-[18px] font-bold text-[#2997ff]">฿264,000</p>
+                <p className="text-[10px] text-[#86868b]">ประหยัด/ปี</p>
+              </div>
+            </div>
+
+            <a
+              href="/#contact"
+              className="inline-flex items-center gap-2 bg-[#5856d6] text-white text-[15px] font-medium px-8 py-3.5 rounded-full hover:bg-[#4845b4] transition-colors"
+            >
+              ปรึกษาฟรี — ออกแบบระบบให้
+              <ArrowRight size={16} />
+            </a>
+            <p className="text-[11px] text-[#86868b] mt-3">
+              ไม่มีค่าใช้จ่ายจนกว่าจะตกลง | Demo ให้ดูก่อนตัดสินใจ
+            </p>
+          </motion.div>
         </div>
       </section>
     </div>
