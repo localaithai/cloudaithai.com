@@ -1,161 +1,191 @@
 "use client";
-import { useEffect, useRef, useState, useCallback } from "react";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
-const TOTAL_FRAMES = 300;
+function BrandIcon({ slug, fallback, size = 20 }: { slug: string; fallback: string; size?: number }) {
+  const [err, setErr] = useState(false);
+  if (err) return <span style={{ fontSize: size }}>{fallback}</span>;
+  return <img src={`https://cdn.simpleicons.org/${slug}`} alt={slug} width={size} height={size} onError={() => setErr(true)} className="opacity-80" />;
+}
+
+/* ─── Bold, visible model pills with real presence ─── */
+const models = [
+  { name: "GPT-5", color: "#10a37f", bg: "#10a37f15", slug: "openai", fallback: "🤖" },
+  { name: "Claude 4.6", color: "#c96442", bg: "#c9644215", slug: "anthropic", fallback: "🧠" },
+  { name: "Gemini 3.1", color: "#4285f4", bg: "#4285f415", slug: "google", fallback: "🔵" },
+  { name: "DeepSeek V3", color: "#5b6abf", bg: "#5b6abf15", slug: "deepseek", fallback: "🔮" },
+  { name: "Grok 3", color: "#1d9bf0", bg: "#1d9bf015", slug: "x", fallback: "𝕏" },
+  { name: "o3", color: "#10a37f", bg: "#10a37f15", slug: "openai", fallback: "🤖" },
+];
+
+const tools = [
+  { name: "n8n", slug: "n8n", fallback: "⚡" },
+  { name: "Flowise", slug: "flowise", fallback: "🌊" },
+  { name: "OpenClaw", slug: "openclaw", fallback: "🦞" },
+  { name: "Dify", slug: "dify", fallback: "🔮" },
+  { name: "ActivePieces", slug: "activepieces", fallback: "🧩" },
+];
 
 export default function Hero() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [progress, setProgress] = useState(0);
-  const imagesRef = useRef<HTMLImageElement[]>([]);
-  const loadedRef = useRef<boolean[]>(new Array(TOTAL_FRAMES).fill(false));
-  const [loaded, setLoaded] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Detect mobile
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 640);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
-
-  const frameDir = isMobile ? "/hero-frames-mobile" : "/hero-frames";
-  const WIDTH = isMobile ? 780 : 1920;
-  const HEIGHT = isMobile ? 1400 : 1080;
-
-  // Preload frames
-  useEffect(() => {
-    let count = 0;
-    const images: HTMLImageElement[] = [];
-    loadedRef.current = new Array(TOTAL_FRAMES).fill(false);
-    setLoaded(false);
-
-    for (let i = 0; i < TOTAL_FRAMES; i++) {
-      const img = new Image();
-      img.src = `${frameDir}/element-${String(i).padStart(3, "0")}.jpeg`;
-      img.onload = () => {
-        count++;
-        loadedRef.current[i] = true;
-        if (count >= TOTAL_FRAMES * 0.15) setLoaded(true);
-      };
-      img.onerror = () => { count++; };
-      images.push(img);
-    }
-    imagesRef.current = images;
-  }, [frameDir]);
-
-  // Scroll tracking
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-    const onScroll = () => {
-      const rect = section.getBoundingClientRect();
-      const sectionHeight = section.offsetHeight - window.innerHeight;
-      const scrolled = -rect.top;
-      setProgress(Math.max(0, Math.min(scrolled / sectionHeight, 1)));
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Draw frame based on scroll
-  const drawFrame = useCallback(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-    const frameIndex = Math.min(Math.floor(progress * (TOTAL_FRAMES - 1)), TOTAL_FRAMES - 1);
-    const img = imagesRef.current[frameIndex];
-    if (img && loadedRef.current[frameIndex] && img.complete && img.naturalWidth > 0) {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-    }
-  }, [progress]);
-
-  useEffect(() => {
-    const raf = requestAnimationFrame(drawFrame);
-    return () => cancelAnimationFrame(raf);
-  }, [drawFrame]);
-
   return (
-    <section
-      ref={sectionRef}
-      className="relative"
-      style={{ height: isMobile ? "300vh" : "400vh" }}
-    >
-      <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden bg-[#fbfbfd]">
-        {/* Progress bar */}
-        <div className="absolute top-0 left-0 right-0 h-[3px] bg-[#e5e5ea] z-20">
-          <div
-            className="h-full"
-            style={{
-              width: `${progress * 100}%`,
-              background: "linear-gradient(90deg, #2997ff, #5856d6, #34c759)",
-              transition: "none",
-            }}
-          />
-        </div>
-
-        {/* Canvas — full screen */}
-        <canvas
-          ref={canvasRef}
-          width={WIDTH}
-          height={HEIGHT}
-          className="w-full h-full object-contain sm:object-contain"
-          style={{
-            maxWidth: isMobile ? "100%" : `${(100 * WIDTH) / HEIGHT}vh`,
-            maxHeight: isMobile ? "100%" : "100vh",
-            opacity: loaded ? 1 : 0,
-            transition: "opacity 0.5s",
-          }}
+    <section className="relative bg-[#fbfbfd] overflow-hidden">
+      {/* Background gradient — bolder, actually visible */}
+      <div className="absolute inset-0 pointer-events-none">
+        <motion.div
+          className="absolute top-[-20%] left-[20%] w-[500px] h-[500px] sm:w-[700px] sm:h-[700px] rounded-full"
+          style={{ background: "radial-gradient(circle, rgba(41,151,255,0.12) 0%, transparent 70%)" }}
+          animate={{ x: [0, 30, 0], y: [0, -20, 0], scale: [1, 1.05, 1] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         />
-
-        {/* Loading */}
-        {!loaded && (
-          <div className="absolute inset-0 flex items-center justify-center bg-[#fbfbfd] z-30">
-            <div className="text-center">
-              <div className="w-8 h-8 border-2 border-[#2997ff] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-              <p className="text-[14px] text-[#86868b]">กำลังโหลด...</p>
-            </div>
-          </div>
-        )}
-
-        {/* Intro overlay — before scrolling */}
-        {progress < 0.03 && loaded && (
-          <div
-            className="absolute inset-0 z-20 flex flex-col items-center justify-end pb-12 sm:pb-16 text-center px-6"
-            style={{ opacity: 1 - progress * 33 }}
-          >
-            <div className="flex flex-col items-center gap-2 animate-bounce">
-              <div className="w-6 h-10 rounded-full border-2 border-[#2997ff]/30 flex justify-center pt-2">
-                <div className="w-1 h-2.5 rounded-full bg-[#2997ff] animate-pulse" />
-              </div>
-              <span className="text-[11px] text-[#2997ff] font-medium tracking-widest">SCROLL</span>
-            </div>
-          </div>
-        )}
+        <motion.div
+          className="absolute top-[30%] right-[10%] w-[400px] h-[400px] sm:w-[600px] sm:h-[600px] rounded-full"
+          style={{ background: "radial-gradient(circle, rgba(88,86,214,0.10) 0%, transparent 70%)" }}
+          animate={{ x: [0, -25, 0], y: [0, 20, 0], scale: [1, 1.08, 1] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-[10%] left-[30%] w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] rounded-full"
+          style={{ background: "radial-gradient(circle, rgba(175,82,222,0.08) 0%, transparent 70%)" }}
+          animate={{ x: [0, 20, 0], y: [0, -15, 0] }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        />
       </div>
 
-      {/* CTAs + Stats — appear after video section */}
-      <div className="absolute bottom-0 left-0 right-0 bg-[#fbfbfd] py-10 z-10">
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-          <a href="#pricing" className="apple-btn apple-btn-blue">ดูแพ็คเกจ</a>
-          <a href="#solutions" className="apple-link">ดูว่า AI ทำอะไรได้บ้าง</a>
-        </div>
-        <div className="flex justify-center gap-12 md:gap-24">
-          {[
-            { value: "6+", label: "Frontier Models" },
-            { value: "55+", label: "Integrations" },
-            { value: "฿19,900", label: "เริ่มต้น" },
-          ].map((stat) => (
-            <div key={stat.label} className="text-center">
-              <p className="text-[22px] md:text-[28px] font-semibold text-[#1d1d1f] tracking-tight">{stat.value}</p>
-              <p className="text-[11px] text-[#86868b] mt-1">{stat.label}</p>
+      <div className="relative z-10 pt-28 sm:pt-36 pb-20 sm:pb-28 px-6">
+        <div className="max-w-[900px] mx-auto text-center">
+          {/* Overline */}
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-[#2997ff] text-[15px] sm:text-[17px] font-medium mb-5"
+          >
+            AI Automation สำหรับธุรกิจไทย
+          </motion.p>
+
+          {/* Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.7 }}
+            className="text-[42px] sm:text-[64px] md:text-[80px] font-semibold leading-[1.1] tracking-[-0.03em] text-[#1d1d1f] mb-2"
+          >
+            ให้ AI ทำงานแทน
+          </motion.h1>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.45, duration: 0.7 }}
+            className="text-[28px] sm:text-[40px] md:text-[52px] font-semibold leading-[1.15] tracking-[-0.02em] gradient-text mb-6"
+          >
+            คุณทำสิ่งที่สำคัญ
+          </motion.h2>
+
+          {/* Body */}
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="text-[16px] sm:text-[19px] text-[#86868b] max-w-[540px] mx-auto mb-8 leading-[1.55]"
+          >
+            ติดตั้งระบบ AI Automation ใช้ Frontier Model อย่าง GPT-5, Claude, Gemini
+            สร้าง workflow อัตโนมัติ ลดงานซ้ำ 80%
+          </motion.p>
+
+          {/* CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.75 }}
+            className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-14"
+          >
+            <a href="#pricing" className="apple-btn apple-btn-blue">ดูแพ็คเกจ</a>
+            <a href="#solutions" className="apple-link">ดูว่า AI ทำอะไรได้บ้าง</a>
+          </motion.div>
+
+          {/* ─── Model pills — bold, clearly visible ─── */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9 }}
+            className="mb-6"
+          >
+            <p className="text-[11px] sm:text-[12px] text-[#86868b] uppercase tracking-[0.15em] font-medium mb-4">Frontier Models</p>
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
+              {models.map((m, i) => (
+                <motion.div
+                  key={m.name}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 1 + i * 0.08 }}
+                  whileHover={{ scale: 1.06, y: -2 }}
+                  className="px-4 py-2 sm:px-5 sm:py-2.5 rounded-full border cursor-default"
+                  style={{
+                    background: m.bg,
+                    borderColor: m.color + "20",
+                    color: m.color,
+                  }}
+                >
+                  <span className="flex items-center gap-2 text-[13px] sm:text-[14px] font-medium">
+                    <BrandIcon slug={m.slug} fallback={m.fallback} size={16} />
+                    {m.name}
+                  </span>
+                </motion.div>
+              ))}
             </div>
-          ))}
+          </motion.div>
+
+          {/* ─── Tool icons row ─── */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.4 }}
+            className="mb-12"
+          >
+            <p className="text-[11px] sm:text-[12px] text-[#86868b] uppercase tracking-[0.15em] font-medium mb-4">Automation Tools</p>
+            <div className="flex justify-center gap-3 sm:gap-4">
+              {tools.map((t, i) => (
+                <motion.div
+                  key={t.name}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.5 + i * 0.08 }}
+                  whileHover={{ scale: 1.1, y: -3 }}
+                  className="flex flex-col items-center gap-1 cursor-default"
+                >
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white shadow-md shadow-black/[0.04] border border-black/[0.04] flex items-center justify-center">
+                    <BrandIcon slug={t.slug} fallback={t.fallback} size={24} />
+                  </div>
+                  <span className="text-[10px] sm:text-[11px] text-[#86868b] font-medium">{t.name}</span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* ─── Stats ─── */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.8 }}
+            className="flex justify-center gap-10 sm:gap-16 md:gap-24"
+          >
+            {[
+              { value: "6+", label: "Frontier Models" },
+              { value: "55+", label: "Integrations" },
+              { value: "฿19,900", label: "เริ่มต้น" },
+            ].map((stat, i) => (
+              <motion.div
+                key={stat.label}
+                className="text-center"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.9 + i * 0.1 }}
+              >
+                <p className="text-[22px] sm:text-[28px] font-semibold text-[#1d1d1f] tracking-tight">{stat.value}</p>
+                <p className="text-[11px] sm:text-[12px] text-[#86868b] mt-1">{stat.label}</p>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>
