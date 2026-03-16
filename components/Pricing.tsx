@@ -1,7 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
 import { Check, X } from "lucide-react";
-import FloatingParticles from "./FloatingParticles";
 
 const plans = [
   {
@@ -9,7 +8,7 @@ const plans = [
     price: "19,900",
     monthly: "฿700 - 2,500",
     desc: "เริ่มต้น AI Automation สำหรับทีมเล็ก",
-    color: "#0071e3",
+    color: "#2997ff",
     tools: ["n8n", "Flowise"],
     includes: [
       "ติดตั้ง n8n + Flowise",
@@ -72,7 +71,6 @@ const plans = [
 export default function Pricing() {
   return (
     <section id="pricing" className="py-24 md:py-32 relative overflow-hidden">
-      <FloatingParticles count={20} speed={0.15} />
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -80,11 +78,11 @@ export default function Pricing() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <p className="text-[13px] font-semibold text-[#0071e3] uppercase tracking-widest mb-3">Pricing</p>
+          <p className="text-[13px] font-semibold text-[#2997ff] uppercase tracking-widest mb-3">Pricing</p>
           <h2 className="text-3xl md:text-5xl font-bold text-[#1d1d1f] tracking-tight mb-4">
             Setup fee ครั้งเดียว
           </h2>
-          <p className="text-lg text-[#6e6e73] max-w-xl mx-auto">
+          <p className="text-lg text-[#86868b] max-w-xl mx-auto">
             จ่ายค่าติดตั้งครั้งเดียว + ค่า hosting & API รายเดือนตามใช้จริง
           </p>
         </motion.div>
@@ -97,8 +95,8 @@ export default function Pricing() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className={`glass-card relative p-8 ${
-                plan.badge ? "!bg-white/65 md:-mt-4 md:mb-4 shimmer-bg" : ""
+              className={`apple-card relative p-8 ${
+                plan.badge ? "!bg-white/65 md:-mt-4 md:mb-4" : ""
               }`}
             >
               {plan.badge && (
@@ -112,16 +110,16 @@ export default function Pricing() {
               <div className="text-center mb-6 pb-6 border-b border-black/[0.04]">
                 <h3 className="text-lg font-semibold text-[#1d1d1f] mb-2">{plan.name}</h3>
                 <div className="flex items-baseline justify-center gap-1 mb-1">
-                  <span className="text-[11px] text-[#6e6e73]">฿</span>
+                  <span className="text-[11px] text-[#86868b]">฿</span>
                   <span className="text-4xl font-bold text-[#1d1d1f]">{plan.price}</span>
                 </div>
-                <p className="text-[11px] text-[#6e6e73]">Setup fee (ครั้งเดียว)</p>
-                <p className="text-[12px] text-[#6e6e73] mt-1">+ {plan.monthly}/เดือน</p>
+                <p className="text-[11px] text-[#86868b]">Setup fee (ครั้งเดียว)</p>
+                <p className="text-[12px] text-[#86868b] mt-1">+ {plan.monthly}/เดือน</p>
               </div>
 
               {/* Tools */}
               <div className="mb-5">
-                <p className="text-[11px] text-[#6e6e73] mb-2">เครื่องมือที่ติดตั้ง</p>
+                <p className="text-[11px] text-[#86868b] mb-2">เครื่องมือที่ติดตั้ง</p>
                 <div className="flex flex-wrap gap-1.5">
                   {plan.tools.map((t) => (
                     <span key={t} className="text-[11px] font-medium px-2.5 py-1 rounded-full bg-[#f5f5f7] text-[#1d1d1f]">{t}</span>
@@ -149,7 +147,7 @@ export default function Pricing() {
                 ))}
               </div>
 
-              <p className="text-[11px] text-[#6e6e73] mb-4">เหมาะกับทีม {plan.bestFor}</p>
+              <p className="text-[11px] text-[#86868b] mb-4">เหมาะกับทีม {plan.bestFor}</p>
 
               <a
                 href="#contact"
@@ -174,7 +172,7 @@ export default function Pricing() {
           className="mt-12 bg-white rounded-2xl p-6 md:p-8 border border-black/[0.04]"
         >
           <h3 className="text-[15px] font-semibold text-[#1d1d1f] mb-4">ค่าใช้จ่ายรายเดือน (ประมาณ)</h3>
-          <div className="grid sm:grid-cols-2 gap-6 text-[13px] text-[#6e6e73]">
+          <div className="grid sm:grid-cols-2 gap-6 text-[13px] text-[#86868b]">
             <div>
               <p className="font-medium text-[#1d1d1f] mb-2">ค่า Hosting</p>
               <p>VPS (2 vCPU, 4GB): ~฿500-900/เดือน</p>

@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import Models from "@/components/Models";
 import ScrollShowcase from "@/components/ScrollShowcase";
 import Tools from "@/components/Tools";
+import Integrations from "@/components/Integrations";
 import Solutions from "@/components/Solutions";
 import HomeAI from "@/components/HomeAI";
 import UseCases from "@/components/UseCases";
@@ -20,6 +21,7 @@ export default function Home() {
       <Models />
       <ScrollShowcase />
       <Tools />
+      <Integrations />
       <Solutions />
       <HomeAI />
       <UseCases />

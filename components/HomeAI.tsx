@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, MessageCircle, Calendar, Music, Lightbulb, ShoppingBag, CloudSun, Tv, Wifi } from "lucide-react";
 
 const features = [
-  { icon: <MessageCircle size={20} />, title: "สั่งผ่าน LINE / WhatsApp", desc: "พิมพ์หรือพูด สั่ง AI ทำทุกอย่าง — เปิดไฟ ดูปฏิทิน สั่งของ", color: "#007aff" },
+  { icon: <MessageCircle size={20} />, title: "สั่งผ่าน LINE / WhatsApp", desc: "พิมพ์หรือพูด สั่ง AI ทำทุกอย่าง — เปิดไฟ ดูปฏิทิน สั่งของ", color: "#2997ff" },
   { icon: <Calendar size={20} />, title: "จัดการปฏิทิน", desc: "\"นัดหมอพรุ่งนี้บ่ายโมง\" → AI สร้าง event + ตั้งแจ้งเตือนให้", color: "#5856d6" },
   { icon: <CloudSun size={20} />, title: "พยากรณ์อากาศ + แนะนำ", desc: "\"พรุ่งนี้ฝนตกไหม\" → AI ดูพยากรณ์ + แนะนำหยิบร่ม", color: "#5ac8fa" },
   { icon: <ShoppingBag size={20} />, title: "สั่งของ / ค้นข้อมูล", desc: "\"หาร้านซูชิดีๆ แถวสีลม\" → AI ค้น + สรุปรีวิว + จองโต๊ะ", color: "#ff9500" },
@@ -30,10 +30,10 @@ export default function HomeAI() {
           className="text-center mb-16"
         >
           <p className="text-[13px] font-semibold text-[#af52de] uppercase tracking-widest mb-3">Home AI</p>
-          <h2 className="text-3xl md:text-5xl font-bold text-[#1c1c1e] tracking-tight mb-4">
+          <h2 className="text-3xl md:text-5xl font-bold text-[#1d1d1f] tracking-tight mb-4">
             ผู้ช่วย AI ที่บ้าน
           </h2>
-          <p className="text-base text-[#6e6e73] max-w-xl mx-auto">
+          <p className="text-base text-[#86868b] max-w-xl mx-auto">
             เหมือนมี JARVIS ส่วนตัว — สั่งผ่าน LINE จัดการปฏิทิน สั่งของ ควบคุม smart home ได้หมด
           </p>
         </motion.div>
@@ -49,14 +49,14 @@ export default function HomeAI() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.05 }}
-                  className="glass-card relative p-4"
+                  className="apple-card relative p-4"
                 >
                   <div className="relative z-10">
-                    <div className="w-9 h-9 rounded-xl glass-pill flex items-center justify-center mb-2" style={{ color: f.color }}>
+                    <div className="w-9 h-9 rounded-xl bg-[#f5f5f7] rounded-full flex items-center justify-center mb-2" style={{ color: f.color }}>
                       {f.icon}
                     </div>
-                    <h3 className="text-[13px] font-semibold text-[#1c1c1e] mb-0.5">{f.title}</h3>
-                    <p className="text-[11px] text-[#8e8e93] leading-relaxed">{f.desc}</p>
+                    <h3 className="text-[13px] font-semibold text-[#1d1d1f] mb-0.5">{f.title}</h3>
+                    <p className="text-[11px] text-[#86868b] leading-relaxed">{f.desc}</p>
                   </div>
                 </motion.div>
               ))}
@@ -79,15 +79,15 @@ export default function HomeAI() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <div className="glass-card relative p-0 overflow-hidden">
+            <div className="apple-card relative p-0 overflow-hidden">
               {/* Chat header */}
-              <div className="liquid-glass-strong px-5 py-3 flex items-center gap-3">
+              <div className="nav-glass px-5 py-3 flex items-center gap-3">
                 <div className="flex gap-1.5">
                   <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
                   <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
                   <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
                 </div>
-                <span className="text-[12px] text-[#6e6e73] font-medium ml-2">Home AI Assistant</span>
+                <span className="text-[12px] text-[#86868b] font-medium ml-2">Home AI Assistant</span>
                 <span className="ml-auto relative w-2 h-2 rounded-full bg-[#34c759]">
                   <span className="absolute inset-0 rounded-full bg-[#34c759] animate-ping opacity-50" />
                 </span>
@@ -105,7 +105,7 @@ export default function HomeAI() {
                       transition={{ delay: demo.delay }}
                       className="flex justify-end"
                     >
-                      <div className="bg-[#007aff] text-white text-[13px] px-4 py-2.5 rounded-2xl rounded-br-md max-w-[80%]">
+                      <div className="bg-[#2997ff] text-white text-[13px] px-4 py-2.5 rounded-2xl rounded-br-md max-w-[80%]">
                         {demo.user}
                       </div>
                     </motion.div>
@@ -117,7 +117,7 @@ export default function HomeAI() {
                       transition={{ delay: demo.delay + 0.3 }}
                       className="flex justify-start"
                     >
-                      <div className="glass-card relative !rounded-2xl !rounded-bl-md p-4 max-w-[85%] text-[13px] text-[#1c1c1e] whitespace-pre-line leading-relaxed">
+                      <div className="apple-card relative !rounded-2xl !rounded-bl-md p-4 max-w-[85%] text-[13px] text-[#1d1d1f] whitespace-pre-line leading-relaxed">
                         {demo.ai}
                       </div>
                     </motion.div>

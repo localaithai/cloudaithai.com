@@ -1,7 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import FloatingParticles from "./FloatingParticles";
 
 const tools = [
   {
@@ -49,7 +48,6 @@ const tools = [
 export default function Tools() {
   return (
     <section id="tools" className="py-24 md:py-32 relative overflow-hidden">
-      <FloatingParticles count={25} speed={0.2} />
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -57,11 +55,11 @@ export default function Tools() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <p className="text-[13px] font-semibold text-[#0071e3] uppercase tracking-widest mb-3">Automation Tools</p>
+          <p className="text-[13px] font-semibold text-[#2997ff] uppercase tracking-widest mb-3">Automation Tools</p>
           <h2 className="text-3xl md:text-5xl font-bold text-[#1d1d1f] tracking-tight mb-4">
             เครื่องมือ 5 ตัวที่ทำทุกอย่าง
           </h2>
-          <p className="text-lg text-[#6e6e73] max-w-xl mx-auto">
+          <p className="text-lg text-[#86868b] max-w-xl mx-auto">
             Open-source ทั้งหมด ไม่มีค่า license — เราติดตั้ง ตั้งค่า สอนใช้ให้ครบ
           </p>
         </motion.div>
@@ -74,7 +72,7 @@ export default function Tools() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              className="group glass-card relative p-8 md:p-10"
+              className="group apple-card relative p-8 md:p-10"
             >
               <div className="flex flex-col md:flex-row md:items-center gap-6">
                 <div className="flex-1">
@@ -82,7 +80,7 @@ export default function Tools() {
                     <span className="text-3xl">{tool.icon}</span>
                     <div>
                       <h3 className="text-xl font-bold text-[#1d1d1f]">{tool.name}</h3>
-                      <p className="text-[13px] text-[#6e6e73]">{tool.tagline}</p>
+                      <p className="text-[13px] text-[#86868b]">{tool.tagline}</p>
                     </div>
                   </div>
                   <p className="text-[15px] text-[#1d1d1f]/70 leading-relaxed mb-4">{tool.description}</p>
