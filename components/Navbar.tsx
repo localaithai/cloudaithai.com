@@ -26,7 +26,7 @@ export default function Navbar() {
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? "glass border-b border-black/[0.04] shadow-sm shadow-black/[0.02]" : "bg-transparent"
+        scrolled ? "liquid-glass-strong" : "bg-transparent"
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
@@ -46,7 +46,7 @@ export default function Navbar() {
               {l.label}
             </a>
           ))}
-          <a href="#contact" className="text-[13px] font-medium text-white bg-[#0071e3] hover:bg-[#0077ed] px-5 py-2 rounded-full transition-colors">
+          <a href="#contact" className="text-[13px] font-medium text-white bg-[#007aff] hover:bg-[#0077ed] px-5 py-2 rounded-full transition-colors">
             เริ่มต้นใช้งาน
           </a>
         </div>
@@ -73,7 +73,7 @@ export default function Navbar() {
                   {l.label}
                 </a>
               ))}
-              <a href="#contact" onClick={() => setOpen(false)} className="block mt-3 text-center text-[15px] font-medium text-white bg-[#0071e3] py-3 rounded-full">
+              <a href="#contact" onClick={() => setOpen(false)} className="block mt-3 text-center text-[15px] font-medium text-white bg-[#007aff] py-3 rounded-full">
                 เริ่มต้นใช้งาน
               </a>
             </div>

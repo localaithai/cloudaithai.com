@@ -12,7 +12,7 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="bg-[#fafafa]">
+    <main className="bg-[#f2f2f7] mesh-gradient min-h-screen">
       <Navbar />
       <Hero />
       <Models />

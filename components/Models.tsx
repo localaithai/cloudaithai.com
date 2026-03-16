@@ -153,8 +153,8 @@ function ModelCard({ model, index }: { model: Model; index: number }) {
       transition={{ delay: index * 0.06, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
       <div
-        className={`group bg-white rounded-3xl border transition-all duration-500 overflow-hidden ${
-          expanded ? "shadow-xl shadow-black/[0.06] border-black/[0.08]" : "border-black/[0.04] hover:shadow-lg hover:shadow-black/[0.04] hover:-translate-y-1"
+        className={`group glass-card relative overflow-hidden ${
+          expanded ? "!bg-white/70" : ""
         }`}
       >
         <button onClick={() => setExpanded(!expanded)} className="w-full text-left p-6">
@@ -267,7 +267,7 @@ function CostComparison() {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="mt-16 bg-white rounded-3xl border border-black/[0.04] overflow-hidden"
+      className="mt-16 glass-card relative overflow-hidden"
     >
       <div className="p-6 md:p-8">
         <h3 className="text-xl font-semibold text-[#1d1d1f] mb-2">เปรียบเทียบค่าใช้จ่าย AI ทุก Model</h3>

@@ -185,8 +185,8 @@ function UseCaseCard({ useCase, index }: { useCase: UseCase; index: number }) {
       viewport={{ once: true, margin: "-30px" }}
       transition={{ delay: index * 0.05, duration: 0.5 }}
     >
-      <div className={`bg-white rounded-3xl border transition-all duration-500 overflow-hidden ${
-        expanded ? "shadow-xl shadow-black/[0.06] border-black/[0.08]" : "border-black/[0.04] hover:shadow-lg hover:shadow-black/[0.04]"
+      <div className={`glass-card relative overflow-hidden ${
+        expanded ? "!bg-white/70" : ""
       }`}>
         <button onClick={() => setExpanded(!expanded)} className="w-full text-left p-6">
           <div className="flex items-start gap-4">

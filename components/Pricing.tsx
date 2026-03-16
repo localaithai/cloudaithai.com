@@ -97,8 +97,8 @@ export default function Pricing() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className={`relative bg-white rounded-3xl p-8 border card-glow ${
-                plan.badge ? "border-[#5856d6]/20 md:-mt-4 md:mb-4 shadow-lg shadow-[#5856d6]/5 shimmer" : "border-black/[0.06]"
+              className={`glass-card relative p-8 ${
+                plan.badge ? "!bg-white/65 md:-mt-4 md:mb-4 shimmer-bg" : ""
               }`}
             >
               {plan.badge && (
