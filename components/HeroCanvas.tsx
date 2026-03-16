@@ -62,10 +62,10 @@ export default function HeroCanvas() {
         width={1920}
         height={1080}
         className="w-full h-full object-cover"
-        style={{ opacity: loaded ? 0.5 : 0, transition: "opacity 1s ease" }}
+        style={{ opacity: loaded ? 0.8 : 0, transition: "opacity 1s ease" }}
       />
       {/* Gradient overlay for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#fbfbfd]/60 via-transparent to-[#fbfbfd]/80" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#fbfbfd]/40 via-[#fbfbfd]/20 to-[#fbfbfd]/70" />
     </div>
   );
 }
