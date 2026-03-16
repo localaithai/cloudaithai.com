@@ -667,6 +667,39 @@ export default function RestaurantSection() {
         </div>
       </section>
 
+      {/* ═══ CLOUD AI RISKS ═══ */}
+      <section className="py-16 px-6">
+        <div className="max-w-3xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <div className="rounded-2xl border border-[#ff9500]/20 bg-[#ff9500]/[0.03] p-6 sm:p-8">
+              <div className="flex items-center gap-2.5 mb-4">
+                <AlertTriangle size={18} className="text-[#ff9500]" />
+                <h3 className="text-[16px] font-semibold text-[#1d1d1f]">ข้อควรรู้เกี่ยวกับ Cloud AI</h3>
+              </div>
+              <div className="space-y-3">
+                {[
+                  { title: "ถ้าเน็ตล่ม ร้านรับออเดอร์ไม่ได้", desc: "ระบบ KDS, LINE Bot, และ stock monitoring พึ่งพา Cloud 100% — ถ้าเน็ตมีปัญหาช่วง peak hour ออเดอร์จะหลุดทั้งหมด" },
+                  { title: "AI อาจรับออเดอร์ผิด", desc: "AI อาจเข้าใจคำสั่งลูกค้าผิด โดยเฉพาะเมนูที่คล้ายกัน หรือ customization ซับซ้อน — ควรมีคน double-check" },
+                  { title: "ข้อมูลสูตรอาหารถูกส่งไป Cloud", desc: "ข้อมูลเมนู ราคาต้นทุน สูตรอาหาร และ supplier ถูกส่งผ่าน API — ข้อมูลเหล่านี้เป็นความลับทางธุรกิจ" },
+                  { title: "ค่า API ขึ้นตามจำนวนออเดอร์", desc: "ร้านขายดี = ออเดอร์เยอะ = ค่า AI สูงขึ้น อาจกระทบกำไรถ้าไม่ตั้งเพดานไว้" },
+                ].map((risk) => (
+                  <div key={risk.title} className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#ff9500] mt-2 shrink-0" />
+                    <div>
+                      <p className="text-[13px] font-medium text-[#1d1d1f]">{risk.title}</p>
+                      <p className="text-[12px] text-[#6e6e73] leading-relaxed">{risk.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p className="text-[11px] text-[#8e8e93] mt-4 pt-3 border-t border-[#ff9500]/10">
+                เราช่วยประเมินความเสี่ยงและออกแบบ guardrails ให้ — ปรึกษาฟรีก่อนตัดสินใจ
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ═══ 7. PRICING — Single package + CTA ═══ */}
       <section className="py-20 px-6">
         <div className="max-w-2xl mx-auto">

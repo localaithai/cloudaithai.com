@@ -246,6 +246,39 @@ export default function RealEstateSection() {
         </div>
       </section>
 
+      {/* ═══ CLOUD AI RISKS ═══ */}
+      <section className="py-16 px-6">
+        <div className="max-w-3xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <div className="rounded-2xl border border-[#ff9500]/20 bg-[#ff9500]/[0.03] p-6 sm:p-8">
+              <div className="flex items-center gap-2.5 mb-4">
+                <AlertTriangle size={18} className="text-[#ff9500]" />
+                <h3 className="text-[16px] font-semibold text-[#1d1d1f]">ข้อควรรู้เกี่ยวกับ Cloud AI</h3>
+              </div>
+              <div className="space-y-3">
+                {[
+                  { title: "ข้อมูลลูกค้าและทรัพย์ถูกส่งไป Cloud", desc: "ข้อมูล lead, ประวัติการดูห้อง, งบประมาณ และข้อมูลทรัพย์ถูกส่งผ่าน API ไปยัง server ต่างประเทศ — คู่แข่งอาจใช้ provider เดียวกัน" },
+                  { title: "AI อาจให้ข้อมูลราคาผิด", desc: "การวิเคราะห์ราคาตลาดของ AI อาจไม่แม่นยำ — ไม่ควรใช้เป็นฐานในการตั้งราคาหรือเจรจาโดยไม่ตรวจสอบ" },
+                  { title: "ค่า API ขึ้นอยู่กับปริมาณ lead", desc: "ยิ่งมี inquiry เยอะ ค่า API ยิ่งสูง — ช่วง launch โครงการใหม่อาจมีค่าใช้จ่ายพุ่งสูง" },
+                  { title: "พึ่งพา Internet 100%", desc: "ถ้าเน็ตล่ม AI จะหยุดตอบ LINE, หยุดวิเคราะห์ราคา, หยุดนัดหมาย — ต้องมี fallback plan" },
+                ].map((risk) => (
+                  <div key={risk.title} className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#ff9500] mt-2 shrink-0" />
+                    <div>
+                      <p className="text-[13px] font-medium text-[#1d1d1f]">{risk.title}</p>
+                      <p className="text-[12px] text-[#6e6e73] leading-relaxed">{risk.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p className="text-[11px] text-[#8e8e93] mt-4 pt-3 border-t border-[#ff9500]/10">
+                เราช่วยประเมินความเสี่ยงและออกแบบ guardrails ให้ — ปรึกษาฟรีก่อนตัดสินใจ
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ═══ PRICING — single prominent plan ═══ */}
       <section className="py-20 px-6 bg-[#f5f5f7]">
         <div className="max-w-4xl mx-auto text-center">
