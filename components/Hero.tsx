@@ -95,14 +95,19 @@ export default function Hero() {
             สร้าง workflow อัตโนมัติ ลดงานซ้ำ 80%
           </motion.p>
 
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.68 }}
-            className="text-[13px] sm:text-[15px] text-[#86868b] max-w-[480px] mx-auto mb-8 tracking-wide"
+            className="max-w-[560px] mx-auto mb-10 py-5 border-t border-b border-black/[0.06]"
           >
-            ทุกโปรเจกต์ออกแบบเฉพาะสำหรับธุรกิจคุณ ไม่มี solution สำเร็จรูป
-          </motion.p>
+            <p className="text-[15px] sm:text-[17px] text-[#1d1d1f] font-medium italic leading-[1.6] text-center">
+              "ไม่มี solution สำเร็จรูปที่เหมาะกับทุกคน
+              <br className="hidden sm:block" />
+              มีแต่ระบบที่สร้างขึ้นให้พอดีกับธุรกิจคุณ"
+            </p>
+            <p className="text-[12px] text-[#6e6e73] text-center mt-2 tracking-wider uppercase">Our Philosophy</p>
+          </motion.div>
 
           {/* CTAs */}
           <motion.div

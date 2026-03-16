@@ -727,9 +727,11 @@ export default function PricingPage() {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center text-[13px] sm:text-[15px] text-[#86868b] max-w-2xl mx-auto -mt-8 mb-12"
+            className="text-center max-w-lg mx-auto -mt-6 mb-14"
           >
-            แพ็คเกจคือ tier ราคา ไม่ใช่ของสำเร็จรูป — ทุกโปรเจกต์ออกแบบและสร้างเฉพาะสำหรับธุรกิจคุณ
+            <p className="text-[15px] sm:text-[17px] text-[#1d1d1f] font-medium italic leading-[1.6]">
+              "แพ็คเกจคือจุดเริ่มต้น ไม่ใช่จุดสิ้นสุด — สิ่งที่คุณได้รับคือระบบที่พอดีกับธุรกิจคุณ ไม่ใช่ของสำเร็จรูปที่ใส่ทุกคน"
+            </p>
           </motion.p>
 
           <div className="grid md:grid-cols-3 gap-6 items-start">
