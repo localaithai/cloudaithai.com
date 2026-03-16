@@ -551,7 +551,7 @@ export default function CreatorSection() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="bg-gradient-to-r from-[#af52de] via-[#5856d6] to-[#2997ff]"
+          className="bg-gradient-to-r from-[#7b1fa2] via-[#3f1f9e] to-[#0d47a1]"
         >
           <div className="max-w-5xl mx-auto grid grid-cols-2 sm:grid-cols-4">
             {[
@@ -568,9 +568,9 @@ export default function CreatorSection() {
                 transition={{ delay: i * 0.1 }}
                 className="flex flex-col items-center py-8 px-4 text-center border-r border-white/10 last:border-r-0"
               >
-                <div className="text-white/60 mb-2">{stat.icon}</div>
+                <div className="text-white/80 mb-2">{stat.icon}</div>
                 <p className="text-[28px] sm:text-[32px] font-bold text-white tracking-tight">{stat.value}</p>
-                <p className="text-[11px] text-white/70 font-medium mt-0.5">{stat.unit}</p>
+                <p className="text-[12px] text-white font-medium mt-0.5">{stat.unit}</p>
               </motion.div>
             ))}
           </div>
@@ -685,17 +685,17 @@ export default function CreatorSection() {
             className="apple-card p-0 overflow-hidden ring-2 ring-[#af52de]/20 shadow-xl shadow-[#af52de]/[0.06]"
           >
             {/* Header banner */}
-            <div className="bg-gradient-to-r from-[#af52de] to-[#5856d6] px-6 py-5 text-center">
+            <div className="bg-gradient-to-br from-[#7b1fa2] to-[#311b92] px-6 py-8 text-center text-white">
               <div className="inline-flex items-center gap-1.5 bg-white/20 rounded-full px-3 py-1 mb-3">
                 <Award size={12} className="text-white" />
-                <span className="text-[11px] font-semibold text-white">แพ็คเกจยอดนิยม</span>
+                <span className="text-[11px] font-semibold">แพ็คเกจยอดนิยม</span>
               </div>
-              <h3 className="text-[20px] font-semibold text-white">Creator Studio Pro</h3>
+              <h3 className="text-[24px] font-bold">Creator Studio Pro</h3>
               <div className="flex items-baseline justify-center gap-1 mt-2">
-                <span className="text-[40px] font-bold text-white tracking-tight">฿14,900</span>
-                <span className="text-[14px] text-white/70">setup fee</span>
+                <span className="text-[48px] font-bold tracking-tight">฿14,900</span>
+                <span className="text-[14px]">setup fee</span>
               </div>
-              <p className="text-[12px] text-white/60 mt-1">+ ค่า API ประมาณ ฿800–2,500/เดือน</p>
+              <p className="text-[14px] mt-2 font-medium">+ ค่า API ประมาณ ฿800–2,500/เดือน</p>
             </div>
 
             {/* Features */}

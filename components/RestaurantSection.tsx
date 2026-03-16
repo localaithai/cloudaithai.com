@@ -145,8 +145,8 @@ function KDSCard({ order, isAnimating }: { order: KDSOrder; isAnimating?: boolea
       {/* card footer */}
       <div className="flex items-center justify-between px-3 py-2 border-t border-white/[0.06]">
         <div className="flex items-center gap-1">
-          <Clock size={10} className="text-white/40" />
-          <span className="text-[10px] text-white/40 font-mono">{order.time}</span>
+          <Clock size={10} className="text-white/60" />
+          <span className="text-[10px] text-white/60 font-mono">{order.time}</span>
         </div>
         <div
           className="w-2 h-2 rounded-full"
@@ -239,9 +239,9 @@ export default function RestaurantSection() {
               <h2 className="text-[18px] sm:text-[22px] font-semibold text-white/90 tracking-tight">
                 Kitchen Display System
               </h2>
-              <span className="text-[10px] text-white/30 font-mono hidden sm:inline">LIVE</span>
+              <span className="text-[10px] text-white/50 font-mono hidden sm:inline">LIVE</span>
             </div>
-            <div className="flex items-center gap-4 text-[11px] text-white/40">
+            <div className="flex items-center gap-4 text-[11px] text-white/60">
               <span className="hidden sm:inline">วันนี้ 16 มี.ค. 2569</span>
               <span className="font-mono">12:34 PM</span>
             </div>
@@ -265,7 +265,7 @@ export default function RestaurantSection() {
                   ))}
                 </AnimatePresence>
                 {waiting.length === 0 && (
-                  <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-[12px] text-white/20 text-center py-8">
+                  <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-[12px] text-white/40 text-center py-8">
                     ว่างอยู่
                   </motion.p>
                 )}
@@ -288,7 +288,7 @@ export default function RestaurantSection() {
                   ))}
                 </AnimatePresence>
                 {cooking.length === 0 && (
-                  <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-[12px] text-white/20 text-center py-8">
+                  <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-[12px] text-white/40 text-center py-8">
                     ว่างอยู่
                   </motion.p>
                 )}
@@ -315,7 +315,7 @@ export default function RestaurantSection() {
           </div>
 
           {/* KDS Footer stats */}
-          <div className="flex items-center justify-center gap-6 mt-6 text-[11px] text-white/30">
+          <div className="flex items-center justify-center gap-6 mt-6 text-[11px] text-white/50">
             <span className="flex items-center gap-1.5"><Clock size={11} /> Avg. เวลา: 12 นาที</span>
             <span className="flex items-center gap-1.5"><TrendingUp size={11} /> ออเดอร์วันนี้: 67</span>
             <span className="flex items-center gap-1.5"><Users size={11} /> พนักงานครัว: 3</span>
