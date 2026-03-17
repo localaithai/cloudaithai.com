@@ -19,9 +19,9 @@ export default function ScrollVideo() {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  const [useDesktopFrames, setUseDesktopFrames] = useState(!isMobile);
+  const [useDesktopFrames, setUseDesktopFrames] = useState(false);
 
-  // Probe desktop frames — fallback to mobile if missing
+  // Probe desktop frames — only use them on non-mobile
   useEffect(() => {
     if (isMobile) { setUseDesktopFrames(false); return; }
     const probe = new Image();
@@ -107,8 +107,12 @@ export default function ScrollVideo() {
           width={WIDTH}
           height={HEIGHT}
           style={{
-            width: isMobile ? "100%" : `min(100vw, ${(100 * WIDTH) / HEIGHT}vh)`,
-            height: isMobile ? "100%" : `min(100vh, ${(100 * HEIGHT) / WIDTH}vw)`,
+            width: isMobile
+              ? `min(100vw, ${(100 * WIDTH) / HEIGHT}vh)`
+              : `min(100vw, ${(100 * WIDTH) / HEIGHT}vh)`,
+            height: isMobile
+              ? `min(100vh, ${(100 * HEIGHT) / WIDTH}vw)`
+              : `min(100vh, ${(100 * HEIGHT) / WIDTH}vw)`,
             objectFit: "contain",
             opacity: loaded ? 1 : 0,
             transition: "opacity 0.5s",
