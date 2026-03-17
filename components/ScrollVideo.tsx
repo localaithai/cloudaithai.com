@@ -121,9 +121,9 @@ export default function ScrollVideo() {
 
         {/* Loading */}
         {!loaded && (
-          <div className="absolute inset-0 flex items-center justify-center bg-[#fbfbfd] z-30">
-            <div className="text-center">
-              <div className="w-8 h-8 border-2 border-[#2997ff] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+          <div className="absolute inset-0 flex items-center justify-center bg-[#fbfbfd] z-30 px-6">
+            <div className="text-center flex flex-col items-center">
+              <div className="w-8 h-8 border-2 border-[#2997ff] border-t-transparent rounded-full animate-spin mb-3" />
               <p className="text-[14px] text-[#6e6e73]">กำลังโหลด...</p>
             </div>
           </div>

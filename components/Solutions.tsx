@@ -90,7 +90,7 @@ export default function Solutions() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 px-0">
           {solutions.map((sol, i) => (
             <motion.a
               key={sol.title}
@@ -99,7 +99,7 @@ export default function Solutions() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-30px" }}
               transition={{ delay: i * 0.06 }}
-              className="apple-card relative p-4 sm:p-6 group cursor-pointer"
+              className="apple-card relative p-4 sm:p-6 group cursor-pointer hover:shadow-lg hover:shadow-black/[0.06] transition-shadow duration-300"
             >
               {/* Tinted gradient overlay */}
               <div className={`absolute inset-0 bg-gradient-to-br ${sol.gradient} rounded-[24px] opacity-50 group-hover:opacity-100 transition-opacity duration-500`} />
@@ -116,7 +116,7 @@ export default function Solutions() {
 
                 <h3 className="text-[17px] font-semibold text-[#1d1d1f] mb-0.5">{sol.title}</h3>
                 <p className="text-[12px] text-[#6e6e73] mb-3">{sol.subtitle}</p>
-                <p className="text-[13px] text-[#6e6e73] mb-4 leading-relaxed">{sol.desc}</p>
+                <p className="text-[13px] text-[#6e6e73] mb-4 leading-relaxed line-clamp-3">{sol.desc}</p>
 
                 {/* Example pills */}
                 <div className="flex flex-wrap gap-1.5 mb-4">

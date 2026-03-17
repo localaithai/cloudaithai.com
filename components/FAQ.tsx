@@ -38,10 +38,10 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="border-b border-black/[0.04]">
-      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between py-5 text-left">
-        <span className="text-[15px] font-medium text-[#1d1d1f] pr-4">{q}</span>
-        <motion.div animate={{ rotate: open ? 45 : 0 }} transition={{ duration: 0.2 }}>
-          <Plus size={18} className="text-[#6e6e73] shrink-0" />
+      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between py-5 sm:py-5 text-left group">
+        <span className="text-[15px] sm:text-[16px] font-medium text-[#1d1d1f] pr-4">{q}</span>
+        <motion.div animate={{ rotate: open ? 45 : 0 }} transition={{ duration: 0.2 }} className="w-10 h-10 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shrink-0 group-active:bg-black/[0.04] transition-colors">
+          <Plus size={18} className="text-[#6e6e73]" />
         </motion.div>
       </button>
       <AnimatePresence>
@@ -76,7 +76,7 @@ export default function FAQ() {
           </h2>
         </motion.div>
 
-        <div>
+        <div className="border-t border-black/[0.04]">
           {faqs.map((faq) => (
             <FAQItem key={faq.q} q={faq.q} a={faq.a} />
           ))}

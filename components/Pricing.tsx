@@ -114,7 +114,7 @@ export default function Pricing() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
               className={`apple-card relative p-8 !overflow-visible ${
-                plan.badge ? "!bg-white/65 md:-mt-4 md:mb-4" : ""
+                plan.badge ? "!bg-white/65 md:-mt-4 md:mb-4 ring-2 ring-[#5856d6]/20 shadow-xl shadow-[#5856d6]/10" : ""
               }`}
             >
               {plan.badge && (

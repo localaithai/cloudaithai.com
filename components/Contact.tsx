@@ -46,14 +46,14 @@ export default function Contact() {
                 className="space-y-4"
               >
                 <div>
-                  <input name="name" type="text" required placeholder="ชื่อ-นามสกุล" className="w-full px-4 py-3 text-[14px] text-[#1d1d1f] placeholder:text-[#c7c7cc] bg-white rounded-[14px] border border-[#d2d2d7]/40 focus:border-[#2997ff] focus:ring-2 focus:ring-[#2997ff]/10 focus:outline-none" />
+                  <input name="name" type="text" required placeholder="ชื่อ-นามสกุล" className="w-full px-4 py-3 text-[14px] text-[#1d1d1f] placeholder:text-[#c7c7cc] bg-white rounded-[14px] border border-[#d2d2d7]/40 focus:border-[#2997ff] focus:ring-2 focus:ring-[#2997ff]/20 focus:outline-none" />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <input name="email" type="email" required placeholder="อีเมล" className="w-full px-4 py-3 text-[14px] text-[#1d1d1f] placeholder:text-[#c7c7cc] bg-white rounded-[14px] border border-[#d2d2d7]/40 focus:border-[#2997ff] focus:ring-2 focus:ring-[#2997ff]/10 focus:outline-none" />
-                  <input name="phone" type="tel" placeholder="เบอร์โทร" className="w-full px-4 py-3 text-[14px] text-[#1d1d1f] placeholder:text-[#c7c7cc] bg-white rounded-[14px] border border-[#d2d2d7]/40 focus:border-[#2997ff] focus:ring-2 focus:ring-[#2997ff]/10 focus:outline-none" />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <input name="email" type="email" required placeholder="อีเมล" className="w-full px-4 py-3 text-[14px] text-[#1d1d1f] placeholder:text-[#c7c7cc] bg-white rounded-[14px] border border-[#d2d2d7]/40 focus:border-[#2997ff] focus:ring-2 focus:ring-[#2997ff]/20 focus:outline-none" />
+                  <input name="phone" type="tel" placeholder="เบอร์โทร" className="w-full px-4 py-3 text-[14px] text-[#1d1d1f] placeholder:text-[#c7c7cc] bg-white rounded-[14px] border border-[#d2d2d7]/40 focus:border-[#2997ff] focus:ring-2 focus:ring-[#2997ff]/20 focus:outline-none" />
                 </div>
                 <div>
-                  <select name="package" className="w-full px-4 py-3 rounded-xl bg-white border border-black/[0.08] text-[14px] text-[#1d1d1f] focus:outline-none focus:border-[#2997ff] focus:ring-2 focus:ring-[#2997ff]/10 transition-all">
+                  <select name="package" className="w-full px-4 py-3 rounded-[14px] bg-white border border-[#d2d2d7]/40 text-[14px] text-[#1d1d1f] focus:outline-none focus:border-[#2997ff] focus:ring-2 focus:ring-[#2997ff]/20 transition-all">
                     <option value="">เลือกแพ็คเกจที่สนใจ</option>
                     <option value="starter">Starter ฿19,900</option>
                     <option value="professional">Professional ฿39,900</option>

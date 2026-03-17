@@ -129,7 +129,7 @@ export default function Hero() {
             className="mb-6"
           >
             <p className="text-[11px] sm:text-[12px] text-[#6e6e73] uppercase tracking-[0.15em] font-medium mb-4">Frontier Models</p>
-            <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 max-w-[480px] sm:max-w-none mx-auto">
               {models.map((m, i) => (
                 <motion.div
                   key={m.name}
@@ -137,7 +137,7 @@ export default function Hero() {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 1 + i * 0.08 }}
                   whileHover={{ scale: 1.06, y: -2 }}
-                  className="px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-full border cursor-default"
+                  className="px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-full border cursor-default shrink-0"
                   style={{
                     background: m.bg,
                     borderColor: m.color + "20",
@@ -145,7 +145,7 @@ export default function Hero() {
                   }}
                 >
                   <span className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[14px] font-medium">
-                    <BrandIcon slug={m.slug} fallback={m.fallback} size={14} />
+                    <BrandIcon slug={m.slug} fallback={m.fallback} size={16} />
                     {m.name}
                   </span>
                 </motion.div>
@@ -172,7 +172,7 @@ export default function Hero() {
                   className="flex flex-col items-center gap-1 cursor-default"
                 >
                   <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white shadow-md shadow-black/[0.04] border border-black/[0.04] flex items-center justify-center">
-                    <BrandIcon slug={t.slug} fallback={t.fallback} size={24} />
+                    <BrandIcon slug={t.slug} fallback={t.fallback} size={26} />
                   </div>
                   <span className="text-[10px] sm:text-[11px] text-[#6e6e73] font-medium">{t.name}</span>
                 </motion.div>
@@ -191,10 +191,10 @@ export default function Hero() {
               { value: "6+", label: "Frontier Models" },
               { value: "55+", label: "Integrations" },
               { value: "฿19,900", label: "เริ่มต้น" },
-            ].map((stat, i) => (
+            ].map((stat, i, arr) => (
               <motion.div
                 key={stat.label}
-                className="text-center"
+                className={`text-center ${i < arr.length - 1 ? "sm:border-r sm:border-black/[0.08] sm:pr-12 md:pr-20" : ""}`}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.9 + i * 0.1 }}

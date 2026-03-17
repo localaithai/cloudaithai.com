@@ -760,7 +760,7 @@ export default function PricingPage() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
                 className={`apple-card relative p-8 !overflow-visible ${
-                  plan.badge ? "!bg-white/65 md:-mt-4 md:mb-4" : ""
+                  plan.badge ? "!bg-white/65 md:-mt-4 md:mb-4 ring-2 ring-[#5856d6]/20 shadow-xl shadow-[#5856d6]/10" : ""
                 }`}
               >
                 {plan.badge && (
@@ -867,14 +867,14 @@ export default function PricingPage() {
           />
 
           {/* Tabs */}
-          <div className="flex flex-wrap justify-center gap-2 mb-12">
+          <div className="flex overflow-x-auto sm:flex-wrap sm:justify-center gap-2 mb-12 pb-2 sm:pb-0 -mx-6 px-6 sm:mx-0 sm:px-0 scrollbar-hide">
             {industryTabs.map((tab) => (
               <button
                 key={tab.key}
                 onClick={() => setActiveIndustry(tab.key)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-[13px] font-medium transition-all ${
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-[13px] font-medium transition-all whitespace-nowrap shrink-0 ${
                   activeIndustry === tab.key
-                    ? "bg-[#1d1d1f] text-white"
+                    ? "bg-[#1d1d1f] text-white shadow-md shadow-black/[0.15]"
                     : "bg-[#f5f5f7] text-[#6e6e73] hover:bg-[#e8e8ed]"
                 }`}
               >
@@ -1281,7 +1281,7 @@ export default function PricingPage() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
                 className={`apple-card relative p-8 !overflow-visible ${
-                  plan.badge ? "!bg-white/65 md:-mt-4 md:mb-4" : ""
+                  plan.badge ? "!bg-white/65 md:-mt-4 md:mb-4 ring-2 ring-[#5856d6]/20 shadow-xl shadow-[#5856d6]/10" : ""
                 }`}
               >
                 {plan.badge && (

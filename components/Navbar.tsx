@@ -72,8 +72,8 @@ function DesktopDropdown({ group }: { group: NavGroup }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 6, scale: 0.97 }}
             transition={{ duration: 0.15 }}
-            className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-60 rounded-2xl overflow-hidden p-1"
-            style={{ background: "rgba(251,251,253,0.96)", backdropFilter: "blur(60px) saturate(180%)", WebkitBackdropFilter: "blur(60px) saturate(180%)", boxShadow: "0 12px 40px rgba(0,0,0,0.1), 0 0 0 0.5px rgba(0,0,0,0.06), inset 0 0.5px 0 rgba(255,255,255,0.7)" }}
+            className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-60 rounded-2xl overflow-hidden p-1 shadow-lg"
+            style={{ background: "rgba(251,251,253,0.96)", backdropFilter: "blur(60px) saturate(180%)", WebkitBackdropFilter: "blur(60px) saturate(180%)", boxShadow: "0 16px 48px rgba(0,0,0,0.14), 0 0 0 0.5px rgba(0,0,0,0.08), inset 0 0.5px 0 rgba(255,255,255,0.7)" }}
           >
             {group.children.map((child) => (
               <a
@@ -183,15 +183,17 @@ export default function Navbar() {
             className="lg:hidden overflow-hidden"
           >
             <div className="px-6 pb-8 pt-2 max-h-[calc(100dvh-56px)] overflow-y-auto overscroll-contain" style={{ background: "rgba(251,251,253,0.98)", backdropFilter: "blur(40px) saturate(180%)", WebkitBackdropFilter: "blur(40px) saturate(180%)" }}>
-              {navItems.map((item) =>
-                isGroup(item) ? (
-                  <MobileGroup key={item.label} group={item} onNav={() => setOpen(false)} />
-                ) : (
-                  <a key={item.href} href={item.href} onClick={() => setOpen(false)} className="block py-3 text-[15px] text-[#1c1c1e] font-medium">
-                    {item.label}
-                  </a>
-                )
-              )}
+              {navItems.map((item, i) => (
+                <div key={isGroup(item) ? item.label : item.href} className={i > 0 ? "border-t border-black/[0.06]" : ""}>
+                  {isGroup(item) ? (
+                    <MobileGroup group={item} onNav={() => setOpen(false)} />
+                  ) : (
+                    <a href={item.href} onClick={() => setOpen(false)} className="block py-3 text-[15px] text-[#1c1c1e] font-medium">
+                      {item.label}
+                    </a>
+                  )}
+                </div>
+              ))}
               <a href="/#contact" onClick={() => setOpen(false)} className="block mt-3 text-center text-[15px] font-medium text-white bg-[#007aff] py-3 rounded-full">
                 เริ่มต้นใช้งาน
               </a>

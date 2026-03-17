@@ -54,7 +54,7 @@ export default function Models() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.04 }}
             >
-              <div className="apple-card">
+              <div className={`apple-card transition-all duration-200 ${expanded === i ? "ring-1 ring-[#d2d2d7]/60 shadow-lg shadow-black/[0.04]" : ""}`}>
                 <button
                   onClick={() => setExpanded(expanded === i ? null : i)}
                   className="w-full text-left px-4 py-3 sm:px-6 sm:py-5 flex items-center gap-3 sm:gap-5"
@@ -94,7 +94,7 @@ export default function Models() {
                       className="overflow-hidden"
                     >
                       <div className="px-4 pb-4 pt-0 sm:px-6 sm:pb-5">
-                        <div className="border-t border-[#d2d2d7]/30 pt-4 grid grid-cols-2 sm:grid-cols-5 gap-4 text-center">
+                        <div className="border-t border-[#d2d2d7]/30 pt-4 grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4 text-center overflow-hidden">
                           {[
                             { label: "Provider", value: m.provider },
                             { label: "Input/1M", value: m.input },
@@ -104,7 +104,7 @@ export default function Models() {
                           ].map((stat) => (
                             <div key={stat.label}>
                               <p className="text-[11px] text-[#6e6e73] mb-0.5">{stat.label}</p>
-                              <p className="text-[14px] font-medium text-[#1d1d1f]">{stat.value}</p>
+                              <p className="text-[13px] sm:text-[14px] font-medium text-[#1d1d1f] truncate">{stat.value}</p>
                             </div>
                           ))}
                         </div>

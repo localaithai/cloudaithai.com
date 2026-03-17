@@ -8,33 +8,33 @@ export default function Footer() {
           {/* Solutions */}
           <div>
             <p className="text-[12px] font-semibold text-[#1d1d1f] uppercase tracking-wider mb-3">Solutions</p>
-            <div className="space-y-2 text-[13px] text-[#6e6e73]">
-              <a href="/solutions/ecommerce" className="block hover:text-[#1d1d1f] transition-colors">ร้านค้าออนไลน์</a>
-              <a href="/solutions/creator" className="block hover:text-[#1d1d1f] transition-colors">Content Creator</a>
-              <a href="/solutions/legal" className="block hover:text-[#1d1d1f] transition-colors">สำนักงานกฎหมาย</a>
-              <a href="/solutions/healthcare" className="block hover:text-[#1d1d1f] transition-colors">คลินิก & โรงพยาบาล</a>
-              <a href="/solutions/realestate" className="block hover:text-[#1d1d1f] transition-colors">อสังหาริมทรัพย์</a>
-              <a href="/solutions/restaurant" className="block hover:text-[#1d1d1f] transition-colors">ร้านอาหาร & F&B</a>
+            <div className="space-y-0.5 text-[13px] text-[#6e6e73]">
+              <a href="/solutions/ecommerce" className="block py-1.5 hover:text-[#1d1d1f] transition-colors">ร้านค้าออนไลน์</a>
+              <a href="/solutions/creator" className="block py-1.5 hover:text-[#1d1d1f] transition-colors">Content Creator</a>
+              <a href="/solutions/legal" className="block py-1.5 hover:text-[#1d1d1f] transition-colors">สำนักงานกฎหมาย</a>
+              <a href="/solutions/healthcare" className="block py-1.5 hover:text-[#1d1d1f] transition-colors">คลินิก & โรงพยาบาล</a>
+              <a href="/solutions/realestate" className="block py-1.5 hover:text-[#1d1d1f] transition-colors">อสังหาริมทรัพย์</a>
+              <a href="/solutions/restaurant" className="block py-1.5 hover:text-[#1d1d1f] transition-colors">ร้านอาหาร & F&B</a>
             </div>
           </div>
 
           {/* Tools */}
           <div>
             <p className="text-[12px] font-semibold text-[#1d1d1f] uppercase tracking-wider mb-3">เครื่องมือ</p>
-            <div className="space-y-2 text-[13px] text-[#6e6e73]">
-              <a href="/integrations" className="block hover:text-[#1d1d1f] transition-colors">55+ Integrations</a>
-              <a href="/home-ai" className="block hover:text-[#1d1d1f] transition-colors">Home AI Assistant</a>
-              <a href="/#models" className="block hover:text-[#1d1d1f] transition-colors">Frontier Models</a>
+            <div className="space-y-0.5 text-[13px] text-[#6e6e73]">
+              <a href="/integrations" className="block py-1.5 hover:text-[#1d1d1f] transition-colors">55+ Integrations</a>
+              <a href="/home-ai" className="block py-1.5 hover:text-[#1d1d1f] transition-colors">Home AI Assistant</a>
+              <a href="/#models" className="block py-1.5 hover:text-[#1d1d1f] transition-colors">Frontier Models</a>
             </div>
           </div>
 
           {/* Company */}
           <div>
             <p className="text-[12px] font-semibold text-[#1d1d1f] uppercase tracking-wider mb-3">Company</p>
-            <div className="space-y-2 text-[13px] text-[#6e6e73]">
-              <a href="/#pricing" className="block hover:text-[#1d1d1f] transition-colors">ราคา</a>
-              <a href="/#contact" className="block hover:text-[#1d1d1f] transition-colors">ติดต่อเรา</a>
-              <CrossSiteLink href="https://www.localaithai.com" className="block hover:text-[#2997ff] transition-colors">LocalAI Thailand</CrossSiteLink>
+            <div className="space-y-0.5 text-[13px] text-[#6e6e73]">
+              <a href="/#pricing" className="block py-1.5 hover:text-[#1d1d1f] transition-colors">ราคา</a>
+              <a href="/#contact" className="block py-1.5 hover:text-[#1d1d1f] transition-colors">ติดต่อเรา</a>
+              <CrossSiteLink href="https://www.localaithai.com" className="block py-1.5 hover:text-[#2997ff] transition-colors">LocalAI Thailand</CrossSiteLink>
             </div>
           </div>
 
