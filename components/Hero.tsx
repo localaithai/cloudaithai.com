@@ -117,6 +117,7 @@ export default function Hero() {
             className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-14"
           >
             <a href="#pricing" className="apple-btn apple-btn-blue">ดูแพ็คเกจ</a>
+            <a href="/#contact" className="apple-btn apple-btn-outline" style={{ border: "1px solid #2997ff", color: "#2997ff", background: "transparent" }}>Request a Demo</a>
             <a href="#solutions" className="apple-link">ดูว่า AI ทำอะไรได้บ้าง</a>
           </motion.div>
 
