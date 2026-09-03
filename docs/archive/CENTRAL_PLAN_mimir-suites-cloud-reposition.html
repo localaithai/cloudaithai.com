@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mimir Suites Cloud reposition, Central Plan</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .pill { display:inline-flex; align-items:center; padding:.125rem .5rem; border-radius:9999px; font-size:.75rem; font-weight:500; }
+    .pill-done { background:#d1fae5; color:#065f46; }
+    .pill-wip { background:#fef3c7; color:#92400e; }
+    .pill-queued { background:#e5e7eb; color:#374151; }
+    table { border-collapse:collapse; width:100%; }
+    th, td { border:1px solid #e5e7eb; padding:.5rem .75rem; text-align:left; vertical-align:top; font-size:.875rem; }
+    th { background:#f9fafb; font-weight:600; }
+  </style>
+</head>
+<body class="bg-white text-gray-900 antialiased">
+  <main class="max-w-4xl mx-auto px-6 py-10 space-y-10">
+    <header class="space-y-2 border-b border-gray-200 pb-6">
+      <h1 class="text-3xl font-bold tracking-tight">Mimir Suites Cloud reposition</h1>
+      <dl class="grid grid-cols-[max-content_1fr] gap-x-3 gap-y-1 text-sm">
+        <dt class="font-semibold text-gray-700">Status</dt>
+        <dd>Shipped, Cloud reposition implemented and verified across 13 routes</dd>
+        <dt class="font-semibold text-gray-700">Complements</dt>
+        <dd>
+          <a class="text-blue-700 underline" href="../../../../business/docs/decisions/brand-architecture/log-2026-09-04.md">Brand architecture decision</a>
+          and
+          <a class="text-blue-700 underline" href="../../../../suites/docs/decisions/product/log-2026-09-04.md">product decision</a>
+        </dd>
+        <dt class="font-semibold text-gray-700">Last updated</dt>
+        <dd data-last-updated="2026-09-04">2026-09-04</dd>
+      </dl>
+    </header>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-2">Goal</h2>
+      <p class="text-sm leading-6">Make cloudaithai.com the sole Thai-first acquisition door for Mimir Suites Cloud. Every surviving route must describe per-machine Suite installs, independent seat data, cloud model choice, clear data handling, per-app pricing, and the Local edition upgrade path.</p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-3">Progress Tracker</h2>
+      <table>
+        <thead><tr><th>#</th><th>Milestone</th><th>Area</th><th>Status</th><th>Contract</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Map current site and lock route set</td><td>App router, navigation, sitemap</td><td><span class="pill pill-done">Done</span></td><td>Keep only routes with honest Cloud-edition content.</td></tr>
+          <tr><td>2</td><td>Rewrite product and sales surfaces</td><td>Home, product pages, solution pages</td><td><span class="pill pill-done">Done</span></td><td>Thai-first copy, existing visual language and motion patterns.</td></tr>
+          <tr><td>3</td><td>Align metadata and data handling</td><td>Site config, JSON-LD, robots, sitemap, FAQ</td><td><span class="pill pill-done">Done</span></td><td>One source for brand facts and routes, no unsupported claims.</td></tr>
+          <tr><td>4</td><td>Verify and land</td><td>Repository</td><td><span class="pill pill-done">Done</span></td><td>Lint and build pass, legacy terms are absent, and the sitemap matches output.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-2">Locked decisions</h2>
+      <ul class="list-disc pl-5 text-sm space-y-2">
+        <li>CloudAI Thailand sells only Mimir Suites Cloud. Rationale remains in the linked brand and product decisions.</li>
+        <li>Request a Demo remains the primary CTA. The Local AI link appears only where on-site data is a genuine buyer alternative.</li>
+        <li>Delete unsupported automation, hosting, case-study, prototype, resource, support, and home-assistant routes instead of preserving misleading copy.</li>
+        <li>Keep six industry routes, each rewritten around named Mimir apps and without outcome statistics or medical, legal, or compliance promises.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-2">Surviving route contract</h2>
+      <p class="text-sm leading-6"><code>/</code>, <code>/about</code>, <code>/compare</code>, <code>/ecosystem</code>, <code>/how-it-works</code>, <code>/methodology</code>, <code>/pricing</code>, and the six existing <code>/solutions/*</code> routes.</p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-2">What Was Built</h2>
+      <ul class="list-disc pl-5 text-sm space-y-2">
+        <li>Shared brand, route, metadata, navigation, app catalog, model, FAQ, and solution data under <code>lib/</code>.</li>
+        <li>Cloud-edition copy across the home page and every surviving route, including a dedicated data-handling section.</li>
+        <li>Per-route canonicals, fixed review timestamps, generated robots and sitemap output, plus a conditional unset legal disclosure.</li>
+        <li>Retired routes, components, vendor assets, binary workflow frames, and their rendering dependencies removed.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-2">Verification Checklist</h2>
+      <pre class="bg-gray-50 border border-gray-200 rounded p-3 text-xs overflow-x-auto"><code>npm run build
+repository-wide legacy-term audit
+repository-wide punctuation audit
+find out -name index.html -o -name sitemap.xml -o -name robots.txt</code></pre>
+    </section>
+  </main>
+</body>
+</html>

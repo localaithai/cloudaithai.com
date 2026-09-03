@@ -1,21 +1,26 @@
-import Navbar from "@/components/Navbar";
+import Contact from "@/components/Contact";
+import DataHandlingSection from "@/components/data-handling-section";
+import FAQ from "@/components/FAQ";
+import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import Models from "@/components/Models";
-import ScrollVideo from "@/components/ScrollVideo";
-import Solutions from "@/components/Solutions";
+import Navbar from "@/components/Navbar";
 import Pricing from "@/components/Pricing";
-import FAQ from "@/components/FAQ";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+import ScrollShowcase from "@/components/ScrollShowcase";
+import Solutions from "@/components/Solutions";
+import { metadataFor } from "@/lib/site-data";
+
+export const metadata = metadataFor("/");
 
 export default function Home() {
   return (
     <main className="bg-[#fbfbfd]">
       <Navbar />
       <Hero />
-      <ScrollVideo />
+      <ScrollShowcase />
       <Models />
       <Solutions />
+      <DataHandlingSection />
       <Pricing />
       <FAQ />
       <Contact />

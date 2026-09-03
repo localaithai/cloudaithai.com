@@ -1,22 +1,13 @@
-import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import EcommerceSection from "@/components/EcommerceSection";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+import SitePage from "@/components/site-page";
+import UseCases from "@/components/UseCases";
+import { metadataFor } from "@/lib/site-data";
 
-export const metadata: Metadata = {
-  title: "AI สำหรับร้านค้าออนไลน์ — ตอบแชท จัดการ Order สร้าง Content อัตโนมัติ",
-  description: "ระบบ AI Automation สำหรับ E-commerce ตอบแชทลูกค้า 24/7 จัดการออเดอร์ สร้าง product description วิเคราะห์ยอดขาย เริ่มต้น ฿19,900",
-};
+export const metadata = metadataFor("/solutions/ecommerce");
 
-export default function EcommerceSolutionPage() {
+export default function EcommercePage() {
   return (
-    <main className="bg-[#fbfbfd] min-h-screen">
-      <Navbar />
-      <div className="pt-20" />
-      <EcommerceSection />
-      <Contact />
-      <Footer />
-    </main>
+    <SitePage>
+      <UseCases solution="ecommerce" />
+    </SitePage>
   );
 }

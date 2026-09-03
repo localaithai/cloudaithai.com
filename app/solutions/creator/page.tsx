@@ -1,22 +1,13 @@
-import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import CreatorSection from "@/components/CreatorSection";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+import SitePage from "@/components/site-page";
+import UseCases from "@/components/UseCases";
+import { metadataFor } from "@/lib/site-data";
 
-export const metadata: Metadata = {
-  title: "AI สำหรับ Content Creator & Agency — เขียน Script Caption วาง Content Calendar",
-  description: "AI Automation สำหรับ Creator & Agency เขียน TikTok script, IG caption, วาง content calendar, วิเคราะห์ engagement เริ่มต้น ฿9,900",
-};
+export const metadata = metadataFor("/solutions/creator");
 
-export default function CreatorSolutionPage() {
+export default function CreatorPage() {
   return (
-    <main className="bg-[#fbfbfd] min-h-screen">
-      <Navbar />
-      <div className="pt-20" />
-      <CreatorSection />
-      <Contact />
-      <Footer />
-    </main>
+    <SitePage>
+      <UseCases solution="creator" />
+    </SitePage>
   );
 }

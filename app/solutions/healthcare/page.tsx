@@ -1,23 +1,13 @@
-import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import HealthcareSection from "@/components/HealthcareSection";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+import SitePage from "@/components/site-page";
+import UseCases from "@/components/UseCases";
+import { metadataFor } from "@/lib/site-data";
 
-export const metadata: Metadata = {
-  title: "AI สำหรับคลินิก & โรงพยาบาล",
-  description:
-    "ระบบ AI Automation สำหรับคลินิกและโรงพยาบาล นัดหมายอัตโนมัติ ค้นข้อมูลยา สรุปเวชระเบียน เคลมประกัน รายงานประจำวัน เริ่มต้น ฿19,900/เดือน",
-};
+export const metadata = metadataFor("/solutions/healthcare");
 
-export default function HealthcareSolutionPage() {
+export default function HealthcarePage() {
   return (
-    <main className="bg-[#fbfbfd] min-h-screen">
-      <Navbar />
-      <div className="pt-20" />
-      <HealthcareSection />
-      <Contact />
-      <Footer />
-    </main>
+    <SitePage>
+      <UseCases solution="healthcare" />
+    </SitePage>
   );
 }

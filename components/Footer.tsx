@@ -1,63 +1,59 @@
-import CrossSiteLink from "./CrossSiteLink";
+"use client";
+
+import { motion } from "framer-motion";
+import Link from "next/link";
+
+import { site } from "@/lib/site";
+import { footer } from "@/lib/site-data";
 
 export default function Footer() {
   return (
-    <footer className="py-12 border-t border-black/[0.04]">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 mb-10">
-          {/* Solutions */}
-          <div>
-            <p className="text-[12px] font-semibold text-[#1d1d1f] uppercase tracking-wider mb-3">Solutions</p>
-            <div className="space-y-0.5 text-[13px] text-[#6e6e73]">
-              <a href="/solutions/ecommerce" className="block py-1.5 hover:text-[#1d1d1f] transition-colors">ร้านค้าออนไลน์</a>
-              <a href="/solutions/creator" className="block py-1.5 hover:text-[#1d1d1f] transition-colors">Content Creator</a>
-              <a href="/solutions/legal" className="block py-1.5 hover:text-[#1d1d1f] transition-colors">สำนักงานกฎหมาย</a>
-              <a href="/solutions/healthcare" className="block py-1.5 hover:text-[#1d1d1f] transition-colors">คลินิก & โรงพยาบาล</a>
-              <a href="/solutions/realestate" className="block py-1.5 hover:text-[#1d1d1f] transition-colors">อสังหาริมทรัพย์</a>
-              <a href="/solutions/restaurant" className="block py-1.5 hover:text-[#1d1d1f] transition-colors">ร้านอาหาร & F&B</a>
-            </div>
-          </div>
-
-          {/* Tools */}
-          <div>
-            <p className="text-[12px] font-semibold text-[#1d1d1f] uppercase tracking-wider mb-3">เครื่องมือ</p>
-            <div className="space-y-0.5 text-[13px] text-[#6e6e73]">
-              <a href="/integrations" className="block py-1.5 hover:text-[#1d1d1f] transition-colors">55+ Integrations</a>
-              <a href="/home-ai" className="block py-1.5 hover:text-[#1d1d1f] transition-colors">Home AI Assistant</a>
-              <a href="/#models" className="block py-1.5 hover:text-[#1d1d1f] transition-colors">Frontier Models</a>
-            </div>
-          </div>
-
-          {/* Company */}
-          <div>
-            <p className="text-[12px] font-semibold text-[#1d1d1f] uppercase tracking-wider mb-3">Company</p>
-            <div className="space-y-0.5 text-[13px] text-[#6e6e73]">
-              <a href="/#pricing" className="block py-1.5 hover:text-[#1d1d1f] transition-colors">ราคา</a>
-              <a href="/#contact" className="block py-1.5 hover:text-[#1d1d1f] transition-colors">ติดต่อเรา</a>
-              <CrossSiteLink href="https://www.localaithai.com" className="block py-1.5 hover:text-[#2997ff] transition-colors">LocalAI Thailand</CrossSiteLink>
-            </div>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <p className="text-[12px] font-semibold text-[#1d1d1f] uppercase tracking-wider mb-3">ติดต่อ</p>
-            <div className="space-y-1 text-[13px] text-[#6e6e73]">
-              <a href="tel:0827047606" className="block py-2 -mx-2 px-2 rounded-lg hover:text-[#1d1d1f] active:bg-black/5 transition-colors">082-704-7606</a>
-              <a href="mailto:chavin@pace-design.co.th" className="block py-2 -mx-2 px-2 rounded-lg hover:text-[#1d1d1f] active:bg-black/5 transition-colors break-all">chavin@pace-design.co.th</a>
-              <a href="https://line.me/R/ti/p/@542mgysj" className="block py-2 -mx-2 px-2 rounded-lg hover:text-[#1d1d1f] active:bg-black/5 transition-colors">LINE @542mgysj</a>
-            </div>
-          </div>
+    <motion.footer
+      initial={{ opacity: 0, y: 14 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="border-t border-black/[.05] py-10"
+    >
+      <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between gap-8">
+        <div>
+          <p className="font-semibold text-[#1d1d1f]">CloudAI Thailand</p>
+          <p className="mt-2 max-w-sm text-sm text-[#6e6e73]">
+            Mimir Suites Cloud สำหรับงานบนเครื่องพนักงาน
+          </p>
+          {site.legalDisclosure && (
+            <p className="mt-3 text-xs text-[#6e6e73]">
+              {site.legalDisclosure}
+            </p>
+          )}
         </div>
-
-        {/* Bottom bar */}
-        <div className="flex flex-col sm:flex-row justify-between items-center pt-8 border-t border-black/[0.04] gap-4">
-          <div className="flex items-center gap-2">
-            <img src="/icon.svg" alt="CloudAI" className="w-6 h-6 rounded-md" />
-            <span className="text-[13px] font-semibold text-[#1d1d1f]">CloudAI Thailand</span>
-          </div>
-          <p className="text-[11px] text-[#d2d2d7]">&copy; 2026 CloudAI Thailand — AI Automation สำหรับธุรกิจไทย</p>
+        <div className="grid grid-cols-2 gap-x-8 gap-y-2 text-sm text-[#6e6e73]">
+          {footer.map((item) =>
+            item.external ? (
+              <a
+                key={item.href}
+                href={item.href}
+                className="hover:text-[#1d1d1f]"
+              >
+                {item.label}
+              </a>
+            ) : (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="hover:text-[#1d1d1f]"
+              >
+                {item.label}
+              </Link>
+            ),
+          )}
+          <Link href={site.primaryCta.href} className="hover:text-[#1d1d1f]">
+            {site.primaryCta.label}
+          </Link>
         </div>
       </div>
-    </footer>
+      <div className="max-w-6xl mx-auto px-6 mt-8 pt-5 border-t border-black/[.05] text-xs text-[#6e6e73]">
+        © 2026 CloudAI Thailand
+      </div>
+    </motion.footer>
   );
 }

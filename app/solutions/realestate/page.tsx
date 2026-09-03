@@ -1,23 +1,13 @@
-import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import RealEstateSection from "@/components/RealEstateSection";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+import SitePage from "@/components/site-page";
+import UseCases from "@/components/UseCases";
+import { metadataFor } from "@/lib/site-data";
 
-export const metadata: Metadata = {
-  title: "AI สำหรับอสังหาริมทรัพย์",
-  description:
-    "ระบบ AI Automation สำหรับอสังหาริมทรัพย์ ตอบคำถามลูกค้าอัตโนมัติ วิเคราะห์ราคาตลาด จับคู่ผู้ซื้อกับทรัพย์สิน จัดการนัดชม และปิดการขายด้วย AI",
-};
+export const metadata = metadataFor("/solutions/realestate");
 
-export default function RealestateSolutionPage() {
+export default function RealEstatePage() {
   return (
-    <main className="bg-[#fbfbfd] min-h-screen">
-      <Navbar />
-      <div className="pt-20" />
-      <RealEstateSection />
-      <Contact />
-      <Footer />
-    </main>
+    <SitePage>
+      <UseCases solution="realestate" />
+    </SitePage>
   );
 }

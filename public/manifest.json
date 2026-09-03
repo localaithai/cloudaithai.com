@@ -1,7 +1,7 @@
 {
-  "name": "CloudAI Thailand",
-  "short_name": "CloudAI",
-  "description": "AI Automation สำหรับธุรกิจไทย",
+  "name": "Mimir Suites Cloud | CloudAI Thailand",
+  "short_name": "Mimir Cloud",
+  "description": "Mimir Suite บนเครื่องพนักงาน พร้อมโมเดลคลาวด์",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#fbfbfd",
