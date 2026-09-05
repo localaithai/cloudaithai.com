@@ -3,7 +3,7 @@ export default function EcosystemSection() {
   return (
     <section className="apple-section section-gray">
       <div className="max-w-5xl mx-auto px-6">
-        <p className="text-[#2997ff] font-medium mb-3">Mimir Suites Cloud</p>
+        <p className="text-[#0071e3] font-medium mb-3">Mimir Suites Cloud</p>
         <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight">
           แอปของคุณ, โมเดลที่เลือก
         </h1>

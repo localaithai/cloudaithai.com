@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bai_Jamjuree } from "next/font/google";
+import { MotionConfig } from "framer-motion";
 
 import "./globals.css";
 import PageTransition from "@/components/PageTransition";
@@ -63,7 +64,9 @@ export default function RootLayout({
             dangerouslySetInnerHTML={{ __html: JSON.stringify(item) }}
           />
         ))}
-        <PageTransition>{children}</PageTransition>
+        <MotionConfig reducedMotion="user">
+          <PageTransition>{children}</PageTransition>
+        </MotionConfig>
       </body>
     </html>
   );

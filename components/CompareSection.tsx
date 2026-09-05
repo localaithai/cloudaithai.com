@@ -3,7 +3,7 @@ export default function CompareSection() {
     <section className="apple-section section-gray">
       <div className="max-w-5xl mx-auto px-6">
         <div className="text-center">
-          <p className="text-[#2997ff] font-medium mb-3">
+          <p className="text-[#0071e3] font-medium mb-3">
             Choose the right edition
           </p>
           <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight">

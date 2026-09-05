@@ -2,7 +2,7 @@ export default function MethodologySection() {
   return (
     <section className="apple-section">
       <div className="max-w-4xl mx-auto px-6">
-        <p className="text-[#2997ff] font-medium mb-3">Working principles</p>
+        <p className="text-[#0071e3] font-medium mb-3">Working principles</p>
         <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight">
           เลือกงานและข้อมูลก่อนเลือกแอป
         </h1>

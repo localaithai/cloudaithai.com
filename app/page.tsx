@@ -14,17 +14,19 @@ export const metadata = metadataFor("/");
 
 export default function Home() {
   return (
-    <main className="bg-[#fbfbfd]">
+    <>
       <Navbar />
-      <Hero />
-      <ScrollShowcase />
-      <Models />
-      <Solutions />
-      <DataHandlingSection />
-      <Pricing />
-      <FAQ />
-      <Contact />
+      <main id="content" className="bg-[#fbfbfd]">
+        <Hero />
+        <ScrollShowcase />
+        <Models />
+        <Solutions />
+        <DataHandlingSection />
+        <Pricing />
+        <FAQ />
+        <Contact />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }

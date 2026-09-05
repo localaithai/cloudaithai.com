@@ -28,7 +28,7 @@ export default function DataHandlingSection() {
           viewport={{ once: true }}
           className="max-w-2xl mb-10"
         >
-          <p className="text-[#2997ff] font-medium mb-3">Data handling</p>
+          <p className="text-[#0071e3] font-medium mb-3">Data handling</p>
           <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight text-[#1d1d1f]">
             ข้อมูลไปไหน, บอกตรงๆ
           </h2>

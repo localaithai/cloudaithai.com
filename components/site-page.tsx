@@ -6,12 +6,14 @@ import MotionPageContent from "@/components/motion-page-content";
 
 export default function SitePage({ children }: { children: ReactNode }) {
   return (
-    <main className="bg-[#fbfbfd] min-h-screen">
+    <>
       <Navbar />
-      <div className="pt-20" />
-      <MotionPageContent>{children}</MotionPageContent>
-      <Contact />
+      <main id="content" className="bg-[#fbfbfd] min-h-screen">
+        <div className="pt-20" />
+        <MotionPageContent>{children}</MotionPageContent>
+        <Contact />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }

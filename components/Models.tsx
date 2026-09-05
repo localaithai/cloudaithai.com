@@ -3,7 +3,7 @@ export default function Models() {
   return (
     <section id="models" className="apple-section">
       <div className="max-w-5xl mx-auto px-6 text-center">
-        <p className="text-[#2997ff] font-medium mb-3">Model choice</p>
+        <p className="text-[#0071e3] font-medium mb-3">Model choice</p>
         <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight">
           เลือกโมเดลให้เหมาะกับงาน
         </h2>

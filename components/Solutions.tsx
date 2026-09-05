@@ -4,7 +4,7 @@ export default function Solutions() {
     <section id="solutions" className="apple-section section-gray">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto">
-          <p className="text-[#2997ff] font-medium mb-3">Solutions</p>
+          <p className="text-[#0071e3] font-medium mb-3">Solutions</p>
           <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight">
             แอปที่เริ่มจากงานจริง
           </h2>
@@ -26,7 +26,7 @@ export default function Solutions() {
               <p className="mt-2 text-sm text-[#6e6e73] leading-relaxed">
                 {solution.intro}
               </p>
-              <p className="mt-4 text-sm text-[#2997ff]">ดูแอปที่เกี่ยวข้อง</p>
+              <p className="mt-4 text-sm text-[#0071e3]">ดูแอปที่เกี่ยวข้อง</p>
             </a>
           ))}
         </div>

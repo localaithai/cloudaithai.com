@@ -2,7 +2,7 @@ export default function AboutSection() {
   return (
     <section className="apple-section">
       <div className="max-w-4xl mx-auto px-6">
-        <p className="text-[#2997ff] font-medium mb-3">About</p>
+        <p className="text-[#0071e3] font-medium mb-3">About</p>
         <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight">
           Mimir Suites Cloud คือ Suite บนเครื่องทำงาน
         </h1>

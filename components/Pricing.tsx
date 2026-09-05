@@ -14,7 +14,7 @@ export default function Pricing() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <p className="text-[#2997ff] font-medium mb-3">Pricing</p>
+          <p className="text-[#0071e3] font-medium mb-3">Pricing</p>
           <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight">
             เลือกแอป, เลือก seat
           </h2>

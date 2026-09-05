@@ -11,7 +11,7 @@ export default function Hero() {
     <section className="relative overflow-hidden bg-[#fbfbfd]">
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
-          className="absolute -top-24 left-1/4 h-[34rem] w-[34rem] rounded-full bg-[#2997ff]/10 blur-3xl"
+          className="absolute -top-24 left-1/4 h-[34rem] w-[34rem] rounded-full bg-[#0071e3]/10 blur-3xl"
           animate={{ x: [0, 24, 0], y: [0, -18, 0] }}
           transition={{ duration: 14, repeat: Infinity }}
         />
@@ -20,7 +20,7 @@ export default function Hero() {
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-[#2997ff] font-medium mb-5"
+          className="text-[#0071e3] font-medium mb-5"
         >
           Mimir Suites Cloud
         </motion.p>

@@ -15,9 +15,12 @@ export default function Navbar() {
       animate={{ y: 0 }}
       className="fixed inset-x-0 top-0 z-50 bg-[#fbfbfd]/85 backdrop-blur-xl border-b border-black/[.04]"
     >
+      <a href="#content" className="skip-link">
+        ข้ามไปยังเนื้อหา
+      </a>
       <div className="max-w-6xl mx-auto h-16 px-6 flex items-center justify-between">
         <Link href="/" className="font-semibold text-[#1d1d1f]">
-          Cloud<span className="text-[#2997ff]">AI</span>{" "}
+          Cloud<span className="text-[#0071e3]">AI</span>{" "}
           <span className="text-xs text-[#6e6e73]">Thailand</span>
         </Link>
         <div className="hidden md:flex items-center gap-6 text-sm text-[#6e6e73]">
@@ -77,7 +80,7 @@ export default function Navbar() {
               )}
               <Link
                 href={site.primaryCta.href}
-                className="text-[#2997ff] font-medium"
+                className="text-[#0071e3] font-medium"
               >
                 {site.primaryCta.label}
               </Link>

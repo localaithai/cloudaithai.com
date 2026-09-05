@@ -11,7 +11,7 @@ export default function FAQ() {
             <details key={question} className="apple-card p-5 group">
               <summary className="cursor-pointer list-none font-semibold text-[#1d1d1f] flex justify-between gap-4">
                 {question}
-                <span className="text-[#2997ff] group-open:rotate-45 transition-transform">
+                <span className="text-[#0071e3] group-open:rotate-45 transition-transform">
                   +
                 </span>
               </summary>

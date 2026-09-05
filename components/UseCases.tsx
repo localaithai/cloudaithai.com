@@ -8,7 +8,7 @@ export default function UseCases({
   return (
     <section className="apple-section">
       <div className="max-w-4xl mx-auto px-6">
-        <p className="text-[#2997ff] font-medium mb-3">Mimir Suites Cloud</p>
+        <p className="text-[#0071e3] font-medium mb-3">Mimir Suites Cloud</p>
         <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight">
           {item.title.replace("Mimir Suites Cloud สำหรับ", "")}
         </h1>
