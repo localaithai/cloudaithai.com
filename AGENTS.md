@@ -23,7 +23,8 @@ Before writing copy, CTAs, footer disclosures, or cross-links, read:
 - Say plainly that document text goes to cloud models, with PII redacted by default before it leaves. Never borrow the Local AI line's privacy wording. Link to `localaithai.com` for the customer who needs data on-site; that is the one cross-link with genuine user benefit.
 - Each seat is one install with its own data, a company buys one per machine, and a backup folder is part of setup. Copy describes the Suite and its apps, never an "AI automation install".
 - Model-usage billing is undecided. Do not publish credit, token or tier pricing until the product decides it.
-- `lib/site.ts` is the only place a brand value is written: name, suite name, URL, tagline, CTA, contact, legal disclosure. `lib/site-data.ts` owns every route, label, title and description. Pages read from both; they never restate a value inline.
+- `lib/site.ts` is the only place a brand value is written: name, suite name, URL, tagline, CTA, legal disclosure. `lib/site-data.ts` owns every route, label, title and description. Pages read from both; they never restate a value inline.
+- Contact channels (email, LINE, phone) and the lead form come from omni's `cta.js` via `data-cta` attributes; never hardcode them in components.
 - Fully static export with `trailingSlash: true`; canonical paths end in `/`. No API routes, middleware or request-time rendering.
 - Pages compose `components/site-page.tsx` (Navbar, motion wrapper, Contact, Footer) rather than rebuilding the frame.
 - Primary CTA is "Request a Demo" into the contact section. "Visit Mimir Suites" is never the primary CTA.

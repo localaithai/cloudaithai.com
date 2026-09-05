@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Bai_Jamjuree } from "next/font/google";
 import { MotionConfig } from "framer-motion";
+import Script from "next/script";
 
 import "./globals.css";
+import OmniToaster from "@/components/omni-toaster";
 import PageTransition from "@/components/PageTransition";
 import { absoluteUrl, site } from "@/lib/site";
 
@@ -67,6 +69,8 @@ export default function RootLayout({
         <MotionConfig reducedMotion="user">
           <PageTransition>{children}</PageTransition>
         </MotionConfig>
+        <Script src="https://localai-omni.vercel.app/cta.js" strategy="afterInteractive" />
+        <OmniToaster />
       </body>
     </html>
   );
