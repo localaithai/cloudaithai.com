@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import Models from "@/components/Models";
 import Navbar from "@/components/Navbar";
+import Partners from "@/components/Partners";
 import Pricing from "@/components/Pricing";
 import ScrollShowcase from "@/components/ScrollShowcase";
 import Solutions from "@/components/Solutions";
@@ -23,6 +24,7 @@ export default function Home() {
         <Solutions />
         <DataHandlingSection />
         <Pricing />
+        <Partners />
         <FAQ />
         <Contact />
       </main>
