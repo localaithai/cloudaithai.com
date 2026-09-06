@@ -70,6 +70,7 @@ export default function RootLayout({
           <PageTransition>{children}</PageTransition>
         </MotionConfig>
         <Script src="https://localai-omni.vercel.app/cta.js" strategy="afterInteractive" />
+        <Script src="https://localai-omni.vercel.app/analytics.js" strategy="afterInteractive" />
         <OmniToaster />
       </body>
     </html>

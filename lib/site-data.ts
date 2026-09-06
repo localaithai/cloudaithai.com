@@ -133,6 +133,15 @@ export const routes = [
     priority: 0.8,
     frequency: "monthly",
   },
+  {
+    path: "/privacy",
+    canonicalPath: "/privacy/",
+    label: "นโยบายความเป็นส่วนตัว",
+    title: "นโยบายความเป็นส่วนตัว",
+    description: "การเก็บ ใช้ และคุ้มครองข้อมูลบนเว็บไซต์ CloudAI Thailand ตาม PDPA",
+    priority: 0.3,
+    frequency: "monthly",
+  },
 ] as const satisfies readonly RouteDefinition[];
 
 export type RoutePath = (typeof routes)[number]["path"];
@@ -174,6 +183,7 @@ export const footer = [
   { href: "/pricing", label: "ราคา", external: false },
   { href: "/compare", label: "Cloud หรือ AI machine", external: false },
   { href: "/ecosystem", label: "Mimir Suites Cloud", external: false },
+  { href: "/privacy", label: "นโยบายความเป็นส่วนตัว", external: false },
   {
     href: "https://localaithai.com",
     label: "Local AI Thailand",
