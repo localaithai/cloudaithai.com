@@ -1,9 +1,19 @@
 import { appGroups, models } from "@/lib/site-data";
+import Image from "next/image";
 export default function EcosystemSection() {
   return (
     <section className="apple-section section-gray">
       <div className="max-w-5xl mx-auto px-6">
-        <p className="text-[#0071e3] font-medium mb-3">Mimir Suites Cloud</p>
+        <div className="mb-3 flex items-center gap-3">
+          <Image
+            src="/mimir-suite-logo.png"
+            alt=""
+            width={72}
+            height={48}
+            className="h-10 w-auto object-contain"
+          />
+          <p className="font-medium text-[#0071e3]">Mimir Suites Cloud</p>
+        </div>
         <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight">
           แอปของคุณ, โมเดลที่เลือก
         </h1>
@@ -25,9 +35,23 @@ export default function EcosystemSection() {
             <article key={group.title} className="apple-card p-6">
               <h2 className="font-semibold text-[#1d1d1f]">{group.title}</h2>
               <p className="mt-2 text-sm text-[#6e6e73]">{group.detail}</p>
-              <p className="mt-4 text-sm text-[#1d1d1f]">
-                {group.apps.map((app) => `Mimir ${app}`).join(" · ")}
-              </p>
+              <ul className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
+                {group.apps.map((app) => (
+                  <li
+                    key={app}
+                    className="flex items-center gap-2 text-sm text-[#1d1d1f]"
+                  >
+                    <Image
+                      src={`/mimir-apps/${app.toLowerCase()}.png`}
+                      alt=""
+                      width={32}
+                      height={32}
+                      className="size-8 object-contain"
+                    />
+                    <span>Mimir {app}</span>
+                  </li>
+                ))}
+              </ul>
             </article>
           ))}
         </div>

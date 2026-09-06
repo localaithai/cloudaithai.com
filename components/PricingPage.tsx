@@ -1,5 +1,6 @@
 import { appGroups } from "@/lib/site-data";
 import Pricing from "@/components/Pricing";
+import Image from "next/image";
 export default function PricingPage() {
   return (
     <>
@@ -14,8 +15,15 @@ export default function PricingPage() {
                 {group.apps.map((app) => (
                   <span
                     key={app}
-                    className="rounded-full bg-[#f5f5f7] px-3 py-1.5 text-sm"
+                    className="inline-flex items-center gap-2 rounded-full bg-[#f5f5f7] px-3 py-1.5 text-sm"
                   >
+                    <Image
+                      src={`/mimir-apps/${app.toLowerCase()}.png`}
+                      alt=""
+                      width={24}
+                      height={24}
+                      className="size-6 object-contain"
+                    />
                     Mimir {app}
                   </span>
                 ))}
