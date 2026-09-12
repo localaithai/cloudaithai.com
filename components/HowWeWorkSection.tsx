@@ -5,9 +5,9 @@ export default function HowWeWorkSection() {
       <div className="max-w-5xl mx-auto px-6">
         <div className="text-center">
           <p className="text-[#0071e3] font-medium mb-3">How it works</p>
-          <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight">
+          <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight">
             เริ่มจากเครื่องของแต่ละคน
-          </h1>
+          </h2>
         </div>
         <div className="mt-12 grid sm:grid-cols-5 gap-4">
           {setupSteps.map(([number, title, detail]) => (

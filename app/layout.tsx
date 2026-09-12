@@ -6,7 +6,9 @@ import Script from "next/script";
 import "./globals.css";
 import OmniToaster from "@/components/omni-toaster";
 import PageTransition from "@/components/PageTransition";
-import { absoluteUrl, site } from "@/lib/site";
+import { site } from "@/lib/site";
+import { metadataFor } from "@/lib/site-data";
+import { siteGraph } from "@/lib/structured-data";
 
 const font = Bai_Jamjuree({
   variable: "--font-bai",
@@ -18,54 +20,29 @@ const font = Bai_Jamjuree({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Mimir Suites Cloud | CloudAI Thailand",
+    default: "Mimir Suites Cloud",
     template: "%s | CloudAI Thailand",
   },
-  description: site.description,
-  manifest: "/manifest.json",
-  robots: { index: true, follow: true },
-  openGraph: {
-    type: "website",
-    locale: site.openGraphLocale,
-    siteName: site.name,
+  manifest: "/manifest.webmanifest",
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+    ...(process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION
+      ? { other: { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION } }
+      : {}),
   },
-  twitter: { card: "summary" },
+  ...metadataFor("/"),
 };
-
-const structuredData = [
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: site.name,
-    url: site.url,
-    description: site.description,
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "@id": absoluteUrl("/#mimir-suites-cloud"),
-    url: absoluteUrl("/"),
-    name: site.suiteName,
-    applicationCategory: "BusinessApplication",
-    operatingSystem: "Desktop",
-    description: site.description,
-    brand: { "@type": "Brand", name: "Mimir" },
-  },
-];
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang={site.htmlLang} className="scroll-smooth">
+      <head>
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-friendly summary" />
+      </head>
       <body className={`${font.variable} antialiased`}>
-        {structuredData.map((item, index) => (
-          <script
-            key={index}
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(item) }}
-          />
-        ))}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(siteGraph()) }} />
         <MotionConfig reducedMotion="user">
           <PageTransition>{children}</PageTransition>
         </MotionConfig>

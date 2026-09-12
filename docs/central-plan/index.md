@@ -5,6 +5,7 @@
 | Plan | Status | Last updated |
 | --- | --- | --- |
 | [Partner section](CENTRAL_PLAN_partner-section.html) | Shipped and verified | 2026-09-07 |
+| [SEO and AEO baseline](CENTRAL_PLAN_seo-aeo.html) | Shipped, including brand sitelink candidates | 2026-09-13 |
 
 ## Archived
 

@@ -3,19 +3,13 @@ export default function MethodologySection() {
     <section className="apple-section">
       <div className="max-w-4xl mx-auto px-6">
         <p className="text-[#0071e3] font-medium mb-3">Working principles</p>
-        <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight">
+        <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight">
           เลือกงานและข้อมูลก่อนเลือกแอป
-        </h1>
+        </h2>
         <div className="mt-9 grid sm:grid-cols-3 gap-4">
           {[
-            [
-              "เริ่มที่งาน",
-              "คุยว่างานเอกสาร เสียง รูป หรือข้อมูลส่วนไหนควรอยู่ใน Suite",
-            ],
-            [
-              "กำหนด seat",
-              "หนึ่งเครื่องต่อหนึ่ง seat และข้อมูลของแต่ละ seat ไม่แชร์กัน",
-            ],
+            ["เริ่มที่งาน", "คุยว่างานเอกสาร เสียง รูป หรือข้อมูลส่วนไหนควรอยู่ใน Suite"],
+            ["กำหนด seat", "หนึ่งเครื่องต่อหนึ่ง seat และข้อมูลของแต่ละ seat ไม่แชร์กัน"],
             [
               "ตั้งค่าอย่างตรงไปตรงมา",
               "เลือกแอป โมเดล และโฟลเดอร์สำรองข้อมูลระหว่างตั้งค่า",

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 
-import { absoluteUrl, site } from "@/lib/site";
+import { TITLE_SUFFIX, site } from "@/lib/site";
+import { assertSnippet } from "@/lib/snippet";
+import { pageSocial } from "@/lib/social";
 
 type Frequency = "weekly" | "monthly";
 type RouteDefinition = {
@@ -11,6 +13,7 @@ type RouteDefinition = {
   description: string;
   priority: number;
   frequency: Frequency;
+  sitelinkName?: string;
 };
 
 export const routes = [
@@ -26,58 +29,68 @@ export const routes = [
   {
     path: "/about",
     canonicalPath: "/about/",
-    label: "เกี่ยวกับ Cloud",
-    title: "เกี่ยวกับ Mimir Suites Cloud",
-    description: "Mimir Suites Cloud ติดตั้งบนเครื่องพนักงานแต่ละเครื่อง",
+    label: "About",
+    title: "About",
+    description:
+      "Learn why Mimir Suites Cloud runs on each staff machine with no shared company data.",
     priority: 0.7,
     frequency: "monthly",
+    sitelinkName: "About",
   },
   {
     path: "/compare",
     canonicalPath: "/compare/",
-    label: "Cloud หรือ AI machine",
-    title: "Cloud หรือ AI machine",
-    description: "เปรียบเทียบ Mimir Suites Cloud กับทางเลือก on-site",
+    label: "Compare",
+    title: "Compare",
+    description:
+      "Compare Mimir Suites Cloud and on-site AI by data boundary, hardware, and workflow.",
     priority: 0.8,
     frequency: "monthly",
+    sitelinkName: "Compare",
   },
   {
     path: "/ecosystem",
     canonicalPath: "/ecosystem/",
-    label: "Mimir Suites Cloud",
-    title: "Mimir Suites Cloud",
-    description: "แอป Mimir และโมเดลคลาวด์ที่เลือกได้",
+    label: "Ecosystem",
+    title: "Ecosystem",
+    description:
+      "Explore Mimir app groups and cloud models for independent staff-machine installs.",
     priority: 0.7,
     frequency: "monthly",
+    sitelinkName: "Ecosystem",
   },
   {
     path: "/how-it-works",
     canonicalPath: "/how-it-works/",
-    label: "วิธีใช้งาน",
-    title: "วิธีใช้ Mimir Suites Cloud",
+    label: "How it works",
+    title: "How it works",
     description:
-      "ติดตั้ง Suite ลงชื่อเข้าใช้ เลือกแอป เลือกโมเดล แล้วเริ่มทำงาน",
+      "See how each staff machine gets its own Mimir apps, model, data, and backup folder.",
     priority: 0.8,
     frequency: "monthly",
+    sitelinkName: "How it works",
   },
   {
     path: "/methodology",
     canonicalPath: "/methodology/",
-    label: "หลักการใช้งาน",
-    title: "หลักการใช้งาน",
-    description: "เลือกงาน แอป และ seat สำหรับ Mimir Suites Cloud",
+    label: "Methodology",
+    title: "Methodology",
+    description:
+      "Choose Mimir apps, cloud models, and independent seats that fit each team member's work.",
     priority: 0.7,
     frequency: "monthly",
+    sitelinkName: "Methodology",
   },
   {
     path: "/pricing",
     canonicalPath: "/pricing/",
-    label: "ราคา",
-    title: "ราคาแอปต่อ seat",
+    label: "Pricing",
+    title: "Pricing",
     description:
-      "Mimir Suites Cloud คิดราคาต่อแอปต่อ seat, ติดต่อเราเพื่อคุยความต้องการ",
+      "Review per-app, per-seat Mimir Suites Cloud pricing for the apps each staff machine needs.",
     priority: 0.9,
     frequency: "weekly",
+    sitelinkName: "Pricing",
   },
   {
     path: "/solutions/ecommerce",
@@ -155,19 +168,22 @@ export function routeAt(path: RoutePath): SiteRoute {
 
 export function metadataFor(path: RoutePath): Metadata {
   const route = routeAt(path);
-  const canonical = absoluteUrl(route.canonicalPath);
+  assertSnippet(path, {
+    title: route.title,
+    description: route.description,
+    titleSuffix: TITLE_SUFFIX,
+  });
+  const canonical = route.canonicalPath;
+  const title = `${route.title}${TITLE_SUFFIX}`;
   return {
     title: route.title,
     description: route.description,
     alternates: { canonical },
-    openGraph: {
-      title: route.title,
-      description: route.description,
-      url: canonical,
-    },
-    twitter: { title: route.title, description: route.description },
+    ...pageSocial({ path: canonical, title, description: route.description }),
   };
 }
+
+for (const route of routes) metadataFor(route.path);
 
 export const navigation = [
   { href: "/how-it-works", label: "วิธีใช้งาน", external: false },
@@ -178,11 +194,12 @@ export const navigation = [
 ] as const;
 
 export const footer = [
-  { href: "/about", label: "เกี่ยวกับ Cloud", external: false },
-  { href: "/how-it-works", label: "วิธีใช้งาน", external: false },
-  { href: "/pricing", label: "ราคา", external: false },
-  { href: "/compare", label: "Cloud หรือ AI machine", external: false },
-  { href: "/ecosystem", label: "Mimir Suites Cloud", external: false },
+  { href: "/pricing", label: "Pricing", external: false },
+  { href: "/how-it-works", label: "How it works", external: false },
+  { href: "/compare", label: "Compare", external: false },
+  { href: "/methodology", label: "Methodology", external: false },
+  { href: "/ecosystem", label: "Ecosystem", external: false },
+  { href: "/about", label: "About", external: false },
   { href: "/privacy", label: "นโยบายความเป็นส่วนตัว", external: false },
   {
     href: "https://localaithai.com",
@@ -276,8 +293,7 @@ export const solutions = {
   },
   creator: {
     title: "Mimir Suites Cloud สำหรับ Creator",
-    intro:
-      "ช่วยอ่านแหล่งข้อมูล สรุป บันทึกเสียง เขียนร่าง และทำคำบรรยายจากงานของคุณ",
+    intro: "ช่วยอ่านแหล่งข้อมูล สรุป บันทึกเสียง เขียนร่าง และทำคำบรรยายจากงานของคุณ",
     apps: [
       "Mimir Digest",
       "Mimir Echo",
@@ -288,8 +304,7 @@ export const solutions = {
   },
   legal: {
     title: "Mimir Suites Cloud สำหรับสำนักงานกฎหมาย",
-    intro:
-      "ช่วยอ่าน จัดข้อมูล และร่างจากเอกสารให้ทีมตรวจทานต่อ ไม่ใช่คำแนะนำทางกฎหมาย",
+    intro: "ช่วยอ่าน จัดข้อมูล และร่างจากเอกสารให้ทีมตรวจทานต่อ ไม่ใช่คำแนะนำทางกฎหมาย",
     apps: [
       "Mimir Scan",
       "Mimir Extract",
@@ -300,8 +315,7 @@ export const solutions = {
   },
   healthcare: {
     title: "Mimir Suites Cloud สำหรับงานเอกสารสุขภาพ",
-    intro:
-      "ช่วยงานธุรการ เอกสาร และสรุปสำหรับผู้รับผิดชอบ ไม่ใช้เพื่อการวินิจฉัยหรือการรักษา",
+    intro: "ช่วยงานธุรการ เอกสาร และสรุปสำหรับผู้รับผิดชอบ ไม่ใช้เพื่อการวินิจฉัยหรือการรักษา",
     apps: [
       "Mimir Scan",
       "Mimir Extract",

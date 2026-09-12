@@ -14,9 +14,9 @@ export default function EcosystemSection() {
           />
           <p className="font-medium text-[#0071e3]">Mimir Suites Cloud</p>
         </div>
-        <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight">
+        <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight">
           แอปของคุณ, โมเดลที่เลือก
-        </h1>
+        </h2>
         <p className="mt-4 max-w-2xl text-lg text-[#6e6e73]">
           Mimir Suite รวมแอปบนเครื่องของแต่ละ seat และเชื่อมต่อโมเดลคลาวด์ตามงาน
         </p>

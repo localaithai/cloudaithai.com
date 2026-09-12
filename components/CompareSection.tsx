@@ -6,9 +6,9 @@ export default function CompareSection() {
           <p className="text-[#0071e3] font-medium mb-3">
             Choose the right edition
           </p>
-          <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight">
+          <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight">
             Cloud หรือ AI machine
-          </h1>
+          </h2>
         </div>
         <div className="mt-10 grid md:grid-cols-2 gap-5">
           <article className="apple-card p-7">
