@@ -1,11 +1,13 @@
+import Image from "next/image";
+
 const partners = [
-  "INGRAM MICRO",
-  "TD SYNNEX",
-  "SIS",
-  "ASCENTI",
-  "EATON",
-  "SCHNEIDER",
-  "VST ECS",
+  { name: "Ingram Micro", logo: "/partners/ingram-micro.svg" },
+  { name: "TD SYNNEX", logo: "/partners/td-synnex.svg" },
+  { name: "SiS Distribution", logo: "/partners/sis.png" },
+  { name: "Ascenti", logo: "/partners/ascenti-dark.png" },
+  { name: "Eaton", logo: "/partners/eaton.svg" },
+  { name: "Schneider Electric", logo: "/partners/schneider-electric.svg" },
+  { name: "VST ECS", logo: "/partners/vst-ecs.png" },
 ] as const;
 
 export default function Partners() {
@@ -17,9 +19,11 @@ export default function Partners() {
           <h2 id="partners-heading" className="text-4xl font-semibold tracking-tight sm:text-5xl">พร้อมเติบโตจาก cloud ไปถึงระบบเต็มรูปแบบ</h2>
           <p className="mx-auto mt-5 max-w-2xl text-lg text-[#515154]">Mimir Suites Cloud เริ่มได้โดยไม่ต้องมีเครื่อง AI และยังอยู่ในเครือข่ายพาร์ทเนอร์เดียวกับระบบ hardware และ infrastructure เมื่อต้องการขยายภายหลัง</p>
         </div>
-        <ul className="mt-10 flex flex-wrap justify-center gap-x-8 gap-y-3 border-y border-black/[0.08] py-8">
+        <ul className="mt-10 grid grid-cols-2 overflow-hidden rounded-2xl border border-black/[0.08] bg-white shadow-[0_12px_40px_rgba(0,0,0,0.04)] sm:grid-cols-3 lg:grid-cols-7">
           {partners.map((partner) => (
-            <li key={partner} className="px-2 text-sm font-semibold tracking-[-0.01em] text-[#515154] sm:text-base">{partner}</li>
+            <li key={partner.name} className="flex min-h-28 items-center justify-center border-b border-r border-black/[0.08] px-5 py-6">
+              <Image src={partner.logo} alt={`${partner.name} logo`} width={160} height={64} className="h-10 w-full object-contain" />
+            </li>
           ))}
         </ul>
       </div>
