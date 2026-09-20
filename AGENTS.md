@@ -46,3 +46,11 @@ Before writing copy, CTAs, footer disclosures, or cross-links, read:
 
 - The Cloud-edition reposition plan is complete and archived: `docs/archive/CENTRAL_PLAN_mimir-suites-cloud-reposition.html` (2026-09-04). New multi-session work starts a fresh plan in `docs/central-plan/`.
 - Business strategy, brand architecture and domain briefs: `../../business/`
+
+## Documentation lifecycle
+
+- Production code, executable configuration, and meaningful tests define implemented behavior. Agreed product and business requirements define the behavior changes must satisfy; investigate any mismatch.
+- Multi-session work belongs in `docs/central-plan/CENTRAL_PLAN_<feature>.html`. Preserve the settled design, ordered file and symbol changes, edge cases, tests, commands, progress, and exact resume point, then archive the plan after delivery.
+- `docs/decisions/<domain>/log-YYYY-MM-DD.md` preserves selective durable rationale. Routine changes need no decision record.
+- Former domain summary pages under `docs/decisions/` are historical snapshots and navigation aids. Assess their content when that domain is next changed; keep dated logs and links intact.
+- Update maintained documentation only when a change affects one of its claims. Do not create empty documentation folders.
