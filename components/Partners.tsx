@@ -1,13 +1,14 @@
+import { assetUrl } from "@/lib/assets";
 import Image from "next/image";
 
 const partners = [
-  { name: "Ingram Micro", logo: "/partners/ingram-micro.svg" },
-  { name: "TD SYNNEX", logo: "/partners/td-synnex.svg" },
-  { name: "SiS Distribution", logo: "/partners/sis.png" },
-  { name: "Ascenti", logo: "/partners/ascenti-dark.png" },
-  { name: "Eaton", logo: "/partners/eaton.svg" },
-  { name: "Schneider Electric", logo: "/partners/schneider-electric.svg" },
-  { name: "VST ECS", logo: "/partners/vst-ecs.png" },
+  { name: "Ingram Micro", logo: assetUrl("/partners/ingram-micro.svg") },
+  { name: "TD SYNNEX", logo: assetUrl("/partners/td-synnex.svg") },
+  { name: "SiS Distribution", logo: assetUrl("/partners/sis.png") },
+  { name: "Ascenti", logo: assetUrl("/partners/ascenti-dark.png") },
+  { name: "Eaton", logo: assetUrl("/partners/eaton.svg") },
+  { name: "Schneider Electric", logo: assetUrl("/partners/schneider-electric.svg") },
+  { name: "VST ECS", logo: assetUrl("/partners/vst-ecs.png") },
 ] as const;
 
 export default function Partners() {

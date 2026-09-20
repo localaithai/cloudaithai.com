@@ -1,3 +1,4 @@
+import { assetUrl } from "@/lib/assets";
 import { appGroups, models } from "@/lib/site-data";
 import Image from "next/image";
 export default function EcosystemSection() {
@@ -6,7 +7,7 @@ export default function EcosystemSection() {
       <div className="max-w-5xl mx-auto px-6">
         <div className="mb-3 flex items-center gap-3">
           <Image
-            src="/mimir-suite-logo.png"
+            src={assetUrl("/mimir-suite-logo.png")}
             alt=""
             width={72}
             height={48}

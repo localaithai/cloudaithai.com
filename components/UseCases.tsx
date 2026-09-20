@@ -1,3 +1,4 @@
+import { assetUrl } from "@/lib/assets";
 import { solutions } from "@/lib/site-data";
 import Image from "next/image";
 export default function UseCases({
@@ -25,7 +26,7 @@ export default function UseCases({
                 className="inline-flex items-center gap-2 rounded-full bg-[#f5f5f7] px-4 py-2 text-sm font-medium"
               >
                 <Image
-                  src={`/mimir-apps/${app.replace("Mimir ", "").toLowerCase()}.png`}
+                  src={assetUrl(`/mimir-apps/${app.replace("Mimir ", "").toLowerCase()}.png`)}
                   alt=""
                   width={28}
                   height={28}
