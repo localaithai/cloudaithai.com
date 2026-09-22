@@ -1,5 +1,5 @@
 import { assetUrl } from "@/lib/assets";
-import { appGroups, models } from "@/lib/site-data";
+import { appGroups, appMarkPath, models } from "@/lib/site-data";
 import Image from "next/image";
 export default function EcosystemSection() {
   return (
@@ -43,7 +43,7 @@ export default function EcosystemSection() {
                     className="flex items-center gap-2 text-sm text-[#1d1d1f]"
                   >
                     <Image
-                      src={`/mimir-apps/${app.toLowerCase()}.png`}
+                      src={assetUrl(appMarkPath(app))}
                       alt=""
                       width={32}
                       height={32}

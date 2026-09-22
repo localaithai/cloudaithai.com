@@ -151,7 +151,8 @@ export const routes = [
     canonicalPath: "/privacy/",
     label: "นโยบายความเป็นส่วนตัว",
     title: "นโยบายความเป็นส่วนตัว",
-    description: "การเก็บ ใช้ และคุ้มครองข้อมูลบนเว็บไซต์ CloudAI Thailand ตาม PDPA",
+    description:
+      "การเก็บ ใช้ และคุ้มครองข้อมูลบนเว็บไซต์ CloudAI Thailand ตาม PDPA",
     priority: 0.3,
     frequency: "monthly",
   },
@@ -209,6 +210,16 @@ export const footer = [
 ] as const;
 
 export const models = ["Claude", "Gemini", "GPT", "DeepSeek"] as const;
+
+/** App names carry spaces ("Second Brain"); their marks are kebab-cased. */
+export function appMarkPath(app: string): string {
+  const slug = app
+    .replace(/^Mimir /, "")
+    .toLowerCase()
+    .replace(/ /g, "-");
+  return `/mimir-apps/${slug}.png`;
+}
+
 export const appGroups = [
   {
     title: "Converters",
@@ -217,14 +228,11 @@ export const appGroups = [
       "Scan",
       "Extract",
       "Verify",
-      "Digest",
-      "Veil",
-      "Bridge",
-      "Echo",
-      "Compose",
-      "Caption",
-      "Dub",
-      "Inspect",
+      "Summarize",
+      "Redact",
+      "Translate",
+      "Transcribe",
+      "Write",
     ],
   },
   {
@@ -232,12 +240,12 @@ export const appGroups = [
     detail: "ข้อมูลแต่ละชุดอยู่ใน seat ของเครื่องนั้น",
     apps: [
       "Ledger",
-      "Quote",
-      "People",
-      "Well",
-      "Dock",
-      "Tally",
-      "Brief",
+      "Quotation",
+      "Second Brain",
+      "Intake",
+      "Reconcile",
+      "Docs",
+      "Slides",
       "Chat",
     ],
   },
@@ -286,42 +294,45 @@ export const solutions = {
     apps: [
       "Mimir Scan",
       "Mimir Extract",
-      "Mimir Compose",
-      "Mimir Caption",
-      "Mimir Quote",
+      "Mimir Write",
+      "Mimir Translate",
+      "Mimir Quotation",
     ],
   },
   creator: {
     title: "Mimir Suites Cloud สำหรับ Creator",
-    intro: "ช่วยอ่านแหล่งข้อมูล สรุป บันทึกเสียง เขียนร่าง และทำคำบรรยายจากงานของคุณ",
+    intro:
+      "ช่วยอ่านแหล่งข้อมูล สรุป บันทึกเสียง เขียนร่าง และทำสไลด์จากงานของคุณ",
     apps: [
-      "Mimir Digest",
-      "Mimir Echo",
-      "Mimir Compose",
-      "Mimir Caption",
-      "Mimir Well",
+      "Mimir Summarize",
+      "Mimir Transcribe",
+      "Mimir Write",
+      "Mimir Slides",
+      "Mimir Second Brain",
     ],
   },
   legal: {
     title: "Mimir Suites Cloud สำหรับสำนักงานกฎหมาย",
-    intro: "ช่วยอ่าน จัดข้อมูล และร่างจากเอกสารให้ทีมตรวจทานต่อ ไม่ใช่คำแนะนำทางกฎหมาย",
+    intro:
+      "ช่วยอ่าน จัดข้อมูล และร่างจากเอกสารให้ทีมตรวจทานต่อ ไม่ใช่คำแนะนำทางกฎหมาย",
     apps: [
       "Mimir Scan",
       "Mimir Extract",
       "Mimir Verify",
-      "Mimir Digest",
-      "Mimir Veil",
+      "Mimir Summarize",
+      "Mimir Redact",
     ],
   },
   healthcare: {
     title: "Mimir Suites Cloud สำหรับงานเอกสารสุขภาพ",
-    intro: "ช่วยงานธุรการ เอกสาร และสรุปสำหรับผู้รับผิดชอบ ไม่ใช้เพื่อการวินิจฉัยหรือการรักษา",
+    intro:
+      "ช่วยงานธุรการ เอกสาร และสรุปสำหรับผู้รับผิดชอบ ไม่ใช้เพื่อการวินิจฉัยหรือการรักษา",
     apps: [
       "Mimir Scan",
       "Mimir Extract",
-      "Mimir Digest",
-      "Mimir Veil",
-      "Mimir Brief",
+      "Mimir Summarize",
+      "Mimir Redact",
+      "Mimir Docs",
     ],
   },
   realestate: {
@@ -330,9 +341,9 @@ export const solutions = {
     apps: [
       "Mimir Extract",
       "Mimir Verify",
-      "Mimir Compose",
-      "Mimir Quote",
-      "Mimir Well",
+      "Mimir Write",
+      "Mimir Quotation",
+      "Mimir Second Brain",
     ],
   },
   restaurant: {
@@ -341,9 +352,9 @@ export const solutions = {
     apps: [
       "Mimir Scan",
       "Mimir Extract",
-      "Mimir Compose",
-      "Mimir Tally",
-      "Mimir Brief",
+      "Mimir Write",
+      "Mimir Reconcile",
+      "Mimir Ledger",
     ],
   },
 } as const;

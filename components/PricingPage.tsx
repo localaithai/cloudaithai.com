@@ -1,5 +1,5 @@
 import { assetUrl } from "@/lib/assets";
-import { appGroups } from "@/lib/site-data";
+import { appGroups, appMarkPath } from "@/lib/site-data";
 import Pricing from "@/components/Pricing";
 import Image from "next/image";
 export default function PricingPage() {
@@ -19,7 +19,7 @@ export default function PricingPage() {
                     className="inline-flex items-center gap-2 rounded-full bg-[#f5f5f7] px-3 py-1.5 text-sm"
                   >
                     <Image
-                      src={assetUrl(`/mimir-apps/${app.toLowerCase()}.png`)}
+                      src={assetUrl(appMarkPath(app))}
                       alt=""
                       width={24}
                       height={24}
