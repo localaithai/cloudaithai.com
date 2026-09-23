@@ -32,6 +32,10 @@ const sharedAssets: Readonly<Record<string, string>> = {
   "/mimir-apps/write.png":
     "https://assets.mimir.business/assets/shared/apps/write.0da10233fb87.png",
   "/mimir-suite-logo.png": "https://assets.mimir.business/assets/shared/brand/mimir-suite-logo.52b4d97f76ea.png",
+  "/msi-edgexpert.png": "https://assets.mimir.business/assets/sites/mimir.business/presentations/msi-edgexpert.d4296d826892.png",
+  "/acer-gn100.jpg": "https://assets.mimir.business/assets/sites/mimir.business/presentations/acer-gn100.c2d1031bbb2d.jpg",
+  "/asus-gx10.png": "https://assets.mimir.business/assets/sites/mimir.business/presentations/asus-gx10.239a2586deb1.png",
+  "/lenovo-pgx.png": "https://assets.mimir.business/assets/sites/mimir.business/presentations/lenovo-pgx.8b97ca1633d7.png",
   "/partners/ascenti-dark.png": "https://assets.mimir.business/assets/shared/partners/ascenti-dark.9ab2939100e8.png",
   "/partners/eaton.svg": "https://assets.mimir.business/assets/shared/partners/eaton.4d7cc489208e.svg",
   "/partners/ingram-micro.svg": "https://assets.mimir.business/assets/shared/partners/ingram-micro.a6c090cee0a5.svg",
