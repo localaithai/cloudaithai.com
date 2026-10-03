@@ -1,4 +1,6 @@
 const sharedAssets: Readonly<Record<string, string>> = {
+  "/mimir-suites-home.png":
+    "https://assets.mimir.business/assets/sites/mimir.business/presentations/mimir-suites-home.6e3c706ae192.png",
   "/mimir-apps/chat.png":
     "https://assets.mimir.business/assets/shared/apps/chat.6a32e40a7667.png",
   "/mimir-apps/docs.png":

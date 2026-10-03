@@ -1,78 +1,70 @@
-"use client";
-
-import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 
+import { assetUrl } from "@/lib/assets";
 import { site } from "@/lib/site";
 import { models } from "@/lib/site-data";
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-[#fbfbfd]">
-      <div className="absolute inset-0 pointer-events-none">
-        <motion.div
-          className="absolute -top-24 left-1/4 h-[34rem] w-[34rem] rounded-full bg-[#0071e3]/10 blur-3xl"
-          animate={{ x: [0, 24, 0], y: [0, -18, 0] }}
-          transition={{ duration: 14, repeat: Infinity }}
-        />
-      </div>
-      <div className="relative max-w-5xl mx-auto px-6 pt-36 pb-24 text-center">
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-[#0071e3] font-medium mb-5"
-        >
-          Mimir Suites Cloud
-        </motion.p>
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="text-5xl sm:text-7xl font-semibold tracking-[-.045em] text-[#1d1d1f]"
-        >
-          AI บนทุกเครื่อง
-          <br />
-          <span className="gradient-text">ของทีมคุณ</span>
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="max-w-2xl mx-auto mt-7 text-lg sm:text-xl text-[#6e6e73] leading-relaxed"
-        >
-          ติดตั้ง Mimir Suite บนเครื่องพนักงาน เลือกแอปและโมเดลคลาวด์ได้เอง
-          ไม่ต้องซื้อเครื่อง AI ไม่มีเซิร์ฟเวอร์ และไม่มีบริการโฮสต์จากเรา
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="mt-9 flex flex-wrap justify-center items-center gap-4"
-        >
-          <Link
-            href={site.primaryCta.href}
-            className="apple-btn apple-btn-blue"
-          >
-            {site.primaryCta.label}
-          </Link>
-          <Link href="/pricing" className="apple-link">
-            ดูรูปแบบราคา
-          </Link>
-        </motion.div>
-        <div className="mt-14">
-          <p className="text-xs text-[#6e6e73] uppercase tracking-[.16em] mb-4">
+    <section className="bg-[#fbfbfd]">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 px-6 pb-16 pt-28 sm:pt-32 lg:grid-cols-[0.95fr_1.1fr] lg:gap-12">
+        <div>
+          <p className="mb-5 font-medium text-[#0071e3]">
+            Mimir Suites Cloud
+          </p>
+          <h1 className="max-w-[14ch] text-[clamp(2.5rem,4.2vw,4.2rem)] font-semibold leading-[1.2] tracking-[-.045em] text-[#1d1d1f]">
+            AI บนทุกเครื่อง
+            <br />
+            <span className="text-[#0071e3]">ของทีมคุณ</span>
+          </h1>
+          <p className="mt-7 max-w-2xl text-lg leading-relaxed text-[#6e6e73] sm:text-xl">
+            ติดตั้ง Mimir Suite บนเครื่องพนักงาน เลือกแอปและโมเดลคลาวด์ได้เอง
+            ไม่ต้องซื้อเครื่อง AI ไม่มีเซิร์ฟเวอร์ และไม่มีบริการโฮสต์จากเรา
+          </p>
+          <div className="mt-8 flex flex-wrap items-center gap-4">
+            <Link
+              href={site.primaryCta.href}
+              className="apple-btn apple-btn-blue"
+            >
+              {site.primaryCta.label}
+            </Link>
+            <Link href="/pricing" className="apple-link min-h-11 px-2">
+              ดูรูปแบบราคา
+            </Link>
+          </div>
+          <p className="mt-4 max-w-prose text-sm leading-[1.5] text-[#6e6e73]">
+            ข้อความเอกสารถูกส่งไปยังโมเดลคลาวด์ โดยปิดบัง PII เป็นค่าเริ่มต้น
+          </p>
+        </div>
+
+        <figure className="overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm">
+          <div className="relative aspect-[3.4] overflow-hidden">
+            <Image
+              src={assetUrl("/mimir-suites-home.png")}
+              alt="ตัวอย่างหน้ารวมแอป Mimir Suites"
+              width={3016}
+              height={1894}
+              loading="eager"
+              fetchPriority="high"
+              sizes="(min-width: 1024px) 54vw, 100vw"
+              className="absolute bottom-0 left-1/2 h-auto w-[190%] max-w-none -translate-x-1/2 translate-y-[4.4%] object-contain object-bottom"
+            />
+          </div>
+          <figcaption className="px-4 py-3 text-sm leading-[1.5] text-[#6e6e73]">
+            ตัวอย่างหน้ารวมแอป Mimir Suites · Cloud edition ใช้โมเดลคลาวด์
+          </figcaption>
+        </figure>
+
+        <div className="flex flex-col gap-3 border-y border-black/10 py-4 sm:flex-row sm:items-center sm:gap-6 lg:col-span-2">
+          <p className="m-0 text-xs font-medium uppercase tracking-[.12em] text-[#6e6e73]">
             Choose a model for the work
           </p>
-          <div className="flex flex-wrap justify-center gap-2">
+          <ul className="m-0 flex list-none flex-wrap gap-x-3 gap-y-1 p-0 text-sm text-[#1d1d1f]">
             {models.map((model) => (
-              <span
-                key={model}
-                className="rounded-full border border-black/5 bg-white px-4 py-2 text-sm font-medium text-[#1d1d1f] shadow-sm"
-              >
-                {model}
-              </span>
+              <li key={model}>{model}</li>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
     </section>

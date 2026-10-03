@@ -6,7 +6,10 @@ const lastModified = new Date("2026-09-04T00:00:00.000Z");
 export default function sitemap(): MetadataRoute.Sitemap {
   return routes.map((route) => ({
     url: absoluteUrl(route.canonicalPath),
-    lastModified,
+    lastModified:
+      route.canonicalPath === "/"
+        ? new Date("2026-10-03T00:00:00+07:00")
+        : lastModified,
     changeFrequency: route.frequency,
     priority: route.priority,
   }));
