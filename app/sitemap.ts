@@ -1,14 +1,15 @@
 import type { MetadataRoute } from "next";
-import { routes } from "@/lib/site-data";
+import { REVIEWED_DATE, routes } from "@/lib/site-data";
 import { absoluteUrl } from "@/lib/site";
 export const dynamic = "force-static";
 const lastModified = new Date("2026-09-04T00:00:00.000Z");
+const scopeReviewedPaths = new Set(["/", "/ecosystem", "/pricing", "/solutions/creator"]);
 export default function sitemap(): MetadataRoute.Sitemap {
   return routes.map((route) => ({
     url: absoluteUrl(route.canonicalPath),
     lastModified:
-      route.canonicalPath === "/"
-        ? new Date("2026-10-03T00:00:00+07:00")
+      scopeReviewedPaths.has(route.path)
+        ? new Date(`${REVIEWED_DATE}T00:00:00+07:00`)
         : lastModified,
     changeFrequency: route.frequency,
     priority: route.priority,

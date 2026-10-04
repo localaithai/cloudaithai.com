@@ -9,7 +9,7 @@ import Partners from "@/components/Partners";
 import Pricing from "@/components/Pricing";
 import ScrollShowcase from "@/components/ScrollShowcase";
 import Solutions from "@/components/Solutions";
-import { metadataFor } from "@/lib/site-data";
+import { metadataFor, mimirScopeNotice } from "@/lib/site-data";
 
 export const metadata = metadataFor("/");
 
@@ -19,6 +19,9 @@ export default function Home() {
       <Navbar />
       <main id="content" className="bg-[#fbfbfd]">
         <Hero />
+        <p className="mx-auto max-w-5xl px-6 pb-8 text-sm leading-7 text-[#6e6e73]">
+          {mimirScopeNotice}
+        </p>
         <ScrollShowcase />
         <Models />
         <Solutions />

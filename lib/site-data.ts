@@ -4,6 +4,10 @@ import { TITLE_SUFFIX, site } from "@/lib/site";
 import { assertSnippet } from "@/lib/snippet";
 import { pageSocial } from "@/lib/social";
 
+export const REVIEWED_DATE = "2026-10-05";
+export const mimirScopeNotice =
+  "Slides, Image Studio และ Video Studio หยุดพัฒนาไว้ และไม่รวมอยู่ใน Mimir Suites ทั้ง Local และ Cloud";
+
 type Frequency = "weekly" | "monthly";
 type RouteDefinition = {
   path: string;
@@ -245,7 +249,6 @@ export const appGroups = [
       "Intake",
       "Reconcile",
       "Docs",
-      "Slides",
       "Chat",
     ],
   },
@@ -302,12 +305,11 @@ export const solutions = {
   creator: {
     title: "Mimir Suites Cloud สำหรับ Creator",
     intro:
-      "ช่วยอ่านแหล่งข้อมูล สรุป บันทึกเสียง เขียนร่าง และทำสไลด์จากงานของคุณ",
+      "ช่วยอ่านแหล่งข้อมูล บันทึกเสียง ร่างข้อความด้วย Mimir Write และสรุปงานด้วย Summarize",
     apps: [
       "Mimir Summarize",
       "Mimir Transcribe",
       "Mimir Write",
-      "Mimir Slides",
       "Mimir Second Brain",
     ],
   },

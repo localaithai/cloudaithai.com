@@ -1,5 +1,5 @@
 import { absoluteUrl, site } from "@/lib/site";
-import { faqs, routes } from "@/lib/site-data";
+import { faqs, mimirScopeNotice, REVIEWED_DATE, routes } from "@/lib/site-data";
 
 export const dynamic = "force-static";
 
@@ -16,6 +16,8 @@ export function GET() {
     "- Document text goes to the selected cloud model after personally identifiable information is redacted by default.",
     "- Setup includes choosing a backup folder for each seat.",
     "- The Cloud edition needs no AI machine, worker or hosted server from CloudAI Thailand.",
+    `- ${mimirScopeNotice}`,
+    `- Content last reviewed: ${REVIEWED_DATE}.`,
     "",
     "## Frequently asked questions",
     ...questions,

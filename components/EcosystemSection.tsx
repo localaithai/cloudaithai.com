@@ -1,5 +1,5 @@
 import { assetUrl } from "@/lib/assets";
-import { appGroups, appMarkPath, models } from "@/lib/site-data";
+import { appGroups, appMarkPath, mimirScopeNotice, models } from "@/lib/site-data";
 import Image from "next/image";
 export default function EcosystemSection() {
   return (
@@ -20,6 +20,9 @@ export default function EcosystemSection() {
         </h2>
         <p className="mt-4 max-w-2xl text-lg text-[#6e6e73]">
           Mimir Suite รวมแอปบนเครื่องของแต่ละ seat และเชื่อมต่อโมเดลคลาวด์ตามงาน
+        </p>
+        <p className="mt-4 max-w-2xl text-sm leading-7 text-[#6e6e73]">
+          {mimirScopeNotice}
         </p>
         <div className="mt-8 flex flex-wrap gap-2">
           {models.map((model) => (

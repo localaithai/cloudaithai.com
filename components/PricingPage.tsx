@@ -1,5 +1,5 @@
 import { assetUrl } from "@/lib/assets";
-import { appGroups, appMarkPath } from "@/lib/site-data";
+import { appGroups, appMarkPath, mimirScopeNotice } from "@/lib/site-data";
 import Pricing from "@/components/Pricing";
 import Image from "next/image";
 export default function PricingPage() {
@@ -8,6 +8,9 @@ export default function PricingPage() {
       <Pricing />
       <section className="pb-24">
         <div className="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-5">
+          <p className="text-sm leading-7 text-[#6e6e73] md:col-span-2">
+            {mimirScopeNotice}
+          </p>
           {appGroups.map((group) => (
             <article key={group.title} className="apple-card p-7">
               <h2 className="text-2xl font-semibold">{group.title}</h2>

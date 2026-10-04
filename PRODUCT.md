@@ -12,6 +12,8 @@ Thai SMEs and solo operators who want the Mimir Suite experience without buying 
 
 Sell Mimir Suites Cloud as the fastest no-hardware entry point, while explaining per-machine seats, cloud model use, backups, and data handling honestly.
 
+Mimir Suites focuses on supported document, knowledge, and business apps. Slides, Image Studio, and Video Studio are paused and are not included in either the Cloud or Local edition.
+
 ## Brand Personality
 
 Clear, calm, and lightweight. The experience should feel like capable software that is easy to start, not an infrastructure project.
