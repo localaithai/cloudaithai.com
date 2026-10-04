@@ -190,7 +190,14 @@ export function metadataFor(path: RoutePath): Metadata {
 
 for (const route of routes) metadataFor(route.path);
 
+export const blogIndex = {
+  title: "ข่าวโมเดล AI บนคลาวด์",
+  description: "ข่าวโมเดลคลาวด์สำหรับงานเอกสาร พร้อมวิธีเลือกและประเมินความเสี่ยง โดยข้อความเอกสารถูกส่งไปคลาวด์หลังปิดข้อมูลส่วนบุคคลตามค่าเริ่มต้น",
+  navLabel: "ข่าวและอัปเดต",
+} as const;
+
 export const navigation = [
+  { href: "/blog/", label: blogIndex.navLabel, external: false },
   { href: "/how-it-works", label: "วิธีใช้งาน", external: false },
   { href: "/solutions/ecommerce", label: "Solutions", external: false },
   { href: "/pricing", label: "ราคา", external: false },
@@ -199,6 +206,7 @@ export const navigation = [
 ] as const;
 
 export const footer = [
+  { href: "/blog/", label: blogIndex.navLabel, external: false },
   { href: "/pricing", label: "Pricing", external: false },
   { href: "/how-it-works", label: "How it works", external: false },
   { href: "/compare", label: "Compare", external: false },

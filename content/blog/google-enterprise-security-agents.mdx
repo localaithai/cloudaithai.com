@@ -1,0 +1,49 @@
+---
+title: "คนอนุมัติก่อน Agent แตะเอกสารสำคัญ"
+description: "ข่าว security agents ชวนกำหนด human approval ของงานเอกสารกฎหมายบน cloud โดยแยกอ่าน ร่าง แก้ ส่ง และถอนสิทธิ์"
+kind: "news"
+query: "Gemini Enterprise security agents human approval legal document cloud privileged actions"
+cluster: "/solutions/legal/"
+source: "google-enterprise-security-agents"
+published: "2026-10-05"
+reviewed: "2026-10-05"
+newsDate: "2026-09-29"
+summary: "Agent งานเอกสารสำคัญควรเริ่มอ่านและร่างอย่างจำกัด การแก้ ส่งหรือเปลี่ยนสิทธิ์ต้องมีคนอนุมัติรายการชัด พร้อมบันทึกและวิธียกเลิก"
+faq: [{"question":"อนุมัติร่างเท่ากับอนุมัติส่งไหม","answer":"ควรแยกกัน ให้การส่งระบุฉบับ ผู้รับและขอบเขตข้อมูลที่คนอนุมัติเห็นชัด"},{"question":"มี human approval แล้วไม่ต้องตรวจสิทธิ์ไฟล์ไหม","answer":"ยังต้องตรวจ สิทธิ์อ่านและขอบเขตเครื่องมือเป็นอีกชั้น ไม่ขยายตามการอนุมัติงานหนึ่ง"}]
+citations: [{"title":"Google Cloud partners deliver new security agents and AI defenses with Gemini Enterprise","url":"https://cloud.google.com/blog/products/identity-security/google-cloud-partners-deliver-new-security-agents-and-ai-defenses-with-gemini-enterprise","publisher":"Google Cloud","published":"2026-09-29","accessed":"2026-10-05"},{"title":"Zero Trust security for AI agents","url":"https://www.youtube.com/watch?v=G6Aot9UCePU","publisher":"Microsoft Mechanics","published":"2026-06-30","accessed":"2026-10-05"}]
+hero: {"src":"https://assets.mimir.business/assets/sites/aisolutionsthailand.com/general/hero.9917f9cb9829.webp","alt":"ภาพประกอบการตรวจและอนุมัติเอกสารสำคัญก่อนส่งงาน","caption":"ภาพประกอบการทำงานเอกสารจาก Mimir ไม่ใช่ภาพผลิตภัณฑ์ในข่าว และไม่สื่อว่าต้องซื้อฮาร์ดแวร์ AI เพื่อใช้ Cloud edition","credit":"Mimir / aisolutionsthailand.com","sourceUrl":"https://aisolutionsthailand.com/"}
+videos: [{"url":"https://www.youtube.com/watch?v=G6Aot9UCePU","title":"Zero Trust security for AI agents","publisher":"Microsoft Mechanics","published":"2026-06-30","context":true}]
+---
+
+## ตัวอย่าง Security ชวนทบทวนสิทธิ์งานเอกสาร
+
+Google Cloud ประกาศ security agents จากพันธมิตรวันที่ 29 กันยายน 2026 ตัวอย่าง Britive ให้คนอนุมัติก่อนถอน privileged session ข่าวไม่ใช่ผลระบบเอกสารกฎหมาย [แหล่งข่าวทางการ](https://cloud.google.com/blog/products/identity-security/google-cloud-partners-deliver-new-security-agents-and-ai-defenses-with-gemini-enterprise)
+
+งานเอกสารกฎหมายมีทั้งค้นข้อความ ร่างข้อเสนอและการส่งหรือแก้ฉบับที่คนอื่นใช้ การให้ agent ช่วยขั้นแรกไม่ควรขยายสิทธิ์ถึงทุกขั้นโดยอัตโนมัติ ทีมควรกำหนดเจ้าของเอกสารและสิ่งที่ต้องอนุมัติก่อนเรียกเครื่องมือที่มีผลจริง ไม่ใช้คำตอบโมเดลแทนการตัดสินใจของคนรับผิดชอบ
+
+## แบ่งการอ่านจากการกระทำที่มีผล
+
+ข้อวิเคราะห์คือผูกการอนุมัติกับการกระทำเฉพาะ ไม่ใช่อนุมัติให้ agent ทำได้ทุกอย่างตลอด session แสดงแฟ้ม เป้าหมายและผลที่คาดก่อนให้คนยืนยัน การอนุมัติร่างข้อความไม่ได้หมายความว่าอนุญาตส่งให้ผู้รับภายนอกด้วย
+
+| ขั้นงาน | ขอบเขตที่เสนอ |
+| --- | --- |
+| ค้นและอ่าน | จำกัดเอกสารที่ผู้ใช้มีสิทธิ์ |
+| ร่าง | บอกว่าเป็น draft และตรวจต้นฉบับ |
+| แก้หรือส่ง | แสดงฉบับ ผู้รับและขออนุมัติเฉพาะงาน |
+| เปลี่ยนสิทธิ์ | คนมีอำนาจยืนยันพร้อม log การเปลี่ยน |
+
+นี่เป็น workflow ที่เสนอ ไม่ใช่คำแนะนำข้อกฎหมายหรือ feature list ของ Gemini Enterprise ให้ผู้รับผิดชอบงานกำหนดเกณฑ์ที่เหมาะกับเอกสารจริงและตรวจว่าเครื่องมือบังคับได้
+
+## ทดลองการอนุมัติด้วยระบบจำลอง
+
+ใช้ระบบจำลองที่ไม่มีการส่งจริง ทดลองอนุมัติ ปฏิเสธและปล่อยคำขอหมดอายุ ตรวจว่า agent ไม่เรียกเครื่องมือก่อนอนุมัติและไม่ใช้การอนุมัติเก่ากับแฟ้มใหม่ เพิ่มกรณีเอกสารชักนำให้เปิดไฟล์อื่น เพื่อดูว่าขอบเขตสิทธิ์ยังถูกยึดตามผู้ใช้
+
+กำหนดวิธีหยุดงานเมื่อผู้อนุมัติถอนสิทธิ์หรือแก้คำสั่ง ตรวจสิ่งที่ส่งไปแล้วแยกจากงานที่ยังรอ และให้ผู้ใช้เห็นสถานะชัด ระบบที่มีคนกดยืนยันแต่ไม่เห็นฉบับหรือผู้รับอาจยังไม่ช่วยให้ตัดสินอย่างมีข้อมูล
+
+## คงเจ้าของงานไว้ในจุดตัดสินใจ
+
+[Zero Trust security for AI agents](https://www.youtube.com/watch?v=G6Aot9UCePU) ของ Microsoft Mechanics เผยแพร่ก่อนข่าว ใช้เป็นพื้นหลังเรื่องตัวตนและสิทธิ์เครื่องมือ ไม่ใช่เดโม Google หรือผลรับรองงานกฎหมาย
+
+Mimir Suites Cloud ใช้ Suite บนเครื่องผู้ใช้โดยไม่ต้องซื้อฮาร์ดแวร์ AI ข้อความเอกสารถูกส่งไปโมเดล cloud โดยปิดบัง PII เป็นค่าเริ่มต้น ต้องตรวจข้อมูลก่อนส่ง การปิดบังไม่รับรองความนิรนามหรือ compliance ครบ และข่าวไม่ยืนยัน integration ใน Suite
+
+บทความนี้ไม่มีผล audit หรือการรับรองคำตอบทางกฎหมาย เตรียมรายการการกระทำที่ต้องอนุมัติร่วมกับ [Cloud AI สำหรับงานเอกสารกฎหมาย](/solutions/legal/)

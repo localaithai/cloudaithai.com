@@ -1,0 +1,49 @@
+---
+title: "Cloud Clone กับสำรองแต่ละเครื่อง"
+description: "ข่าว EBS cross-account clones ชวนแยกวงจรข้อมูล cloud account จาก backup ของ Suite แต่ละเครื่อง พร้อมสิทธิ์ ระยะเก็บและวิธีคืน"
+kind: "news"
+query: "EBS cross account clones local per seat Suite backup different data lifecycles"
+cluster: "/how-it-works/"
+source: "aws-ebs-cross-account-clones"
+published: "2026-10-05"
+reviewed: "2026-10-05"
+newsDate: "2026-09-09"
+summary: "Cloud volume clone กับ backup ของ Suite แต่ละเครื่องเป็นคนละระบบ ต้องกำหนดข้อมูล สิทธิ์และวิธีคืนของแต่ละชุด ไม่ถือว่าสำเนาที่สร้างได้แทนแผนกู้คืนครบ"
+faq: [{"question":"มี clone แล้วเท่ากับ backup พร้อมไหม","answer":"ยังต้องตรวจว่าครอบคลุมอะไรและคืนงานได้จริง พร้อมสิทธิ์ ระยะเก็บและผู้ดูแลของสำเนา"},{"question":"แต่ละ seat ใช้ backup ชุดเดียวกันอัตโนมัติไหม","answer":"แต่ละ install มีข้อมูลของตน ต้องกำหนดโฟลเดอร์ ผู้ดูแลและวิธีสำรองตามการตั้งค่า ไม่ถือว่าเป็นคลังร่วมอัตโนมัติ"}]
+citations: [{"title":"Introducing Amazon EBS Volume Clones across AWS accounts","url":"https://aws.amazon.com/blogs/aws/introducing-amazon-ebs-volume-clones-across-aws-accounts/","publisher":"AWS","published":"2026-09-09","accessed":"2026-10-05"},{"title":"Amazon EBS: Scale enterprise workloads with enhanced block storage | Amazon Web Services","url":"https://www.youtube.com/watch?v=kczfTlHayps","publisher":"Amazon Web Services","published":"2025-10-24","accessed":"2026-10-05"}]
+hero: {"src":"https://assets.mimir.business/assets/sites/aisolutionsthailand.com/general/hero.9917f9cb9829.webp","alt":"ภาพประกอบการจัดเอกสารและวางแผนสำรองข้อมูลสำหรับงาน Cloud AI","caption":"ภาพประกอบการทำงานเอกสารจาก Mimir ไม่ใช่ภาพผลิตภัณฑ์ในข่าว และไม่สื่อว่าต้องซื้อฮาร์ดแวร์ AI เพื่อใช้ Cloud edition","credit":"Mimir / aisolutionsthailand.com","sourceUrl":"https://aisolutionsthailand.com/"}
+videos: [{"url":"https://www.youtube.com/watch?v=kczfTlHayps","title":"Amazon EBS: Scale enterprise workloads with enhanced block storage | Amazon Web Services","publisher":"Amazon Web Services","published":"2025-10-24","context":true}]
+---
+
+## สำเนาแต่ละแบบมีขอบเขตของตน
+
+AWS เปิด EBS volume clones ข้ามบัญชีวันที่ 9 กันยายน 2026 ภายใน Availability Zone เดียวกัน คุณสมบัตินี้ไม่ใช่ระบบ backup ของ Mimir Suites [แหล่งข่าวทางการ](https://aws.amazon.com/blogs/aws/introducing-amazon-ebs-volume-clones-across-aws-accounts/)
+
+ข่าวสร้างสำเนา cloud ได้สะดวกเป็นเหตุให้ทบทวนว่าธุรกิจมีข้อมูลกี่ชุด แต่เอกสารบนเครื่องผู้ใช้ ผลงานและสำเนาทดลองอาจอยู่คนละระบบ การสร้างสำเนาสำเร็จไม่รับรองว่าจะคืนงานครบ ต้องรู้สิ่งที่สำเนาครอบคลุมและขั้นกลับมาให้คนทำงานต่อ
+
+## ทำทะเบียนข้อมูลและสำเนา
+
+ข้อวิเคราะห์คือแยกทะเบียน cloud infrastructure จาก backup folder ของแต่ละ seat ใน Suite ระบุเจ้าของและสิทธิ์ของสำเนาที่เพิ่มขึ้น เพราะข้อมูลทดลองหรือสำเนาข้ามบัญชียังมีความรับผิดชอบ แม้ไม่ได้เป็นระบบที่ใช้งานประจำ
+
+| ชุดข้อมูล | สิ่งที่ต้องกำหนด |
+| --- | --- |
+| ต้นฉบับ | เจ้าของ รุ่นและตำแหน่งใช้งาน |
+| สำเนาทดลอง | บัญชีหรือเครื่องที่รับ สิทธิ์และวันลบ |
+| Backup | ข้อมูลที่ครอบคลุม รอบและผู้ดูแล |
+| คืนงาน | ปลายทาง ขั้นทดสอบและสิทธิ์หลังคืน |
+
+ตารางนี้เป็นแผนวงจรข้อมูลที่เสนอ ไม่ใช่ขั้นตั้งค่า AWS หรือคำรับรอง backup ของคุณ แยกข้อกำหนดของแต่ละระบบไว้ชัด และไม่ถือว่าการเข้ารหัสแทนการกำหนดผู้มีสิทธิ์ได้
+
+## ทดลองคืนก่อนเรียกว่าสำรองพร้อม
+
+ใช้เอกสารจำลองทดสอบคืนสำเนาไปสภาพแวดล้อมที่ได้รับอนุญาต ตรวจว่าไฟล์ รุ่นและ configuration จำเป็นกลับมาครบหรือไม่ ให้ผู้ใช้ทำงานตัวอย่างหลังคืน แล้วเก็บเวลาที่ใช้และสิ่งที่ต้องทำด้วยมือ การตรวจเพียงว่ามีไฟล์สำรองอยู่ยังไม่บอกความพร้อมคืนบริการ
+
+ลองถอนสิทธิ์สำเนาและลบเมื่อสิ้นสุดการทดลอง ตรวจสำเนาย่อยกับ log ที่ยังคงอยู่แยกกัน สำหรับการย้ายคนหรือเครื่อง ให้กำหนดผู้รับข้อมูลและสิทธิ์ใหม่ ไม่ส่ง folder ทั้งชุดโดยไม่ตรวจว่ามีงานหรือเอกสารของใครรวมอยู่
+
+## กำหนดสิทธิ์เมื่อย้ายหรือเลิกใช้
+
+[Amazon EBS: Scale enterprise workloads with enhanced block storage | Amazon Web Services](https://www.youtube.com/watch?v=kczfTlHayps) ของ Amazon Web Services เป็นภาพรวม EBS ปี 2025 รวมแนวคิด volume clones เดิม ใช้เป็นพื้นหลัง ไม่ใช่เดโม feature ข้ามบัญชีเดือนกันยายน 2026 หรือระบบสำรอง Suite
+
+Mimir Suites Cloud เป็น Suite บนเครื่องผู้ใช้ ไม่ต้องซื้อฮาร์ดแวร์ AI และแต่ละ seat มี install กับข้อมูลของตน ข้อความเอกสารถูกส่งไปโมเดล cloud โดยปิดบัง PII เป็นค่าเริ่มต้น ยังต้องตรวจข้อมูลก่อนส่งและไม่รับรองการปิดบังครบ ข่าว AWS ไม่ยืนยันว่า Suite ใช้ EBS
+
+บทความนี้ไม่มีผลกู้คืนหรือราคาที่เราทดสอบ เตรียมทะเบียนสำเนากับขั้นคืนงานร่วมกับ [วิธีทำงานของ Mimir Suites Cloud](/how-it-works/)

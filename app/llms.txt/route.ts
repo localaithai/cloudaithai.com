@@ -1,3 +1,4 @@
+import { blog } from "@/lib/blog";
 import { absoluteUrl, site } from "@/lib/site";
 import { faqs, mimirScopeNotice, REVIEWED_DATE, routes } from "@/lib/site-data";
 
@@ -26,5 +27,5 @@ export function GET() {
     ...pages,
     "",
   ].join("\n");
-  return new Response(body, { headers: { "Content-Type": "text/plain; charset=utf-8" } });
+  return new Response(body + "\n" + blog.llmsSection(), { headers: { "Content-Type": "text/plain; charset=utf-8" } });
 }

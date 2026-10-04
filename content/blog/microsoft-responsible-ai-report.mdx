@@ -1,0 +1,49 @@
+---
+title: "ใครดูแลแต่ละชั้นของ Cloud AI"
+description: "รายงาน Responsible AI ชวนแบ่งหน้าที่โมเดล platform และ Suite บนเครื่อง เพื่อให้แก้ปัญหา workflow เอกสาร cloud ได้ตรงส่วน"
+kind: "news"
+query: "Responsible AI report models platforms desktop Suite cloud workflow responsibility"
+cluster: "/methodology/"
+source: "microsoft-responsible-ai-report"
+published: "2026-10-05"
+reviewed: "2026-10-05"
+newsDate: "2026-09-01"
+summary: "Workflow cloud ต้องมีเจ้าของแต่ละชั้น: โมเดล บริการ และแอปบนเครื่อง พร้อมเกณฑ์และ log ที่เชื่อมเหตุได้ ไม่รวมทุกปัญหาไว้ที่โมเดล"
+faq: [{"question":"โมเดลผ่านเกณฑ์แล้วแอปผ่านด้วยไหม","answer":"ยังต้องตรวจอ่านไฟล์ สิทธิ์ การจัดข้อมูลและผล workflow ของแอป โมเดลเป็นหนึ่งชั้นของระบบ"},{"question":"ควรส่ง log ทั้งเอกสารให้ support ไหม","answer":"เก็บและส่งเฉพาะที่จำเป็นตามขอบเขตข้อมูล ใช้รหัสงานและ error เพื่อเริ่มวินิจฉัยโดยไม่เผยเนื้อหาเกินเหตุ"}]
+citations: [{"title":"Responsible AI in 2026: How we are adapting for what’s ahead","url":"https://blogs.microsoft.com/on-the-issues/2026/09/01/responsible-ai-in-2026-how-we-are-adapting-for-whats-ahead/","publisher":"Microsoft","published":"2026-09-01","accessed":"2026-10-05"},{"title":"Zero Trust security for AI agents","url":"https://www.youtube.com/watch?v=G6Aot9UCePU","publisher":"Microsoft Mechanics","published":"2026-06-30","accessed":"2026-10-05"}]
+hero: {"src":"https://assets.mimir.business/assets/sites/aisolutionsthailand.com/general/hero.9917f9cb9829.webp","alt":"ภาพประกอบการจัดขั้นตอนและผู้รับผิดชอบงานเอกสาร Cloud AI","caption":"ภาพประกอบการทำงานเอกสารจาก Mimir ไม่ใช่ภาพผลิตภัณฑ์ในข่าว และไม่สื่อว่าต้องซื้อฮาร์ดแวร์ AI เพื่อใช้ Cloud edition","credit":"Mimir / aisolutionsthailand.com","sourceUrl":"https://aisolutionsthailand.com/"}
+videos: [{"url":"https://www.youtube.com/watch?v=G6Aot9UCePU","title":"Zero Trust security for AI agents","publisher":"Microsoft Mechanics","published":"2026-06-30","context":true}]
+---
+
+## ระบบหลายชั้นต้องมีคนรับงานหลายส่วน
+
+Microsoft เผยรายงาน Responsible AI ฉบับที่สามวันที่ 1 กันยายน 2026 โดยแยกโมเดล platform services และ applications เป็นชั้นของการจัดการ [แหล่งข่าวทางการ](https://blogs.microsoft.com/on-the-issues/2026/09/01/responsible-ai-in-2026-how-we-are-adapting-for-whats-ahead/)
+
+เมื่อ workflow เอกสารผิด ผู้ใช้มักเรียกรวมว่า AI ไม่ทำงาน แต่สาเหตุอาจเป็นอ่านไฟล์ผิด บัญชีบริการหมดสิทธิ์หรือคำตอบโมเดลไม่ผ่าน การแบ่งหน้าที่ให้ชัดช่วยส่งเรื่องถึงคนที่แก้ได้ ไม่ต้องเริ่มสอบสวนทุกชั้นใหม่ทุกครั้ง
+
+## ผูกปัญหากับเจ้าของที่แก้ได้
+
+ข้อวิเคราะห์คือทำแผนผังจากไฟล์ต้นทางจนผลพร้อมใช้ พร้อมเจ้าของและหลักฐานต่อขั้น แยกการยืนยันคุณภาพโมเดลออกจากการตรวจสิทธิ์บริการและความถูกต้องของแอปบนเครื่อง ไม่มีชั้นใดรับรองทุกส่วนแทนกัน
+
+| ชั้นระบบ | หน้าที่และหลักฐาน |
+| --- | --- |
+| แอปบนเครื่อง | อ่านไฟล์ จัดข้อมูลและเก็บรุ่นงาน |
+| บริการและบัญชี | สิทธิ์ endpoint error และเงื่อนไขข้อมูล |
+| โมเดล | ผลคำตอบ รุ่นและเกณฑ์คุณภาพ |
+| คนตรวจ | ต้นฉบับ การอนุมัติและเหตุที่แก้งาน |
+
+ตารางนี้เป็นกรอบแบ่งหน้าที่ที่เสนอ ไม่ใช่การรับรองของ Microsoft ให้ระบุคนรับเรื่องจริงและขอบเขตบริการในโครงการ ไม่ใส่ชื่อฝ่ายกว้าง ๆ โดยไม่มีวิธีส่งงาน
+
+## ทดลองเหตุที่ต่างชั้นกัน
+
+ทดลองเหตุจำลองทีละชั้น เช่น ไฟล์อ่านไม่ได้ token บัญชีถูกถอนหรือคำตอบไม่ผ่าน ดูว่าผู้ใช้เห็นสถานะอะไรและเก็บหลักฐานพอส่งต่อหรือไม่ ใช้รหัสงานเชื่อมเหตุการณ์โดยหลีกเลี่ยงเก็บข้อความเอกสารลับเกินจำเป็น
+
+กำหนดขั้นหลังอัปเดตแอปหรือเปลี่ยนโมเดล มีชุดตรวจเดิมและทางกลับที่บริการรองรับ หากเปลี่ยนหลายส่วนพร้อมกันให้บันทึกเหตุและผลที่ต้องตรวจใหม่ การรักษา baseline ช่วยแยกว่าความผิดพลาดเกิดจากข้อมูลหรือการเปลี่ยนระบบ
+
+## รักษาบันทึกที่ช่วยคืนบริการ
+
+[Zero Trust security for AI agents](https://www.youtube.com/watch?v=G6Aot9UCePU) ของ Microsoft Mechanics เผยแพร่ก่อนรายงานจาก Microsoft Mechanics ใช้เป็นพื้นหลัง identity เครื่องมือและข้อมูล ไม่ใช่การประเมิน Suite หรือหลักฐานว่าระบบของคุณผ่านมาตรฐาน Microsoft
+
+Mimir Suites Cloud เป็น Suite บนเครื่องผู้ใช้ ไม่ต้องซื้อฮาร์ดแวร์ AI และใช้โมเดล cloud ข้อความเอกสารถูกส่งออกโดยปิดบัง PII เป็นค่าเริ่มต้น ยังต้องตรวจขอบเขตข้อมูลและไม่ถือว่าปิดบังได้ครบทุกกรณี แต่ละ install มีข้อมูลของตนจึงต้องกำหนดผู้ดูแลตามเครื่อง
+
+เราไม่ได้รายงานผล audit หรือการรับรอง compliance เตรียมผังผู้รับผิดชอบและเกณฑ์ร่วมกับ [วิธีประเมิน Cloud AI](/methodology/)

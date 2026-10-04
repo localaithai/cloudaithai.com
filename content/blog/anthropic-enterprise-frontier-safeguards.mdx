@@ -1,0 +1,49 @@
+---
+title: "Cloud Monitoring กับคนที่เห็นข้อมูล"
+description: "ข่าว Enterprise Frontier Safeguards ชวนถามที่เก็บ ระยะเก็บและสิทธิ์คนตรวจข้อมูล cloud แยกกัน ก่อนใช้กับเอกสารธุรกิจ"
+kind: "news"
+query: "Enterprise Frontier Safeguards cloud monitoring retention review access Thai"
+cluster: "/methodology/"
+source: "anthropic-enterprise-frontier-safeguards"
+published: "2026-10-05"
+reviewed: "2026-10-05"
+newsDate: "2026-09-01"
+summary: "Cloud monitoring ต้องตอบว่าข้อมูลอะไรอยู่ที่ไหน เก็บนานเท่าใดและใครตรวจได้ การควบคุม infrastructure ไม่แทนการกำหนดสิทธิ์และวงจรลบข้อมูล"
+faq: [{"question":"ลูกค้าควบคุม cloud แล้วใครก็อ่าน log ได้ไหม","answer":"ควรแยกสิทธิ์บริหารกับสิทธิ์อ่านเนื้อหา และกำหนดคนอนุมัติเปิดดูตามงาน"},{"question":"ลบข้อมูลหลักแล้วสำรองถูกลบด้วยไหม","answer":"ต้องตรวจ lifecycle ของแต่ละสำเนา ไม่ถือว่าการลบจุดหนึ่งครอบคลุม log และ backup อัตโนมัติ"}]
+citations: [{"title":"Developing Enterprise Frontier Safeguards with our customers","url":"https://www.anthropic.com/news/enterprise-frontier-safeguards","publisher":"Anthropic","published":"2026-09-01","accessed":"2026-10-05"},{"title":"Building Enterprise Frontier Safeguards with our customers","url":"https://www.youtube.com/watch?v=FoteuzPpx7E","publisher":"Claude","published":"2026-09-01","accessed":"2026-10-05"}]
+hero: {"src":"https://assets.mimir.business/assets/sites/aisolutionsthailand.com/general/hero.9917f9cb9829.webp","alt":"ภาพประกอบงานเอกสารและการกำหนดสิทธิ์ตรวจข้อมูล Cloud AI","caption":"ภาพประกอบการทำงานเอกสารจาก Mimir ไม่ใช่ภาพผลิตภัณฑ์ในข่าว และไม่สื่อว่าต้องซื้อฮาร์ดแวร์ AI เพื่อใช้ Cloud edition","credit":"Mimir / aisolutionsthailand.com","sourceUrl":"https://aisolutionsthailand.com/"}
+videos: [{"url":"https://www.youtube.com/watch?v=FoteuzPpx7E","title":"Building Enterprise Frontier Safeguards with our customers","publisher":"Claude","published":"2026-09-01","context":false}]
+---
+
+## ระบบเฝ้าดูมีข้อมูลอีกชุดหนึ่ง
+
+Anthropic ประกาศ EFS วันที่ 1 กันยายน 2026 โดยให้ข้อมูล monitoring อยู่ใน cloud ที่ลูกค้าควบคุมและทีมลูกค้าตรวจ flag พร้อม rollout เป็นระยะ [แหล่งข่าวทางการ](https://www.anthropic.com/news/enterprise-frontier-safeguards)
+
+การใช้ AI กับเอกสารอาจสร้างข้อมูลหลายชุด ทั้งข้อความที่ส่ง ผลตอบและเหตุการณ์ตรวจสอบ ทีมธุรกิจควรถามเรื่องแต่ละชุด ไม่ถือว่าเงื่อนไขของเอกสารต้นฉบับครอบคลุม log ด้วย ใครเห็นข้อมูลเมื่อเกิด flag และข้อมูลเหล่านั้นถูกเก็บนานเท่าใดมีผลต่อขอบเขตที่เจ้าของงานอนุญาต
+
+## ถามที่เก็บ ระยะเก็บและคนตรวจแยกกัน
+
+ข้อวิเคราะห์คือแยกสิทธิ์บริหาร cloud จากสิทธิ์อ่านเนื้อหาที่ถูกเฝ้าดู ผู้ดูแล infrastructure อาจไม่ควรได้สิทธิ์ดูเอกสารทุกฉบับ ให้ทำรายการบทบาทและขั้นเปิดสิทธิ์เมื่อจำเป็น พร้อมเหตุผลที่ตรวจตามได้
+
+| ชุดข้อมูล | คำถามที่ต้องมีคำตอบ |
+| --- | --- |
+| คำขอและผล | มีข้อความอะไรอยู่ใน monitoring |
+| ที่เก็บ | บัญชี region และผู้ควบคุมที่ตั้งค่าได้ |
+| Retention | กำหนดระยะ ลบและจัดการสำรองอย่างไร |
+| Review | ใครเห็น flag เนื้อหาและอนุมัติการเปิดดู |
+
+ตารางนี้เป็นเกณฑ์ตรวจที่เสนอ ไม่ใช่ configuration EFS ที่เรายืนยัน หากบางระบบต้องเก็บเหตุการณ์ ให้ระบุข้อมูลเท่าที่จำเป็นและเจ้าของนโยบาย ไม่เปิดบันทึกทุกอย่างเพียงเพื่อให้ตรวจง่าย
+
+## ทดลองเหตุการณ์กับข้อมูลจำลอง
+
+สร้างเหตุการณ์ทดลองด้วยเอกสารจำลองที่ไม่มีข้อมูลลับ ตรวจว่าคนแต่ละบทบาทเห็นข้อมูลตามที่กำหนดหรือไม่ ลองการถอนสิทธิ์และการลบเมื่อครบระยะ รวมสำเนาที่ใช้ตรวจหรือสำรอง เพื่อไม่ให้การลบหน้าหลักถูกเข้าใจว่าลบทุกชุดแล้ว
+
+กำหนดขั้นเมื่อมี flag ที่ต้องตรวจ เช่น ผู้รับเรื่อง วิธีขอเปิดข้อมูลและวิธีบันทึกการตัดสินใจ ไม่ให้ระบบแจ้งเตือนเป็นคำตัดสินผิดถูกโดยอัตโนมัติ การควบคุม cloud ฝั่งลูกค้าไม่ได้รับรองว่านโยบายครบหรือว่ามีบริการพร้อมใช้ตามทุกเงื่อนไขที่ต้องการ
+
+## กำหนดนโยบายก่อนเปิดงานจริง
+
+[Building Enterprise Frontier Safeguards with our customers](https://www.youtube.com/watch?v=FoteuzPpx7E) ของ Claude เป็นวิดีโอทางการที่เชื่อมจากประกาศ EFS ใช้ดูแนวคิดและความร่วมมือ ไม่ใช่หลักฐานว่า rollout เสร็จแล้วหรือระบบของคุณผ่านการตรวจ
+
+Mimir Suites Cloud เป็น Suite บนเครื่องผู้ใช้โดยไม่ต้องซื้อฮาร์ดแวร์ AI ข้อความเอกสารถูกส่งไปโมเดล cloud โดยปิดบัง PII เป็นค่าเริ่มต้น ยังต้องตรวจข้อมูลและเงื่อนไขของบริการ ไม่รับรองการปิดบังครบทุกกรณีหรือว่า EFS รวมใน Suite
+
+บทความนี้ไม่มีผล audit หรือราคาที่เรายืนยัน เตรียมรายการข้อมูลและผู้มีสิทธิ์ร่วมกับ [วิธีประเมินงาน Cloud AI](/methodology/)
