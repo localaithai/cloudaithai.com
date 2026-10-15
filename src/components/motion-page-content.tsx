@@ -9,7 +9,7 @@ export default function MotionPageContent({
   return (
     <MotionConfig reducedMotion="user">
       <motion.div
-        initial={{ opacity: 0, y: 18 }}
+        initial={false}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45, ease: "easeOut" }}
       >

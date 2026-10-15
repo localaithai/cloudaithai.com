@@ -16,12 +16,12 @@ export default function DataHandlingSection() {
       <section id="data-handling" className="apple-section section-gray">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="max-w-2xl mb-10"
           >
-            <p className="text-[#0071e3] font-medium mb-3">Data handling</p>
+            <p className="text-[#0066cc] font-medium mb-3">Data handling</p>
             <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight text-[#1d1d1f]">
               ข้อมูลไปไหน, บอกตรงๆ
             </h2>
@@ -30,7 +30,7 @@ export default function DataHandlingSection() {
             {facts.map(([title, detail], index) => (
               <motion.article
                 key={title}
-                initial={{ opacity: 0, y: 14 }}
+                initial={false}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.06 }}

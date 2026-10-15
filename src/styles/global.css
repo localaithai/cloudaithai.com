@@ -7,435 +7,458 @@
   --font-heading: var(--font-bai);
 }
 
-body {
-  background: #fbfbfd;
-  color: #1d1d1f;
-  font-family:
-    var(--font-bai),
-    "Bai Jamjuree",
-    -apple-system,
-    BlinkMacSystemFont,
-    sans-serif;
-  font-weight: 400;
-  letter-spacing: -0.005em;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-tap-highlight-color: transparent;
-  overflow-x: hidden;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-.skip-link {
-  position: fixed;
-  top: 1rem;
-  left: 1rem;
-  z-index: 60;
-  transform: translateY(-150%);
-  border-radius: 0.5rem;
-  background: #fff;
-  box-shadow: 0 0 0 2px #0071e3;
-  color: #1d1d1f;
-  padding: 0.75rem 1rem;
-}
-
-.skip-link:focus-visible {
-  transform: translateY(0);
-}
-::selection {
-  background: rgba(0, 122, 255, 0.15);
-}
-
-::-webkit-scrollbar {
-  width: 0;
-}
-
-/* Typography: Apple-style */
-p {
-  font-weight: 400;
-  line-height: 1.58;
-  letter-spacing: -0.003em;
-  color: #6e6e73;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-bai), "Bai Jamjuree", sans-serif;
-  color: #1d1d1f;
-  letter-spacing: -0.02em;
-  line-height: 1.35;
-  font-weight: 600;
-  overflow: visible;
-}
-
-/* ═══ Apple-style gradient text ═══ */
-.gradient-text {
-  background: linear-gradient(90deg, #0071e3, #5856d6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.gradient-text-warm {
-  background: linear-gradient(90deg, #f2709c, #ff9472);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ═══ Apple navbar glass ═══ */
-.nav-glass {
-  background: rgba(251, 251, 253, 0.94);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-}
-
-/* Cards: Apple-style, clean with a subtle background */
-.apple-card {
-  background: #fff;
-  border-radius: 20px;
-  overflow: hidden;
-  transition:
-    transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-.apple-card:hover {
-  transform: scale(1.02);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06);
-}
-
-/* Dark card (like Apple product sections) */
-.apple-card-dark {
-  background: #1d1d1f;
-  border-radius: 20px;
-  overflow: hidden;
-  color: #f5f5f7;
-}
-.apple-card-dark p {
-  color: #a1a1a6;
-}
-.apple-card-dark h1,
-.apple-card-dark h2,
-.apple-card-dark h3 {
-  color: #f5f5f7;
-}
-
-/* Colored background sections */
-.section-gray {
-  background: #f5f5f7;
-}
-.section-white {
-  background: #fff;
-}
-
-/* ═══ Apple-style link ═══ */
-.apple-link {
-  color: #0071e3;
-  font-size: 17px;
-  font-weight: 400;
-  transition: color 0.2s;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-.apple-link:hover {
-  color: #0071e3;
-  text-decoration: underline;
-}
-.apple-link::after {
-  content: "›";
-  font-size: 1.2em;
-  transition: transform 0.2s;
-}
-.apple-link:hover::after {
-  transform: translateX(2px);
-}
-
-/* ═══ Apple button ═══ */
-.apple-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 24px;
-  border-radius: 980px;
-  font-size: 17px;
-  font-weight: 400;
-  transition: background-color 0.15s, border-color 0.15s, color 0.15s, transform 0.15s;
-  cursor: pointer;
-}
-.apple-btn-blue {
-  background: #0071e3;
-  color: #fff;
-}
-.apple-btn-blue:hover {
-  background: #006edb;
-}
-.apple-btn-outline {
-  background: transparent;
-  color: #0071e3;
-  border: 1px solid #0071e3;
-}
-.apple-btn-outline:hover {
-  background: #0071e3;
-  color: #fff;
-}
-
-/* ═══ Animations ═══ */
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
+@layer base {
+  body {
+    background: #fbfbfd;
+    color: #1d1d1f;
+    font-family:
+      var(--font-bai), "Bai Jamjuree", -apple-system, BlinkMacSystemFont,
+      sans-serif;
+    font-weight: 400;
+    letter-spacing: -0.005em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+    overflow-x: hidden;
   }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-.float {
-  animation: float 4s ease-in-out infinite;
-}
 
-@keyframes pulse-soft {
-  0%,
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.7;
-    transform: scale(1.05);
-  }
-}
-.pulse-soft {
-  animation: pulse-soft 3s ease-in-out infinite;
-}
-
-/* ═══ Smooth global easing ═══ */
-* {
-  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* ═══ Apple Liquid Glass Design System ═══ */
-.mesh-gradient {
-  background:
-    radial-gradient(
-      ellipse at 20% 20%,
-      rgba(175, 82, 222, 0.06) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      ellipse at 80% 50%,
-      rgba(88, 86, 214, 0.05) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      ellipse at 40% 80%,
-      rgba(0, 122, 255, 0.04) 0%,
-      transparent 50%
-    ),
-    #fbfbfd;
-}
-
-.glass-card {
-  position: relative;
-  background: rgba(255, 255, 255, 0.85);
-  border: 0.5px solid rgba(255, 255, 255, 0.6);
-  border-radius: 20px;
-  box-shadow:
-    0 0.5px 0 0 rgba(255, 255, 255, 0.9) inset,
-    0 1px 3px rgba(0, 0, 0, 0.04),
-    0 8px 32px rgba(0, 0, 0, 0.04);
-  backdrop-filter: blur(60px) saturate(180%) brightness(1.05);
-  -webkit-backdrop-filter: blur(60px) saturate(180%) brightness(1.05);
-  overflow: hidden;
-}
-/* Specular highlight: top edge gloss */
-.glass-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.6) 0%,
-    rgba(255, 255, 255, 0.15) 8%,
-    transparent 40%
-  );
-  pointer-events: none;
-  z-index: 1;
-}
-
-.glass-pill {
-  position: relative;
-  background: rgba(255, 255, 255, 0.78);
-  border: 0.5px solid rgba(255, 255, 255, 0.5);
-  border-radius: 980px;
-  box-shadow:
-    0 0.5px 0 0 rgba(255, 255, 255, 0.8) inset,
-    0 1px 2px rgba(0, 0, 0, 0.04);
-  backdrop-filter: blur(40px) saturate(180%) brightness(1.05);
-  -webkit-backdrop-filter: blur(40px) saturate(180%) brightness(1.05);
-}
-.glass-pill::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.5) 0%,
-    transparent 50%
-  );
-  pointer-events: none;
-}
-
-.glass-input {
-  background: rgba(245, 245, 247, 0.92);
-  border: 0.5px solid rgba(0, 0, 0, 0.06);
-  border-radius: 14px;
-  box-shadow:
-    inset 0 1px 3px rgba(0, 0, 0, 0.04),
-    0 0.5px 0 rgba(255, 255, 255, 0.5);
-}
-
-.liquid-glass-strong {
-  background: rgba(245, 245, 247, 0.96);
-  border-bottom: 0.5px solid rgba(0, 0, 0, 0.06);
-  box-shadow:
-    inset 0 0.5px 0 rgba(255, 255, 255, 0.7),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.3);
-}
-
-.shimmer-bg {
-  position: relative;
-  overflow: hidden;
-}
-.shimmer-bg::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: conic-gradient(
-    from 180deg at 50% 50%,
-    transparent 0deg,
-    rgba(255, 255, 255, 0.15) 60deg,
-    transparent 120deg,
-    rgba(255, 255, 255, 0.1) 240deg,
-    transparent 360deg
-  );
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Section spacing: Apple uses generous spacing */
-.apple-section {
-  padding-top: 120px;
-  padding-bottom: 120px;
-}
-
-@media (max-width: 768px) {
-  .apple-section {
-    padding-top: 60px;
-    padding-bottom: 60px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
+
+  ::selection {
+    background: rgba(0, 122, 255, 0.15);
+  }
+
+  p {
+    font-weight: 400;
+    line-height: 1.65;
+    letter-spacing: -0.003em;
+    color: inherit;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-bai), "Bai Jamjuree", sans-serif;
+    color: #1d1d1f;
+    letter-spacing: -0.02em;
+    line-height: 1.35;
+    font-weight: 600;
+    overflow: visible;
+  }
+
+  * {
+    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid #0071e3;
+    outline-offset: 2px;
+  }
 }
 
-/* Omni lead form */
-.omni-form {
-  display: grid;
-  gap: 16px;
-  background: #fff;
-  border-radius: 20px;
-  padding: 24px;
-}
+@layer components {
+  .skip-link {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 60;
+    transform: translateY(-150%);
+    border-radius: 0.5rem;
+    background: #fff;
+    box-shadow: 0 0 0 2px #0071e3;
+    color: #1d1d1f;
+    padding: 0.75rem 1rem;
+  }
 
-.omni-heading {
-  display: none;
-}
+  .skip-link:focus-visible {
+    transform: translateY(0);
+  }
 
-.omni-field {
-  display: grid;
-  gap: 6px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #1d1d1f;
-}
-.omni-field--checkbox {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+  ::-webkit-scrollbar {
+    width: 0;
+  }
 
-.omni-input {
-  width: 100%;
-  border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background: #fff;
-  padding: 12px;
-  font-family: inherit;
-  font-size: 16px;
-  font-weight: 400;
-  color: #1d1d1f;
-}
-.omni-input:focus-visible {
-  outline: 2px solid #0071e3;
-  outline-offset: 1px;
-}
-textarea.omni-input {
-  min-height: 96px;
-  resize: vertical;
-}
-.omni-field--checkbox .omni-input {
-  width: auto;
-  padding: 0;
-}
+  /* Typography: Apple-style */
 
-.omni-submit {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 12px 24px;
-  border-radius: 980px;
-  background: #0071e3;
-  color: #fff;
-  font-family: inherit;
-  font-size: 17px;
-  font-weight: 400;
-  cursor: pointer;
-  transition: background-color 0.15s;
-}
-.omni-submit:hover {
-  background: #006edb;
-}
-.omni-submit:disabled {
-  opacity: 0.6;
-  cursor: default;
-}
+  /* ═══ Apple-style gradient text ═══ */
+  .gradient-text {
+    background: linear-gradient(90deg, #0071e3, #5856d6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 
-.omni-error {
-  color: #b3261e;
-  font-size: 14px;
-  font-weight: 500;
-}
-.omni-success {
-  background: #fff;
-  border-radius: 20px;
-  padding: 28px;
-  text-align: center;
-  color: #1d1d1f;
-  font-size: 17px;
+  .gradient-text-warm {
+    background: linear-gradient(90deg, #f2709c, #ff9472);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ═══ Apple navbar glass ═══ */
+  .nav-glass {
+    background: rgba(251, 251, 253, 0.94);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+  }
+
+  /* Cards: Apple-style, clean with a subtle background */
+  .apple-card {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    transition:
+      transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    a.apple-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06);
+    }
+  }
+
+  /* Dark card (like Apple product sections) */
+  .apple-card-dark {
+    background: #1d1d1f;
+    border-radius: 20px;
+    overflow: hidden;
+    color: #f5f5f7;
+  }
+  .apple-card-dark p {
+    color: #a1a1a6;
+  }
+  .apple-card-dark h1,
+  .apple-card-dark h2,
+  .apple-card-dark h3 {
+    color: #f5f5f7;
+  }
+
+  /* Colored background sections */
+  .section-gray {
+    background: #f5f5f7;
+  }
+  .section-white {
+    background: #fff;
+  }
+
+  /* ═══ Apple-style link ═══ */
+  .apple-link {
+    color: #0071e3;
+    font-size: 17px;
+    font-weight: 400;
+    transition: color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .apple-link:hover {
+    color: #0071e3;
+    text-decoration: underline;
+  }
+  .apple-link::after {
+    content: "›";
+    font-size: 1.2em;
+    transition: transform 0.2s;
+  }
+  .apple-link:hover::after {
+    transform: translateX(2px);
+  }
+
+  /* ═══ Apple button ═══ */
+  .apple-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: 980px;
+    font-size: 17px;
+    font-weight: 400;
+    transition:
+      background-color 0.15s,
+      border-color 0.15s,
+      color 0.15s,
+      transform 0.15s;
+    cursor: pointer;
+  }
+  .apple-btn-blue {
+    background: #0071e3;
+    color: #fff;
+  }
+  .apple-btn-blue:hover {
+    background: #006edb;
+  }
+  .apple-btn-outline {
+    background: transparent;
+    color: #0071e3;
+    border: 1px solid #0071e3;
+  }
+  .apple-btn-outline:hover {
+    background: #0071e3;
+    color: #fff;
+  }
+
+  /* ═══ Animations ═══ */
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+  .float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes pulse-soft {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.7;
+      transform: scale(1.05);
+    }
+  }
+  .pulse-soft {
+    animation: pulse-soft 3s ease-in-out infinite;
+  }
+
+  /* ═══ Smooth global easing ═══ */
+
+  /* ═══ Apple Liquid Glass Design System ═══ */
+  .mesh-gradient {
+    background:
+      radial-gradient(
+        ellipse at 20% 20%,
+        rgba(175, 82, 222, 0.06) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        ellipse at 80% 50%,
+        rgba(88, 86, 214, 0.05) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        ellipse at 40% 80%,
+        rgba(0, 122, 255, 0.04) 0%,
+        transparent 50%
+      ),
+      #fbfbfd;
+  }
+
+  .glass-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.85);
+    border: 0.5px solid rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    box-shadow:
+      0 0.5px 0 0 rgba(255, 255, 255, 0.9) inset,
+      0 1px 3px rgba(0, 0, 0, 0.04),
+      0 8px 32px rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(60px) saturate(180%) brightness(1.05);
+    -webkit-backdrop-filter: blur(60px) saturate(180%) brightness(1.05);
+    overflow: hidden;
+  }
+  /* Specular highlight: top edge gloss */
+  .glass-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.6) 0%,
+      rgba(255, 255, 255, 0.15) 8%,
+      transparent 40%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .glass-pill {
+    position: relative;
+    background: rgba(255, 255, 255, 0.78);
+    border: 0.5px solid rgba(255, 255, 255, 0.5);
+    border-radius: 980px;
+    box-shadow:
+      0 0.5px 0 0 rgba(255, 255, 255, 0.8) inset,
+      0 1px 2px rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(40px) saturate(180%) brightness(1.05);
+    -webkit-backdrop-filter: blur(40px) saturate(180%) brightness(1.05);
+  }
+  .glass-pill::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.5) 0%,
+      transparent 50%
+    );
+    pointer-events: none;
+  }
+
+  .glass-input {
+    background: rgba(245, 245, 247, 0.92);
+    border: 0.5px solid rgba(0, 0, 0, 0.06);
+    border-radius: 14px;
+    box-shadow:
+      inset 0 1px 3px rgba(0, 0, 0, 0.04),
+      0 0.5px 0 rgba(255, 255, 255, 0.5);
+  }
+
+  .liquid-glass-strong {
+    background: rgba(245, 245, 247, 0.96);
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.06);
+    box-shadow:
+      inset 0 0.5px 0 rgba(255, 255, 255, 0.7),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.3);
+  }
+
+  .shimmer-bg {
+    position: relative;
+    overflow: hidden;
+  }
+  .shimmer-bg::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+      from 180deg at 50% 50%,
+      transparent 0deg,
+      rgba(255, 255, 255, 0.15) 60deg,
+      transparent 120deg,
+      rgba(255, 255, 255, 0.1) 240deg,
+      transparent 360deg
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Section spacing: Apple uses generous spacing */
+  .apple-section {
+    padding-block: clamp(64px, 10vw, 120px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  /* Omni lead form */
+  .omni-form {
+    display: grid;
+    gap: 16px;
+    background: #fff;
+    border-radius: 20px;
+    padding: 24px;
+  }
+
+  .omni-heading {
+    display: none;
+  }
+
+  .omni-field {
+    display: grid;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1d1d1f;
+  }
+  .omni-field--checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .omni-input {
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: #fff;
+    padding: 12px;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 400;
+    color: #1d1d1f;
+  }
+  .omni-input:focus-visible {
+    outline: 2px solid #0071e3;
+    outline-offset: 1px;
+  }
+  textarea.omni-input {
+    min-height: 96px;
+    resize: vertical;
+  }
+  .omni-field--checkbox .omni-input {
+    width: auto;
+    padding: 0;
+  }
+
+  .omni-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 12px 24px;
+    border-radius: 980px;
+    background: #0071e3;
+    color: #fff;
+    font-family: inherit;
+    font-size: 17px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: background-color 0.15s;
+  }
+  .omni-submit:hover {
+    background: #006edb;
+  }
+  .omni-submit:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+
+  .omni-error {
+    color: #b3261e;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .omni-success {
+    background: #fff;
+    border-radius: 20px;
+    padding: 28px;
+    text-align: center;
+    color: #1d1d1f;
+    font-size: 17px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .float,
+    .pulse-soft {
+      animation: none;
+    }
+    .apple-link:hover::after {
+      transform: none;
+    }
+  }
 }

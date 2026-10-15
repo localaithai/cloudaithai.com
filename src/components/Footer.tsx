@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <MotionConfig reducedMotion="user">
       <motion.footer
-        initial={{ opacity: 0, y: 14 }}
+        initial={false}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         className="border-t border-black/[.05] py-10"
@@ -29,12 +29,15 @@ export default function Footer() {
               <a
                 key={item.href}
                 href={item.href}
-                className="hover:text-[#1d1d1f]"
+                className="inline-flex min-h-11 items-center hover:text-[#1d1d1f]"
               >
                 {item.label}
               </a>
             ))}
-            <a href={site.primaryCta.href} className="hover:text-[#1d1d1f]">
+            <a
+              href={site.primaryCta.href}
+              className="inline-flex min-h-11 items-center hover:text-[#1d1d1f]"
+            >
               {site.primaryCta.label}
             </a>
           </div>

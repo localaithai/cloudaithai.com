@@ -1,7 +1,6 @@
 ---
 import { Font } from "astro:assets";
 import OmniToaster from "@/components/omni-toaster";
-import PageTransition from "@/components/PageTransition";
 import JsonLd from "@/components/seo/JsonLd.astro";
 import type { PageHead } from "@/lib/seo";
 import { site } from "@/lib/site";
@@ -17,7 +16,7 @@ const bingVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
 ---
 
 <!doctype html>
-<html lang={site.htmlLang} class="scroll-smooth">
+<html lang={site.htmlLang} class="motion-safe:scroll-smooth">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -93,9 +92,7 @@ const bingVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
   </head>
   <body class="antialiased">
     <JsonLd data={siteGraph()} />
-    <PageTransition client:load>
-      <slot />
-    </PageTransition>
+    <slot />
     <script is:inline src="https://localai-omni.vercel.app/cta.js" defer></script>
     <script
       is:inline

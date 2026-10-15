@@ -1,0 +1,23 @@
+---
+type Props = { text: string };
+const { text } = Astro.props;
+---
+
+<span class="split-text" data-split-text={text}>
+  <span class="sr-only">{text}</span>
+  <span aria-hidden="true">{text.split(" ").map((word, index) => <><span class="split-word" style={`--word:${index}`}>{word}</span>{index < text.split(" ").length - 1 ? " " : ""}</>)}</span>
+</span>
+
+<style>
+  .split-word { display: inline-block; }
+  @media (prefers-reduced-motion: no-preference) {
+    .split-word {
+      animation: word-lift 640ms cubic-bezier(0.23, 1, 0.32, 1) both;
+      animation-delay: calc(var(--word) * 70ms);
+    }
+    @keyframes word-lift {
+      from { transform: translateY(0.22em); }
+      to { transform: translateY(0); }
+    }
+  }
+</style>
