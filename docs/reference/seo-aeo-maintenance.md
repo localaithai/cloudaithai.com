@@ -4,7 +4,7 @@ Read this before changing routes, navigation, headings, metadata, copy, internal
 
 ## Sources of truth
 
-`lib/site.ts` holds the brand and canonical origin. `lib/site-data.ts` holds routes, navigation, footer links, page labels, and breadcrumb inputs. Route metadata and `lib/social.ts` create metadata. `app/robots.ts`, `app/sitemap.ts`, and `app/llms.txt` publish crawler surfaces.
+`src/lib/site.ts` holds the brand and canonical origin. `src/lib/site-data.ts` holds routes, navigation, footer links, page labels, and breadcrumb inputs. `src/lib/seo.ts` and `src/lib/social.ts` create metadata, which `src/layouts/Base.astro` renders. `src/pages/robots.txt.ts`, `src/pages/sitemap.xml.ts`, and `src/pages/llms.txt.ts` publish crawler surfaces.
 
 Keep one canonical origin and one canonical URL for every indexable page. Do not create a second source for these facts.
 

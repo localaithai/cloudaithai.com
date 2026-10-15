@@ -1,0 +1,11 @@
+---
+import MethodologySection from "@/components/MethodologySection.astro";
+import SitelinkTrail from "@/components/SitelinkTrail.astro";
+import SitePage from "@/layouts/SitePage.astro";
+import { pageHead } from "@/lib/seo";
+---
+
+<SitePage head={pageHead("/methodology")}>
+  <SitelinkTrail path="/methodology" />
+  <MethodologySection />
+</SitePage>

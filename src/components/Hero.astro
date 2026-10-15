@@ -1,0 +1,68 @@
+---
+import { assetUrl } from "@/lib/assets";
+import { site } from "@/lib/site";
+import { models } from "@/lib/site-data";
+---
+
+<section class="bg-[#fbfbfd]">
+  <div
+    class="mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 px-6 pb-16 pt-28 sm:pt-32 lg:grid-cols-[0.95fr_1.1fr] lg:gap-12"
+  >
+    <div>
+      <p class="mb-5 font-medium text-[#0071e3]">Mimir Suites Cloud</p>
+      <h1
+        class="max-w-[14ch] text-[clamp(2.5rem,4.2vw,4.2rem)] font-semibold leading-[1.2] tracking-[-.045em] text-[#1d1d1f]"
+      >
+        AI บนทุกเครื่อง<br /><span class="text-[#0071e3]">ของทีมคุณ</span>
+      </h1>
+      <p class="mt-7 max-w-2xl text-lg leading-relaxed text-[#6e6e73] sm:text-xl">
+        ติดตั้ง Mimir Suite บนเครื่องพนักงาน เลือกแอปและโมเดลคลาวด์ได้เอง
+        ไม่ต้องซื้อเครื่อง AI ไม่มีเซิร์ฟเวอร์ และไม่มีบริการโฮสต์จากเรา
+      </p>
+      <div class="mt-8 flex flex-wrap items-center gap-4">
+        <a href={site.primaryCta.href} class="apple-btn apple-btn-blue">
+          {site.primaryCta.label}
+        </a>
+        <a href="/pricing/" class="apple-link min-h-11 px-2">ดูรูปแบบราคา</a>
+      </div>
+      <p class="mt-4 max-w-prose text-sm leading-[1.5] text-[#6e6e73]">
+        ข้อความเอกสารถูกส่งไปยังโมเดลคลาวด์ โดยปิดบัง PII เป็นค่าเริ่มต้น
+      </p>
+    </div>
+
+    <figure
+      class="overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm"
+    >
+      <div class="relative aspect-[3.4] overflow-hidden">
+        <img
+          src={assetUrl("/mimir-suites-home.png")}
+          alt="ตัวอย่างหน้ารวมแอป Mimir Suites"
+          width="3016"
+          height="1894"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          class="absolute bottom-0 left-1/2 h-auto w-[190%] max-w-none -translate-x-1/2 translate-y-[4.4%] object-contain object-bottom"
+        />
+      </div>
+      <figcaption class="px-4 py-3 text-sm leading-[1.5] text-[#6e6e73]">
+        ตัวอย่างหน้ารวมแอป Mimir Suites · Cloud edition ใช้โมเดลคลาวด์
+      </figcaption>
+    </figure>
+
+    <div
+      class="flex flex-col gap-3 border-y border-black/10 py-4 sm:flex-row sm:items-center sm:gap-6 lg:col-span-2"
+    >
+      <p
+        class="m-0 text-xs font-medium uppercase tracking-[.12em] text-[#6e6e73]"
+      >
+        Choose a model for the work
+      </p>
+      <ul
+        class="m-0 flex list-none flex-wrap gap-x-3 gap-y-1 p-0 text-sm text-[#1d1d1f]"
+      >
+        {models.map((model) => <li>{model}</li>)}
+      </ul>
+    </div>
+  </div>
+</section>

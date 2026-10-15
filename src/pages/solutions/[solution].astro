@@ -1,0 +1,20 @@
+---
+import UseCases from "@/components/UseCases.astro";
+import SitePage from "@/layouts/SitePage.astro";
+import { pageHead } from "@/lib/seo";
+import { solutions } from "@/lib/site-data";
+
+type Solution = keyof typeof solutions;
+
+export function getStaticPaths() {
+  return (Object.keys(solutions) as Solution[]).map((solution) => ({
+    params: { solution },
+  }));
+}
+
+const solution = Astro.params.solution as Solution;
+---
+
+<SitePage head={pageHead(`/solutions/${solution}`)}>
+  <UseCases solution={solution} />
+</SitePage>

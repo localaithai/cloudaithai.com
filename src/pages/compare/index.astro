@@ -1,0 +1,11 @@
+---
+import CompareSection from "@/components/CompareSection.astro";
+import SitelinkTrail from "@/components/SitelinkTrail.astro";
+import SitePage from "@/layouts/SitePage.astro";
+import { pageHead } from "@/lib/seo";
+---
+
+<SitePage head={pageHead("/compare")}>
+  <SitelinkTrail path="/compare" />
+  <CompareSection />
+</SitePage>

@@ -1,0 +1,34 @@
+---
+import { site } from "@/lib/site";
+import { type RoutePath, routeAt } from "@/lib/site-data";
+
+type Props = { path: RoutePath };
+
+const route = routeAt(Astro.props.path);
+const sitelinkName = "sitelinkName" in route ? route.sitelinkName : undefined;
+if (!sitelinkName) throw new Error(`Missing sitelink name for ${route.path}`);
+
+const breadcrumb = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+    { "@type": "ListItem", position: 2, name: sitelinkName },
+  ],
+}).replaceAll("<", "\\u003c");
+---
+
+<nav
+  aria-label="Breadcrumb"
+  class="mx-auto max-w-6xl px-6 pt-6 text-sm text-[#6e6e73]"
+>
+  <ol class="flex items-center gap-2">
+    <li>
+      <a href="/" class="hover:text-[#06c]">Home</a>
+    </li>
+    <li aria-hidden="true">/</li>
+    <li aria-current="page" class="text-[#1d1d1f]">{sitelinkName}</li>
+  </ol>
+</nav>
+<h1 class="sr-only">{sitelinkName}</h1>
+<script type="application/ld+json" set:html={breadcrumb} />

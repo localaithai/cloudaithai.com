@@ -1,0 +1,35 @@
+---
+import Contact from "@/components/Contact.astro";
+import DataHandlingSection from "@/components/data-handling-section";
+import FAQ from "@/components/FAQ.astro";
+import Footer from "@/components/Footer";
+import Hero from "@/components/Hero.astro";
+import Models from "@/components/Models.astro";
+import Navbar from "@/components/Navbar";
+import Partners from "@/components/Partners.astro";
+import Pricing from "@/components/Pricing";
+import ScrollShowcase from "@/components/ScrollShowcase";
+import Solutions from "@/components/Solutions.astro";
+import Base from "@/layouts/Base.astro";
+import { pageHead } from "@/lib/seo";
+import { mimirScopeNotice } from "@/lib/site-data";
+---
+
+<Base head={pageHead("/")}>
+  <Navbar client:load />
+  <main id="content" class="bg-[#fbfbfd]">
+    <Hero />
+    <p class="mx-auto max-w-5xl px-6 pb-8 text-sm leading-7 text-[#6e6e73]">
+      {mimirScopeNotice}
+    </p>
+    <ScrollShowcase client:visible />
+    <Models />
+    <Solutions />
+    <DataHandlingSection client:visible />
+    <Pricing client:visible />
+    <Partners />
+    <FAQ />
+    <Contact />
+  </main>
+  <Footer client:visible />
+</Base>

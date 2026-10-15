@@ -1,0 +1,11 @@
+---
+import AboutSection from "@/components/AboutSection.astro";
+import SitelinkTrail from "@/components/SitelinkTrail.astro";
+import SitePage from "@/layouts/SitePage.astro";
+import { pageHead } from "@/lib/seo";
+---
+
+<SitePage head={pageHead("/about")}>
+  <SitelinkTrail path="/about" />
+  <AboutSection />
+</SitePage>

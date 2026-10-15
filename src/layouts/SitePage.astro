@@ -1,0 +1,25 @@
+---
+import Contact from "@/components/Contact.astro";
+import Footer from "@/components/Footer";
+import MotionPageContent from "@/components/motion-page-content";
+import Navbar from "@/components/Navbar";
+import Base from "@/layouts/Base.astro";
+import type { PageHead } from "@/lib/seo";
+
+type Props = { head: PageHead };
+
+const { head } = Astro.props;
+---
+
+<Base head={head}>
+  <slot name="head" slot="head" />
+  <Navbar client:load />
+  <main id="content" class="bg-[#fbfbfd] min-h-screen">
+    <div class="pt-20"></div>
+    <MotionPageContent client:load>
+      <slot />
+    </MotionPageContent>
+    <Contact />
+  </main>
+  <Footer client:visible />
+</Base>

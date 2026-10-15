@@ -1,0 +1,11 @@
+---
+import PricingPage from "@/components/PricingPage.astro";
+import SitelinkTrail from "@/components/SitelinkTrail.astro";
+import SitePage from "@/layouts/SitePage.astro";
+import { pageHead } from "@/lib/seo";
+---
+
+<SitePage head={pageHead("/pricing")}>
+  <SitelinkTrail path="/pricing" />
+  <PricingPage />
+</SitePage>

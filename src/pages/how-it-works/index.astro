@@ -1,0 +1,11 @@
+---
+import HowWeWorkSection from "@/components/HowWeWorkSection.astro";
+import SitelinkTrail from "@/components/SitelinkTrail.astro";
+import SitePage from "@/layouts/SitePage.astro";
+import { pageHead } from "@/lib/seo";
+---
+
+<SitePage head={pageHead("/how-it-works")}>
+  <SitelinkTrail path="/how-it-works" />
+  <HowWeWorkSection />
+</SitePage>

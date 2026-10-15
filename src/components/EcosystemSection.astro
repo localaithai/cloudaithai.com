@@ -1,0 +1,68 @@
+---
+import { assetUrl } from "@/lib/assets";
+import {
+  appGroups,
+  appMarkPath,
+  mimirScopeNotice,
+  models,
+} from "@/lib/site-data";
+---
+
+<section class="apple-section section-gray">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="mb-3 flex items-center gap-3">
+      <img
+        src={assetUrl("/mimir-suite-logo.png")}
+        alt=""
+        width="72"
+        height="48"
+        loading="lazy"
+        decoding="async"
+        class="h-10 w-auto object-contain"
+      />
+      <p class="font-medium text-[#0071e3]">Mimir Suites Cloud</p>
+    </div>
+    <h2 class="text-4xl sm:text-5xl font-semibold tracking-tight">
+      แอปของคุณ, โมเดลที่เลือก
+    </h2>
+    <p class="mt-4 max-w-2xl text-lg text-[#6e6e73]">
+      Mimir Suite รวมแอปบนเครื่องของแต่ละ seat และเชื่อมต่อโมเดลคลาวด์ตามงาน
+    </p>
+    <p class="mt-4 max-w-2xl text-sm leading-7 text-[#6e6e73]">
+      {mimirScopeNotice}
+    </p>
+    <div class="mt-8 flex flex-wrap gap-2">
+      {
+        models.map((model) => (
+          <span class="rounded-full bg-white px-4 py-2 shadow-sm">{model}</span>
+        ))
+      }
+    </div>
+    <div class="mt-10 grid md:grid-cols-2 gap-4">
+      {
+        appGroups.map((group) => (
+          <article class="apple-card p-6">
+            <h2 class="font-semibold text-[#1d1d1f]">{group.title}</h2>
+            <p class="mt-2 text-sm text-[#6e6e73]">{group.detail}</p>
+            <ul class="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
+              {group.apps.map((app) => (
+                <li class="flex items-center gap-2 text-sm text-[#1d1d1f]">
+                  <img
+                    src={assetUrl(appMarkPath(app))}
+                    alt=""
+                    width="32"
+                    height="32"
+                    loading="lazy"
+                    decoding="async"
+                    class="size-8 object-contain"
+                  />
+                  <span>Mimir {app}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

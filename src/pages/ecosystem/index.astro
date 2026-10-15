@@ -1,0 +1,11 @@
+---
+import EcosystemSection from "@/components/EcosystemSection.astro";
+import SitelinkTrail from "@/components/SitelinkTrail.astro";
+import SitePage from "@/layouts/SitePage.astro";
+import { pageHead } from "@/lib/seo";
+---
+
+<SitePage head={pageHead("/ecosystem")}>
+  <SitelinkTrail path="/ecosystem" />
+  <EcosystemSection />
+</SitePage>
