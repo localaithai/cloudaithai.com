@@ -13,7 +13,7 @@ const { head } = Astro.props;
 
 <Base head={head}>
   <slot name="head" slot="head" />
-  <Navbar client:load />
+  <Navbar client:load currentPath={Astro.url.pathname} />
   <main id="content" class="bg-[#fbfbfd] min-h-screen">
     <div class="pt-20"></div>
     <MotionPageContent client:load>

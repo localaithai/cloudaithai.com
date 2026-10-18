@@ -20,6 +20,7 @@ const bingVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>document.documentElement.classList.add("js");</script>
     <link
       rel="alternate"
       type="text/plain"
@@ -101,3 +102,30 @@ const bingVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
     <OmniToaster client:idle />
   </body>
 </html>
+
+<script>
+  const items = document.querySelectorAll<HTMLElement>("[data-reveal]");
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          entry.target.classList.add("is-in");
+          observer.unobserve(entry.target);
+        }
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
+    );
+    // Anything already on screen at load shows at once; only later content animates in.
+    for (const item of items) {
+      if (item.getBoundingClientRect().top < window.innerHeight) {
+        item.dataset.reveal = "instant";
+        item.classList.add("is-in");
+      } else {
+        observer.observe(item);
+      }
+    }
+  } else {
+    for (const item of items) item.classList.add("is-in");
+  }
+</script>

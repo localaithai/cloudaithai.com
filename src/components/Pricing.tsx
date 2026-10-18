@@ -1,8 +1,10 @@
 import { MotionConfig, motion } from "framer-motion";
+import type { CSSProperties } from "react";
 
 import { site } from "@/lib/site";
 
-export default function Pricing() {
+export default function Pricing({ reveal = true }: { reveal?: boolean }) {
+  const revealAttr = reveal ? "" : undefined;
   return (
     <MotionConfig reducedMotion="user">
       <section id="pricing" className="apple-section">
@@ -12,11 +14,24 @@ export default function Pricing() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <p className="text-[#0071e3] font-medium mb-3">Pricing</p>
-            <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight">
+            <p
+              data-reveal={revealAttr}
+              className="eyebrow text-[#0071e3] font-medium mb-3"
+            >
+              Pricing
+            </p>
+            <h2
+              data-reveal={revealAttr}
+              style={{ "--i": 1 } as CSSProperties}
+              className="text-h2 font-semibold tracking-tight"
+            >
               เลือกแอป, เลือก seat
             </h2>
-            <div className="mt-8 apple-card border border-black/10 p-8">
+            <div
+              data-reveal={revealAttr}
+              style={{ "--i": 2 } as CSSProperties}
+              className="mt-8 apple-card border border-black/10 p-8"
+            >
               <p className="text-lg text-[#1d1d1f]">
                 Mimir Suites Cloud คิดราคา <strong>ต่อแอป ต่อ seat</strong>
               </p>

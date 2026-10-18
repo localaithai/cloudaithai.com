@@ -5,30 +5,32 @@ import { solutions } from "@/lib/site-data";
 <section id="solutions" class="apple-section section-gray">
   <div class="max-w-6xl mx-auto px-6">
     <div class="text-center max-w-2xl mx-auto">
-      <p class="text-[#0071e3] font-medium mb-3">Solutions</p>
-      <h2 class="text-4xl sm:text-5xl font-semibold tracking-tight">
+      <p data-reveal class="eyebrow text-[#0071e3] font-medium mb-3">Solutions</p>
+      <h2 data-reveal style="--i:1" class="text-h2 font-semibold tracking-tight">
         แอปที่เริ่มจากงานจริง
       </h2>
-      <p class="mt-4 text-lg text-[#6e6e73]">
+      <p data-reveal style="--i:2" class="mt-4 text-balance text-lead text-[#6e6e73]">
         เลือกแอปต่อ seat เพื่อช่วยงานเอกสาร ข้อมูล
         และเนื้อหาของคนทำงานแต่ละคน
       </p>
     </div>
     <div class="mt-10 grid md:grid-cols-3 gap-4">
       {
-        Object.entries(solutions).map(([slug, solution]) => (
-          <a
-            href={`/solutions/${slug}`}
-            class="apple-card p-6 hover:shadow-lg transition-shadow"
-          >
-            <h3 class="font-semibold text-[#1d1d1f]">
-              {solution.title.replace("Mimir Suites Cloud สำหรับ", "")}
-            </h3>
-            <p class="mt-2 text-sm text-[#6e6e73] leading-relaxed">
-              {solution.intro}
-            </p>
-            <p class="mt-4 text-sm text-[#0071e3]">ดูแอปที่เกี่ยวข้อง</p>
-          </a>
+        Object.entries(solutions).map(([slug, solution], index) => (
+          <div data-reveal style={`--i:${index % 3}`}>
+            <a
+              href={`/solutions/${slug}`}
+              class="apple-card flex h-full flex-col p-6"
+            >
+              <h3 class="text-h3 font-semibold text-[#1d1d1f]">
+                {solution.title.replace("Mimir Suites Cloud สำหรับ", "")}
+              </h3>
+              <p class="mt-2 text-sm text-[#6e6e73] leading-relaxed">
+                {solution.intro}
+              </p>
+              <p class="card-cue mt-auto pt-4 text-sm text-[#0071e3]">ดูแอปที่เกี่ยวข้อง</p>
+            </a>
+          </div>
         ))
       }
     </div>

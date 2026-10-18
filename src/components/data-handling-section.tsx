@@ -1,4 +1,5 @@
 import { MotionConfig, motion } from "framer-motion";
+import type { CSSProperties } from "react";
 
 const facts = [
   ["เอกสารไปที่โมเดลคลาวด์", "ข้อความในเอกสารถูกส่งไปยังโมเดลคลาวด์เพื่อทำงานที่เลือก"],
@@ -21,24 +22,33 @@ export default function DataHandlingSection() {
             viewport={{ once: true }}
             className="max-w-2xl mb-10"
           >
-            <p className="text-[#0066cc] font-medium mb-3">Data handling</p>
-            <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight text-[#1d1d1f]">
+            <p
+              data-reveal=""
+              className="eyebrow text-[#0066cc] font-medium mb-3"
+            >
+              Data handling
+            </p>
+            <h2
+              data-reveal=""
+              style={{ "--i": 1 } as CSSProperties}
+              className="text-h2 font-semibold tracking-tight text-[#1d1d1f]"
+            >
               ข้อมูลไปไหน, บอกตรงๆ
             </h2>
           </motion.div>
           <div className="grid sm:grid-cols-2 gap-4">
             {facts.map(([title, detail], index) => (
-              <motion.article
+              <article
                 key={title}
-                initial={false}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.06 }}
+                data-reveal=""
+                style={{ "--i": index % 2 } as CSSProperties}
                 className="apple-card p-6"
               >
-                <h3 className="font-semibold text-[#1d1d1f] mb-2">{title}</h3>
+                <h3 className="text-h3 font-semibold text-[#1d1d1f] mb-2">
+                  {title}
+                </h3>
                 <p className="text-[#6e6e73] leading-relaxed">{detail}</p>
-              </motion.article>
+              </article>
             ))}
           </div>
         </div>

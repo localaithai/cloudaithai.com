@@ -16,10 +16,10 @@ import { mimirScopeNotice } from "@/lib/site-data";
 ---
 
 <Base head={pageHead("/")}>
-  <Navbar client:load />
+  <Navbar client:load currentPath={Astro.url.pathname} />
   <main id="content" class="bg-[#fbfbfd]">
     <Hero />
-    <p class="mx-auto max-w-5xl px-6 pb-8 text-sm leading-7 text-[#6e6e73]">
+    <p class="mx-auto max-w-7xl px-6 pb-12 text-[0.8125rem] leading-6 text-[#6e6e73]">
       {mimirScopeNotice}
     </p>
     <ScrollShowcase client:visible />

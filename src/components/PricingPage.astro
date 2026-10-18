@@ -4,15 +4,15 @@ import { assetUrl } from "@/lib/assets";
 import { appGroups, appMarkPath, mimirScopeNotice } from "@/lib/site-data";
 ---
 
-<Pricing client:visible />
+<Pricing client:visible reveal={false} />
 <section class="pb-24">
   <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-5">
     <p class="text-sm leading-7 text-[#6e6e73] md:col-span-2">
       {mimirScopeNotice}
     </p>
     {
-      appGroups.map((group) => (
-        <article class="apple-card border border-black/10 p-7">
+      appGroups.map((group, index) => (
+        <article data-reveal style={`--i:${index % 2}`} class="apple-card border border-black/10 p-7">
           <h2 class="text-2xl font-semibold">{group.title}</h2>
           <p class="mt-2 text-[#6e6e73]">{group.detail}</p>
           <div class="mt-5 flex flex-wrap gap-2">

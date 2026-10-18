@@ -7,7 +7,20 @@
   --font-heading: var(--font-bai);
 }
 
+@theme {
+  --text-h2: clamp(2rem, 1.55rem + 1.9vw, 3.25rem);
+  --text-h2--line-height: 1.25;
+  --text-h3: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  --text-h3--line-height: 1.45;
+  --text-lead: clamp(1.0625rem, 0.98rem + 0.4vw, 1.3125rem);
+  --text-lead--line-height: 1.7;
+}
+
 @layer base {
+  :root {
+    --ease-brand: cubic-bezier(0.22, 0.75, 0.2, 1);
+  }
+
   body {
     background: #fbfbfd;
     color: #1d1d1f;
@@ -27,7 +40,8 @@
   }
 
   ::selection {
-    background: rgba(0, 122, 255, 0.15);
+    background: rgba(0, 113, 227, 0.18);
+    color: #1d1d1f;
   }
 
   p {
@@ -35,6 +49,11 @@
     line-height: 1.65;
     letter-spacing: -0.003em;
     color: inherit;
+    text-wrap: pretty;
+  }
+
+  section[id] {
+    scroll-margin-top: 5rem;
   }
 
   h1,
@@ -63,7 +82,7 @@
 
   :focus-visible {
     outline: 2px solid #0071e3;
-    outline-offset: 2px;
+    outline-offset: 3px;
   }
 }
 
@@ -116,16 +135,23 @@
   /* Cards: Apple-style, clean with a subtle background */
   .apple-card {
     background: #fff;
+    border: 1px solid rgb(0 0 0 / 0.06);
     border-radius: 20px;
     overflow: hidden;
     transition:
-      transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-      box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      translate 0.5s var(--ease-brand),
+      border-color 0.35s var(--ease-brand),
+      box-shadow 0.5s var(--ease-brand);
+  }
+  @media (hover: hover) {
+    a.apple-card:hover {
+      border-color: rgb(0 113 227 / 0.32);
+      box-shadow: 0 18px 40px -26px rgb(29 29 31 / 0.22);
+    }
   }
   @media (hover: hover) and (prefers-reduced-motion: no-preference) {
     a.apple-card:hover {
-      transform: scale(1.02);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06);
+      translate: 0 -3px;
     }
   }
 
@@ -158,22 +184,101 @@
     color: #0071e3;
     font-size: 17px;
     font-weight: 400;
-    transition: color 0.2s;
     display: inline-flex;
     align-items: center;
     gap: 4px;
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.42em;
+    transition:
+      color 0.35s var(--ease-brand),
+      text-decoration-color 0.35s var(--ease-brand),
+      text-underline-offset 0.45s var(--ease-brand);
   }
   .apple-link:hover {
-    color: #0071e3;
-    text-decoration: underline;
+    color: #0062c4;
+    text-decoration-color: currentColor;
+    text-underline-offset: 0.24em;
   }
   .apple-link::after {
     content: "›";
     font-size: 1.2em;
-    transition: transform 0.2s;
+    transition: transform 0.45s var(--ease-brand);
   }
   .apple-link:hover::after {
-    transform: translateX(2px);
+    transform: translateX(3px);
+  }
+
+  .card-cue {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .card-cue::after {
+    content: "›";
+    font-size: 1.2em;
+    line-height: 1;
+    transition: transform 0.45s var(--ease-brand);
+  }
+  a:hover > .card-cue::after {
+    transform: translateX(3px);
+  }
+
+  .hairline-link {
+    position: relative;
+    transition: color 0.35s var(--ease-brand);
+  }
+  .hairline-link::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: calc(50% - 0.95em);
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.45s var(--ease-brand);
+  }
+  .hairline-link:hover::after,
+  .hairline-link[aria-current]::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  .hairline-link[aria-current] {
+    color: #1d1d1f;
+  }
+  .hairline-link[aria-current]::after {
+    background: #0071e3;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+  }
+  .eyebrow::before {
+    content: "";
+    flex: none;
+    width: 1.5rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.5;
+  }
+
+  .site-nav {
+    border-bottom: 1px solid transparent;
+    transition:
+      background-color 0.5s var(--ease-brand),
+      border-color 0.5s var(--ease-brand),
+      box-shadow 0.5s var(--ease-brand),
+      backdrop-filter 0.5s var(--ease-brand);
+  }
+  .site-nav[data-glass] {
+    background: rgb(251 251 253 / 0.72);
+    border-bottom-color: rgb(0 0 0 / 0.07);
+    box-shadow: 0 12px 32px -22px rgb(29 29 31 / 0.28);
+    backdrop-filter: blur(18px) saturate(1.8);
   }
 
   /* ═══ Apple button ═══ */
@@ -186,18 +291,21 @@
     font-size: 17px;
     font-weight: 400;
     transition:
-      background-color 0.15s,
-      border-color 0.15s,
-      color 0.15s,
-      transform 0.15s;
+      background-color 0.35s var(--ease-brand),
+      border-color 0.35s var(--ease-brand),
+      color 0.35s var(--ease-brand),
+      transform 0.35s var(--ease-brand);
     cursor: pointer;
+  }
+  .apple-btn:active {
+    transform: scale(0.98);
   }
   .apple-btn-blue {
     background: #0071e3;
     color: #fff;
   }
   .apple-btn-blue:hover {
-    background: #006edb;
+    background: #0062c4;
   }
   .apple-btn-outline {
     background: transparent;
@@ -428,10 +536,15 @@
     font-size: 17px;
     font-weight: 400;
     cursor: pointer;
-    transition: background-color 0.15s;
+    transition:
+      background-color 0.35s var(--ease-brand),
+      transform 0.35s var(--ease-brand);
   }
   .omni-submit:hover {
-    background: #006edb;
+    background: #0062c4;
+  }
+  .omni-submit:active {
+    transform: scale(0.98);
   }
   .omni-submit:disabled {
     opacity: 0.6;
@@ -452,13 +565,40 @@
     font-size: 17px;
   }
 
+  html.js [data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+    transition:
+      opacity 1.1s var(--ease-brand),
+      transform 1.2s var(--ease-brand);
+    transition-delay: calc(var(--i, 0) * 90ms);
+  }
+  html.js [data-reveal].is-in {
+    opacity: 1;
+    transform: none;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .float,
     .pulse-soft {
       animation: none;
     }
-    .apple-link:hover::after {
+    .apple-link:hover::after,
+    a:hover > .card-cue::after,
+    .apple-btn:active,
+    .omni-submit:active {
       transform: none;
     }
+    .hairline-link::after {
+      transition: none;
+    }
+    html.js [data-reveal] {
+      transform: none;
+      transition: opacity 0.6s linear;
+    }
+  }
+
+  html.js [data-reveal="instant"] {
+    transition: none;
   }
 }
