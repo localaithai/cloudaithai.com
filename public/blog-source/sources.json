@@ -1,0 +1,84 @@
+{
+  "sources": [
+    {
+      "source_id": "anthropic-enterprise-frontier-safeguards",
+      "file": "anthropic-enterprise-frontier-safeguards.png",
+      "original_image_url": "https://www.anthropic.com/api/opengraph-illustration?name=Hand%20City&backgroundColor=sky",
+      "source_page": "https://www.anthropic.com/news/enterprise-frontier-safeguards",
+      "credit": "Anthropic (แหล่งภาพ)",
+      "sha256": "69eb699d1e29187a630e7311c7bc1cdfd55401aac25ceb691fc7697e77c3f3a3"
+    },
+    {
+      "source_id": "anthropic-sonnet-55",
+      "file": "anthropic-sonnet-55.png",
+      "original_image_url": "https://www.anthropic.com/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2Fcf0eae4b26b6fbe29e370d300ecac766cb94bc2d-1600x1000.png%3Frect%3D0%252C0%252C1600%252C1000&w=3840&q=75",
+      "source_page": "https://www.anthropic.com/claude-sonnet-5-5",
+      "credit": "Anthropic (แหล่งภาพ)",
+      "sha256": "66e96699f9715e5ba3c3381b0ecfb4343fd32ddefeea6c8d42999d45b9a157c8"
+    },
+    {
+      "source_id": "anthropic-text-watermark",
+      "file": "anthropic-text-watermark.png",
+      "original_image_url": "https://www.anthropic.com/api/opengraph-illustration?name=Hand%20Quill&backgroundColor=heather",
+      "source_page": "https://www.anthropic.com/news/claude-text-watermark",
+      "credit": "Anthropic (แหล่งภาพ)",
+      "sha256": "778342ca21627340a55421928a1025456335508c095713aae6d4bf299b13ad31"
+    },
+    {
+      "source_id": "aws-ebs-cross-account-clones",
+      "file": "aws-ebs-cross-account-clones.jpg",
+      "original_image_url": "https://d2908q01vomqb2.cloudfront.net/da4b9237bacccdf19c0760cab7aec4a8359010b0/2026/09/08/2026-ebs-clone-accounts-1.jpg",
+      "source_page": "https://aws.amazon.com/blogs/aws/introducing-amazon-ebs-volume-clones-across-aws-accounts/",
+      "credit": "AWS (แหล่งภาพ)",
+      "sha256": "4a6803bd0dc8090583f84f5ffb52dec7ac38ad1e530afed452f1304984b62741"
+    },
+    {
+      "source_id": "gemini-4-argon-cloud-evaluation",
+      "file": "gemini-4-argon-cloud-evaluation.png",
+      "original_image_url": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/gemini-4-argon__blog-header__2784x1566.width-1300.png",
+      "source_page": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/",
+      "credit": "Google (แหล่งภาพ)",
+      "sha256": "23646e4eaecc376cd723fef7275e02d2d8023e3324366fb39e3a9edceee81aed"
+    },
+    {
+      "source_id": "google-gemini-38-flash",
+      "file": "google-gemini-38-flash.png",
+      "original_image_url": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/gemini-3-8_flash__blog__header__16-9__light.width-1300.png",
+      "source_page": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/",
+      "credit": "Google (แหล่งภาพ)",
+      "sha256": "bfb7b8c2c1b91408bebe70bfb83831e795018d7ff4158c0b945111212e3fc9af"
+    },
+    {
+      "source_id": "google-gemini-4-argon",
+      "file": "google-gemini-4-argon.png",
+      "original_image_url": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/g4_30-09-26_key-art_blog.width-1300.png",
+      "source_page": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/",
+      "credit": "Google (แหล่งภาพ)",
+      "sha256": "896f00d5d2f42a2153a04825ac5ee513074be810ba30ccc0b204af75e99c4042"
+    },
+    {
+      "source_id": "gpt6-astra-ultrafast",
+      "file": "gpt6-astra-ultrafast.png",
+      "original_image_url": "https://blogs.nvidia.com/wp-content/uploads/2026/09/twitter-gif-2104993966043320759-v5.png",
+      "source_page": "https://blogs.nvidia.com/blog/gpus-openai-gpt-6-astra-ultrafast/",
+      "credit": "NVIDIA (แหล่งภาพ)",
+      "sha256": "9d777e79bfbb172f4616349424ff0ce8f24a37e325f4bf105124b86ca82faf28"
+    },
+    {
+      "source_id": "microsoft-responsible-ai-report",
+      "file": "microsoft-responsible-ai-report.jpg",
+      "original_image_url": "https://blogs.microsoft.com/wp-content/uploads/sites/5/2026/08/FY26_PA_RAI_Report-2026_Image_OP3.jpg",
+      "source_page": "https://blogs.microsoft.com/on-the-issues/2026/09/01/responsible-ai-in-2026-how-we-are-adapting-for-whats-ahead/",
+      "credit": "Microsoft (แหล่งภาพ)",
+      "sha256": "7edb2382bad36f8252844f9e8f88670a89fdf18e38383f25c5a0fa9c37c0029c"
+    },
+    {
+      "source_id": "pathumma-gdcc-award",
+      "file": "pathumma-gdcc-award.jpg",
+      "original_image_url": "http://www.nstda.or.th/archives/wp-content/uploads/2026/08/20260824-Pathumma-LLM-5-1024x682.jpg",
+      "source_page": "https://www.nstda.or.th/archives/pathumma-llm-gdcc-gov-cloud-awards-2026/",
+      "credit": "NSTDA (แหล่งภาพ)",
+      "sha256": "f6e1519fa0d685b6aa2f34b82456b972c1b49f0b37c1d9c617138a477f0479db"
+    }
+  ]
+}

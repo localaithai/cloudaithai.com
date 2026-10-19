@@ -1,25 +1,25 @@
 ---
-title: "Context ยาวกับหลักฐานที่ค้นได้"
-description: "ข่าว Gemini 4 Argon ชวนแยก context window ออกจากคุณภาพค้นเอกสารและสิทธิ์ใช้งาน ก่อนวางวิธีประเมิน Cloud AI"
+title: "Google เปิด Gemini 4 Argon ผ่าน Fairwind"
+description: "ข่าว Gemini 4 Argon เพิ่มเพดาน output เป็น 1M token และเริ่มเข้าถึงผ่าน Fairwind ก่อนเปิดกว้าง ชวนตรวจหลักฐานและสิทธิ์ใช้งาน"
 kind: "news"
 query: "Gemini 4 Argon long context retrieval quality general availability limits"
 cluster: "/methodology/"
 source: "google-gemini-4-argon"
 published: "2026-10-05"
-reviewed: "2026-10-05"
+reviewed: "2026-10-20"
 newsDate: "2026-09-30"
-summary: "Context ยาวช่วยรับข้อมูลได้มากตามข้อกำหนด แต่ไม่รับรองว่าจะหาและใช้หลักฐานถูก ต้องทดสอบเอกสารจริงและตรวจ access ของรุ่นก่อนวาง workflow"
+summary: "Gemini 4 Argon เพิ่มเพดาน output เป็นหนึ่งล้าน token โดยเริ่มให้ทีมป้องกันไซเบอร์ที่ได้รับสิทธิ์ใช้ผ่าน Fairwind การตอบจากเอกสารยังต้องทดสอบหลักฐานและสิทธิ์"
 faq: [{"question":"Context ใหญ่แปลว่าอ้างอิงถูกเสมอไหม","answer":"ไม่ ต้องทดสอบการเลือกเอกสาร รุ่นและหลักฐาน รวมกรณีข้อมูลขัดกันหรือไม่ครบ"},{"question":"Argon เปิดใช้ทั่วไปจากข่าวนี้หรือไม่","answer":"ข่าวระบุ access เริ่มต้นผ่าน Fairwind สำหรับ trusted cyber defenders การเปิดกว้างเป็น rollout ในอนาคต"}]
 citations: [{"title":"Gemini 4 Argon: our next era of frontier intelligence","url":"https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/","publisher":"Google","published":"2026-09-30","accessed":"2026-10-05"},{"title":"How developers are using Gemini 1.5 Pro’s 1 million token context window","url":"https://www.youtube.com/watch?v=cogrixfRvWw","publisher":"Google","published":"2024-05-14","accessed":"2026-10-05"}]
-hero: {"src":"https://assets.mimir.business/assets/sites/aisolutionsthailand.com/general/hero.9917f9cb9829.webp","alt":"ภาพประกอบการอ่านและตรวจหลักฐานจากเอกสารหลายฉบับ","caption":"ภาพประกอบการทำงานเอกสารจาก Mimir ไม่ใช่ภาพผลิตภัณฑ์ในข่าว และไม่สื่อว่าต้องซื้อฮาร์ดแวร์ AI เพื่อใช้ Cloud edition","credit":"Mimir / aisolutionsthailand.com","sourceUrl":"https://aisolutionsthailand.com/"}
+hero: {"src":"https://assets.mimir.business/assets/sites/cloudaithai.com/general/google-gemini-4-argon.ef63f5b8569c.png","alt":"กราฟิก Gemini 4 Argon พร้อมเลข 4 สีขาวขนาดใหญ่บนพื้นสีน้ำเงิน","caption":"ภาพประกาศ Gemini 4 Argon ฉบับวันที่ 30 กันยายนจาก Google","credit":"Google (แหล่งภาพ)","sourceUrl":"https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/"}
 videos: [{"url":"https://www.youtube.com/watch?v=cogrixfRvWw","title":"How developers are using Gemini 1.5 Pro’s 1 million token context window","publisher":"Google","published":"2024-05-14","context":true}]
 ---
 
-## พื้นที่รับข้อมูลกับการใช้หลักฐานต่างกัน
+## เพดาน output กับการใช้หลักฐานต่างกัน
 
-Google ประกาศ Gemini 4 Argon วันที่ 30 กันยายน 2026 ระบุ context หนึ่งล้าน token และเริ่ม access ผ่าน Fairwind สำหรับ trusted cyber defenders ไม่ใช่ GA [แหล่งข่าวทางการ](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/)
+Google ประกาศ Gemini 4 Argon วันที่ 30 กันยายน 2026 เพิ่มเพดาน output เป็นหนึ่งล้าน token และเริ่ม access ผ่าน Fairwind สำหรับ trusted cyber defenders ไม่ใช่ GA [แหล่งข่าวทางการ](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/)
 
-ทีมที่มีเอกสารยาวอาจคิดว่าป้อนทั้งหมดแล้วจะไม่ต้องค้นข้อมูลอีก แต่พื้นที่รับข้อความไม่รับรองว่าคำตอบเลือกหลักฐานที่ถูกฉบับ การออกแบบงานควรกำหนดว่าต้องตอบจากแฟ้มใดและแสดงอ้างอิงอย่างไร โดยไม่สรุปจากความจุ context เพียงอย่างเดียว
+เพดาน output ที่สูงขึ้นเปิดทางให้โมเดลสร้างคำตอบและใช้เหตุผลได้ยาวขึ้น แต่ไม่รับรองว่าคำตอบเลือกหลักฐานที่ถูกฉบับ การออกแบบงานควรกำหนดว่าต้องตอบจากแฟ้มใดและแสดงอ้างอิงอย่างไร โดยไม่สรุปจากความจุ context เพียงอย่างเดียว
 
 ## ทดสอบว่าข้อมูลสำคัญถูกใช้หรือไม่
 
@@ -40,7 +40,7 @@ Google ประกาศ Gemini 4 Argon วันที่ 30 กันยา�
 
 หากต้องใช้ RAG หรือการเลือกข้อความก่อนส่ง ให้เทียบภายใต้เอกสารและเกณฑ์เดียวกัน ดูเวลาเตรียมข้อมูลด้วย ก่อนทดลองต้องตรวจ access ของบัญชีและชื่อรุ่นจริง ไม่อ้าง rollout ในอนาคตว่าเป็นบริการทั่วไปที่พร้อมให้ธุรกิจใช้แล้ว
 
-## ดู access พร้อมดู context
+## ดู access พร้อมดูเพดาน output
 
 [How developers are using Gemini 1.5 Pro’s 1 million token context window](https://www.youtube.com/watch?v=cogrixfRvWw) ของ Google เป็นวิดีโอ Gemini 1.5 Pro ปี 2024 ใช้เป็นพื้นหลังแนวคิด long context ไม่ใช่เดโม Argon หรือหลักฐาน availability ของรุ่นใหม่
 
