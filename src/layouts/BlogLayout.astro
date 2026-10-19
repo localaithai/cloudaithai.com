@@ -1,23 +1,10 @@
 ---
 import SitePage from "@/layouts/SitePage.astro";
 import type { PageHead } from "@/lib/seo";
-import "@/styles/blog.css";
 
 type Props = { head: PageHead };
 
 const { head } = Astro.props;
-
-const tokens = {
-  "--blog-bg": "#fbfbfd",
-  "--blog-surface": "#fff",
-  "--blog-ink": "#1d1d1f",
-  "--blog-muted": "#515157",
-  "--blog-border": "#d6d6db",
-  "--blog-accent": "#0071e3",
-  "--blog-accent-ink": "#fff",
-  "--blog-tint": "#eef5ff",
-  "--blog-radius": "16px",
-};
 ---
 
 <SitePage head={head}>
@@ -28,7 +15,5 @@ const tokens = {
     href="/blog/feed.xml"
     title="RSS"
   />
-  <div class="mimir-blog" style={tokens}>
-    <slot />
-  </div>
+  <slot />
 </SitePage>
