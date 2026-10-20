@@ -7,6 +7,7 @@ Static Astro 7 site for cloudaithai.com, the Cloud line's only domain. It sells 
 - Package manager: `pnpm@10.33.0` (`pnpm-lock.yaml` is the committed lockfile)
 - Develop: `pnpm dev` at `http://localhost:17007`; `pnpm preview` serves the built `dist/` on the same port
 - Verification: `pnpm lint && pnpm typecheck && pnpm build` (static output writes `dist/`)
+- Live SEO/AEO check after a deploy: `pnpm seo:audit` (fetches https://cloudaithai.com, or `SITE_URL` when set; run it, do not theorise)
 - Before changing routes, navigation, headings, metadata, copy, internal links, structured data, robots, sitemap, or `llms.txt`, read [SEO, AEO, and sitelink maintenance](docs/reference/seo-aeo-maintenance.md).
 - No automated test suite. `astro check` is the type gate.
 
@@ -36,8 +37,10 @@ Before writing copy, CTAs, footer disclosures, or cross-links, read:
 - Primary CTA is "Request a Demo" into the contact section. "Visit Mimir Suites" is never the primary CTA.
 - `site.legalDisclosure` stays unset until the operating entity is named. Render nothing, never a placeholder.
 - Copy is Thai-first with English product nouns inline. Bai Jamjuree carries both scripts, loaded through the Astro Fonts API as `--font-bai` (`fonts` in `astro.config.ts`, `<Font>` in `Base.astro`); keep Thai line heights.
+- Styling is Tailwind utilities in markup, with tokens in `src/styles/global.css`: element defaults in `@layer base`, shared roles as `@utility` definitions, `:root` tokens only. Never add plain CSS rules or `<style>` blocks; an unlayered rule silently beats every utility.
 - Use the `@/*` alias. TypeScript is strict; do not weaken types or add broad suppressions.
 - Preserve WCAG 2.2 AA behavior: semantic structure, keyboard access, visible focus, contrast, touch targets and reduced motion.
+- `vendor/mimir-blog/` is generated from `../../blog` by its `pnpm sync`; never edit it here. `pnpm build` runs `vendor/mimir-blog/verify.mjs` (fails on any edited, missing or extra file), then `vendor/mimir-blog/social-images.mjs`, which copies each published article's hero from the asset host into `public/blog-media/` for the social card. Commit any new file it writes there with the article.
 
 ## Shared image assets
 
