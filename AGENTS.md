@@ -4,7 +4,7 @@ Static Astro 7 site for cloudaithai.com, the Cloud line's only domain. It sells 
 
 ## Quick reference
 
-- Package manager: `pnpm@10.17.1` (`pnpm-lock.yaml` is the committed lockfile)
+- Package manager: `pnpm@10.33.0` (`pnpm-lock.yaml` is the committed lockfile)
 - Develop: `pnpm dev` at `http://localhost:17007`; `pnpm preview` serves the built `dist/` on the same port
 - Verification: `pnpm lint && pnpm typecheck && pnpm build` (static output writes `dist/`)
 - Before changing routes, navigation, headings, metadata, copy, internal links, structured data, robots, sitemap, or `llms.txt`, read [SEO, AEO, and sitelink maintenance](docs/reference/seo-aeo-maintenance.md).
