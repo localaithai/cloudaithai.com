@@ -1,23 +1,39 @@
 ---
 import Reveal from "@/components/Reveal";
 import { site } from "@/lib/site";
+
+// cta.js injects the lead form, so its markup takes no classes: style it from the host.
+const omniForm = [
+  "[&_.omni-form]:grid [&_.omni-form]:gap-4 [&_.omni-form]:rounded-[20px] [&_.omni-form]:bg-white [&_.omni-form]:p-6",
+  "[&_.omni-heading]:hidden",
+  "[&_.omni-field]:grid [&_.omni-field]:gap-1.5 [&_.omni-field]:text-[14px] [&_.omni-field]:font-medium [&_.omni-field]:text-[#1d1d1f]",
+  "[&_.omni-field--checkbox]:flex [&_.omni-field--checkbox]:items-center [&_.omni-field--checkbox]:gap-2.5",
+  "[&_.omni-input]:w-full [&_.omni-input]:rounded-xl [&_.omni-input]:border [&_.omni-input]:border-black/10 [&_.omni-input]:bg-white [&_.omni-input]:p-3 [&_.omni-input]:text-[16px] [&_.omni-input]:font-normal [&_.omni-input]:text-[#1d1d1f]",
+  "[&_.omni-input:focus-visible]:outline-2 [&_.omni-input:focus-visible]:outline-offset-1 [&_.omni-input:focus-visible]:outline-[#0071e3]",
+  "[&_textarea.omni-input]:min-h-24 [&_textarea.omni-input]:resize-y",
+  "[&_.omni-field--checkbox_.omni-input]:w-auto [&_.omni-field--checkbox_.omni-input]:p-0",
+  "[&_.omni-submit]:inline-flex [&_.omni-submit]:w-full [&_.omni-submit]:cursor-pointer [&_.omni-submit]:items-center [&_.omni-submit]:justify-center [&_.omni-submit]:rounded-[980px] [&_.omni-submit]:bg-[#0071e3] [&_.omni-submit]:px-6 [&_.omni-submit]:py-3 [&_.omni-submit]:text-[17px] [&_.omni-submit]:font-normal [&_.omni-submit]:text-white [&_.omni-submit]:transition-[background-color,transform] [&_.omni-submit]:duration-350 [&_.omni-submit]:ease-(--ease-brand)",
+  "[&_.omni-submit:hover]:bg-[#0062c4] motion-safe:[&_.omni-submit:active]:[transform:scale(0.98)] [&_.omni-submit:disabled]:cursor-default [&_.omni-submit:disabled]:opacity-60",
+  "[&_.omni-error]:text-[14px] [&_.omni-error]:font-medium [&_.omni-error]:text-[#b3261e]",
+  "[&_.omni-success]:rounded-[20px] [&_.omni-success]:bg-white [&_.omni-success]:p-7 [&_.omni-success]:text-center [&_.omni-success]:text-[17px] [&_.omni-success]:text-[#1d1d1f]",
+].join(" ");
 ---
 
 <section id="contact" class="apple-section">
   <div class="max-w-4xl mx-auto px-6">
     <Reveal client:visible className="text-center">
-      <p data-reveal class="eyebrow text-[#0071e3] font-medium">{site.primaryCta.label}</p>
-      <h2 data-reveal style="--i:1" class="mt-3 text-h2 font-semibold tracking-tight">
+      <p data-reveal class="reveal-on-scroll eyebrow text-[#0071e3] font-medium">{site.primaryCta.label}</p>
+      <h2 data-reveal style="--i:1" class="reveal-on-scroll mt-3 text-h2 font-semibold tracking-tight">
         เลือกแอปและ seat ที่ต้องการ
       </h2>
-      <p data-reveal style="--i:2" class="mx-auto mt-4 max-w-[44rem] text-balance text-lead text-[#6e6e73]">
+      <p data-reveal style="--i:2" class="reveal-on-scroll mx-auto mt-4 max-w-[44rem] text-balance text-lead text-[#6e6e73]">
         บอกงาน จำนวนเครื่อง และแอปที่สนใจ เราจะช่วยเริ่มบทสนทนา
       </p>
     </Reveal>
     <Reveal client:visible>
-      <div data-reveal style="--i:3" data-cta="form" class="max-w-xl mx-auto mt-9"></div>
+      <div data-reveal style="--i:3" data-cta="form" class:list={["reveal-on-scroll max-w-xl mx-auto mt-9", omniForm]}></div>
     </Reveal>
-    <p data-reveal class="mt-6 text-center text-sm text-[#6e6e73]">
+    <p data-reveal class="reveal-on-scroll mt-6 text-center text-sm text-[#6e6e73]">
       <a data-cta="email" class="underline"></a> <a data-cta="tel" class="underline"></a> <a data-cta="line" class="underline">LINE</a>
     </p>
   </div>

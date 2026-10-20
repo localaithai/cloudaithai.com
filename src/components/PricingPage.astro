@@ -12,7 +12,7 @@ import { appGroups, appMarkPath, mimirScopeNotice } from "@/lib/site-data";
     </p>
     {
       appGroups.map((group, index) => (
-        <article data-reveal style={`--i:${index % 2}`} class="apple-card border border-black/10 p-7">
+        <article data-reveal style={`--i:${index % 2}`} class="reveal-on-scroll apple-card border border-black/10 p-7">
           <h2 class="text-2xl font-semibold">{group.title}</h2>
           <p class="mt-2 text-[#6e6e73]">{group.detail}</p>
           <div class="mt-5 flex flex-wrap gap-2">

@@ -4,13 +4,13 @@ import { faqs } from "@/lib/site-data";
 
 <section class="apple-section section-gray">
   <div class="max-w-3xl mx-auto px-6">
-    <h2 data-reveal class="text-h2 font-semibold tracking-tight text-center">
+    <h2 data-reveal class="reveal-on-scroll text-h2 font-semibold tracking-tight text-center">
       คำถามที่พบบ่อย
     </h2>
     <div class="mt-10 space-y-3">
       {
         faqs.map(([question, answer], index) => (
-          <details data-reveal style={`--i:${Math.min(index, 4)}`} class="apple-card group">
+          <details data-reveal style={`--i:${Math.min(index, 4)}`} class="reveal-on-scroll apple-card group">
             <summary class="min-h-11 p-5 cursor-pointer list-none font-semibold text-[#1d1d1f] flex justify-between gap-4">
               {question}
               <span aria-hidden="true" class="text-[#0066cc] group-open:rotate-45 transition-transform">

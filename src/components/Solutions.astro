@@ -5,11 +5,11 @@ import { solutions } from "@/lib/site-data";
 <section id="solutions" class="apple-section section-gray">
   <div class="max-w-6xl mx-auto px-6">
     <div class="text-center max-w-2xl mx-auto">
-      <p data-reveal class="eyebrow text-[#0071e3] font-medium mb-3">Solutions</p>
-      <h2 data-reveal style="--i:1" class="text-h2 font-semibold tracking-tight">
+      <p data-reveal class="reveal-on-scroll eyebrow text-[#0071e3] font-medium mb-3">Solutions</p>
+      <h2 data-reveal style="--i:1" class="reveal-on-scroll text-h2 font-semibold tracking-tight">
         แอปที่เริ่มจากงานจริง
       </h2>
-      <p data-reveal style="--i:2" class="mt-4 text-balance text-lead text-[#6e6e73]">
+      <p data-reveal style="--i:2" class="reveal-on-scroll mt-4 text-balance text-lead text-[#6e6e73]">
         เลือกแอปต่อ seat เพื่อช่วยงานเอกสาร ข้อมูล
         และเนื้อหาของคนทำงานแต่ละคน
       </p>
@@ -17,7 +17,7 @@ import { solutions } from "@/lib/site-data";
     <div class="mt-10 grid md:grid-cols-3 gap-4">
       {
         Object.entries(solutions).map(([slug, solution], index) => (
-          <div data-reveal style={`--i:${index % 3}`}>
+          <div data-reveal style={`--i:${index % 3}`} class="reveal-on-scroll">
             <a
               href={`/solutions/${slug}`}
               class="apple-card flex h-full flex-col p-6"
@@ -28,7 +28,7 @@ import { solutions } from "@/lib/site-data";
               <p class="mt-2 text-sm text-[#6e6e73] leading-relaxed">
                 {solution.intro}
               </p>
-              <p class="card-cue mt-auto pt-4 text-sm text-[#0071e3]">ดูแอปที่เกี่ยวข้อง</p>
+              <p class="mt-auto inline-flex items-center gap-1 pt-4 text-sm text-[#0071e3] after:text-[1.2em] after:leading-none after:transition-[transform] after:duration-450 after:ease-(--ease-brand) after:content-['›'] motion-safe:[a:hover>&]:after:[transform:translateX(3px)]">ดูแอปที่เกี่ยวข้อง</p>
             </a>
           </div>
         ))

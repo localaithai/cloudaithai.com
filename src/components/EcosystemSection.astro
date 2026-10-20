@@ -41,7 +41,7 @@ import {
     <div class="mt-10 grid md:grid-cols-2 gap-4">
       {
         appGroups.map((group, index) => (
-          <article data-reveal style={`--i:${index % 2}`} class="apple-card p-6">
+          <article data-reveal style={`--i:${index % 2}`} class="reveal-on-scroll apple-card p-6">
             <h2 class="font-semibold text-[#1d1d1f]">{group.title}</h2>
             <p class="mt-2 text-sm text-[#6e6e73]">{group.detail}</p>
             <ul class="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">

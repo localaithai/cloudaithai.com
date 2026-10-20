@@ -7,9 +7,9 @@ import { site } from "@/lib/site";
 import { siteGraph } from "@/lib/structured-data";
 import "@/styles/global.css";
 
-type Props = { head: PageHead };
+type Props = { head: PageHead; bodyClass?: string };
 
-const { head } = Astro.props;
+const { head, bodyClass = "bg-[#fbfbfd] text-[#1d1d1f]" } = Astro.props;
 const { openGraph: og, twitter } = head;
 const googleVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 const bingVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
@@ -91,7 +91,12 @@ const bingVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
     />
     <Font cssVariable="--font-bai" preload />
   </head>
-  <body class="antialiased">
+  <body
+    class:list={[
+      "overflow-x-hidden font-[family-name:var(--font-bai),'Bai_Jamjuree',-apple-system,BlinkMacSystemFont,sans-serif] font-normal tracking-[-0.005em] antialiased [-webkit-tap-highlight-color:transparent] selection:bg-[rgb(0_113_227/0.18)] selection:text-[#1d1d1f]",
+      bodyClass,
+    ]}
+  >
     <JsonLd data={siteGraph()} />
     <slot />
     <script is:inline src="https://localai-omni.vercel.app/cta.js" defer></script>

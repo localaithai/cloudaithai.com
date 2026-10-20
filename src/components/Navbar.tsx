@@ -79,9 +79,12 @@ export default function Navbar({ currentPath = "" }: { currentPath?: string }) {
         transition={{ duration: 0.6, ease }}
         onFocus={() => setHidden(false)}
         data-glass={glass || open ? "" : undefined}
-        className="site-nav fixed inset-x-0 top-0 z-50"
+        className="fixed inset-x-0 top-0 z-50 border-b border-b-transparent transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500 ease-(--ease-brand) data-glass:border-b-[rgb(0_0_0/0.07)] data-glass:bg-[rgb(251_251_253/0.72)] data-glass:shadow-[0_12px_32px_-22px_rgb(29_29_31/0.28)] data-glass:backdrop-blur-[18px] data-glass:backdrop-saturate-[1.8]"
       >
-        <a href="#content" className="skip-link">
+        <a
+          href="#content"
+          className="fixed top-4 left-4 z-60 rounded-lg bg-white px-4 py-3 text-[#1d1d1f] shadow-[0_0_0_2px_#0071e3] [transform:translateY(-150%)] focus-visible:[transform:translateY(0)]"
+        >
           ข้ามไปยังเนื้อหา
         </a>
         <div className="max-w-6xl mx-auto h-16 px-6 flex items-center justify-between">

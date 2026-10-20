@@ -4,22 +4,22 @@ import { models } from "@/lib/site-data";
 
 <section id="models" class="apple-section">
   <div class="max-w-5xl mx-auto px-6 text-center">
-    <p data-reveal class="eyebrow text-[#0071e3] font-medium mb-3">Model choice</p>
-    <h2 data-reveal style="--i:1" class="text-h2 font-semibold tracking-tight">
+    <p data-reveal class="reveal-on-scroll eyebrow text-[#0071e3] font-medium mb-3">Model choice</p>
+    <h2 data-reveal style="--i:1" class="reveal-on-scroll text-h2 font-semibold tracking-tight">
       เลือกโมเดลให้เหมาะกับงาน
     </h2>
-    <p data-reveal style="--i:2" class="mx-auto mt-4 max-w-[44rem] text-balance text-lead text-[#6e6e73]">
+    <p data-reveal style="--i:2" class="reveal-on-scroll mx-auto mt-4 max-w-[44rem] text-balance text-lead text-[#6e6e73]">
       ใน Suite คุณเลือก Claude, Gemini, GPT หรือ DeepSeek
       สำหรับงานที่กำลังทำได้
     </p>
     <div class="mt-9 grid grid-cols-2 sm:grid-cols-4 gap-3">
       {
         models.map((model, index) => (
-          <div data-reveal style={`--i:${index}`} class="apple-card border border-black/10 p-5 font-semibold text-[#1d1d1f]">{model}</div>
+          <div data-reveal style={`--i:${index}`} class="reveal-on-scroll apple-card border border-black/10 p-5 font-semibold text-[#1d1d1f]">{model}</div>
         ))
       }
     </div>
-    <p data-reveal class="mt-6 text-sm text-[#6e6e73]">
+    <p data-reveal class="reveal-on-scroll mt-6 text-sm text-[#6e6e73]">
       ค่าใช้โมเดลยังไม่กำหนด, ติดต่อเราเพื่อคุยความต้องการ
     </p>
   </div>

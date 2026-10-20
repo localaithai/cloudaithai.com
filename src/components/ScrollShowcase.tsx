@@ -12,13 +12,13 @@ export default function ScrollShowcase() {
             viewport={{ once: true }}
             className="text-center"
           >
-            <h2 data-reveal="" className="text-h2 font-semibold tracking-tight">
+            <h2 data-reveal="" className="reveal-on-scroll text-h2 font-semibold tracking-tight">
               Suite พร้อมงาน, ทีละเครื่อง
             </h2>
             <p
               data-reveal=""
               style={{ "--i": 1 } as CSSProperties}
-              className="mx-auto mt-4 max-w-[44rem] text-balance text-lead text-[#6e6e73]"
+              className="reveal-on-scroll mx-auto mt-4 max-w-[44rem] text-balance text-lead text-[#6e6e73]"
             >
               ตั้งค่าในแอป แล้วเลือกสิ่งที่เหมาะกับงานของคุณ
             </p>
@@ -29,7 +29,7 @@ export default function ScrollShowcase() {
                 key={number}
                 data-reveal=""
                 style={{ "--i": index } as CSSProperties}
-                className="apple-card p-5"
+                className="reveal-on-scroll apple-card p-5"
               >
                 <p className="text-[#0066cc] text-sm font-semibold">{number}</p>
                 <h3 className="mt-3 text-h3 font-semibold">{title}</h3>

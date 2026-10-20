@@ -46,7 +46,7 @@ const LOCAL_MACHINE_OPTIONS = [
       </article>
     </div>
     <div class="mt-14">
-      <div data-reveal class="max-w-3xl">
+      <div data-reveal class="reveal-on-scroll max-w-3xl">
         <h3 class="text-xl font-semibold tracking-tight">
           ตัวอย่างเครื่อง AI แบบ GB10 4 รุ่น สำหรับ Local edition เท่านั้น
         </h3>
@@ -59,7 +59,7 @@ const LOCAL_MACHINE_OPTIONS = [
       <div class="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-4">
         {
           LOCAL_MACHINE_OPTIONS.map((machine, index) => (
-            <figure data-reveal style={`--i:${index}`} class="rounded-2xl border border-black/10 bg-[#fbfbfd] p-4">
+            <figure data-reveal style={`--i:${index}`} class="reveal-on-scroll rounded-2xl border border-black/10 bg-[#fbfbfd] p-4">
               <img
                 src={assetUrl(machine.path)}
                 alt={`${machine.name}, ตัวอย่างเครื่อง AI แบบ GB10 สำหรับ Local edition`}

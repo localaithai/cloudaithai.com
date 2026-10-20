@@ -24,14 +24,14 @@ export default function DataHandlingSection() {
           >
             <p
               data-reveal=""
-              className="eyebrow text-[#0066cc] font-medium mb-3"
+              className="reveal-on-scroll eyebrow text-[#0066cc] font-medium mb-3"
             >
               Data handling
             </p>
             <h2
               data-reveal=""
               style={{ "--i": 1 } as CSSProperties}
-              className="text-h2 font-semibold tracking-tight text-[#1d1d1f]"
+              className="reveal-on-scroll text-h2 font-semibold tracking-tight text-[#1d1d1f]"
             >
               ข้อมูลไปไหน, บอกตรงๆ
             </h2>
@@ -42,7 +42,7 @@ export default function DataHandlingSection() {
                 key={title}
                 data-reveal=""
                 style={{ "--i": index % 2 } as CSSProperties}
-                className="apple-card p-6"
+                className="reveal-on-scroll apple-card p-6"
               >
                 <h3 className="text-h3 font-semibold text-[#1d1d1f] mb-2">
                   {title}
