@@ -1,0 +1,40 @@
+---
+title: "Reflection เปิด Beam ผ่าน Ollama Cloud"
+description: "Beam เปิดให้ใช้ผ่าน Ollama Cloud พร้อมข้ออ้าง ZDR ของ endpoint นั้น ผู้ใช้ควรตรวจปลายทาง ขอบเขตการเก็บ และเงื่อนไขใช้ฟรีชั่วคราว"
+kind: "news"
+query: "Beam แบบ open-weight บน Ollama Cloud ส่งข้อมูลไปไหนและ ZDR ครอบคลุมอะไร"
+cluster: "/compare/"
+source: "reflection-beam-cloud-release"
+published: "2026-10-23"
+reviewed: "2026-10-23"
+newsDate: "2026-10-16"
+summary: "open-weight ไม่ได้บอกว่าคำขอรันในเครื่อง ตรวจผู้ให้บริการ inference และขอบเขต retention ของ endpoint ก่อนส่งเอกสาร แล้ววัดงานที่ตรวจรับได้"
+faq: [{"question":"ดาวน์โหลดแอป Ollama แล้วข้อมูลอยู่ในเครื่องทั้งหมดหรือไม่","answer":"ดูโมเดลและ endpoint ที่เรียกจริง แยกการประมวลผลบนเครื่องออกจากเส้นทางที่ส่งคำขอขึ้น cloud รวมถึงการเชื่อมบริการอื่น"},{"question":"ควรใช้ช่วงทดลองใช้ฟรีวัดอะไร","answer":"ใช้ชุดงานที่ไม่มีข้อมูลลับ บันทึกงานที่สำเร็จ เวลาตรวจแก้ และข้อผิดพลาด อย่าใช้การใช้ฟรีเป็นหลักฐานราคาหรือเงื่อนไขระยะยาว"}]
+citations: [{"title":"Reflection’s Beam is freely available on Ollama for a limited time","url":"https://ollama.com/blog/reflection-beam","publisher":"Ollama","published":"2026-10-16","accessed":"2026-10-23"},{"title":"Beam is now available","url":"https://reflection.ai/blog/beam-is-available","publisher":"Reflection AI","published":"2026-10-16","accessed":"2026-10-23"}]
+hero: {"src":"https://assets.mimir.business/assets/sites/aisolutionsthailand.com/general/hero.9917f9cb9829.webp","credit":"Mimir / aisolutionsthailand.com","sourceUrl":"https://aisolutionsthailand.com/","alt":"เอกสาร laptop และแก้วกาแฟบนโต๊ะไม้","caption":"ภาพประกอบงานเอกสารที่ใช้บริการคลาวด์ ไม่ใช่ภาพผลิตภัณฑ์หรือผลทดสอบ"}
+videos: [{"url":"https://www.youtube.com/watch?v=2MhfdqsNvsI","title":"Why Open Source Is Key to AI’s Next Chapter | Misha Laskin at London Tech Week | Reflection","publisher":"Reflection AI","published":"2026-07-02","context":true}]
+draft: false
+---
+
+## Beam มีเส้นทางใช้งานบน cloud
+
+Reflection เปิดน้ำหนัก Beam ภายใต้ Apache 2.0 วันที่ 16 ตุลาคม 2026 [ประกาศ Reflection](https://reflection.ai/blog/beam-is-available) ส่วน [Ollama](https://ollama.com/blog/reflection-beam) เปิด beam:cloud ฟรีชั่วคราวพร้อมระบุ ZDR สำหรับ endpoint นี้ ไม่ได้หมายถึง inference ใน laptop หรือใช้ฟรีตลอดไป
+
+## เขียนขอบเขต ZDR ให้ครบ
+
+สำหรับผู้ซื้อ Cloud AI คำถามสำคัญคือคำรับรองครอบคลุมบริการใด ข้อเสนอคือทำบัญชีข้อมูลของงานหนึ่งชิ้น ตั้งแต่เลือกไฟล์ ส่งคำขอ จนบันทึกผล อย่านำข้อกำหนดของโมเดลไปครอบการเก็บข้อมูลในแอปหรือเครื่องมือที่เชื่อมต่อโดยอัตโนมัติ
+
+| จุดข้อมูล | สิ่งที่ควรขอคำตอบ | เกณฑ์ก่อนใช้งานจริง |
+| --- | --- | --- |
+| คำขอโมเดล | endpoint และผู้ให้บริการ | ตรงกับทางที่อนุมัติ |
+| บันทึกเครื่องมือ | มีเนื้อหาเอกสารหรือไม่ | จำกัดสิทธิ์และอายุเก็บ |
+| ผลในเครื่อง | ใครเปิดอ่านได้ | อยู่ในพื้นที่ที่กำหนด |
+| สำรอง | สำรองชุดใด คืนให้ใคร | ทดลองคืนข้อมูลได้ |
+
+นี่เป็นการตรวจเส้นทางข้อมูล ไม่ใช่การเพิ่มขอบเขตคำรับรองของ Ollama หากไม่มีคำตอบของขั้นใด ให้เริ่มทดลองด้วยข้อมูลจำลองแทนข้อมูลลับ
+
+## เทียบด้วยงานที่คนรับได้
+
+ตั้งเกณฑ์คำตอบและข้อผิดพลาดที่ต้องส่งต่อคนก่อนทดสอบ การเปิดน้ำหนักไม่ได้ยืนยันความเหมาะกับภาษาไทยหรือขนาดเครื่องของผู้ซื้อ และข่าวนี้ไม่ได้ยืนยันว่า Beam รวมใน Mimir Suites
+
+Mimir Suites Cloud ส่งข้อความเอกสารไปโมเดล cloud โดยปิดบัง PII เป็นค่าเริ่มต้น จึงต้องตรวจข้อมูลที่เหลือด้วย วิดีโอ Reflection AI จากเดือนกรกฎาคมเป็นพื้นหลัง open models ไม่ใช่การสาธิต Beam ใช้รายการข้างต้นประกอบ [การเปรียบเทียบโมเดล Cloud AI](/compare/)

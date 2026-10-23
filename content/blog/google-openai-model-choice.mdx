@@ -1,0 +1,40 @@
+---
+title: "Google เปิดทดลองโมเดล OpenAI ในคลาวด์"
+description: "OpenAI ใน Google Cloud เริ่ม private preview ผู้ใช้ควรแยกช่องทาง API สัญญา และขอบเขตข้อมูล ก่อนเทียบคุณภาพงานกับการใช้โมเดลโดยตรง"
+kind: "news"
+query: "OpenAI Google Cloud Model Garden เปรียบเทียบ API direct cloud"
+cluster: "/compare/"
+source: "google-cloud-openai-model-garden"
+published: "2026-10-23"
+reviewed: "2026-10-23"
+newsDate: "2026-10-21"
+summary: "ชื่อโมเดลเดียวกันยังต้องตรวจช่องทางเข้าถึง ผู้ดูแลข้อมูล และเงื่อนไขบริการใหม่ เปรียบเทียบด้วยงานที่รับผลได้และต้นทุนครบขั้นตอน"
+faq: [{"question":"ควรเปรียบเทียบช่องทางโมเดลด้วยอะไร","answer":"ใช้ชุดงานและเกณฑ์รับผลเดียวกัน บันทึกการเข้าถึงจริง เวลา ความผิดพลาด และค่าใช้จ่ายตามสัญญาของแต่ละช่องทาง"},{"question":"การรวมบิล cloud ทำให้สิทธิ์ใช้เหมือน API โดยตรงหรือไม่","answer":"ตรวจสิทธิ์ รุ่นโมเดล ข้อจำกัด และข้อตกลงของช่องทางนั้นแยกกัน อย่าใช้ชื่อโมเดลเป็นคำตอบแทนเงื่อนไขบริการ"}]
+citations: [{"title":"Google Cloud expands model choice and flexibility, bringing OpenAI models to customers","url":"https://cloud.google.com/blog/products/ai-machine-learning/google-cloud-brings-openai-models-to-customers","publisher":"Google Cloud","published":"2026-10-21","accessed":"2026-10-23"},{"title":"OpenAI models are coming to Google Cloud","url":"https://openai.com/index/openai-models-google-cloud/","publisher":"OpenAI","published":"2026-10-21","accessed":"2026-10-23"}]
+hero: {"src":"https://assets.mimir.business/assets/sites/aisolutionsthailand.com/general/hero.9917f9cb9829.webp","credit":"Mimir / aisolutionsthailand.com","sourceUrl":"https://aisolutionsthailand.com/","alt":"เอกสาร laptop และแก้วกาแฟบนโต๊ะไม้","caption":"ภาพประกอบงานเอกสารที่ใช้บริการคลาวด์ ไม่ใช่ภาพผลิตภัณฑ์หรือผลทดสอบ"}
+videos: [{"url":"https://www.youtube.com/watch?v=I7UiSU96CLc","title":"Introduction to Vertex AI Model Garden","publisher":"Google Cloud Tech","published":"2023-06-07","context":true}]
+draft: false
+---
+
+## เริ่มที่ private preview
+
+Google เปิด OpenAI ใน Model Garden ให้ลูกค้าองค์กรที่คัดเลือกแบบ private preview วันที่ 21 ตุลาคม 2026 [Google](https://cloud.google.com/blog/products/ai-machine-learning/google-cloud-brings-openai-models-to-customers) ระบุ ZDR และ Confidential Compute ว่ายังมาในอนาคต [OpenAI](https://openai.com/index/openai-models-google-cloud/) ระบุแผนเปิดทั่วไปในสัปดาห์ถัดไป จึงยังไม่ใช่สิทธิ์ใช้ทั่วไปในไทย
+
+## แยกสัญญาออกจากผลของงาน
+
+สำหรับผู้ซื้อ Cloud AI ให้เริ่มจากงานที่ทำอยู่ เช่น สรุปเอกสารที่อนุญาตหนึ่งชุด ช่องทางที่เข้ากับการจัดซื้ออาจช่วยเรื่องบริหาร แต่ยังต้องตรวจผลลัพธ์ด้วยเกณฑ์เดียวกับช่องทางเดิม
+
+| เรื่องที่เทียบ | หลักฐานที่ต้องมี | สิ่งที่ยังสรุปไม่ได้จากชื่อโมเดล |
+| --- | --- | --- |
+| การเข้าถึง | บัญชีและรุ่นที่เปิดจริง | ทุกบัญชีใช้ได้เท่ากัน |
+| ข้อมูล | ปลายทางและเงื่อนไขเก็บ | ทุกช่องทางมี retention เดียวกัน |
+| คุณภาพ | ตัวอย่างที่คนรับผลได้ | ผลกับเอกสารไทยจะเหมือนกัน |
+| ต้นทุน | บิลและงานที่ทำสำเร็จ | ราคาหรือโควตาเหมือนกัน |
+
+นี่เป็นแบบเปรียบเทียบที่เสนอ ไม่ใช่ผล benchmark ให้บันทึกงานที่ต้องลองซ้ำและเวลาตรวจแก้ด้วย เพื่อไม่ให้ตัวเลขต่อคำขอดูต่ำกว่าต้นทุนงานจริง
+
+## วางข้อมูลก่อนเปลี่ยนผู้ให้บริการ
+
+ใน Mimir Suites Cloud ข้อความเอกสารไปยังโมเดล cloud โดยปิดบัง PII เป็นค่าเริ่มต้น การเปลี่ยนช่องทางโมเดลจึงต้องทบทวนข้อมูลที่อนุญาตส่ง การปิดบังไม่รับรองว่าข้อมูลทั้งหมดนิรนาม และข่าวนี้ไม่ได้ระบุการรองรับช่องทางใหม่ของ Suite
+
+วิดีโอ Introduction to Vertex AI Model Garden จากปี 2023 ใช้อธิบายพื้นหลังระบบรายการโมเดล ไม่ใช่การสาธิต OpenAI preview นี้ เตรียมชุดงานก่อนใช้ [กรอบเปรียบเทียบ Cloud AI](/compare/) และขอเงื่อนไขค่าใช้งานสำหรับช่องทางที่เลือก

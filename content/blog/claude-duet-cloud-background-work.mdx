@@ -1,0 +1,40 @@
+---
+title: "Anthropic เปิด Duet ทำงานบนคลาวด์"
+description: "Duet ทดลองทำงานต่อบน cloud VM ผู้ซื้อควรแยกปลายทางข้อมูล งานเบื้องหลัง โควตา และการสำรองต่อเครื่อง ก่อนเทียบกับ Suite ที่ใช้อยู่"
+kind: "news"
+query: "Claude Duet cloud ทำงานปิดคอม ข้อมูลและ usage limit"
+cluster: "/how-it-works/"
+source: "anthropic-claude-duet-preview"
+published: "2026-10-23"
+reviewed: "2026-10-23"
+newsDate: "2026-10-21"
+summary: "งานที่ทำต่อเมื่อปิดคอมต้องมีปลายทางประมวลผลและวิธีหยุดที่ชัด แยกข้อมูลของบริการโมเดลออกจากไฟล์ในเครื่องและขอบเขตการสำรองของแต่ละ seat"
+faq: [{"question":"ติดตั้งแอปในเครื่องแล้วแปลว่าประมวลผลอยู่ในเครื่องหรือไม่","answer":"ตรวจปลายทางของแต่ละขั้น ทั้งการอ่านไฟล์ การส่งข้อความให้โมเดล และการเก็บผล ตำแหน่งแอปไม่ได้ยืนยันตำแหน่ง inference"},{"question":"ควรเริ่มทดลองงานเบื้องหลังอย่างไร","answer":"ใช้ข้อมูลจำลองหนึ่งงาน กำหนดผู้รับการแจ้งเตือน งบใช้งาน และวิธีพักงาน แล้วทดสอบว่าร่างที่ค้างยังต้องผ่านคนก่อนส่ง"}]
+citations: [{"title":"Introducing Claude Duet","url":"https://claude.com/resources/articles/claude-duet","publisher":"Anthropic / Claude","published":"2026-10-21","accessed":"2026-10-23"},{"title":"Release notes: Claude Duet research preview for Pro and Max plans","url":"https://support.claude.com/en/articles/12138966-release-notes","publisher":"Claude Help Center","published":"2026-10-21","accessed":"2026-10-23"}]
+hero: {"src":"https://assets.mimir.business/assets/sites/aisolutionsthailand.com/general/hero.9917f9cb9829.webp","credit":"Mimir / aisolutionsthailand.com","sourceUrl":"https://aisolutionsthailand.com/","alt":"เอกสาร laptop และแก้วกาแฟบนโต๊ะไม้","caption":"ภาพประกอบงานเอกสารที่ใช้บริการคลาวด์ ไม่ใช่ภาพผลิตภัณฑ์หรือผลทดสอบ"}
+videos: [{"url":"https://www.youtube.com/watch?v=Fb-68zqcSVs","title":"Introducing Claude Duet","publisher":"Claude","published":"2026-10-21","context":false}]
+draft: false
+---
+
+## Duet ใช้สภาพแวดล้อมของบริการ
+
+Anthropic เปิด Duet research preview วันที่ 21 ตุลาคม 2026 สำหรับ US Pro/Max ผ่าน waitlist งานบน cloud VM ใช้โควตาร่วม [ประกาศ](https://claude.com/resources/articles/claude-duet) กับ [release notes](https://support.claude.com/en/articles/12138966-release-notes) ไม่ยืนยันสิทธิ์ใช้ในไทย
+
+## ถามว่าแต่ละขั้นอยู่ที่ไหน
+
+ข้อวิเคราะห์สำหรับ SME คือการเปรียบเทียบต้องเริ่มจากผังงานหนึ่งงาน ไม่ใช่คำว่าแอปบน laptop ลองใช้การร่างสรุปยอดร้าน แล้วเขียนว่าข้อมูลถูกอ่านจากที่ใด ผลไปอยู่ที่ไหน และใครเห็นแจ้งเตือนเมื่อเจ้าของเครื่องไม่อยู่
+
+| ส่วนของงาน | คำถามที่ต้องตอบ | สิ่งที่เก็บในแบบทดลอง |
+| --- | --- | --- |
+| แหล่งข้อมูล | อนุญาตอ่านไฟล์ใด | รายการไฟล์ที่ใช้ |
+| ประมวลผล | ส่งข้อความไปบริการใด | ปลายทางที่ตั้งค่า |
+| งานเบื้องหลัง | หยุดหรือพักได้อย่างไร | ผู้รับผิดชอบและวิธีหยุด |
+| ผลและสำรอง | คืนข้อมูลให้เครื่องใด | ตำแหน่งสำรองที่ทดสอบได้ |
+
+ตารางนี้เป็นคำถามเลือกบริการ ไม่ใช่รายการความสามารถที่ Duet หรือ Suite มีเหมือนกัน ควรทดลองด้วยข้อมูลไม่ลับก่อน และไม่ถือว่าการเชื่อมแอปสำเร็จคืออนุมัติให้อ่านข้อมูลทุกโฟลเดอร์
+
+## เทียบกับ Cloud edition ให้ตรง
+
+Mimir Suites Cloud ติดตั้งแยกต่อเครื่อง แต่ละ seat มีข้อมูลของตน ข้อความเอกสารส่งไปโมเดล cloud โดยปิดบัง PII เป็นค่าเริ่มต้น จึงยังต้องตรวจข้อความที่เหลือและข้อมูลที่งานอนุญาต การตั้งสำรองควรระบุเครื่องและเจ้าของให้ชัด
+
+วิดีโอ Introducing Claude Duet แนะนำบริการของ Anthropic ไม่ได้สาธิตการเชื่อม Suite เริ่มจากผังข้างต้นก่อนอ่าน [วิธีทำงานของ Cloud edition](/how-it-works/) โดยไม่สมมติว่ามีคลังข้อมูลร่วม และขอเงื่อนไขค่าใช้งานของข้อเสนอจริง

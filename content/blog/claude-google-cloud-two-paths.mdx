@@ -1,0 +1,40 @@
+---
+title: "Google เปิด Claude แบบ Anthropic ดูแล"
+description: "Claude บน Google Cloud มีทาง Anthropic ดูแลและ Google ดูแล ผู้ซื้อควรบันทึก processor ปลายทาง และข้อมูลที่อนุญาตก่อนเลือกช่องทาง"
+kind: "news"
+query: "Claude Google Cloud สองแบบ ข้อมูล US Global endpoints"
+cluster: "/methodology/"
+source: "claude-google-cloud-anthropic-managed"
+published: "2026-10-23"
+reviewed: "2026-10-23"
+newsDate: "2026-10-22"
+summary: "ก่อนส่งเอกสารให้ Claude ผ่าน Google Cloud ให้ระบุผู้ประมวลผล ปลายทางจริง และเงื่อนไขข้อมูล อย่านำข้อควบคุมของทางหนึ่งไปถือว่าอีกทางมีด้วย"
+faq: [{"question":"เริ่มตรวจสองช่องทางจากอะไร","answer":"ขอชื่อบริการและ endpoint ตามสัญญาที่จะใช้จริง พร้อมผู้รับผิดชอบตอบเรื่องข้อมูล แล้วเทียบกับรายการเอกสารที่อนุญาตให้ส่ง"},{"question":"ต้องย้ายข้อมูลทุกเครื่องพร้อมกันหรือไม่","answer":"ออกแบบ pilot แยกเครื่องและชุดข้อมูลที่ได้รับอนุมัติ เก็บวิธีกลับไปช่องทางเดิมและตำแหน่งสำรองก่อนขยายการใช้งาน"}]
+citations: [{"title":"Expanding Claude availability and deployment choice on Google Cloud","url":"https://cloud.google.com/blog/products/ai-machine-learning/expanding-claude-availability-on-google-cloud","publisher":"Google Cloud","published":"2026-10-22","accessed":"2026-10-23"},{"title":"The full Claude Platform, available on Google Cloud","url":"https://claude.com/resources/articles/claude-models-on-google-cloud-anthropic-managed","publisher":"Anthropic / Claude","published":"2026-10-22","accessed":"2026-10-23"}]
+hero: {"src":"https://assets.mimir.business/assets/sites/aisolutionsthailand.com/general/hero.9917f9cb9829.webp","credit":"Mimir / aisolutionsthailand.com","sourceUrl":"https://aisolutionsthailand.com/","alt":"เอกสาร laptop และแก้วกาแฟบนโต๊ะไม้","caption":"ภาพประกอบงานเอกสารที่ใช้บริการคลาวด์ ไม่ใช่ภาพผลิตภัณฑ์หรือผลทดสอบ"}
+videos: [{"url":"https://www.youtube.com/watch?v=I7UiSU96CLc","title":"Introduction to Vertex AI Model Garden","publisher":"Google Cloud Tech","published":"2023-06-07","context":true}]
+draft: false
+---
+
+## เปิดบริการสองแนวทาง
+
+วันที่ 22 ตุลาคม 2026 Anthropic-managed Claude บน Google Cloud เปิด GA โดย Anthropic เป็น data processor และมี US กับ Global endpoints [Anthropic](https://claude.com/resources/articles/claude-models-on-google-cloud-anthropic-managed) ขณะที่ [Google](https://cloud.google.com/blog/products/ai-machine-learning/expanding-claude-availability-on-google-cloud) แยกบริการ Google-managed ที่ Google เป็น processor ไม่ใช่การยืนยันปลายทางไทย
+
+## จดปลายทางให้คนตรวจได้
+
+ข้อเสนอสำหรับ SME คือเขียนบัตรข้อมูลของช่องทางที่จะใช้เพียงหนึ่งหน้า ให้ผู้ใช้เห็นว่ากำลังส่งข้อมูลชนิดใดและใครตอบเมื่อเกิดปัญหา ไม่เลือกตามชื่อบริษัทที่ออกใบแจ้งหนี้เพียงอย่างเดียว
+
+| ช่องในบัตรบริการ | หลักฐานก่อนทดลอง |
+| --- | --- |
+| ผู้ประมวลผล | ชื่อทางบริการและสัญญาที่เกี่ยวข้อง |
+| ปลายทาง | endpoint และเงื่อนไขพื้นที่ข้อมูล |
+| เอกสารที่อนุญาต | ตัวอย่างที่ไม่มีข้อมูลเกินขอบเขต |
+| การยกเลิก | ผู้ถอนสิทธิ์และวิธีจัดการร่างค้าง |
+
+ตารางนี้เป็นวิธีเลือกบริการ ไม่ใช่เงื่อนไขที่ผู้ขายรับรองเพิ่ม การมีโมเดลชื่อเดียวกันไม่ได้ตอบว่า feature ใหม่จะพร้อมวันเดียวกัน หรือข้อควบคุมข้อมูลจะเท่ากัน
+
+## แยกข้อมูลของแต่ละ seat
+
+Mimir Suites Cloud เป็น install ต่อเครื่องพร้อมข้อมูลของตน ข้อความเอกสารส่งไปโมเดล cloud โดยปิดบัง PII เป็นค่าเริ่มต้น ผู้รับผิดชอบยังต้องตรวจข้อมูลที่เหลือและระบุสำรองของเครื่องนั้น ข่าวนี้ไม่ยืนยันว่า Suite เชื่อมบริการทั้งสองทางแล้ว
+
+วิดีโอ Introduction to Vertex AI Model Garden เป็นพื้นหลังจากปี 2023 ไม่ใช่คำแนะนำตั้งค่าบริการ Anthropic-managed ใหม่ ใช้บัตรบริการข้างต้นประกอบ [วิธีประเมิน Cloud AI](/methodology/) พร้อมขอเงื่อนไขค่าใช้งานของช่องทางที่เลือก
