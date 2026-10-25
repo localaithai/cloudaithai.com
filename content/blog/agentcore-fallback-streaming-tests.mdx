@@ -1,0 +1,43 @@
+---
+title: "AWS เพิ่ม fallback ใน AgentCore"
+description: "AWS เพิ่ม fallback ให้ AgentCore Gateway งาน streaming ต้องแยกช่วงก่อนส่งข้อมูลกับคำตอบที่ส่งไปแล้ว พร้อมทดสอบ retry และค่าใช้จ่ายต่อความพยายาม"
+kind: "news"
+query: "AgentCore Gateway fallback ทดสอบ streaming และค่าใช้จ่าย"
+cluster: "/methodology/"
+source: "bedrock-agentcore-model-fallback"
+published: "2026-10-25"
+reviewed: "2026-10-25"
+newsDate: "2026-10-22"
+summary: "แผนสำรองต้องทดสอบทั้งก่อนคำตอบเริ่มและหลังส่งบางส่วนแล้ว ระบุว่าใคร retry วิธีป้องกันงานซ้ำ และต้นทุนของแต่ละความพยายามถูกนับอย่างไร"
+faq: [{"question": "มี fallback แล้วรับรองคำตอบ streaming ไม่ขาดได้หรือไม่", "answer": "คู่มือระบุว่าสลับปลายทางไม่ได้หลัง streaming เริ่มแล้ว client อาจได้คำตอบบางส่วนกับ error จึงต้องออกแบบการรับมือและ retry แยกต่างหาก"}, {"question": "ควรนับต้นทุนจากจำนวนคำขอของผู้ใช้อย่างเดียวหรือไม่", "answer": "ให้รวมความพยายามภายในที่เกิดขึ้นจริง ตรวจ gateway กับค่าโมเดลแยกกัน และเทียบต้นทุนต่อผลงานที่ตรวจผ่านแทนจำนวนคำขอเริ่มต้น"}]
+citations: [{"title": "AgentCore Gateway now supports Bedrock InvokeModel APIs and model fallback", "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/agentcore-gateway-invokemodel-fallback/", "publisher": "Amazon Web Services", "published": "2026-10-22", "accessed": "2026-10-25"}, {"title": "AWS What’s New RSS: AgentCore Gateway now supports Bedrock InvokeModel APIs and model fallback", "url": "https://aws.amazon.com/about-aws/whats-new/recent/feed/", "publisher": "Amazon Web Services", "published": "2026-10-22", "accessed": "2026-10-25"}]
+hero: {"src": "https://assets.mimir.business/assets/sites/aisolutionsthailand.com/general/hero.9917f9cb9829.webp", "credit": "Mimir / aisolutionsthailand.com", "sourceUrl": "https://aisolutionsthailand.com/", "alt": "เอกสาร laptop และแก้วกาแฟบนโต๊ะไม้", "caption": "ภาพประกอบงานเอกสารจาก Mimir ไม่ใช่หน้าจอผลิตภัณฑ์ในข่าวหรืออุปกรณ์ที่ต้องซื้อเพื่อใช้ Cloud edition"}
+videos: [{"url": "https://www.youtube.com/watch?v=usFIb9aEd1U", "title": "Amazon Bedrock AgentCore: Deploy & Operate AI Agents in Minutes | Amazon Web Services", "publisher": "Amazon Web Services", "published": "2025-07-16", "context": true}]
+draft: false
+---
+
+## AWS เพิ่มลำดับโมเดลสำรอง
+
+AWS เปิด [model fallback สำหรับ AgentCore Gateway](https://aws.amazon.com/about-aws/whats-new/2026/10/agentcore-gateway-invokemodel-fallback/) วันที่ 22 ตุลาคม 2026 ให้กำหนดปลายทางสำรองตามเงื่อนไขผิดพลาดได้ [RSS ของ AWS](https://aws.amazon.com/about-aws/whats-new/recent/feed/) ยืนยันวันประกาศเดียวกัน
+
+[คู่มือ routing ปัจจุบัน](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/gateway-rules-fallback.html) ระบุว่าสลับไม่ได้หลังเริ่ม streaming และคิด gateway invocation ตามความพยายามส่งออก โดยค่าโมเดลคิดแยกกัน การมองว่า client ส่งหนึ่งคำขอจึงยังไม่พอสำหรับประเมินผลและต้นทุน
+
+## ทดลองจุดขาดแทนการดูเฉพาะกรณีสำเร็จ
+
+ข้อเสนอสำหรับทีมเลือกบริการคือกำหนดผลที่ผู้ใช้ควรเห็นเมื่อคำตอบขาด และข้อมูลใดที่ต้องเก็บเพื่อทำต่อ ไม่แสดงข้อความที่ยังไม่ครบเป็นเอกสารพร้อมใช้
+
+| สถานการณ์ | พฤติกรรมที่ต้องตกลง | หลักฐานในการทดลอง |
+| --- | --- | --- |
+| ยังไม่ได้ข้อมูลไบต์แรก | รอ สลับ หรือหยุดตามเกณฑ์ | ปลายทางและเวลาของแต่ละความพยายาม |
+| คำตอบเริ่มแล้วขาด | แจ้งว่าไม่ครบและรับงานต่อ | ส่วนที่ส่งไปกับ error ที่เกิด |
+| ต้อง retry | ไม่ทำคำสั่งธุรกิจซ้ำ | ตัวระบุงานและรายการผลที่เกิดแล้ว |
+| โมเดลสำรองตอบต่างรูปแบบ | ตรวจผลก่อนส่งต่อ | ผลตรวจโครงสร้างและเนื้อหา |
+| ทุกปลายทางล้มเหลว | ส่งคิวให้ผู้รับผิดชอบ | เหตุสุดท้ายและเจ้าของงานค้าง |
+
+ตารางนี้เป็นชุดทดสอบที่เสนอ ใช้ข้อมูลจำลองก่อนเชื่อมงานที่เขียนข้อมูลหรือส่งผลออกนอกระบบ แล้วเก็บผลทุกความพยายามภายใต้ตัวระบุงานเดียวกัน
+
+## คิดต้นทุนต่อผลงานที่ใช้ได้
+
+รวมเวลา retry ภาระคนตรวจ และค่าใช้จ่ายของเส้นทางสำรองไว้ในเกณฑ์ผ่าน สำหรับ Mimir Suites Cloud ข้อความเอกสารส่งไปโมเดลคลาวด์โดยปิดบัง PII เป็นค่าเริ่มต้น การประเมินผู้ให้บริการสำรองยังต้องตรวจปลายทางข้อมูลแยกด้วย
+
+วิดีโอ AgentCore ปี 2025 เป็นบริบทแพลตฟอร์มก่อนเพิ่ม fallback นำสถานการณ์ขาดช่วงไปใส่ [วิธีประเมินงานคลาวด์](/methodology/) ก่อนใช้จำนวนคำขอสำเร็จเป็นเกณฑ์รับมอบ

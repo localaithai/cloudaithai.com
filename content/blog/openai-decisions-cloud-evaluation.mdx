@@ -1,0 +1,43 @@
+---
+title: "OpenAI เปิด Decisions แบบ GA"
+description: "OpenAI เปิด Decisions API แบบ GA เลือก probability choice หรือ score ให้ตรงงาน แล้วทดสอบการปฏิเสธ เกณฑ์คัดกรอง และเส้นทางบริการก่อนส่งข้อมูล"
+kind: "news"
+query: "OpenAI Decisions API ทดสอบตัวเลือกคะแนนบนคลาวด์"
+cluster: "/methodology/"
+source: "openai-decisions-ga"
+published: "2026-10-25"
+reviewed: "2026-10-25"
+newsDate: "2026-10-22"
+summary: "เลือกชนิดคำตอบให้ตรงการตัดสินของงาน แยกคะแนนประมาณจากเกณฑ์อนุมัติ ใช้ชุดข้อมูลติดป้ายกำกับและทางรับงานเมื่อโมเดลปฏิเสธก่อนเปิดใช้งาน"
+faq: [{"question": "คะแนน probability เป็นโอกาสเกิดจริงที่รับรองแล้วหรือไม่", "answer": "เป็นค่าประมาณจากโมเดล ต้องทดสอบกับตัวอย่างที่ติดป้ายกำกับและต้นทุนความผิดพลาดของงาน ก่อนกำหนด threshold หรือใช้จัดคิว"}, {"question": "ใช้ OpenAI โดยตรงกับผ่าน Azure แล้วใช้เงื่อนไขข้อมูลชุดเดียวกันได้หรือไม่", "answer": "ให้ตรวจ endpoint บัญชี ภูมิภาค และเงื่อนไขของแต่ละเส้นทางแยกกัน การมีชื่อ API เหมือนกันไม่โอนสิทธิ์หรือข้อตกลงข้อมูลข้ามบริการ"}]
+citations: [{"title": "Build more responsive apps with the Decisions API", "url": "https://openai.com/index/decisions-api/", "publisher": "OpenAI", "published": "2026-10-22", "accessed": "2026-10-25"}, {"title": "Decisions API is now generally available with new updates", "url": "https://community.openai.com/t/decisions-api-is-now-generally-available-with-new-updates/1408934", "publisher": "OpenAI Developer Community", "published": "2026-10-22", "accessed": "2026-10-25"}, {"title": "Azure OpenAI Decisions API: Now generally available in Microsoft Foundry", "url": "https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/azure-openai-decisions-api-now-generally-available-in-microsoft-foundry/4567265", "publisher": "Microsoft", "published": "2026-10-23", "accessed": "2026-10-25"}, {"title": "Use the Azure OpenAI Decisions API", "url": "https://learn.microsoft.com/azure/foundry/openai/how-to/decisions", "publisher": "Microsoft Learn", "published": "2026-10-21", "accessed": "2026-10-25"}]
+hero: {"src": "https://assets.mimir.business/assets/sites/aisolutionsthailand.com/general/hero.9917f9cb9829.webp", "credit": "Mimir / aisolutionsthailand.com", "sourceUrl": "https://aisolutionsthailand.com/", "alt": "เอกสาร laptop และแก้วกาแฟบนโต๊ะไม้", "caption": "ภาพประกอบงานเอกสารจาก Mimir ไม่ใช่หน้าจอผลิตภัณฑ์ในข่าวหรืออุปกรณ์ที่ต้องซื้อเพื่อใช้ Cloud edition"}
+videos: [{"url": "https://www.youtube.com/watch?v=hciNKcLwSes", "title": "New tools for building agents with the API", "publisher": "OpenAI", "published": "2025-03-11", "context": true}]
+draft: false
+---
+
+## OpenAI เปิด API สำหรับคำตอบที่มีขอบเขต
+
+OpenAI เปิด [Decisions API แบบ GA](https://openai.com/index/decisions-api/) วันที่ 22 ตุลาคม 2026 โดยใช้ GPT-6 Luna คืน probability, choice หรือ score จากข้อมูลที่ให้ประเมิน [ประกาศนักพัฒนา](https://community.openai.com/t/decisions-api-is-now-generally-available-with-new-updates/1408934) ยืนยันการออกจาก beta
+
+Microsoft ระบุใน [บทความวันที่ 23 ตุลาคม](https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/azure-openai-decisions-api-now-generally-available-in-microsoft-foundry/4567265) ว่านำบริการเข้า Foundry วันที่ 22 ตุลาคม เส้นทาง Azure กับ OpenAI โดยตรงต้องตรวจ endpoint และเงื่อนไขแยกกัน
+
+## เลือกผลตอบตามการตัดสินที่ต้องใช้
+
+ข้อเสนอสำหรับผู้ซื้อคลาวด์คือเขียนคำถามธุรกิจที่แคบพอจะรู้คำตอบถูกผิด เช่น ต้องส่งเอกสารกลับให้เจ้าของเติมหรือส่งให้ผู้ตรวจคนใด แล้วกำหนดชุดตัวเลือกที่มีทางออกเมื่อข้อมูลไม่พอ
+
+| สิ่งที่ต้องตัดสิน | ชุดทดสอบที่ควรเตรียม | ขอบเขตการนำผลไปใช้ |
+| --- | --- | --- |
+| เงื่อนไขเป็นจริงหรือไม่ | ตัวอย่างจริง เท็จ และคลุมเครือ | ใช้เกณฑ์ที่ผ่านการทดสอบ |
+| ควรเข้าคิวใด | งานหลายเจตนาและนอกขอบเขต | มีผู้รับผิดชอบคิวสำรอง |
+| ระดับตาม rubric | ตัวอย่างขอบระหว่างระดับ | คนตรวจนิยามระดับให้ตรงกัน |
+| โมเดลปฏิเสธ | คำขอที่ควรหยุดประเมิน | แยกจากคะแนนต่ำและส่งให้คน |
+| เปลี่ยนเส้นทางบริการ | ข้อมูลชนิดเดียวกันแต่ต่าง endpoint | ตรวจนโยบายก่อนส่งซ้ำ |
+
+ตารางนี้เป็นการออกแบบการประเมินที่เสนอ [คู่มือ Microsoft](https://learn.microsoft.com/azure/foundry/openai/how-to/decisions) แยก refusal ออกจากคำตอบที่มี probability ต่ำ ระบบปลายทางจึงต้องตรวจชนิดคำตอบก่อนอ่านค่า
+
+## วัดคุณภาพก่อนเปิดให้ตัดสินงานจริง
+
+เก็บรุ่นชุดทดสอบ prompt ตัวเลือก และ threshold ไว้ด้วยกัน เมื่อเปลี่ยนอย่างใดให้ตรวจตัวอย่างเดิมและกรณีใหม่ที่ทำผิด โดยให้เจ้าของงานตัดสินว่าความเสียหายแบบใดต้องหยุดหรือส่งต่อ
+
+Mimir Suites Cloud ส่งข้อความเอกสารไปโมเดลคลาวด์โดยปิดบัง PII เป็นค่าเริ่มต้น วิดีโอ OpenAI ปี 2025 เป็นบริบทการสร้าง Agent ก่อน Decisions GA ใช้ [วิธีประเมินโมเดลคลาวด์](/methodology/) บันทึกทั้งผลที่ใช้ได้ การส่งต่อ และต้นทุนของงานที่ทำซ้ำ

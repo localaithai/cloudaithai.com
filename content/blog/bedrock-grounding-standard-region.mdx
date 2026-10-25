@@ -1,0 +1,43 @@
+---
+title: "AWS เพิ่ม Standard ให้ตัวตรวจคำตอบ"
+description: "AWS เพิ่ม Standard tier สำหรับตรวจ grounding ใน Bedrock ทีมคลาวด์ควรทดสอบ threshold ใหม่และเส้นทางข้ามภูมิภาคก่อนเปลี่ยนจาก Classic"
+kind: "news"
+query: "Bedrock grounding Standard tier region และ threshold"
+cluster: "/methodology/"
+source: "bedrock-grounding-standard-tier"
+published: "2026-10-25"
+reviewed: "2026-10-25"
+newsDate: "2026-10-19"
+summary: "ก่อนเปลี่ยนตัวตรวจ grounding ให้ใช้คู่เอกสารกับคำตอบที่รู้ผล ทบทวน threshold และตรวจเส้นทางข้ามภูมิภาค อย่าใช้คะแนนจากตัวตรวจเดิมแทนการทดลองใหม่"
+faq: [{"question": "ใช้ threshold เดิมหลังเปลี่ยน tier ได้เลยหรือไม่", "answer": "ควรทดลองกับคำตอบถูกและผิดที่มีต้นทางกำกับ แล้วตั้งเกณฑ์ตามความเสียหายจากการปล่อยผ่านและการบล็อกผิด เก็บผลก่อนกับหลังแยกกัน"}, {"question": "ตัวตรวจ grounding ผ่านแล้วให้ถือว่าข้อความถูกทุกด้านหรือไม่", "answer": "ยังต้องตรวจว่าต้นทางเหมาะกับงาน เป็นฉบับที่อนุมัติ และมีผู้รับผิดชอบความหมายทางธุรกิจ การอิงเอกสารได้ไม่แทนการตรวจคุณภาพต้นทาง"}]
+citations: [{"title": "Document history: contextual grounding Standard tier", "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-ug-doc-history.html", "publisher": "Amazon Web Services", "published": "2026-10-19", "accessed": "2026-10-25"}, {"title": "Amazon Bedrock Guardrails now supports Standard tier for contextual grounding checks", "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/bedrock-guardrails-grounding-standard/", "publisher": "Amazon Web Services", "published": "2026-10-20", "accessed": "2026-10-25"}]
+hero: {"src": "https://assets.mimir.business/assets/sites/aisolutionsthailand.com/general/hero.9917f9cb9829.webp", "credit": "Mimir / aisolutionsthailand.com", "sourceUrl": "https://aisolutionsthailand.com/", "alt": "เอกสาร laptop และแก้วกาแฟบนโต๊ะไม้", "caption": "ภาพประกอบงานเอกสารจาก Mimir ไม่ใช่หน้าจอผลิตภัณฑ์ในข่าวหรืออุปกรณ์ที่ต้องซื้อเพื่อใช้ Cloud edition"}
+videos: [{"url": "https://www.youtube.com/watch?v=srQxO_o9KgM", "title": "NEW DEMO - Amazon Bedrock Guardrails | Amazon Web Services", "publisher": "Amazon Web Services", "published": "2024-07-10", "context": true}]
+draft: false
+---
+
+## AWS เพิ่ม Standard ให้ contextual grounding
+
+[ประวัติ Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-ug-doc-history.html) บันทึกอัปเดตวันที่ 19 ตุลาคม 2026 และ [ประกาศวันที่ 20 ตุลาคม](https://aws.amazon.com/about-aws/whats-new/2026/10/bedrock-guardrails-grounding-standard/) อธิบาย Standard tier สำหรับคำตอบแบบสนทนาหรือมี reasoning การตั้งเดิมยังใช้ Classic จนกว่าจะเปลี่ยน
+
+Standard contextual grounding ต้องใช้ cross-Region inference กับ guardrail profile รายการภูมิภาคของฟีเจอร์นี้ไม่รวมไทย จึงต้องตรวจขอบเขตเฉพาะฟีเจอร์ แยกจากรายการพื้นที่ของนโยบายชนิดอื่น
+
+## ตั้งเกณฑ์ใหม่จากคู่ต้นทางกับคำตอบ
+
+ข้อเสนอสำหรับผู้ประเมินคือให้เจ้าของงานจัดตัวอย่างที่รู้ว่าทำไมผ่านหรือไม่ผ่าน แล้วตรวจทั้งการยอมรับคำตอบผิดกับการบล็อกคำตอบที่ควรใช้ได้
+
+| ตัวอย่างทดลอง | สิ่งที่ควรตรวจ | ผู้ให้คำตัดสิน |
+| --- | --- | --- |
+| สรุปตรงเอกสาร | เก็บใจความและตัวเลขครบ | เจ้าของเนื้อหา |
+| เรียบเรียงใหม่ความหมายเดิม | ไม่บล็อกเพราะเปลี่ยนถ้อยคำ | ผู้ตรวจภาษาและงาน |
+| ข้อสรุปที่เอกสารไม่รองรับ | ไม่ปล่อยข้อเดาเป็นข้อเท็จจริง | ผู้ประเมินความเสี่ยง |
+| ข้อมูลขัดต้นทาง | พบความต่างที่มีผลต่องาน | เจ้าของข้อมูล |
+| เอกสารผิดฉบับ | หยุดก่อนใช้ผลแม้อ่านได้ | ผู้ดูแลแหล่งอ้างอิง |
+
+ตารางนี้เป็นเกณฑ์ทดสอบที่เสนอ กำหนด threshold จากต้นทุนความผิดพลาดของงานและเก็บรุ่นการตั้งค่าไว้ ไม่ปรับเกณฑ์เพียงเพื่อให้คะแนนเฉลี่ยดูดีขึ้น
+
+## ตรวจปลายทางของตัวตรวจด้วย
+
+ทำผังแยกบริการสร้างคำตอบกับบริการตรวจคำตอบ ระบุว่าข้อความอ้างอิง คำถาม และผลถูกส่งไปที่ใด ใครเปิดดู log ได้ และกฎการเก็บข้อมูลที่ตกลงคืออะไร
+
+Mimir Suites Cloud ส่งข้อความเอกสารไปโมเดลคลาวด์โดยปิดบัง PII เป็นค่าเริ่มต้น วิดีโอ Guardrails ปี 2024 เป็นบริบทก่อน Standard tier นำทั้งชุดทดสอบและผังข้อมูลไปใช้ใน [วิธีประเมินบริการคลาวด์](/methodology/) โดยตรวจความสามารถที่ซื้อจริงเป็นรายฟีเจอร์

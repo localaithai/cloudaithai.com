@@ -1,0 +1,43 @@
+---
+title: "AWS เพิ่มย่อ prompt ใน Bedrock"
+description: "AWS เพิ่ม prompt shortening ใน Bedrock เปรียบเทียบคุณภาพงานไทยกับต้นทุนรวม ใช้ชุดทดสอบที่แยกไว้ก่อนยอมรับ prompt ที่สั้นลง"
+kind: "news"
+query: "Bedrock prompt shortening วัดต้นทุนและคุณภาพ"
+cluster: "/compare/"
+source: "bedrock-prompt-shortening"
+published: "2026-10-25"
+reviewed: "2026-10-25"
+newsDate: "2026-10-20"
+summary: "prompt ที่สั้นลงควรผ่านงานสำคัญและกรณีหายากในชุดทดสอบที่แยกไว้ พร้อมลดต้นทุนต่อผลที่ใช้ได้จริง คะแนนเฉลี่ยเพียงค่าเดียวยังไม่ตอบเรื่องนี้"
+faq: [{"question": "ระบบคืน prompt ที่สั้นลงทุกครั้งหรือไม่", "answer": "ประกาศระบุว่าจะคืนฉบับย่อเมื่อสั้นกว่าและคะแนนประเมินไม่ต่ำกว่าเดิม มิฉะนั้นคืนฉบับเดิม เงื่อนไขนี้ผูกกับชุดและวิธีประเมินที่เลือก"}, {"question": "ควรตรวจข้อกำหนดภาษาไทยส่วนใดเป็นพิเศษ", "answer": "เลือกข้อห้าม เงื่อนไขยกเว้น หน่วยเงิน วันเวลา และคำกำกวมที่กระทบงานจริงไว้ในชุดทดสอบ ให้เจ้าของงานตรวจว่าการย่อยังรักษาความหมายที่จำเป็น"}]
+citations: [{"title": "Document history: Advanced Prompt Optimization shortening", "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-ug-doc-history.html", "publisher": "Amazon Web Services", "published": "2026-10-20", "accessed": "2026-10-25"}, {"title": "Amazon Bedrock Advanced Prompt Optimization now supports prompt shortening", "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/bedrock-prompt-optimization-shortening/", "publisher": "Amazon Web Services", "published": "2026-10-20", "accessed": "2026-10-25"}]
+hero: {"src": "https://assets.mimir.business/assets/sites/aisolutionsthailand.com/general/hero.9917f9cb9829.webp", "credit": "Mimir / aisolutionsthailand.com", "sourceUrl": "https://aisolutionsthailand.com/", "alt": "เอกสาร laptop และแก้วกาแฟบนโต๊ะไม้", "caption": "ภาพประกอบงานเอกสารจาก Mimir ไม่ใช่หน้าจอผลิตภัณฑ์ในข่าวหรืออุปกรณ์ที่ต้องซื้อเพื่อใช้ Cloud edition"}
+videos: [{"url": "https://www.youtube.com/watch?v=WlD2i6gT9Js", "title": "Amazon Bedrock Prompt Optimization Demo | Amazon Web Services", "publisher": "Amazon Web Services", "published": "2025-04-09", "context": true}]
+draft: false
+---
+
+## AWS เพิ่มตัวเลือก prompt shortening
+
+AWS เพิ่ม [prompt shortening ใน Advanced Prompt Optimization](https://aws.amazon.com/about-aws/whats-new/2026/10/bedrock-prompt-optimization-shortening/) วันที่ 20 ตุลาคม 2026 ตรงกับ [ประวัติเอกสาร](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-ug-doc-history.html) เป็นตัวเลือกต่อ template และคืนฉบับย่อเมื่อสั้นกว่าโดยคะแนนประเมินไม่ลด มิฉะนั้นใช้ฉบับเดิม
+
+ผลคะแนนนั้นใช้กับเกณฑ์และข้อมูลที่เลือกประเมิน ไม่ได้ยืนยันว่าทุกคำขอในงานจริงจะรักษาคุณภาพหรือประหยัดเท่ากัน
+
+## เก็บเงื่อนไขงานก่อนลดคำ
+
+ข้อเสนอสำหรับธุรกิจไทยคือแยกชุดที่ใช้ปรับ prompt ออกจากชุดตรวจรับ ใช้คำถามและเอกสารชุดเดียวกันเปรียบเทียบฉบับเดิมกับฉบับย่อ พร้อมผู้ตรวจที่รู้ว่าความผิดแบบใดทำให้งานใช้ไม่ได้
+
+| จุดเปรียบเทียบ | ตัวอย่างที่ควรเก็บ | เกณฑ์ตัดสิน |
+| --- | --- | --- |
+| ข้อห้ามสำคัญ | งานที่คำขอชนกับกฎ | ไม่ข้ามข้อห้ามหลังย่อ |
+| ข้อยกเว้น | คำขอหายากแต่ต้องรับมือ | ยังเลือกทางออกถูก |
+| ภาษาไทย | ตัวเลข หน่วย และข้อความกำกวม | ไม่เปลี่ยนสาระที่ต้องใช้ |
+| เวลาและต้นทุน | งานผ่านกับงานต้องทำใหม่ | นับจนได้ผลที่ตรวจใช้ได้ |
+| การดูแลรุ่น | ฉบับเดิม ฉบับย่อ และเหตุผลอนุมัติ | ย้อนกลับได้เมื่อกรณีใหม่ผิด |
+
+ตารางนี้เป็นเกณฑ์เลือก prompt ที่เสนอ ไม่ใช่ตัวเลขประสิทธิภาพที่วัดแล้ว หากงานสำคัญผิดแม้คะแนนเฉลี่ยผ่าน ให้คงคำสั่งเดิมส่วนนั้นและเก็บตัวอย่างไว้แก้การประเมิน
+
+## รวมค่าใช้จ่ายของการทดลองด้วย
+
+ต้นทุนที่ควรนำมาเทียบมีทั้งงาน optimize การประเมิน การรันซ้ำ และเวลาคนตรวจ อย่าใช้จำนวน token ที่ลดลงแทนผลประหยัดทั้ง workflow
+
+Mimir Suites Cloud ส่งข้อความเอกสารไปโมเดลคลาวด์โดยปิดบัง PII เป็นค่าเริ่มต้น วิดีโอ Prompt Optimization ปี 2025 เป็นบริบทก่อนเพิ่ม shortening ใช้ชุดงานเดียวกัน [เปรียบเทียบทางเลือกคลาวด์](/compare/) พร้อมเงื่อนไขคุณภาพที่เจ้าของงานยอมรับ
