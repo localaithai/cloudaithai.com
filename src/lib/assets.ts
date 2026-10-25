@@ -1,4 +1,10 @@
 const sharedAssets: Readonly<Record<string, string>> = {
+  "/mimir-suites-home-640.webp":
+    "https://assets.mimir.business/assets/sites/cloudaithai.com/general/mimir-suites-home-640.982048377ee7.webp",
+  "/mimir-suites-home-1280.webp":
+    "https://assets.mimir.business/assets/sites/cloudaithai.com/general/mimir-suites-home-1280.096f783b356a.webp",
+  "/mimir-suites-home-1920.webp":
+    "https://assets.mimir.business/assets/sites/cloudaithai.com/general/mimir-suites-home-1920.6552fcdff04b.webp",
   "/mimir-suites-home.png":
     "https://assets.mimir.business/assets/sites/mimir.business/presentations/mimir-suites-home.6e3c706ae192.png",
   "/mimir-apps/chat.png":

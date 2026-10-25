@@ -10,7 +10,7 @@ export default defineConfig({
   output: "static",
   // One canonical URL shape, matching vercel.json's trailingSlash.
   trailingSlash: "always",
-  build: { format: "directory" },
+  build: { format: "directory", inlineStylesheets: "always" },
   devToolbar: { enabled: false },
   integrations: [react()],
   // Bai Jamjuree carries both Thai and Latin runs.

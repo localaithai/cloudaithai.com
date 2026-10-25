@@ -36,10 +36,12 @@ import { models } from "@/lib/site-data";
     >
       <div class="relative aspect-[3.4] overflow-hidden">
         <img
-          src={assetUrl("/mimir-suites-home.png")}
+          src={assetUrl("/mimir-suites-home-1280.webp")}
+          srcset={[640, 1280, 1920].map((width) => `${assetUrl(`/mimir-suites-home-${width}.webp`)} ${width}w`).join(", ")}
+          sizes="(min-width: 1280px) 1200px, (min-width: 1024px) calc(102vw - 98px), calc(190vw - 95px)"
           alt="ตัวอย่างหน้ารวมแอป Mimir Suites"
-          width="3016"
-          height="1894"
+          width="1280"
+          height="804"
           loading="eager"
           fetchpriority="high"
           decoding="async"
