@@ -1,0 +1,64 @@
+---
+import Print from "@/components/Print.astro";
+import { CLOUD_PATH, CLOUD_VIEWBOX } from "@/lib/brand-mark";
+
+const facts = [
+  ["เอกสารไปที่โมเดลคลาวด์", "ข้อความในเอกสารถูกส่งไปยังโมเดลคลาวด์เพื่อทำงานที่เลือก"],
+  ["ปิดทับข้อมูลส่วนบุคคล", "ข้อมูลส่วนบุคคลถูกปิดทับโดยค่าเริ่มต้นก่อนออกจากเครื่อง"],
+  [
+    "แยกข้อมูลตาม seat",
+    "แต่ละ seat เก็บข้อมูลของตัวเองบนเครื่องนั้น ไม่มีข้อมูลร่วมกันระหว่างเครื่อง",
+  ],
+  ["เลือกโฟลเดอร์สำรอง", "เลือกโฟลเดอร์สำรองข้อมูลระหว่างขั้นตอนตั้งค่า"],
+] as const;
+
+const icon = "h-7 w-11";
+const stroke = {
+  fill: "none",
+  stroke: "currentColor",
+  "stroke-width": "1.5",
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round",
+  "aria-hidden": "true",
+} as const;
+---
+
+<section id="data-handling" class="band band-ink">
+  <div class="shell">
+    <div class="grid items-end gap-x-16 gap-y-10 lg:grid-cols-12">
+      <h2 data-reveal class="reveal-on-scroll text-display lg:col-span-6">ข้อมูลไปไหน, บอกตรงๆ</h2>
+      <Print path="/photo/redaction-concept.webp" alt="เอกสารบนโต๊ะที่ปิดทับข้อความบางส่วนด้วยแถบทึบก่อนส่งขึ้นคลาวด์" class="aspect-[3/2] rounded-xl lg:col-span-6" />
+    </div>
+    <ul class="m-0 mt-16 grid list-none border-t border-white p-0 lg:grid-cols-4">
+      {
+        facts.map(([title, detail], index) => (
+          <li data-reveal style={`--i:${index}`} class="reveal-on-scroll border-b border-on-ink-line py-7 lg:border-b-0 lg:border-l lg:px-7 lg:first:border-l-0 lg:first:pl-0 lg:last:pr-0">
+            {index === 0 ? (
+              <svg viewBox={CLOUD_VIEWBOX} class={icon} {...stroke}>
+                <path d={CLOUD_PATH} vector-effect="non-scaling-stroke" />
+              </svg>
+            ) : null}
+            {index === 1 ? (
+              <svg viewBox="0 0 44 28" class={icon} {...stroke}>
+                <path d="M2 5h40M36 14h6M2 23h22" />
+                <rect x="2" y="10.5" width="30" height="7" rx="1.5" fill="currentColor" stroke="none" />
+              </svg>
+            ) : null}
+            {index === 2 ? (
+              <svg viewBox="0 0 44 28" class={icon} {...stroke}>
+                <path d="M8 3h28v17H8zM2 25h40" />
+              </svg>
+            ) : null}
+            {index === 3 ? (
+              <svg viewBox="0 0 44 28" class={icon} {...stroke}>
+                <path d="M3 4h13l4 4h21v17H3z" />
+              </svg>
+            ) : null}
+            <h3 class="mt-5 text-h3">{title}</h3>
+            <p class="mt-2 text-on-ink-2">{detail}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

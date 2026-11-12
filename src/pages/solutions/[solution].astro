@@ -15,6 +15,6 @@ export function getStaticPaths() {
 const solution = Astro.params.solution as Solution;
 ---
 
-<SitePage head={pageHead(`/solutions/${solution}`)}>
+<SitePage head={pageHead(`/solutions/${solution}`)} inkTop>
   <UseCases solution={solution} />
 </SitePage>

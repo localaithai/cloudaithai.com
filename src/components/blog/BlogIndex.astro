@@ -100,7 +100,7 @@ for (const post of archive) {
       <a
         href="/blog/feed.xml"
         class:list={[
-          "inline-flex min-h-11 items-center gap-2 rounded-full border border-line px-4 text-sm font-semibold text-ink no-underline transition-colors hover:border-brand hover:bg-ink/4",
+          "inline-flex min-h-11 items-center gap-2 rounded-lg border border-line px-4 text-sm font-semibold text-ink no-underline transition-colors hover:border-brand hover:bg-ink/4",
           focusRing,
         ]}
       >
@@ -233,7 +233,7 @@ for (const post of archive) {
                   </p>
                 </div>
                 {post.hero ? (
-                  <div class="relative col-start-1 row-start-1 aspect-square overflow-hidden rounded-[0.75rem] bg-surface after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--color-ink)_10%,transparent)]">
+                  <div class="relative col-start-1 row-start-1 aspect-square isolate overflow-hidden rounded-[0.75rem] bg-ink after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--color-ink)_10%,transparent)]">
                     <img
                       src={post.hero.src}
                       alt={post.hero.alt}

@@ -9,7 +9,7 @@ import "@/styles/global.css";
 
 type Props = { head: PageHead; bodyClass?: string };
 
-const { head, bodyClass = "bg-[#fbfbfd] text-[#1d1d1f]" } = Astro.props;
+const { head, bodyClass = "bg-page text-ink" } = Astro.props;
 const { openGraph: og, twitter } = head;
 const googleVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 const bingVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
@@ -32,6 +32,7 @@ const bingVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
     {head.noindex ? <meta name="robots" content="noindex" /> : null}
     <meta name="description" content={head.description} />
     <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content={site.themeColor} />
     {
       googleVerification ? (
         <meta name="google-site-verification" content={googleVerification} />
@@ -89,11 +90,11 @@ const bingVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
       sizes="256x256"
       type="image/x-icon"
     />
-    <Font cssVariable="--font-bai" preload />
+    <Font cssVariable="--font-athiti" preload />
   </head>
   <body
     class:list={[
-      "overflow-x-hidden font-[family-name:var(--font-bai),'Bai_Jamjuree',-apple-system,BlinkMacSystemFont,sans-serif] font-normal tracking-[-0.005em] antialiased [-webkit-tap-highlight-color:transparent] selection:bg-[rgb(0_113_227/0.18)] selection:text-[#1d1d1f]",
+      "overflow-x-hidden font-sans text-body font-medium antialiased [-webkit-tap-highlight-color:transparent] selection:bg-ink selection:text-white",
       bodyClass,
     ]}
   >

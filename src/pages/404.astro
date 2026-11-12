@@ -1,27 +1,15 @@
 ---
 import Base from "@/layouts/Base.astro";
 import { notFoundHead } from "@/lib/seo";
-
-// The site never had its own not-found page; this is the Next.js default.
+import { routeAt } from "@/lib/site-data";
 ---
 
-<Base
-  head={notFoundHead()}
-  bodyClass="bg-white text-black dark:bg-black dark:text-white"
->
-  <div
-    class="flex h-screen flex-col items-center justify-center text-center font-[family-name:system-ui,'Segoe_UI',Roboto,Helvetica,Arial,sans-serif,'Apple_Color_Emoji','Segoe_UI_Emoji']"
-  >
-    <div>
-      <h1
-        class="mr-5 inline-block border-r border-r-[rgb(0_0_0/0.3)] pr-[23px] align-top text-[24px] leading-[49px] font-medium dark:border-r-[rgb(255_255_255/0.3)]"
-      >
-        404
-      </h1><div class="inline-block">
-        <h2 class="text-[14px] leading-[49px] font-normal">
-          This page could not be found.
-        </h2>
-      </div>
+<Base head={notFoundHead()} bodyClass="bg-ink text-white">
+  <main class="band-ink grid min-h-svh place-items-center">
+    <div class="shell">
+      <h1 class="text-[clamp(4.5rem,3rem+8vw,6rem)] [line-height:1] font-light">404</h1>
+      <h2 class="mt-5 text-h3 font-medium">This page could not be found.</h2>
+      <a href="/" class="btn btn-paper mt-10">{routeAt("/").label}</a>
     </div>
-  </div>
+  </main>
 </Base>

@@ -30,7 +30,7 @@ Clear, calm, and lightweight. The experience should feel like capable software t
 - Show the Suite and the jobs it completes.
 - State cloud model use and PII redaction plainly.
 - Make one seat, one machine, and one local data store easy to understand.
-- Preserve the light, precise interface and restrained motion.
+- Print everything in one ultramarine ink on white: type, rules, icons and photographs. Keep motion restrained.
 - Keep the upgrade path to Local visible only where useful.
 
 ## Accessibility & Inclusion

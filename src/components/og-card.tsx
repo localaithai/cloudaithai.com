@@ -2,13 +2,6 @@ import { site } from "@/lib/site";
 
 export const OG_SIZE = { width: 1200, height: 630 } as const;
 
-// next/og faded the glow to transparent black in straight alpha; current
-// satori premultiplies, so the same falloff is spelled out as stops.
-const glow = Array.from({ length: 9 }, (_, step) => {
-  const alpha = 1 - step / 8;
-  return `rgba(0,${Math.round(119 * alpha)},${Math.round(255 * alpha)},${alpha}) ${(30 * step) / 8}%`;
-}).join(", ");
-
 /**
  * The social card, rasterised at build time by src/pages/opengraph-image.ts.
  * next/og drew every line in its one face, Noto Sans Regular, so no line
@@ -27,14 +20,23 @@ export function OgCard() {
         flexDirection: "column",
         justifyContent: "space-between",
         padding: 72,
-        color: "#f7fbff",
-        background: `radial-gradient(circle at 78% 18%, ${glow}), linear-gradient(135deg, #07152b, #162f56)`,
+        color: "#ffffff",
+        background: site.themeColor,
       }}
     >
       <div style={{ display: "flex", fontSize: 30 }}>
         {site.name}
       </div>
       <div style={{ display: "flex", flexDirection: "column", maxWidth: 900 }}>
+        <div
+          style={{
+            display: "flex",
+            width: 132,
+            height: 16,
+            marginBottom: 40,
+            background: "#ffffff",
+          }}
+        />
         <div
           style={{
             display: "flex",
@@ -49,7 +51,7 @@ export function OgCard() {
             display: "flex",
             marginTop: 28,
             fontSize: 30,
-            color: "#c1dcff",
+            color: "#dbddf7",
           }}
         >
           Business AI apps, without an AI machine.

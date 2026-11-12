@@ -18,16 +18,13 @@ const breadcrumb = JSON.stringify({
 }).replaceAll("<", "\\u003c");
 ---
 
-<nav
-  aria-label="Breadcrumb"
-  class="mx-auto max-w-6xl px-6 pt-6 text-sm text-[#6e6e73]"
->
-  <ol class="flex items-center gap-2">
+<nav aria-label="Breadcrumb" class="shell pt-8 text-meta text-ink-2">
+  <ol class="m-0 flex list-none items-center gap-2 p-0">
     <li>
-      <a href="/" class="hover:text-[#06c]">Home</a>
+      <a href="/" class="inline-flex min-h-11 items-center underline-offset-[0.3em] hover:text-ink hover:underline">Home</a>
     </li>
     <li aria-hidden="true">/</li>
-    <li aria-current="page" class="text-[#1d1d1f]">{sitelinkName}</li>
+    <li aria-current="page" class="font-semibold text-ink">{sitelinkName}</li>
   </ol>
 </nav>
 <h1 class="sr-only">{sitelinkName}</h1>

@@ -1,0 +1,31 @@
+---
+import { CLOUD_PATH } from "@/lib/brand-mark";
+
+type Props = { class?: string };
+
+const { class: className } = Astro.props;
+const bar = "origin-left [transform-box:fill-box] motion-safe:animate-redact";
+---
+
+<svg
+  viewBox="0 0 360 120"
+  width="360"
+  height="120"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.5"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  class={className}
+>
+  <rect x="8" y="10" width="124" height="100" rx="6"></rect>
+  <path d="M24 30h92M80 46h36M24 62h92M24 78h28M24 94h60" stroke-opacity="0.6"></path>
+  <rect x="24" y="42" width="48" height="8" rx="2" fill="currentColor" stroke="none" class:list={[bar, "[animation-delay:500ms]"]}></rect>
+  <rect x="60" y="74" width="56" height="8" rx="2" fill="currentColor" stroke="none" class:list={[bar, "[animation-delay:700ms]"]}></rect>
+  <path d="M148 60h62" stroke-dasharray="2 7"></path>
+  <path d="M204 52l10 8-10 8"></path>
+  <g transform="translate(232 24) scale(0.33)">
+    <path transform="translate(-88 -96)" d={CLOUD_PATH} vector-effect="non-scaling-stroke"></path>
+  </g>
+</svg>

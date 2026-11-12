@@ -51,6 +51,19 @@ const sharedAssets: Readonly<Record<string, string>> = {
   "/partners/sis.png": "https://assets.mimir.business/assets/shared/partners/sis.1e722cd4968f.png",
   "/partners/td-synnex.svg": "https://assets.mimir.business/assets/shared/partners/td-synnex.90fbe1686e01.svg",
   "/partners/vst-ecs.png": "https://assets.mimir.business/assets/shared/partners/vst-ecs.8af9fd17f623.png",
+  "/photo/backup-folder.webp": "https://assets.mimir.business/assets/sites/cloudaithai.com/generated/backup-folder.c72b34e68466.webp",
+  "/photo/cloud-onboarding.webp": "https://assets.mimir.business/assets/sites/cloudaithai.com/generated/cloud-onboarding.19c77e41eb0f.webp",
+  "/photo/cloud-search.webp": "https://assets.mimir.business/assets/sites/cloudaithai.com/generated/cloud-search.1f6d04ab9287.webp",
+  "/photo/document-to-cloud.webp": "https://assets.mimir.business/assets/sites/cloudaithai.com/generated/document-to-cloud.82eb72017152.webp",
+  "/photo/document-workflow.webp": "https://assets.mimir.business/assets/sites/cloudaithai.com/generated/document-workflow.e56370fa0879.webp",
+  "/photo/hero-cloud-workspace.webp": "https://assets.mimir.business/assets/sites/cloudaithai.com/generated/hero-cloud-workspace.c434a4e666ed.webp",
+  "/photo/laptop-only.webp": "https://assets.mimir.business/assets/sites/cloudaithai.com/generated/laptop-only.38974a4f1352.webp",
+  "/photo/model-choice.webp": "https://assets.mimir.business/assets/sites/cloudaithai.com/generated/model-choice.70f187318fff.webp",
+  "/photo/redaction-concept.webp": "https://assets.mimir.business/assets/sites/cloudaithai.com/generated/redaction-concept.41588ee51117.webp",
+  "/photo/remote-work.webp": "https://assets.mimir.business/assets/sites/cloudaithai.com/generated/remote-work.edb6f75c3a5b.webp",
+  "/photo/solo-business.webp": "https://assets.mimir.business/assets/sites/cloudaithai.com/generated/solo-business.0ca41d6a0730.webp",
+  "/photo/team-seats.webp": "https://assets.mimir.business/assets/sites/cloudaithai.com/generated/team-seats.6aceb3361f35.webp",
+  "/photo/upgrade-path.webp": "https://assets.mimir.business/assets/sites/cloudaithai.com/generated/upgrade-path.ec3c64fcad7b.webp",
 };
 
 export function assetUrl(path: string): string {

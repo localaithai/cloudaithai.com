@@ -19,10 +19,10 @@ export const metaRow =
 export const metaDot = "size-[3px] rounded-full bg-current opacity-70";
 
 export const media =
-  "relative overflow-hidden rounded-[1rem] bg-surface after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--color-ink)_10%,transparent)]";
+  "relative isolate overflow-hidden rounded-[1rem] bg-ink after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--color-ink)_10%,transparent)]";
 
 export const mediaImage =
-  "block size-full object-cover transition-transform duration-700 ease-blog group-hover:scale-104 motion-reduce:transition-none";
+  "block size-full bg-white object-cover mix-blend-screen grayscale transition-transform duration-700 ease-blog group-hover:scale-104 motion-reduce:transition-none";
 
 export const sectionHeading =
   "m-0 mb-4 font-display text-[clamp(1.375rem,1.2rem+0.8vw,1.875rem)] leading-[1.5] font-[650] tracking-[-0.005em] text-balance";

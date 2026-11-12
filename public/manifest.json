@@ -4,8 +4,8 @@
   "description": "Mimir Suite บนเครื่องพนักงาน พร้อมโมเดลคลาวด์",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#fbfbfd",
-  "theme_color": "#007AFF",
+  "background_color": "#1b2bd0",
+  "theme_color": "#1b2bd0",
   "icons": [
     {
       "src": "/icon-192.png",

@@ -1,39 +1,13 @@
 ---
-import Pricing from "@/components/Pricing";
-import { assetUrl } from "@/lib/assets";
-import { appGroups, appMarkPath, mimirScopeNotice } from "@/lib/site-data";
+import AppGroups from "@/components/AppGroups.astro";
+import Pricing from "@/components/Pricing.astro";
+import { mimirScopeNotice } from "@/lib/site-data";
 ---
 
-<Pricing client:visible reveal={false} />
-<section class="pb-24">
-  <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-5">
-    <p class="text-sm leading-7 text-[#6e6e73] md:col-span-2">
-      {mimirScopeNotice}
-    </p>
-    {
-      appGroups.map((group, index) => (
-        <article data-reveal style={`--i:${index % 2}`} class="reveal-on-scroll apple-card border border-black/10 p-7">
-          <h2 class="text-2xl font-semibold">{group.title}</h2>
-          <p class="mt-2 text-[#6e6e73]">{group.detail}</p>
-          <div class="mt-5 flex flex-wrap gap-2">
-            {group.apps.map((app) => (
-              <span class="inline-flex items-center gap-2 rounded-full bg-[#f5f5f7] px-3 py-1.5 text-sm">
-                <img
-                  src={assetUrl(appMarkPath(app))}
-                  alt=""
-                  width="24"
-                  height="24"
-                  loading="lazy"
-                  decoding="async"
-                  class="size-6 object-contain"
-                />
-                Mimir {app}
-              </span>
-            ))}
-          </div>
-          <p class="mt-5 text-sm text-[#6e6e73]">ราคาแอปต่อ seat: ติดต่อเรา</p>
-        </article>
-      ))
-    }
+<Pricing reveal={false} first />
+<section class="pb-[clamp(4.5rem,9vw,8.5rem)]">
+  <div class="shell">
+    <p class="max-w-[60ch] text-meta text-ink-2">{mimirScopeNotice}</p>
+    <AppGroups showPriceNote class="mt-10" />
   </div>
 </section>

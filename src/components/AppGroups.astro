@@ -1,0 +1,42 @@
+---
+import { assetUrl } from "@/lib/assets";
+import { appGroups, appMarkPath } from "@/lib/site-data";
+
+type Props = { showPriceNote?: boolean; class?: string };
+
+const { showPriceNote = false, class: className } = Astro.props;
+---
+
+<div class:list={["border-b-2 border-ink", className]}>
+  {
+    appGroups.map((group, index) => (
+      <article data-reveal style={`--i:${index}`} class="reveal-on-scroll grid gap-x-16 gap-y-8 border-t-2 border-ink py-[clamp(2rem,4vw,3.5rem)] lg:grid-cols-12">
+        <div class="lg:col-span-4">
+          <h2 class="text-sub">{group.title}</h2>
+          <p class="mt-3 max-w-[36ch] text-ink-2">{group.detail}</p>
+          {showPriceNote ? (
+            <p class="mt-5 text-meta font-semibold">ราคาแอปต่อ seat: ติดต่อเรา</p>
+          ) : null}
+        </div>
+        <ul class="m-0 grid list-none grid-cols-2 gap-x-6 gap-y-7 p-0 sm:grid-cols-4 lg:col-span-8">
+          {group.apps.map((app) => (
+            <li class="flex items-center gap-3 sm:flex-col sm:items-start">
+              <span class="print block size-12 flex-none rounded-lg">
+                <img
+                  src={assetUrl(appMarkPath(app))}
+                  alt=""
+                  width="48"
+                  height="48"
+                  loading="lazy"
+                  decoding="async"
+                  class="print-img size-full object-contain"
+                />
+              </span>
+              <span class="font-semibold">Mimir {app}</span>
+            </li>
+          ))}
+        </ul>
+      </article>
+    ))
+  }
+</div>

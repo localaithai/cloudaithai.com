@@ -1,14 +1,14 @@
 ---
 import Contact from "@/components/Contact.astro";
-import DataHandlingSection from "@/components/data-handling-section";
+import DataHandlingSection from "@/components/DataHandlingSection.astro";
 import FAQ from "@/components/FAQ.astro";
-import Footer from "@/components/Footer";
+import Footer from "@/components/Footer.astro";
 import Hero from "@/components/Hero.astro";
 import Models from "@/components/Models.astro";
 import Navbar from "@/components/Navbar";
 import Partners from "@/components/Partners.astro";
-import Pricing from "@/components/Pricing";
-import ScrollShowcase from "@/components/ScrollShowcase";
+import Pricing from "@/components/Pricing.astro";
+import ScrollShowcase from "@/components/ScrollShowcase.astro";
 import Solutions from "@/components/Solutions.astro";
 import Base from "@/layouts/Base.astro";
 import { pageHead } from "@/lib/seo";
@@ -16,20 +16,20 @@ import { mimirScopeNotice } from "@/lib/site-data";
 ---
 
 <Base head={pageHead("/")}>
-  <Navbar client:load currentPath={Astro.url.pathname} />
-  <main id="content" class="bg-[#fbfbfd]">
+  <Navbar client:load currentPath={Astro.url.pathname} onInk />
+  <main id="content">
     <Hero />
-    <p class="mx-auto max-w-7xl px-6 pb-12 text-[0.8125rem] leading-6 text-[#6e6e73]">
-      {mimirScopeNotice}
-    </p>
-    <ScrollShowcase client:visible />
+    <div class="border-b border-line">
+      <p class="shell py-5 text-meta text-ink-2">{mimirScopeNotice}</p>
+    </div>
+    <ScrollShowcase />
     <Models />
     <Solutions />
-    <DataHandlingSection client:visible />
-    <Pricing client:visible />
+    <DataHandlingSection />
+    <Pricing tone="wash" />
     <Partners />
     <FAQ />
     <Contact />
   </main>
-  <Footer client:visible />
+  <Footer />
 </Base>

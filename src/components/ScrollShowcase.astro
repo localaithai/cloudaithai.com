@@ -1,0 +1,19 @@
+---
+import Print from "@/components/Print.astro";
+import StepList from "@/components/StepList.astro";
+---
+
+<section class="band">
+  <div class="shell grid gap-x-16 gap-y-12 lg:grid-cols-12">
+    <div class="lg:sticky lg:top-28 lg:col-span-5 lg:self-start">
+      <h2 data-reveal class="reveal-on-scroll text-h2">Suite พร้อมงาน, ทีละเครื่อง</h2>
+      <p data-reveal style="--i:1" class="reveal-on-scroll mt-5 max-w-[34ch] text-lead text-ink-2">
+        ตั้งค่าในแอป แล้วเลือกสิ่งที่เหมาะกับงานของคุณ
+      </p>
+      <Print path="/photo/cloud-onboarding.webp" alt="พนักงานสองคนตั้งค่าแล็ปท็อปบนโต๊ะทำงาน" class="mt-10 aspect-[3/2] rounded-xl" />
+    </div>
+    <div class="lg:col-span-7">
+      <StepList headingLevel="h3" />
+    </div>
+  </div>
+</section>

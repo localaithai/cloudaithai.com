@@ -1,25 +1,22 @@
 ---
 import Contact from "@/components/Contact.astro";
-import Footer from "@/components/Footer";
-import MotionPageContent from "@/components/motion-page-content";
+import Footer from "@/components/Footer.astro";
 import Navbar from "@/components/Navbar";
 import Base from "@/layouts/Base.astro";
 import type { PageHead } from "@/lib/seo";
 
-type Props = { head: PageHead };
+type Props = { head: PageHead; inkTop?: boolean };
 
-const { head } = Astro.props;
+const { head, inkTop = false } = Astro.props;
 ---
 
 <Base head={head}>
   <slot name="head" slot="head" />
-  <Navbar client:load currentPath={Astro.url.pathname} />
-  <main id="content" class="bg-[#fbfbfd] min-h-screen">
-    <div class="pt-20"></div>
-    <MotionPageContent client:load>
-      <slot />
-    </MotionPageContent>
+  <Navbar client:load currentPath={Astro.url.pathname} onInk={inkTop} />
+  <main id="content" class="min-h-screen">
+    {inkTop ? null : <div class="pt-16"></div>}
+    <slot />
     <Contact />
   </main>
-  <Footer client:visible />
+  <Footer />
 </Base>

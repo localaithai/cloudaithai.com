@@ -1,18 +1,24 @@
-<section class="apple-section">
-  <div class="max-w-4xl mx-auto px-6">
-    <p class="eyebrow text-[#0071e3] font-medium mb-3">About</p>
-    <h2 class="text-h2 font-semibold tracking-tight">
-      Mimir Suites Cloud คือ Suite บนเครื่องทำงาน
-    </h2>
-    <p class="mt-6 max-w-[44rem] text-lead text-[#6e6e73]">
-      CloudAI Thailand คือประตูสำหรับ Mimir Suites Cloud ในไทย
-      แอปติดตั้งบนเครื่องพนักงานแต่ละเครื่อง ทุก seat แยกการติดตั้งและข้อมูลออกจากกัน
-    </p>
-    <div class="mt-9 apple-card p-6">
-      <p class="font-semibold text-[#1d1d1f]">ไม่ต้องซื้อเครื่อง AI</p>
-      <p class="mt-2 text-[#6e6e73]">
-        เลือกแอป เลือกโมเดล แล้วทำงานจาก Mimir Suite บนเครื่องของคุณ
+---
+import Print from "@/components/Print.astro";
+---
+
+<section class="band pt-10">
+  <div class="shell grid items-center gap-x-16 gap-y-12 lg:grid-cols-12">
+    <div class="lg:col-span-7">
+      <h2 class="text-title">
+        Mimir Suites Cloud คือ Suite บนเครื่องทำงาน
+      </h2>
+      <p class="mt-7 max-w-[40ch] text-lead text-ink-2">
+        CloudAI Thailand คือประตูสำหรับ Mimir Suites Cloud ในไทย
+        แอปติดตั้งบนเครื่องพนักงานแต่ละเครื่อง ทุก seat แยกการติดตั้งและข้อมูลออกจากกัน
       </p>
+      <div class="mt-10 border-t-2 border-ink pt-6">
+        <p class="text-h3 font-semibold">ไม่ต้องซื้อเครื่อง AI</p>
+        <p class="mt-2 max-w-[52ch] text-ink-2">
+          เลือกแอป เลือกโมเดล แล้วทำงานจาก Mimir Suite บนเครื่องของคุณ
+        </p>
+      </div>
     </div>
+    <Print path="/photo/laptop-only.webp" alt="แล็ปท็อปหนึ่งเครื่องบนโต๊ะทำงาน เชื่อมต่อกับคลาวด์" eager class="aspect-[3/2] rounded-xl lg:col-span-5 lg:aspect-[4/5]" />
   </div>
 </section>

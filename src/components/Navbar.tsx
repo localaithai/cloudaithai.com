@@ -6,10 +6,11 @@ import {
 } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
+import { CLOUD_MARK_PATH, CLOUD_VIEWBOX } from "@/lib/brand-mark";
 import { site } from "@/lib/site";
 import { navigation } from "@/lib/site-data";
 
-const ease = [0.22, 0.75, 0.2, 1] as const;
+const ease = [0.22, 1, 0.36, 1] as const;
 
 function currentState(path: string, href: string) {
   if (path === href) return "page" as const;
@@ -17,9 +18,16 @@ function currentState(path: string, href: string) {
   return undefined;
 }
 
-export default function Navbar({ currentPath = "" }: { currentPath?: string }) {
+export default function Navbar({
+  currentPath = "",
+  onInk = false,
+}: {
+  currentPath?: string;
+  /** The page opens on an ink band, so the bar starts transparent with white type. */
+  onInk?: boolean;
+}) {
   const [open, setOpen] = useState(false);
-  const [glass, setGlass] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const reducedMotion = useReducedMotion();
@@ -30,7 +38,7 @@ export default function Navbar({ currentPath = "" }: { currentPath?: string }) {
     const update = () => {
       ticking = false;
       const y = window.scrollY;
-      setGlass(y > 24);
+      setScrolled(y > 24);
       if (y > lastY + 4) {
         if (y > window.innerHeight) setHidden(true);
         lastY = y;
@@ -56,7 +64,7 @@ export default function Navbar({ currentPath = "" }: { currentPath?: string }) {
       setOpen(false);
       toggleRef.current?.focus();
     };
-    const desktop = window.matchMedia("(min-width: 768px)");
+    const desktop = window.matchMedia("(min-width: 1024px)");
     const closeOnDesktop = (event: MediaQueryListEvent) => {
       if (event.matches) setOpen(false);
     };
@@ -71,6 +79,8 @@ export default function Navbar({ currentPath = "" }: { currentPath?: string }) {
     };
   }, [open]);
 
+  const tone = open || (onInk && !scrolled) ? "ink" : "paper";
+
   return (
     <MotionConfig reducedMotion="user">
       <motion.nav
@@ -78,37 +88,50 @@ export default function Navbar({ currentPath = "" }: { currentPath?: string }) {
         animate={{ y: hidden && !open ? -100 : 0 }}
         transition={{ duration: 0.6, ease }}
         onFocus={() => setHidden(false)}
-        data-glass={glass || open ? "" : undefined}
-        className="fixed inset-x-0 top-0 z-50 border-b border-b-transparent transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500 ease-(--ease-brand) data-glass:border-b-[rgb(0_0_0/0.07)] data-glass:bg-[rgb(251_251_253/0.72)] data-glass:shadow-[0_12px_32px_-22px_rgb(29_29_31/0.28)] data-glass:backdrop-blur-[18px] data-glass:backdrop-saturate-[1.8]"
+        data-tone={tone}
+        data-open={open ? "" : undefined}
+        className="group/nav fixed inset-x-0 top-0 z-50 border-b border-transparent text-ink transition-[background-color,border-color,color] duration-300 data-open:bg-ink data-[tone=ink]:text-white data-[tone=ink]:[&_:focus-visible]:outline-white data-[tone=paper]:border-line data-[tone=paper]:bg-white"
       >
         <a
           href="#content"
-          className="fixed top-4 left-4 z-60 rounded-lg bg-white px-4 py-3 text-[#1d1d1f] shadow-[0_0_0_2px_#0071e3] [transform:translateY(-150%)] focus-visible:[transform:translateY(0)]"
+          className="fixed top-4 left-4 z-60 rounded-lg bg-white px-4 py-3 font-semibold text-ink outline-2 outline-ink [transform:translateY(-150%)] focus-visible:[transform:translateY(0)]"
         >
           ข้ามไปยังเนื้อหา
         </a>
-        <div className="max-w-6xl mx-auto h-16 px-6 flex items-center justify-between">
+        <div className="shell flex h-16 items-center justify-between gap-6">
           <a
             href="/"
-            className="inline-flex min-h-11 items-center font-semibold text-[#1d1d1f]"
+            className="inline-flex min-h-11 items-center gap-2.5 text-[1.0625rem] font-bold"
           >
-            Cloud<span className="text-[#0071e3]">AI</span>{" "}
-            <span className="text-xs text-[#6e6e73]">Thailand</span>
+            <svg
+              viewBox={CLOUD_VIEWBOX}
+              aria-hidden="true"
+              className="h-5 w-auto flex-none"
+            >
+              <path
+                d={CLOUD_MARK_PATH}
+                fill="currentColor"
+                fillRule="evenodd"
+              />
+            </svg>
+            <span>
+              CloudAI <span className="font-medium">Thailand</span>
+            </span>
           </a>
-          <div className="hidden md:flex items-center gap-6 text-sm text-[#6e6e73]">
+          <div className="hidden items-center gap-7 text-meta font-semibold lg:flex">
             {navigation.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
                 aria-current={currentState(currentPath, item.href)}
-                className="hairline-link inline-flex min-h-11 items-center hover:text-[#1d1d1f]"
+                className="hairline-link inline-flex min-h-11 items-center"
               >
                 {item.label}
               </a>
             ))}
             <a
               href={site.primaryCta.href}
-              className="apple-btn apple-btn-blue !py-2"
+              className="btn group-data-[tone=ink]/nav:bg-white group-data-[tone=ink]/nav:text-ink group-data-[tone=ink]/nav:hover:bg-wash group-data-[tone=paper]/nav:bg-ink group-data-[tone=paper]/nav:text-white group-data-[tone=paper]/nav:hover:bg-ink-deep"
             >
               {site.primaryCta.label}
             </a>
@@ -119,7 +142,7 @@ export default function Navbar({ currentPath = "" }: { currentPath?: string }) {
             aria-expanded={open}
             aria-controls="mobile-navigation"
             onClick={() => setOpen(!open)}
-            className="md:hidden min-h-11 min-w-11 -mr-2 rounded-full px-4 text-sm text-[#1d1d1f] transition-colors duration-300 hover:bg-black/[.04] aria-expanded:bg-black/[.05]"
+            className="-mr-1 inline-flex min-h-11 min-w-11 cursor-pointer items-center justify-center rounded-lg border-[1.5px] border-current px-4 text-meta font-semibold lg:hidden"
           >
             Menu
           </button>
@@ -131,33 +154,30 @@ export default function Navbar({ currentPath = "" }: { currentPath?: string }) {
               initial={reducedMotion ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={reducedMotion ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: reducedMotion ? 0 : 0.3, ease }}
-              className="md:hidden flex h-[calc(100dvh-4rem)] flex-col justify-between gap-10 overflow-y-auto border-t border-black/[.06] bg-[#fbfbfd] px-6 pt-6 pb-[max(2rem,env(safe-area-inset-bottom))]"
+              transition={{ duration: reducedMotion ? 0 : 0.25, ease }}
+              className="flex h-[calc(100dvh-4rem)] flex-col justify-between gap-10 overflow-y-auto bg-ink px-[clamp(1.25rem,4.5vw,3.5rem)] pt-2 pb-[max(2rem,env(safe-area-inset-bottom))] text-white lg:hidden"
             >
               <motion.ul
                 initial={reducedMotion ? false : "closed"}
                 animate="open"
                 variants={{
                   open: {
-                    transition: { staggerChildren: 0.055, delayChildren: 0.06 },
+                    transition: { staggerChildren: 0.05, delayChildren: 0.05 },
                   },
                 }}
-                className="m-0 grid list-none gap-1 p-0"
+                className="m-0 grid list-none p-0"
               >
                 {navigation.map((item) => (
                   <motion.li
                     key={item.href}
                     variants={{
-                      closed: { opacity: 0, y: 14 },
-                      open: {
-                        opacity: 1,
-                        y: 0,
-                        transition: { duration: 0.6, ease },
-                      },
+                      closed: { y: 14 },
+                      open: { y: 0, transition: { duration: 0.5, ease } },
                     }}
+                    className="border-b border-on-ink-line"
                   >
                     <a
-                      className="flex min-h-14 items-center text-[clamp(1.625rem,7.5vw,2.125rem)] font-semibold leading-[1.3] tracking-[-0.02em] text-[#1d1d1f] transition-colors duration-300 hover:text-[#0071e3] aria-[current]:text-[#0071e3]"
+                      className="flex min-h-16 items-center text-[clamp(1.625rem,7vw,2.125rem)] [line-height:1.3] font-semibold aria-[current]:underline aria-[current]:decoration-2 aria-[current]:underline-offset-8"
                       onClick={() => setOpen(false)}
                       href={item.href}
                       aria-current={currentState(currentPath, item.href)}
@@ -167,24 +187,13 @@ export default function Navbar({ currentPath = "" }: { currentPath?: string }) {
                   </motion.li>
                 ))}
               </motion.ul>
-              <motion.div
-                initial={reducedMotion ? false : { opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.6,
-                  ease,
-                  delay: 0.06 + navigation.length * 0.055,
-                }}
-                className="border-t border-black/[.06] pt-6"
+              <a
+                href={site.primaryCta.href}
+                onClick={() => setOpen(false)}
+                className="btn btn-paper w-full"
               >
-                <a
-                  href={site.primaryCta.href}
-                  onClick={() => setOpen(false)}
-                  className="apple-btn apple-btn-blue w-full"
-                >
-                  {site.primaryCta.label}
-                </a>
-              </motion.div>
+                {site.primaryCta.label}
+              </a>
             </motion.div>
           )}
         </AnimatePresence>

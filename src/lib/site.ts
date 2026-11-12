@@ -22,7 +22,7 @@ export const site: SiteConfig = {
   description:
     "Mimir Suites Cloud ติดตั้งบนเครื่องพนักงาน เลือกแอปและโมเดลคลาวด์ได้ โดยไม่ต้องซื้อเครื่อง AI",
   primaryCta: { label: "Request a Demo", href: "/#contact" },
-  themeColor: "#fbfbfd",
+  themeColor: "#1b2bd0",
   social: { ogImage: "/opengraph-image" },
 };
 

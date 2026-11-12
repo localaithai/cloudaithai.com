@@ -1,40 +1,45 @@
 ---
-import Reveal from "@/components/Reveal";
 import { site } from "@/lib/site";
 
 // cta.js injects the lead form, so its markup takes no classes: style it from the host.
 const omniForm = [
-  "[&_.omni-form]:grid [&_.omni-form]:gap-4 [&_.omni-form]:rounded-[20px] [&_.omni-form]:bg-white [&_.omni-form]:p-6",
+  "[&_.omni-form]:grid [&_.omni-form]:gap-x-5 [&_.omni-form]:gap-y-4 [&_.omni-form]:rounded-xl [&_.omni-form]:bg-white [&_.omni-form]:p-[clamp(1.25rem,3vw,2.25rem)] [&_.omni-form]:text-ink sm:[&_.omni-form]:grid-cols-2",
+  "[&_.omni-form]:selection:bg-ink [&_.omni-form]:selection:text-white",
   "[&_.omni-heading]:hidden",
-  "[&_.omni-field]:grid [&_.omni-field]:gap-1.5 [&_.omni-field]:text-[14px] [&_.omni-field]:font-medium [&_.omni-field]:text-[#1d1d1f]",
+  "[&_.omni-field]:grid [&_.omni-field]:content-start [&_.omni-field]:gap-1.5 [&_.omni-field]:text-meta [&_.omni-field]:font-semibold",
+  "sm:[&_.omni-field--textarea]:col-span-2 sm:[&_.omni-field--checkbox]:col-span-2",
   "[&_.omni-field--checkbox]:flex [&_.omni-field--checkbox]:items-center [&_.omni-field--checkbox]:gap-2.5",
-  "[&_.omni-input]:w-full [&_.omni-input]:rounded-xl [&_.omni-input]:border [&_.omni-input]:border-black/10 [&_.omni-input]:bg-white [&_.omni-input]:p-3 [&_.omni-input]:text-[16px] [&_.omni-input]:font-normal [&_.omni-input]:text-[#1d1d1f]",
-  "[&_.omni-input:focus-visible]:outline-2 [&_.omni-input:focus-visible]:outline-offset-1 [&_.omni-input:focus-visible]:outline-[#0071e3]",
-  "[&_textarea.omni-input]:min-h-24 [&_textarea.omni-input]:resize-y",
-  "[&_.omni-field--checkbox_.omni-input]:w-auto [&_.omni-field--checkbox_.omni-input]:p-0",
-  "[&_.omni-submit]:inline-flex [&_.omni-submit]:w-full [&_.omni-submit]:cursor-pointer [&_.omni-submit]:items-center [&_.omni-submit]:justify-center [&_.omni-submit]:rounded-[980px] [&_.omni-submit]:bg-[#0071e3] [&_.omni-submit]:px-6 [&_.omni-submit]:py-3 [&_.omni-submit]:text-[17px] [&_.omni-submit]:font-normal [&_.omni-submit]:text-white [&_.omni-submit]:transition-[background-color,transform] [&_.omni-submit]:duration-350 [&_.omni-submit]:ease-(--ease-brand)",
-  "[&_.omni-submit:hover]:bg-[#0062c4] motion-safe:[&_.omni-submit:active]:[transform:scale(0.98)] [&_.omni-submit:disabled]:cursor-default [&_.omni-submit:disabled]:opacity-60",
-  "[&_.omni-error]:text-[14px] [&_.omni-error]:font-medium [&_.omni-error]:text-[#b3261e]",
-  "[&_.omni-success]:rounded-[20px] [&_.omni-success]:bg-white [&_.omni-success]:p-7 [&_.omni-success]:text-center [&_.omni-success]:text-[17px] [&_.omni-success]:text-[#1d1d1f]",
+  "[&_.omni-input]:min-h-12 [&_.omni-input]:w-full [&_.omni-input]:rounded-lg [&_.omni-input]:border-[1.5px] [&_.omni-input]:border-edge [&_.omni-input]:bg-white [&_.omni-input]:px-3.5 [&_.omni-input]:py-2.5 [&_.omni-input]:text-[1.0625rem] [&_.omni-input]:font-medium [&_.omni-input]:text-ink [&_.omni-input]:placeholder:text-ink-2",
+  "[&_.omni-input:hover]:border-ink [&_.omni-input:focus-visible]:border-ink [&_.omni-input:focus-visible]:outline-2 [&_.omni-input:focus-visible]:outline-offset-2 [&_.omni-input:focus-visible]:outline-ink",
+  "[&_textarea.omni-input]:min-h-32 [&_textarea.omni-input]:resize-y",
+  "[&_.omni-field--checkbox_.omni-input]:size-5 [&_.omni-field--checkbox_.omni-input]:min-h-0 [&_.omni-field--checkbox_.omni-input]:p-0 [&_.omni-field--checkbox_.omni-input]:accent-ink",
+  "[&_.omni-submit]:inline-flex [&_.omni-submit]:min-h-13 [&_.omni-submit]:w-full [&_.omni-submit]:cursor-pointer [&_.omni-submit]:items-center [&_.omni-submit]:justify-center [&_.omni-submit]:rounded-lg [&_.omni-submit]:bg-ink [&_.omni-submit]:px-6 [&_.omni-submit]:py-3 [&_.omni-submit]:text-[1.0625rem] [&_.omni-submit]:font-semibold [&_.omni-submit]:text-white [&_.omni-submit]:transition-[background-color,transform] [&_.omni-submit]:duration-200 sm:[&_.omni-submit]:col-span-2",
+  "[&_.omni-submit:hover]:bg-ink-deep [&_.omni-submit:focus-visible]:outline-ink motion-safe:[&_.omni-submit:active]:[transform:scale(0.98)] [&_.omni-submit:disabled]:cursor-default [&_.omni-submit:disabled]:opacity-60",
+  "[&_.omni-error]:rounded-lg [&_.omni-error]:border-[1.5px] [&_.omni-error]:border-ink [&_.omni-error]:bg-wash [&_.omni-error]:px-4 [&_.omni-error]:py-3 [&_.omni-error]:text-meta [&_.omni-error]:font-bold [&_.omni-error]:text-ink sm:[&_.omni-error]:col-span-2",
+  "[&_.omni-success]:rounded-xl [&_.omni-success]:bg-white [&_.omni-success]:p-8 [&_.omni-success]:text-lead [&_.omni-success]:font-semibold [&_.omni-success]:text-ink",
 ].join(" ");
+
+const channel =
+  "flex min-h-14 items-center text-[1.25rem] font-semibold underline-offset-[0.3em] hover:underline";
+const row = "border-b border-on-ink-line has-[[hidden]]:hidden";
 ---
 
-<section id="contact" class="apple-section">
-  <div class="max-w-4xl mx-auto px-6">
-    <Reveal client:visible className="text-center">
-      <p data-reveal class="reveal-on-scroll eyebrow text-[#0071e3] font-medium">{site.primaryCta.label}</p>
-      <h2 data-reveal style="--i:1" class="reveal-on-scroll mt-3 text-h2 font-semibold tracking-tight">
+<section id="contact" class="band band-ink">
+  <div class="shell grid gap-x-16 gap-y-12 lg:grid-cols-12">
+    <div class="lg:col-span-5">
+      <p class="kicker text-on-ink-2">{site.primaryCta.label}</p>
+      <h2 data-reveal class="reveal-on-scroll mt-4 text-h2">
         เลือกแอปและ seat ที่ต้องการ
       </h2>
-      <p data-reveal style="--i:2" class="reveal-on-scroll mx-auto mt-4 max-w-[44rem] text-balance text-lead text-[#6e6e73]">
+      <p data-reveal style="--i:1" class="reveal-on-scroll mt-5 max-w-[36ch] text-lead text-on-ink-2">
         บอกงาน จำนวนเครื่อง และแอปที่สนใจ เราจะช่วยเริ่มบทสนทนา
       </p>
-    </Reveal>
-    <Reveal client:visible>
-      <div data-reveal style="--i:3" data-cta="form" class:list={["reveal-on-scroll max-w-xl mx-auto mt-9", omniForm]}></div>
-    </Reveal>
-    <p data-reveal class="reveal-on-scroll mt-6 text-center text-sm text-[#6e6e73]">
-      <a data-cta="email" class="underline"></a> <a data-cta="tel" class="underline"></a> <a data-cta="line" class="underline">LINE</a>
-    </p>
+      <ul class="m-0 mt-10 list-none border-t border-on-ink-line p-0">
+        <li class={row}><a data-cta="email" class={channel}></a></li>
+        <li class={row}><a data-cta="tel" class={channel}></a></li>
+        <li class={row}><a data-cta="line" class={channel}>LINE</a></li>
+      </ul>
+    </div>
+    <div data-cta="form" class:list={["lg:col-span-7", omniForm]}></div>
   </div>
 </section>

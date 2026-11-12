@@ -1,0 +1,25 @@
+---
+import { setupSteps } from "@/lib/site-data";
+
+type Props = { headingLevel: "h2" | "h3" };
+
+const Heading = Astro.props.headingLevel;
+---
+
+<ol class="m-0 list-none border-b-2 border-ink p-0">
+  {
+    setupSteps.map(([number, title, detail], index) => (
+      <li
+        data-reveal
+        style={`--i:${index}`}
+        class="reveal-on-scroll grid grid-cols-[minmax(2.75rem,auto)_minmax(0,1fr)] gap-x-[clamp(1.25rem,4vw,3.5rem)] border-t border-line py-[clamp(1.5rem,3vw,2.25rem)] first:border-t-2 first:border-ink"
+      >
+        <p class="text-numeral font-light tabular-nums">{number}</p>
+        <div>
+          <Heading class="text-h3">{title}</Heading>
+          <p class="mt-2 max-w-[56ch] text-ink-2">{detail}</p>
+        </div>
+      </li>
+    ))
+  }
+</ol>

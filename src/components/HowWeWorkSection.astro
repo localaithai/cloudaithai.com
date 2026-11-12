@@ -1,25 +1,16 @@
 ---
-import { setupSteps } from "@/lib/site-data";
+import Print from "@/components/Print.astro";
+import StepList from "@/components/StepList.astro";
 ---
 
-<section class="apple-section">
-  <div class="max-w-5xl mx-auto px-6">
-    <div class="text-center">
-      <p class="eyebrow text-[#0071e3] font-medium mb-3">How it works</p>
-      <h2 class="text-h2 font-semibold tracking-tight">
-        เริ่มจากเครื่องของแต่ละคน
-      </h2>
+<section class="band pt-10">
+  <div class="shell grid gap-x-16 gap-y-12 lg:grid-cols-12">
+    <div class="lg:sticky lg:top-28 lg:col-span-5 lg:self-start">
+      <h2 class="text-title">เริ่มจากเครื่องของแต่ละคน</h2>
+      <Print path="/photo/backup-folder.webp" alt="แล็ปท็อปกับแฟ้มและไดรฟ์สำรองข้อมูลบนโต๊ะทำงาน" eager class="mt-10 aspect-[3/2] rounded-xl" />
     </div>
-    <div class="mt-12 grid sm:grid-cols-5 gap-4">
-      {
-        setupSteps.map(([number, title, detail]) => (
-          <article class="apple-card p-5">
-            <p class="text-[#0071e3] font-semibold">{number}</p>
-            <h2 class="mt-4 font-semibold text-[#1d1d1f]">{title}</h2>
-            <p class="mt-2 text-sm text-[#6e6e73] leading-relaxed">{detail}</p>
-          </article>
-        ))
-      }
+    <div class="lg:col-span-7">
+      <StepList headingLevel="h2" />
     </div>
   </div>
 </section>

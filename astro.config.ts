@@ -13,13 +13,13 @@ export default defineConfig({
   build: { format: "directory", inlineStylesheets: "always" },
   devToolbar: { enabled: false },
   integrations: [react()],
-  // Bai Jamjuree carries both Thai and Latin runs.
+  // Athiti carries both Thai and Latin runs.
   fonts: [
     {
       provider: fontProviders.google(),
-      name: "Bai Jamjuree",
-      cssVariable: "--font-bai",
-      weights: [200, 300, 400, 500, 600, 700],
+      name: "Athiti",
+      cssVariable: "--font-athiti",
+      weights: [300, 500, 600, 700],
       styles: ["normal"],
       subsets: ["latin", "thai"],
     },

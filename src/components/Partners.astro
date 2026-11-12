@@ -15,40 +15,33 @@ const partners = [
 ] as const;
 ---
 
-<section aria-labelledby="partners-heading" class="apple-section bg-white">
-  <div class="mx-auto max-w-5xl px-6">
-    <div class="mx-auto max-w-3xl text-center">
-      <p data-reveal class="reveal-on-scroll eyebrow mb-3 font-medium text-[#0071e3]">Partner ecosystem</p>
-      <h2
-        id="partners-heading"
-        data-reveal
-        style="--i:1"
-        class="reveal-on-scroll text-h2 font-semibold tracking-tight"
-      >
+<section aria-labelledby="partners-heading" class="band">
+  <div class="shell grid gap-x-16 gap-y-12 lg:grid-cols-12">
+    <div class="lg:col-span-5">
+      <h2 id="partners-heading" data-reveal class="reveal-on-scroll text-h2">
         พร้อมเติบโตจาก cloud ไปถึงระบบเต็มรูปแบบ
       </h2>
-      <p data-reveal style="--i:2" class="reveal-on-scroll mx-auto mt-5 max-w-3xl text-lead text-[#515154]">
+      <p data-reveal style="--i:1" class="reveal-on-scroll mt-5 text-lead text-ink-2">
         Mimir Suites Cloud เริ่มได้โดยไม่ต้องมีเครื่อง AI
         และยังอยู่ในเครือข่ายพาร์ทเนอร์เดียวกับระบบ hardware และ infrastructure
         เมื่อต้องการขยายภายหลัง
       </p>
     </div>
-    <ul
-      data-reveal
-      class="reveal-on-scroll mt-10 grid grid-cols-2 overflow-hidden rounded-2xl border border-black/[0.08] bg-white shadow-[0_12px_40px_rgba(0,0,0,0.04)] sm:grid-cols-3 lg:grid-cols-7"
-    >
+    <ul class="m-0 grid list-none grid-cols-2 self-start border-t border-l border-line p-0 sm:grid-cols-4 lg:col-span-7">
       {
         partners.map((partner) => (
-          <li class="flex min-h-28 items-center justify-center border-b border-r border-black/[0.08] px-5 py-6">
-            <img
-              src={partner.logo}
-              alt={`${partner.name} logo`}
-              width="160"
-              height="64"
-              loading="lazy"
-              decoding="async"
-              class="h-10 w-full object-contain"
-            />
+          <li class="border-r border-b border-line p-5">
+            <span class="print block">
+              <img
+                src={partner.logo}
+                alt={`${partner.name} logo`}
+                width="160"
+                height="64"
+                loading="lazy"
+                decoding="async"
+                class="print-img h-12 w-full object-contain contrast-125"
+              />
+            </span>
           </li>
         ))
       }
